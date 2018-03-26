@@ -33,3 +33,24 @@ p.ref {
 	text-align: center;
 	padding: 2em 1em;
 }
+.getpass{
+	padding-left:20px;
+	float:left;
+}
+
+.register{
+	padding-right:20px;
+	float:right;
+}
+.foot{
+	width: 400px;
+	height: 75%;
+	padding: 35px;
+	color: #EEE;
+	position: absolute;
+	left: 57%;
+	top:120%;
+	margin-left: -200px;
+	margin-top: -250px;
+}
+
