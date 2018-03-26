@@ -1,113 +1,46 @@
-<!doctype html>
-<html lang="zh">
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>用户登录</title>
-	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/default.css">
-	<script src='js/prefixfree.min.js'></script>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>login</title>
+<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/demo.css" />
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" href="css/component.css" />
+<!--[if IE]>
+<script src="js/html5.js"></script>
+<![endif]-->
 </head>
 <body>
-<div id="logo"> 
-  <h1 class="hogo"><i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;势库 </i></h1>
-</div> 
-<section class="stark-login">
-  <form action="" method="">	
-    <div id="fade-box">
-      <input type="text" name="username" id="username" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
-          
-          <button>Log In</button> 
-        </div>
-      </form>
-      <div class="hexagons">
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <br>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <br>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span> 
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            
-            <br>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <br>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-              </div>      
-        </section> 
-    
-        <div id="circle1">
-          <div id="inner-cirlce1">
-            <h2> </h2>
-          </div>
-        </div>
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-	<header class="htmleaf-header">
-			<!--<h1>带科幻风格的纯CSS3用户登录界面设计 <span>A User login interface Design </span></h1>-->
-			<div class="htmleaf-links">
-				<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="后台入口" target="_blank"><span>后台入口</span></a>
-				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/css3/ui-design/201507212272.html" title="注册" target="_blank"><span> 注册</span></a>
+		<div class="container demo-1">
+			<div class="content">
+				<div id="large-header" class="large-header">
+					<canvas id="demo-canvas"></canvas>
+					<div class="logo_box">
+						<h3>欢迎你</h3>
+						<form action="#" name="f" method="post">
+							<div class="input_outer">
+								<span class="u_user"></span>
+								<input name="logname" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<input name="logpass" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
+							</div>
+							<div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
+						</form>
+					</div>
+				</div>
 			</div>
-		</header>
-</body>
+		</div><!-- /container -->
+		<script src="js/TweenLite.min.js"></script>
+		<script src="js/EasePack.min.js"></script>
+		<script src="js/rAF.js"></script>
+		<script src="js/demo-1.js"></script>
+		<div style="text-align:center;">
+<p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+</div>
+	</body>
 </html>
