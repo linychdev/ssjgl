@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Created by cuizhixiang on 2017/5/31.
- * 过去资源文件数据
+ * Created by linych on 2018/03/28.
+ * 读取资源文件数据
  **/
 @Component
 public class MailConfig {
