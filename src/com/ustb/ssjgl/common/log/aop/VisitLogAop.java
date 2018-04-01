@@ -22,6 +22,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.ustb.ssjgl.common.log.annotation.VisitLog;
 import com.ustb.ssjgl.common.log.annotation.VisitLogType;
+import com.ustb.ssjgl.common.utils.IPUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.SsjglUtils;
 import com.ustb.ssjgl.service.IVisitLogService;
@@ -59,13 +60,13 @@ public class VisitLogAop {
         request=  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
     }
-//    @After("log()")
-//    public void afterExec(JoinPoint joinPoint) {
-//        MethodSignature ms = (MethodSignature) joinPoint.getSignature();
-//        Method method = ms.getMethod();
-//        LOG.debug("标记为" + tag.get() + "的方法" + method.getName()
-//                + "运行消耗" + (System.currentTimeMillis() - time.get()) + "ms");   
-//    }
+    @After("log()")
+    public void afterExec(JoinPoint joinPoint) {
+        MethodSignature ms = (MethodSignature) joinPoint.getSignature();
+        Method method = ms.getMethod();
+        LOG.debug("标记为" + tag.get() + "的方法" + method.getName()
+                + "运行消耗" + (System.currentTimeMillis() - time.get()) + "ms");   
+    }
     //在执行目标方法的过程中，会执行这个方法，可以在这里实现日志的记录
     @Around("log()")
     public Object aroundExec(ProceedingJoinPoint pjp) throws Throwable {
@@ -77,36 +78,17 @@ public class VisitLogAop {
             //获取注解的操作日志信息
             VisitLog log = method.getAnnotation(VisitLog.class);
             VisitLogType businessType = log.value();
-            LOG.info(businessType.getName());
+            LOG.info("客户端IP为:{},执行的操作为:{}", IPUtils.getBrowserIpAddress(request), businessType.getName());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("获取执行方法信息出错！", e);
         }
         return ret;
     }
     //记录异常日志
     @AfterThrowing(pointcut = "log()",throwing="e")
     public  void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        LOG.error("出差啦！",e);
+        LOG.error("出错啦！",e);
     }
-    
-    /**
-     * 获取远程客户端Ip
-     * @param request
-     * @return
-     */
-    private  String getRemoteHost(javax.servlet.http.HttpServletRequest request){
-        String ip = request.getHeader("x-forwarded-for");
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
-            ip = request.getRemoteAddr();
-        }
-        return ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
-    }   
     
     private void info(JoinPoint joinPoint) {
         LOG.debug("--------------------------------------------------");
