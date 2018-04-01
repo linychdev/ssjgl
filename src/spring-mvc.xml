@@ -3,19 +3,51 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"  
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/mvc   http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd ">
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd  
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
     <description>spring mvc</description>
+	<!-- 开启注解 -->
+    <context:annotation-config/>
     <context:component-scan base-package="com.ustb.ssjgl" use-default-filters="false">
-       <!-- 扫描规则-->
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	    <!-- 扫描规则-->
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-
-    <mvc:default-servlet-handler/>
-    <mvc:annotation-driven/>
+    
+    
+<!--         配置AOP面向切面
+    <aop:config>
+           配置需要面向切面的类
+         <aop:aspect id="asp" ref="personInterceptor">
+             配置切入点,指从什么包下面搜索需要配置面向切面的类.
+             <aop:pointcut  id="mycut" expression="execution(* com.java.spring..*.*(..))" />
+             前置方法
+             <aop:before pointcut-ref="mycut" method="doAccessCheck"/>
+              后置方法
+             <aop:after-returning pointcut-ref="mycut" method="doAfterRetruing"/>
+             例外方法
+             <aop:after-throwing pointcut-ref="mycut" method="doAfterThrowing"/>
+             最终方法
+             <aop:after pointcut-ref="mycut" method="doAfter"/>
+         </aop:aspect>
+    </aop:config> -->
+    
+    <bean id = "visitLogAop" class="com.ustb.ssjgl.common.log.aop.VisitLogAop"></bean>
+    <bean id = "visitLogService" class="com.ustb.ssjgl.service.impl.VisitLogService"></bean>
+    <!-- 开启AOP拦截 -->
+    <aop:aspectj-autoproxy proxy-target-class="true" /> 
+    <mvc:annotation-driven />
+    <!-- 定义Spring描述Bean的范围  -->
+    <context:component-scan base-package="com.ustb.ssjgl.common.log" >
+         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>

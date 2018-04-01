@@ -1,4 +1,4 @@
-package com.ustb.ssjgl.mail.util;
+package com.ustb.ssjgl.common.utils.mail;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
