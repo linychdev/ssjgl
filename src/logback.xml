@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  <property name="app.name" value="ssjgl"/>
+  <property name="log.home" value="${catalina.base:-${app.name}}/logs/ssjgl"/>
+
+  <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+  <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS , GMT+8} [%c:%L]-[%p] %m%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="R" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    <File>${log.home}/ssjgl.log</File> 
+    <encoder> 
+      <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS , GMT+8} [%c:%L]-[%p] %m%n</pattern> 
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+      <fileNamePattern>${log.home}/ssjgl.%d.log</fileNamePattern> 
+    </rollingPolicy>
+  </appender>
+
+  <logger name="org.apache" level="info"/>
+<!--   <logger name="org.apache.ibatis" level="debug"/> -->
+  <logger name="org.mybatis" level="debug"/>
+  <logger name="org.springframework" level="info"/>
+  <logger name="org.springframework.web.servlet.DispatcherServlet" level="debug"/>
+  <logger name="org.quartz.simpl" level="error"/>
+  <logger name="com.ustb.ssjgl" level="debug"/>
+  
+  <logger name="jdbc.sqlonly" level="OFF"/>
+  <logger name="jdbc.sqltiming" level="INFO"/>
+  <logger name="jdbc.audit" level="OFF"/>
+  <logger name="jdbc.resultset" level="OFF"/>
+  <logger name="jdbc.connection" level="OFF"/>
+  
+  <root level="info">
+    <appender-ref ref="stdout"/>
+     <appender-ref ref="R"/> 
+  </root>
+</configuration>
