@@ -4,6 +4,4 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id = "visitLogService" class="com.ustb.ssjgl.service.impl.VisitLogService"></bean>
-	<bean id = "userService" class="com.ustb.ssjgl.service.impl.UserService"></bean>
-
 </beans>

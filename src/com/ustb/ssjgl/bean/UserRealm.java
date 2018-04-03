@@ -48,4 +48,18 @@ public class UserRealm extends AuthorizingRealm {
         );
         return authenticationInfo;
     }
+
+    /**
+     * @return the userService
+     */
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    /**
+     * @param userService the userService to set
+     */
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
+    }
 }

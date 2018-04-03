@@ -5,7 +5,4 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 
 	<!-- 配置进行访问日志记录的切面 -->  
 	<bean id = "visitLogAop" class="com.ustb.ssjgl.common.log.aop.VisitLogAop"></bean>
-	<!-- 配置进行授权和认证的 Realm -->  
-	<bean id = "userRealm" class="com.ustb.ssjgl.bean.UserRealm"></bean>
-
 </beans>

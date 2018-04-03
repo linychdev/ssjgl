@@ -12,7 +12,7 @@ import java.util.Properties;
  **/
 @Component
 public class MailConfig {
-    private static final String PROPERTIES_DEFAULT = "props/mailConfig.properties";
+    private static final String PROPERTIES_DEFAULT = "props/config.properties";
     public static String host;
     public static Integer port;
     public static String userName;
