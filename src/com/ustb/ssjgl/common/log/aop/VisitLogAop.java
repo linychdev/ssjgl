@@ -1,7 +1,6 @@
 package com.ustb.ssjgl.common.log.aop;
 
 import java.lang.reflect.Method;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
