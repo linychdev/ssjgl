@@ -16,10 +16,17 @@
 	    <!-- 配置进行授权和认证的 Realm -->  
 	    <bean id = "userRealm" class="com.ustb.ssjgl.bean.UserRealm"></bean>
         <!-- 配置缓存管理器 -->  
-        <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
+        <bean id="cacheManager" class="com.ustb.ssjgl.shiro.MemoryCacheManager">  
         <!-- 指定 ehcache 的配置文件 -->   
-             <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml"/>   
-        </bean>  
+             <!-- <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml"/> -->   
+        </bean>
+        
+<!--         <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation" value="classpath:ehcache.xml" />  
+        <property name="shared" value="true"/>
+    	</bean>   -->
+        
+        
         <!-- 配置 Shiro 的 SecurityManager Bean. -->  
         <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
              <property name="cacheManager" ref="cacheManager"/>
@@ -38,13 +45,19 @@
             <!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截.  -->  
             <property name="filterChainDefinitions">  
                 <value>  
-                      /index.jsp=anon
-                      /success.jsp=anon
-                      /fail.jsp=anon
-                      /user.jsp = roles[user]
-                      /admin.jsp = roles[admin]
-                      /logout = logout
-                      /test = anon
+	                    /index.jsp=anon
+	                    /success.jsp=anon
+	                    /fail.jsp=anon
+	                    /user.jsp = roles[user]
+	                    /admin.jsp = roles[admin]
+	                    /logout = logout
+						/**/*.js = anon
+						/**/*.css = anon
+						/**/*.png = anon
+						/**/*.jpg = anon
+						/**/*.gif = anon
+						/**/*.swf = anon
+						/** = authc
                 </value>  
             </property>  
         </bean>  

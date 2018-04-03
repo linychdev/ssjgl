@@ -13,6 +13,16 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
     <description>spring context</description>
+    
+    <!-- *.properties配置文件加载 -->
+	
+	<bean
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations">
+	<value>classpath:/props/config.properties</value>
+	</property>
+	</bean>
+    
 	<!-- 数据源 -->
      <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" 
 	  init-method="init" destroy-method="close"> 
@@ -21,9 +31,9 @@
 	  <property name="username" value="${jdbc.username}" /> 
 	  <property name="password" value="${jdbc.password}" /> 
 	  <!-- 配置初始化大小、最小、最大 --> 
-	  <property name="initialSize" value="#{jdbc.initialSize}" /> 
-	  <property name="minIdle" value="#{jdbc.minIdle}" /> 
-	  <property name="maxActive" value="#{jdbc.maxActive}" />
+	  <property name="initialSize" value="${jdbc.initialSize}" /> 
+	  <property name="minIdle" value="${jdbc.minIdle}" /> 
+	  <property name="maxActive" value="${jdbc.maxActive}" />
 	
 	  <!-- 配置获取连接等待超时的时间 --> 
 	  <property name="maxWait" value="10000" />
@@ -102,17 +112,5 @@
         <property name="defaultEncoding" value="utf-8"></property>
         <property name="maxUploadSize" value="2147483648"></property>
         <property name="maxInMemorySize" value="40960"></property>
-    </bean>
-    
-    <!-- *.properties配置文件加载 -->
-    <bean id="ssjglConfigProperties"
-        class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="ignoreResourceNotFound" value="true" />
-        <property name="locations">
-            <list>
-                <value>classpath:/props/config.properties</value>
-                <value>classpath:/props/local.properties</value>
-            </list>
-        </property>
     </bean>
 </beans>
