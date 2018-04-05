@@ -27,9 +27,10 @@
     <mvc:default-servlet-handler/> 
 	<!-- 开启注解 -->
     <context:annotation-config/>
+    <!-- 扫描规则-->
     <context:component-scan base-package="com.ustb.ssjgl" use-default-filters="false">
-	    <!-- 扫描规则-->
-    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    	<!-- 设置use-default-filters="false"后,需要声明开启Controller注解扫描,否则不能访问(404) -->
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
     
     <!-- 开启AOP拦截 -->
@@ -41,7 +42,7 @@
             <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />  
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter" />  
         </mvc:message-converters>  
-    </mvc:annotation-driven>  
+    </mvc:annotation-driven>
     <mvc:default-servlet-handler />  
     
     <!--视图解析器-->
@@ -55,19 +56,6 @@
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="maxUploadSize" value="10000000"/>
     </bean>
-      
-  
-<!--     避免IE执行AJAX时,返回JSON出现下载文件  
-    支持JSON数据格式  
-    <bean  
-        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
-        <property name="messageConverters">  
-            <list>  
-                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>解析导出文件byte流   
-                <ref bean="fastJsonHttpMessageConverter" />  
-            </list>  
-        </property>  
-    </bean>   -->
     <!-- 使用fastJson来支持JSON数据格式 -->  
     <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">  
                 <property name="supportedMediaTypes">  
@@ -92,9 +80,4 @@
             </list>
         </property>
     </bean>
-    <import resource="spring/spring-shiro.xml"/>
-    <import resource="spring/spring-action.xml"/>
-    <import resource="spring/spring-service.xml"/>
-    <import resource="spring/spring-dao.xml"/>
-    <import resource="spring/spring-bean.xml"/>
 </beans>

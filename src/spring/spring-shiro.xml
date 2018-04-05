@@ -11,21 +11,16 @@
 		<!-- 开启注解 -->
         <context:annotation-config/>
 		<!-- 自动扫描 -->
-		<context:component-scan base-package="com.ustb.ssjgl" />
 	    <bean id = "userService" class="com.ustb.ssjgl.service.impl.UserService"></bean>
 	    <!-- 配置进行授权和认证的 Realm -->  
 	    <bean id = "userRealm" class="com.ustb.ssjgl.bean.UserRealm"></bean>
         <!-- 配置缓存管理器 -->  
-        <bean id="cacheManager" class="com.ustb.ssjgl.shiro.MemoryCacheManager">  
+<!--         <bean id="cacheManager" class="com.ustb.ssjgl.shiro.MemoryCacheManager">  
+        </bean> -->
+        <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
         <!-- 指定 ehcache 的配置文件 -->   
-             <!-- <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml"/> -->   
+             <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml"/>
         </bean>
-        
-<!--         <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
-        <property name="configLocation" value="classpath:ehcache.xml" />  
-        <property name="shared" value="true"/>
-    	</bean>   -->
-        
         
         <!-- 配置 Shiro 的 SecurityManager Bean. -->  
         <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
@@ -51,6 +46,7 @@
 	                    /user.jsp = roles[user]
 	                    /admin.jsp = roles[admin]
 	                    /logout = logout
+	                    /test = anon
 						/**/*.js = anon
 						/**/*.css = anon
 						/**/*.png = anon

@@ -101,7 +101,7 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage"
-            value="com.ustb.ssjgl.dat.impl" />
+            value="com.ustb.ssjgl.dao.impl" />
         <property name="sqlSessionFactoryBeanName" value="mybatisSessionFactory" />
     </bean>
    
@@ -113,4 +113,7 @@
         <property name="maxUploadSize" value="2147483648"></property>
         <property name="maxInMemorySize" value="40960"></property>
     </bean>
+    <import resource="spring/spring-service.xml"/>
+    <import resource="spring/spring-dao.xml"/>
+    <import resource="spring/spring-bean.xml"/>
 </beans>

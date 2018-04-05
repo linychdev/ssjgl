@@ -2,6 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-<!--    <bean id="abstractDao" class="com.thunisoft.dat2.AbstractDao">
-  </bean> -->
+		
+		<bean id="abstractDao" class="com.ustb.ssjgl.dao.AbstractDao">
+			<property name="sqlSessionTemplate" ref="sqlSession" />
+		    <property name="jdbcTemplate" ref="jdbcTemplate" />
+		    <property name="transactionTemplate" ref="transactionTemplate"/>
+		</bean>
+		<bean id="testDao" class="com.ustb.ssjgl.dao.impl.TestDao" parent="abstractDao"></bean>
+		
 </beans>
