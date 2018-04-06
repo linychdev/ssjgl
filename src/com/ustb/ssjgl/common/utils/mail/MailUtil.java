@@ -1,19 +1,18 @@
 package com.ustb.ssjgl.common.utils.mail;
 
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+
 /**
- * Created by cuizhixiang on 2017/5/31.
+ * Created by linych on 2018/03/31.
  * 资源文件方式
  **/
-@Component
 public class MailUtil {
     private static final String HOST = MailConfig.host;
     private static final Integer PORT = MailConfig.port;

@@ -1,6 +1,6 @@
 package com.ustb.ssjgl.dao.impl;
 
-import com.ustb.ssjgl.dao.AbstractDao;
+import com.ustb.ssjgl.common.dao.AbstractDao;
 import com.ustb.ssjgl.dao.IVisitLogDao;
 import com.ustb.ssjgl.dao.pojo.TTestLin;
 

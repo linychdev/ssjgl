@@ -1,4 +1,4 @@
-package com.ustb.ssjgl.common.log.aop;
+package com.ustb.ssjgl.visitlog.aop;
 
 import java.lang.reflect.Method;
 
@@ -19,12 +19,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.ustb.ssjgl.common.log.annotation.VisitLog;
-import com.ustb.ssjgl.common.log.annotation.VisitLogType;
 import com.ustb.ssjgl.common.utils.IPUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.SsjglUtils;
 import com.ustb.ssjgl.service.IVisitLogService;
+import com.ustb.ssjgl.visitlog.annotation.VisitLog;
+import com.ustb.ssjgl.visitlog.annotation.VisitLogType;
 
 @Aspect
 @Component
@@ -42,7 +42,7 @@ public class VisitLogAop {
     public static ThreadLocal<String> tag = new ThreadLocal<String>();
 
     //声明AOP切入点，凡是使用了VisitLog的方法均被拦截
-    @Pointcut("@annotation(com.ustb.ssjgl.common.log.annotation.VisitLog)")
+    @Pointcut("@annotation(com.ustb.ssjgl.visitlog.annotation.VisitLog)")
     public void log() {
         LOG.info("我是一个切入点");
     }

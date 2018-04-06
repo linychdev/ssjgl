@@ -3,7 +3,7 @@
   xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		
-		<bean id="abstractDao" class="com.ustb.ssjgl.dao.AbstractDao">
+		<bean id="abstractDao" class="com.ustb.ssjgl.common.dao.AbstractDao">
 			<property name="sqlSessionTemplate" ref="sqlSession" />
 		    <property name="jdbcTemplate" ref="jdbcTemplate" />
 		    <property name="transactionTemplate" ref="transactionTemplate"/>

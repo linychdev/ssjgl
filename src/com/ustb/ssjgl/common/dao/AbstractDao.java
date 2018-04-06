@@ -1,4 +1,4 @@
-package com.ustb.ssjgl.dao;
+package com.ustb.ssjgl.common.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;

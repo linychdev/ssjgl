@@ -11,9 +11,9 @@
 		<!-- 开启注解 -->
         <context:annotation-config/>
 		<!-- 自动扫描 -->
-	    <bean id = "userService" class="com.ustb.ssjgl.service.impl.UserService"></bean>
+	    <bean id = "userService" class="com.ustb.ssjgl.login.service.UserServiceImpl"></bean>
 	    <!-- 配置进行授权和认证的 Realm -->  
-	    <bean id = "userRealm" class="com.ustb.ssjgl.bean.UserRealm"></bean>
+	    <bean id = "userRealm" class="com.ustb.ssjgl.login.bean.UserRealm"></bean>
         <!-- 配置缓存管理器 -->  
 <!--         <bean id="cacheManager" class="com.ustb.ssjgl.shiro.MemoryCacheManager">  
         </bean> -->

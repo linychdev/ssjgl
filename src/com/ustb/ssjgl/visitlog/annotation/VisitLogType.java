@@ -1,4 +1,4 @@
-package com.ustb.ssjgl.common.log.annotation;
+package com.ustb.ssjgl.visitlog.annotation;
 
 
 public enum VisitLogType {

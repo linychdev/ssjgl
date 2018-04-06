@@ -1,7 +1,5 @@
 package com.ustb.ssjgl.common.utils.mail;
 
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,7 +8,6 @@ import java.util.Properties;
  * Created by linych on 2018/03/28.
  * 读取资源文件数据
  **/
-@Component
 public class MailConfig {
     private static final String PROPERTIES_DEFAULT = "props/config.properties";
     public static String host;

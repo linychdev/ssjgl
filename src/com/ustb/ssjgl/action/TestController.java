@@ -5,10 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ustb.ssjgl.common.log.annotation.VisitLog;
-import com.ustb.ssjgl.common.log.annotation.VisitLogType;
 import com.ustb.ssjgl.dao.impl.TestDao;
 import com.ustb.ssjgl.dao.pojo.TTestLin;
+import com.ustb.ssjgl.visitlog.annotation.VisitLog;
+import com.ustb.ssjgl.visitlog.annotation.VisitLogType;
 
 @Controller
 public class TestController{

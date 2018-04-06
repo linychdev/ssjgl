@@ -4,5 +4,5 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- 配置进行访问日志记录的切面 -->  
-	<bean id = "visitLogAop" class="com.ustb.ssjgl.common.log.aop.VisitLogAop"></bean>
+	<bean id = "visitLogAop" class="com.ustb.ssjgl.visitlog.aop.VisitLogAop"></bean>
 </beans>
