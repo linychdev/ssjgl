@@ -15,15 +15,15 @@ import org.springframework.transaction.support.TransactionTemplate;
  *
  */
 @Repository("abstractDao")
-public class AbstractDao extends SqlSessionDaoSupport {
+public class AbstractDao extends SqlSessionDaoSupport implements IAbstractDao{
 
-    private static final String mapperNamespace = "com.ustb.ssjgl.dao.mappings.";
+    protected String mapperNamespace = "com.ustb.ssjgl.common.dao.mappings.";
 
     private String getStatementByClass(String method, Class<?> entityClass) {
         return mapperNamespace + entityClass.getSimpleName() + "Mapper." + method;
     }
 
-    private static String getStatement(String method, Object entity) {
+    private String getStatement(String method, Object entity) {
         return mapperNamespace + entity.getClass().getSimpleName() + "Mapper." + method;
     }
 

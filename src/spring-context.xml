@@ -81,9 +81,9 @@
     <!-- MyBatis -->
     <bean id="mybatisSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath:com/ustb/ssjgl/dao/mappings/**/*Mapper.xml"></property>
+        <property name="mapperLocations" value="classpath:com/ustb/ssjgl/**/mappings/**/*Mapper.xml"></property>
         <!-- mybatis配置文件 -->
-        <!-- <property name="configLocation" value="classpath:mybatis-config.xml"></property> -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
     </bean>
     <bean id="transactionTemplate"
         class="org.springframework.transaction.support.TransactionTemplate">

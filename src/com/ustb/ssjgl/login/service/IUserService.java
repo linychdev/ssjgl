@@ -1,26 +1,40 @@
 package com.ustb.ssjgl.login.service;
 
 import java.util.List;
-import java.util.Set;
 
-import com.ustb.ssjgl.login.bean.PermissionModel;
-import com.ustb.ssjgl.login.bean.RoleModel;
-import com.ustb.ssjgl.login.bean.UserModel;
+import com.ustb.ssjgl.login.dao.bean.TPermission;
+import com.ustb.ssjgl.login.dao.bean.TRole;
+import com.ustb.ssjgl.login.dao.bean.TUser;
 
+/**
+ * 用户管理service
+ * IUserService
+ * @author linych
+ * @version 1.0
+ *
+ */
 public interface IUserService {
-    public UserModel getUser(String userName);
 
-    public Set<String> findRoles(String username);
 
-    public Set<String> findPermissions(String username);
+    /**
+     * 根据用户名获取用户对象
+     * @param currentUsername
+     * @return
+     */
+    public TUser getUserByName(String currentUsername);
 
-    public UserModel findByUsername(String username);
+    /**
+     * 根据用户id获取权限
+     * @param userId 用户id
+     * @return
+     */
+    public List<TRole> getRoleByUserId(String userId);
 
-    public UserModel getUserByName(String currentUsername);
+    /**
+     * 根据用户id获取角色
+     * @param String roleId 角色id
+     * @return
+     */
+    public List<TPermission> getPermissionByUserId(String roleId);
 
-    public List<RoleModel> selectRoleByMemberId(Object id);
-
-    public List<PermissionModel> selectPermissionByMemberId(Object id);
-
-    public UserModel getMemberByName(String username);
 }

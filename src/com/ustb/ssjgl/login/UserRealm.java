@@ -1,4 +1,4 @@
-package com.ustb.ssjgl.login.bean;
+package com.ustb.ssjgl.login;
 
 import java.util.List;
 
@@ -17,6 +17,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ustb.ssjgl.login.dao.bean.TPermission;
+import com.ustb.ssjgl.login.dao.bean.TRole;
+import com.ustb.ssjgl.login.dao.bean.TUser;
 import com.ustb.ssjgl.login.service.IUserService;
 
 public class UserRealm extends AuthorizingRealm {
@@ -29,27 +32,27 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){  
         //获取当前登录的用户名,等价于(String)principals.fromRealm(this.getName()).iterator().next()  
         String currentUsername = (String)super.getAvailablePrincipal(principals);  
-        UserModel member = userService.getUserByName(currentUsername);  
+        TUser member = userService.getUserByName(currentUsername);  
         if(member == null){  
-            throw new AuthenticationException("msg:用户不存在。");  
+            throw new AuthenticationException("msg:用户不存在。");
         }  
-        SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();  
+        SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
           
-        List<RoleModel> roleList = userService.selectRoleByMemberId(member.getId());  
-        List<PermissionModel> permList = userService.selectPermissionByMemberId(member.getId());  
+        List<TRole> roleList = userService.getRoleByUserId(member.getcId());
+        List<TPermission> permList = userService.getPermissionByUserId(member.getcId());  
           
         if(roleList != null && roleList.size() > 0){  
-            for(RoleModel role : roleList){  
-                if(role.getRoleCode() != null){  
-                    simpleAuthorInfo.addRole(role.getRoleCode());  
+            for(TRole role : roleList){  
+                if(role.getcRole() != null){  
+                    simpleAuthorInfo.addRole(role.getcRole());  
                 }  
             }  
         }  
           
         if(permList != null && permList.size() > 0){  
-            for(PermissionModel perm : permList){  
-                if(perm.getCode() != null){  
-                    simpleAuthorInfo.addStringPermission(perm.getCode());  
+            for(TPermission perm : permList){  
+                if(perm.getcPermission() != null){  
+                    simpleAuthorInfo.addStringPermission(perm.getcPermission());  
                 }  
             }  
         }  
@@ -72,18 +75,18 @@ public class UserRealm extends AuthorizingRealm {
 //        if (token.getCaptcha() == null || !token.getCaptcha().toUpperCase().equals(code)){  
 //            throw new AuthenticationException("msg:验证码错误, 请重试.");  
 //        }  
-        UserModel member = userService.getMemberByName(token.getUsername());  
-        if(member != null){  
-            if(member.getIslock() !=null && member.getIslock() == 1){  
+        TUser user = userService.getUserByName(token.getUsername());
+        System.out.println(user.getcPhone());
+        if(user != null){
+            if(user.getnIslock() !=null && user.getnIslock() == 1){  
                 throw new AuthenticationException("msg:该已帐号禁止登录.");  
-            }  
-            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(member.getLoginName(), member.getPwd(), this.getName());  
-            this.setSession("currentUser", member.getLoginName());  
+            }
+            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getcLoginName(), user.getcPassword(), this.getName());  
+            this.setSession("currentUser", user.getcLoginName());
               
             return authcInfo;  
         }  
         return null;  
-          
     }  
       
     /** 
