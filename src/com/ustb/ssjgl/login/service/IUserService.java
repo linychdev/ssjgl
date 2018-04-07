@@ -37,4 +37,6 @@ public interface IUserService {
      */
     public List<TPermission> getPermissionByUserId(String roleId);
 
+    public boolean addUser(TUser user);
+
 }

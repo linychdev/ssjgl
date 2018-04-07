@@ -15,6 +15,7 @@ import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ustb.ssjgl.login.dao.bean.TPermission;
@@ -76,12 +77,22 @@ public class UserRealm extends AuthorizingRealm {
 //            throw new AuthenticationException("msg:验证码错误, 请重试.");  
 //        }  
         TUser user = userService.getUserByName(token.getUsername());
-        System.out.println(user.getcPhone());
         if(user != null){
             if(user.getnIslock() !=null && user.getnIslock() == 1){  
                 throw new AuthenticationException("msg:该已帐号禁止登录.");  
             }
-            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getcLoginName(), user.getcPassword(), this.getName());  
+            //1)principal：认证的实体信息，可以是username，也可以是数据库表对应的用户的实体对象 
+            String principal = user.getcLoginName();  
+            //2)credentials：密码  
+            String credentials = user.getcPassword();  
+            //3)realmName：当前realm对象的name，调用父类的getName()方法即可  
+            String realmName = getName();  
+            //4)credentialsSalt盐值  
+            ByteSource credentialsSalt = ByteSource.Util.bytes(principal);//使用账号作为盐值  
+              
+            SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);  
+            
+//            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getcLoginName(), user.getcPassword(), this.getName());  
             this.setSession("currentUser", user.getcLoginName());
               
             return authcInfo;  

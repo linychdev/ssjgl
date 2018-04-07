@@ -2,8 +2,10 @@ package com.ustb.ssjgl.login.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.login.dao.IPermissionDao;
 import com.ustb.ssjgl.login.dao.IRoleDao;
 import com.ustb.ssjgl.login.dao.IUserDao;
@@ -14,6 +16,8 @@ import com.ustb.ssjgl.login.service.IUserService;
 
 public class UserServiceImpl implements IUserService{
 
+    private static final Logger LOG = LogUtils.getLogger();
+    
     @Autowired
     private IUserDao userDao;
     
@@ -36,5 +40,17 @@ public class UserServiceImpl implements IUserService{
     @Override
     public List<TPermission> getPermissionByUserId(String roleId) {
         return permissionDao.getPermissionsByRoleId(roleId);
+    }
+
+    @Override
+    public boolean addUser(TUser user) {
+        try {
+            userDao.insertSelective(user);
+            return true;
+            
+        } catch (Exception e) {
+            LOG.error("保存用户数据出错！", e);
+            return false;
+        }
     }
 }

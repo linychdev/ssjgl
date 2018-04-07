@@ -2,6 +2,10 @@ package com.ustb.ssjgl.login.dao.bean;
 
 import java.util.Date;
 
+import com.ustb.ssjgl.common.SsjglContants;
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.SsjglUtils;
+
 public class TUser {
     private String cId;
 
@@ -28,6 +32,16 @@ public class TUser {
     private Date dCreateTime;
 
     private Date dTime;
+
+    public TUser(){
+        super();
+        this.cId = SsjglUtils.getUuid();
+        this.nIslock = SsjglContants.USER_LOCK_NO;
+        this.nValid = SsjglContants.USER_VALID_YES;
+        this.dCreateTime = DateUtils.getCurrentDate();
+        this.dTime = DateUtils.getCurrentDate();
+    }
+    
 
     public String getcId() {
         return cId;

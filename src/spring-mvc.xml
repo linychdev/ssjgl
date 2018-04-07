@@ -80,4 +80,21 @@
             </list>
         </property>
     </bean>
+    
+    <!-- 支持Shiro对Controller的方法级AOP安全控制 begin -->  
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"  
+        depends-on="lifecycleBeanPostProcessor">  
+        <property name="proxyTargetClass" value="true" />  
+    </bean>  
+  
+    <!-- 无权限 控制后台不报错 -->  
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+        <property name="exceptionMappings">  
+            <props>  
+                <prop key="org.apache.shiro.authz.UnauthorizedException">405</prop>  
+                <prop key="java.lang.Throwable">405</prop>  
+            </props>  
+        </property>  
+    </bean>   
+    
 </beans>

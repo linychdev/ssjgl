@@ -28,4 +28,7 @@ public interface IUserDao extends IAbstractDao{
     
     
     public List<TUser> getUserListByRole(String role);
+    
+    
+    public void saveUser(TUser user);
 }

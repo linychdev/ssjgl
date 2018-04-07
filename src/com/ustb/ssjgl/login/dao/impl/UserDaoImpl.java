@@ -9,7 +9,9 @@ import com.ustb.ssjgl.login.dao.bean.TUser;
 public class UserDaoImpl extends AbstractDao implements IUserDao{
 
     private String mapperNamespace = "com.ustb.ssjgl.login.dao.mappings.TUserMapper";
-    
+    {
+        super.mapperNamespace = "com.ustb.ssjgl.login.dao.mappings.";
+    }
     @Override
     public TUser getUserByLoginName(String loginName) {
         String statement = mapperNamespace + ".selectUserByLoginName";
@@ -26,5 +28,10 @@ public class UserDaoImpl extends AbstractDao implements IUserDao{
     public List<TUser> getUserListByRole(String role) {
         String statement = mapperNamespace + ".selectUserByRole";
         return this.getSqlSession().selectList(statement, role);
+    }
+
+    @Override
+    public void saveUser(TUser user) {
+        insertSelective(user);
     }
 }

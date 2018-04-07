@@ -12,20 +12,32 @@
         <context:annotation-config/>
 		<!-- 自动扫描 -->
 	    <bean id = "userService" class="com.ustb.ssjgl.login.service.impl.UserServiceImpl"></bean>
+        
+       <!-- 用户授权信息Cache -->  
+   	 	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />  
+
 	    <!-- 配置进行授权和认证的 Realm -->  
-	    <bean id = "userRealm" class="com.ustb.ssjgl.login.UserRealm"></bean>
+	    <bean id = "userRealm" class="com.ustb.ssjgl.login.UserRealm">
+	    	<property name="cacheManager" ref="cacheManager" />
+	    	<property name="credentialsMatcher">  
+        		<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">  
+            <property name="hashAlgorithmName" value="MD5"></property>  
+            <property name="hashIterations" value="1024"></property>
+        </bean>  
+    </property>  
+	    </bean>
         <!-- 配置缓存管理器 -->  
-<!--         <bean id="cacheManager" class="com.ustb.ssjgl.shiro.MemoryCacheManager">  
+<!-- 		<bean id="cacheManager" class="com.ustb.ssjgl.shiro.MemoryCacheManager">  
         </bean> -->
-        <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
-        <!-- 指定 ehcache 的配置文件 -->   
+<!--         <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
+        指定 ehcache 的配置文件   
              <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml"/>
-        </bean>
+        </bean> -->
         
         <!-- 配置 Shiro 的 SecurityManager Bean. -->  
         <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
-             <property name="cacheManager" ref="cacheManager"/>
              <property name="realm" ref="userRealm"/>
+             <property name="cacheManager" ref="cacheManager"/>
        </bean>
        
        <!-- 启用shrio授权注解拦截方式 -->  
@@ -41,6 +53,7 @@
             <property name="filterChainDefinitions">  
                 <value>  
 	                    /index.jsp=anon
+	                    /register.jsp=anon
 	                    /success.jsp=anon
 	                    /fail.jsp=anon
 	                    /user.jsp = roles[user]
@@ -48,6 +61,7 @@
 	                    /logout = logout
 	                    /test = anon
 	                    /login = anon
+	                    /register = anon
 						/**/*.js = anon
 						/**/*.css = anon
 						/**/*.png = anon
@@ -61,4 +75,14 @@
        
        <!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->  
         <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+        
+        <!-- AOP式方法级权限检查 -->  
+	    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"  
+	        depends-on="lifecycleBeanPostProcessor">  
+	        <property name="proxyTargetClass" value="true" />  
+	    </bean>  
+	    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">  
+	        <property name="securityManager" ref="securityManager" />  
+	    </bean>  
+        
 </beans>
