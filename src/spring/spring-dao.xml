@@ -12,5 +12,6 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<bean id="userDao" class="com.ustb.ssjgl.login.dao.impl.UserDaoImpl" parent="abstractDao"></bean>
 		<bean id="roleDao" class="com.ustb.ssjgl.login.dao.impl.RoleDaoImpl" parent="abstractDao"></bean>
 		<bean id="permissionDao" class="com.ustb.ssjgl.login.dao.impl.PermissionDaoImpl" parent="abstractDao"></bean>
+		<bean id="emailRecordDao" class="com.ustb.ssjgl.login.dao.impl.EmaiRecordDaoImpl" parent="abstractDao"></bean>
 		
 </beans>

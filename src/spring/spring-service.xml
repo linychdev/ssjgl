@@ -5,4 +5,5 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 
 	<bean id = "visitLogService" class="com.ustb.ssjgl.service.impl.VisitLogService"></bean>
 	<bean id = "userService" class="com.ustb.ssjgl.login.service.impl.UserServiceImpl"></bean>
+	<bean id = "emailService" class="com.ustb.ssjgl.login.service.impl.EmailServiceImpl"></bean>
 </beans>

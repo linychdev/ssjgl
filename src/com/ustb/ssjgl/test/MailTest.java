@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
 
-import com.ustb.ssjgl.common.utils.mail.MailUtil;
+import com.ustb.ssjgl.common.utils.MailUtil;
 
 public class MailTest {
 	public static void main(String[] args) {

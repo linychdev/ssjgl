@@ -1,5 +1,12 @@
 package com.ustb.ssjgl.login.action;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.login.dao.bean.TUser;
+import com.ustb.ssjgl.login.service.IEmailService;
 import com.ustb.ssjgl.login.service.IUserService;
 
 /**
@@ -18,37 +27,65 @@ import com.ustb.ssjgl.login.service.IUserService;
  *
  */
 @Controller
-public class RegisterAction {
+public class RegisterAction extends AbstractAction{
     
     @Autowired
     private IUserService userService;
     
-    @RequestMapping("/register")
+    @Autowired
+    private IEmailService emailService;
+    
+    @RequestMapping("/register/regist")
     public String register(@RequestParam("username") String username,
             @RequestParam("password") String password, 
             @RequestParam("name") String name,
             @RequestParam("email") String email,
-            @RequestParam("phone") String phone){
+            @RequestParam("phone") String phone,
+            @RequestParam("vercode") String vercode){
         
-        TUser user = new TUser();
-        user.setcEmail(email);
-        user.setcName(name);
-        user.setcLoginName(username);
-        user.setcPhone(phone);
-        
-        
+        if(isValidVerCode(email, vercode)){
+            TUser user = new TUser();
+            user.setcEmail(email);
+            user.setcName(name);
+            user.setcLoginName(username);
+            user.setcPhone(phone);
+            String encryptionPassword = getEncryptionPassword(username, password);
+            user.setcPassword(encryptionPassword.toString());
+            boolean success = userService.addUser(user);
+            if(success){
+                return "login";
+            }else{
+                return "error";
+            }
+        }else{
+            return "vercodeFaild";
+        }
+    }
+
+    @RequestMapping("/register/sendEmail")
+    public void sendEmail(HttpServletRequest request, HttpServletResponse response){
+        String emailAddress = request.getParameter("emailAddress");
+        String verCode = emailService.sendVerificationMessage(emailAddress);
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", "success");
+        result.put("verCode", verCode);
+        this.writeAjaxObject(response, result);
+    }
+    
+    private boolean isValidVerCode(String emailAddress, String vercode) {
+        List<String> validCodeList = emailService.getValidVerificationCodeByEmail(emailAddress);
+        if(validCodeList.contains(vercode)){
+            return true;
+        }
+        return false;
+    }
+
+    private String getEncryptionPassword(String username, String password) {
         String hashAlgorithmName = "MD5";//加密方式  
         Object crdentials = password;//密码原值  
         ByteSource salt = ByteSource.Util.bytes(username);//以账号作为盐值  
         int hashIterations = 1024;//加密1024次  
         SimpleHash encryptionPassword = new SimpleHash(hashAlgorithmName,crdentials,salt,hashIterations);
-        user.setcPassword(encryptionPassword.toString());
-        
-        boolean success = userService.addUser(user);
-        
-        if(success){
-            return "login";
-        }
-        return "error";
+        return encryptionPassword.toString();
     }
 }

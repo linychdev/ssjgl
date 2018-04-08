@@ -61,7 +61,7 @@
 	                    /logout = logout
 	                    /test = anon
 	                    /login = anon
-	                    /register = anon
+	                    /register/* = anon
 						/**/*.js = anon
 						/**/*.css = anon
 						/**/*.png = anon

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.login.dao.mappings.TEmailRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.login.dao.bean.TEmailRecord" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_email" property="cEmail" jdbcType="VARCHAR" />
+    <result column="c_verification_code" property="cVerificationCode" jdbcType="VARCHAR" />
+    <result column="c_html" property="cHtml" jdbcType="VARCHAR" />
+    <result column="d_send_time" property="dSendTime" jdbcType="TIMESTAMP" />
+    <result column="d_overdue_time" property="dOverdueTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_email, c_verification_code, c_html, d_send_time, d_overdue_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_email_record
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_email_record
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.login.dao.bean.TEmailRecord" >
+    insert into t_email_record (c_id, c_email, c_verification_code, 
+      c_html, d_send_time, d_overdue_time
+      )
+    values (#{cId,jdbcType=VARCHAR}, #{cEmail,jdbcType=VARCHAR}, #{cVerificationCode,jdbcType=VARCHAR}, 
+      #{cHtml,jdbcType=VARCHAR}, #{dSendTime,jdbcType=TIMESTAMP}, #{dOverdueTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.login.dao.bean.TEmailRecord" >
+    insert into t_email_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cEmail != null" >
+        c_email,
+      </if>
+      <if test="cVerificationCode != null" >
+        c_verification_code,
+      </if>
+      <if test="cHtml != null" >
+        c_html,
+      </if>
+      <if test="dSendTime != null" >
+        d_send_time,
+      </if>
+      <if test="dOverdueTime != null" >
+        d_overdue_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmail != null" >
+        #{cEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cVerificationCode != null" >
+        #{cVerificationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cHtml != null" >
+        #{cHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="dSendTime != null" >
+        #{dSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dOverdueTime != null" >
+        #{dOverdueTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.login.dao.bean.TEmailRecord" >
+    update t_email_record
+    <set >
+      <if test="cEmail != null" >
+        c_email = #{cEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cVerificationCode != null" >
+        c_verification_code = #{cVerificationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cHtml != null" >
+        c_html = #{cHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="dSendTime != null" >
+        d_send_time = #{dSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dOverdueTime != null" >
+        d_overdue_time = #{dOverdueTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.login.dao.bean.TEmailRecord" >
+    update t_email_record
+    set c_email = #{cEmail,jdbcType=VARCHAR},
+      c_verification_code = #{cVerificationCode,jdbcType=VARCHAR},
+      c_html = #{cHtml,jdbcType=VARCHAR},
+      d_send_time = #{dSendTime,jdbcType=TIMESTAMP},
+      d_overdue_time = #{dOverdueTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectRecordByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_email_record
+    where c_email = #{cEmail,jdbcType=VARCHAR}
+      and now() between d_send_time and d_overdue_time
+  </select>
+</mapper>

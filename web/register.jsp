@@ -19,12 +19,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+<script type="text/javascript">
+  var contextPath = "<%=request.getContextPath()%>";
+</script>
   </head>
   
   <body>
 	<center>
         <h1 style="color:red">注册</h1>
-            <form id="indexform" name="indexForm" action="register" method="post">
+            <form id="indexform" name="indexForm" action="register/regist" method="post">
                 <table border="0">
                     <tr>
                         <td>账号：</td>
@@ -42,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </tr>
                     <tr>
                         <td>邮箱：</td>
-                        <td><input type="text" name="email">
+                        <td><input id = "emailAddress" type="text" name="email">
                         </td>
                     </tr>
                     <tr>
@@ -50,10 +53,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <td><input type="text" name="phone">
                         </td>
                     </tr>
+                    <tr>
+                        <td>验证码：</td>
+                        <td><input type="text" name="vercode">
+                        </td>
+                    </tr>
                 </table>
             <br>
+                <div id = "sendVerCode"><a href="javascript:void(0)">发送验证码</a></div>
                 <input type="submit" value="注册" style="color:#BC8F8F">
             </form>
     </center>
   </body>
+      <script src="js/jquery-1.8.2.min.js"></script>
+      <script src="js/register.js"></script>
 </html>

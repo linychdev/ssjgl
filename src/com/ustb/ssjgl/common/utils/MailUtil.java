@@ -1,4 +1,4 @@
-package com.ustb.ssjgl.common.utils.mail;
+package com.ustb.ssjgl.common.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
@@ -9,18 +9,20 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import com.ustb.ssjgl.common.ConfigFile;
+
 /**
  * Created by linych on 2018/03/31.
  * 资源文件方式
  **/
 public class MailUtil {
-    private static final String HOST = MailConfig.host;
-    private static final Integer PORT = MailConfig.port;
-    private static final String USERNAME = MailConfig.userName;
-    private static final String PASSWORD = MailConfig.passWord;
-    private static final String emailForm = MailConfig.emailForm;
-    private static final String timeout = MailConfig.timeout;
-    private static final String personal = MailConfig.personal;
+    private static final String HOST = ConfigFile.host;
+    private static final Integer PORT = ConfigFile.port;
+    private static final String USERNAME = ConfigFile.userName;
+    private static final String PASSWORD = ConfigFile.passWord;
+    private static final String emailForm = ConfigFile.emailForm;
+    private static final String timeout = ConfigFile.timeout;
+    private static final String personal = ConfigFile.personal;
     private static JavaMailSenderImpl mailSender = createMailSender();
 
     /**

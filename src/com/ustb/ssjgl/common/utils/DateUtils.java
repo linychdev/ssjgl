@@ -260,6 +260,21 @@ public final class DateUtils {
         Timestamp timestamp = new Timestamp(calendar.getTime().getTime());
         return timestamp;
     }
+
+    /**
+     * 根据传入日期和要加的分钟数返回新日期
+     * @param date
+     * @param n
+     * @return
+     */
+    public static Timestamp addMinutes(Timestamp date, int n) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MINUTE, +n);
+        Timestamp timestamp = new Timestamp(calendar.getTime().getTime());
+        return timestamp;
+    }
+    
     /**
      * 根据传入日期和要加的天数返回新日期
      * @param date

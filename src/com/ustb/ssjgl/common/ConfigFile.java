@@ -1,14 +1,20 @@
-package com.ustb.ssjgl.common.utils.mail;
+package com.ustb.ssjgl.common;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+
+import com.ustb.ssjgl.common.utils.LogUtils;
+
 /**
  * Created by linych on 2018/03/28.
  * 读取资源文件数据
  **/
-public class MailConfig {
+public class ConfigFile {
+    
+    private static final Logger LOG = LogUtils.getLogger();
     private static final String PROPERTIES_DEFAULT = "props/config.properties";
     public static String host;
     public static Integer port;
@@ -17,6 +23,9 @@ public class MailConfig {
     public static String emailForm;
     public static String timeout;
     public static String personal;
+    public static Integer failureTime;
+    public static String subject;
+    public static Integer verCodeLength;
     public static Properties properties;
     static{
         init();
@@ -28,19 +37,21 @@ public class MailConfig {
     private static void init() {
         properties = new Properties();
         try{
-            InputStream inputStream = MailConfig.class.getClassLoader().getResourceAsStream(PROPERTIES_DEFAULT);
+            InputStream inputStream = ConfigFile.class.getClassLoader().getResourceAsStream(PROPERTIES_DEFAULT);
             properties.load(inputStream);
             inputStream.close();
-            //properties.setProperty("mailFrom","cuizhixiang@feitu.biz");
             host = properties.getProperty("mailHost");
             port = Integer.parseInt(properties.getProperty("mailPort"));
             userName = properties.getProperty("mailUsername");
             passWord = properties.getProperty("mailPassword");
             emailForm = properties.getProperty("mailFrom");
             timeout = properties.getProperty("mailTimeout");
-            personal = "linych";
+            personal = properties.getProperty("mailPersonal");
+            subject = new String(properties.getProperty("mailSubject").getBytes("ISO-8859-1"), "utf-8");
+            failureTime = Integer.valueOf(properties.getProperty("mailFailureTime"));
+            verCodeLength = Integer.valueOf(properties.getProperty("mailVerCodeLength"));
         } catch(IOException e){
-            e.printStackTrace();
+            LOG.error("读取配置文件出错！", e);
         }
     }
 }

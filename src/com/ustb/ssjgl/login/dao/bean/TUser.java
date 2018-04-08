@@ -1,6 +1,6 @@
 package com.ustb.ssjgl.login.dao.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.DateUtils;
@@ -29,9 +29,9 @@ public class TUser {
 
     private String cNote;
 
-    private Date dCreateTime;
+    private Timestamp dCreateTime;
 
-    private Date dTime;
+    private Timestamp dTime;
 
     public TUser(){
         super();
@@ -131,19 +131,19 @@ public class TUser {
         this.cNote = cNote == null ? null : cNote.trim();
     }
 
-    public Date getdCreateTime() {
+    public Timestamp getdCreateTime() {
         return dCreateTime;
     }
 
-    public void setdCreateTime(Date dCreateTime) {
+    public void setdCreateTime(Timestamp dCreateTime) {
         this.dCreateTime = dCreateTime;
     }
 
-    public Date getdTime() {
+    public Timestamp getdTime() {
         return dTime;
     }
 
-    public void setdTime(Date dTime) {
+    public void setdTime(Timestamp dTime) {
         this.dTime = dTime;
     }
 }
