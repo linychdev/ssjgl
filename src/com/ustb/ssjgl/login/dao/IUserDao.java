@@ -31,4 +31,6 @@ public interface IUserDao extends IAbstractDao{
     
     
     public void saveUser(TUser user);
+
+    public TUser getUserByEmail(String emailAddress);
 }

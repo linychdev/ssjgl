@@ -65,10 +65,29 @@ public class RegisterAction extends AbstractAction{
     @RequestMapping("/register/sendEmail")
     public void sendEmail(HttpServletRequest request, HttpServletResponse response){
         String emailAddress = request.getParameter("emailAddress");
-        String verCode = emailService.sendVerificationMessage(emailAddress);
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("success", "success");
-        result.put("verCode", verCode);
+        //校验邮箱是否已被使用
+        TUser user = userService.getUserByEmail(emailAddress);
+        if(user != null){
+            result.put("emailUsed", true);
+        }else{
+            emailService.sendVerificationMessage(emailAddress);
+            result.put("success", true);
+        }
+        this.writeAjaxObject(response, result);
+    }
+    
+    @RequestMapping("/register/checkName")
+    public void checkName(HttpServletRequest request, HttpServletResponse response){
+        String loginName = request.getParameter("loginName");
+        Map<String, Object> result = new HashMap<String, Object>();
+        //校验用户名是否已被使用
+        TUser user = userService.getUserByName(loginName);
+        if(user != null){
+            result.put("repeat", true);
+        }else{
+            result.put("repeat", false);
+        }
         this.writeAjaxObject(response, result);
     }
     

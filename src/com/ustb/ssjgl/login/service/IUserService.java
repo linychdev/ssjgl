@@ -18,10 +18,10 @@ public interface IUserService {
 
     /**
      * 根据用户名获取用户对象
-     * @param currentUsername
+     * @param loginName
      * @return
      */
-    public TUser getUserByName(String currentUsername);
+    public TUser getUserByName(String loginName);
 
     /**
      * 根据用户id获取权限
@@ -38,5 +38,12 @@ public interface IUserService {
     public List<TPermission> getPermissionByUserId(String roleId);
 
     public boolean addUser(TUser user);
+
+    /**
+     * 根据邮箱地址获取用户信息
+     * @param emailAddress
+     * @return
+     */
+    public TUser getUserByEmail(String emailAddress);
 
 }

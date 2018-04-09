@@ -34,4 +34,10 @@ public class UserDaoImpl extends AbstractDao implements IUserDao{
     public void saveUser(TUser user) {
         insertSelective(user);
     }
+
+    @Override
+    public TUser getUserByEmail(String emailAddress) {
+        String statement = mapperNamespace + ".selectUserByEmail";
+        return this.getSqlSession().selectOne(statement, emailAddress);
+    }
 }

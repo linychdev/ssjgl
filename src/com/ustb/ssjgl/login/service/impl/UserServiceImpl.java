@@ -53,4 +53,9 @@ public class UserServiceImpl implements IUserService{
             return false;
         }
     }
+
+    @Override
+    public TUser getUserByEmail(String emailAddress) {
+        return userDao.getUserByEmail(emailAddress);
+    }
 }

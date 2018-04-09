@@ -19,9 +19,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<script type="text/javascript">
-  var contextPath = "<%=request.getContextPath()%>";
-</script>
+	<script type="text/javascript">
+	  var contextPath = "<%=request.getContextPath()%>";
+	</script>
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script src="js/register.js"></script>
   </head>
   
   <body>
@@ -31,7 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <table border="0">
                     <tr>
                         <td>账号：</td>
-                        <td><input type="text" name="username"></td>
+                        <td><input id = "register_login_name" type="text" name="username" onchange="checkname()"></td>
+                        <td id = "check_name_reminder"></td>
                     </tr>
                     <tr>
                         <td>密码：</td>
@@ -65,6 +68,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </form>
     </center>
   </body>
-      <script src="js/jquery-1.8.2.min.js"></script>
-      <script src="js/register.js"></script>
 </html>

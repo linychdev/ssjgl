@@ -216,4 +216,11 @@
       and role.n_valid = 1
   </select>
   
+  <select id="selectUserByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+     from t_user
+    where c_email = #{cEmail,jdbcType=VARCHAR}
+      and n_valid = 1
+  </select>
 </mapper>
