@@ -1,9 +1,3 @@
-/*
- * @(#)DateUtils.java 2016年9月29日下午3:43:17
- * dat2.0_common
- * Copyright 2016 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.common.utils;
 
 import java.sql.Timestamp;
@@ -361,63 +355,6 @@ public final class DateUtils {
         cal.set(Calendar.SECOND, 0);
         Date currentDate = cal.getTime();
         return currentDate;
-    }
-    
-    /**
-     * 获取运行监控日期的开始时间
-     * @param date Date类型日期
-     * @param timeParse "19:00:00"格式的字符串
-     * @return 运行监控时间的开始时间
-     */
-    public static Date getMonitorDateBegin(Date date, String timeParse){
-        
-        String[] ss = timeParse.split(":");
-        String hour24 = ss[0]; 
-        String minute = ss[1]; 
-        String second = ss[2]; 
-        
-        Calendar monitorCal = Calendar.getInstance();
-        monitorCal.setTime(date);
-        monitorCal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour24));
-        monitorCal.set(Calendar.MINUTE, Integer.parseInt(minute));
-        monitorCal.set(Calendar.SECOND, Integer.parseInt(second));
-       
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        
-        if(cal.before(monitorCal) || cal.equals(monitorCal)){
-            monitorCal.add(Calendar.DAY_OF_MONTH, -1);
-        }
-        return monitorCal.getTime();
-    }
-    
-    /**
-     * 获取运行监控日期的结束时间
-     * @param date Date类型日期
-     * @param timeParse "19:00:00"格式的字符串
-     * @return 运行监控时间的开始时间
-     */
-    public static Date getMonitorDateEnd(Date date, String timeParse){
-        
-        String[] ss = timeParse.split(":");
-        String hour24 = ss[0]; 
-        String minute = ss[1]; 
-        String second = ss[2];
-        
-        Calendar monitorCal = Calendar.getInstance();
-        monitorCal.setTime(date);
-        monitorCal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour24));
-        monitorCal.set(Calendar.MINUTE, Integer.parseInt(minute));
-        monitorCal.set(Calendar.SECOND, Integer.parseInt(second));
-        
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        
-        if(cal.after(monitorCal)){
-            monitorCal.add(Calendar.DAY_OF_MONTH, 1);
-        }
-        monitorCal.add(Calendar.SECOND, -1);
-        return monitorCal.getTime();
     }
     
     /**

@@ -1,9 +1,3 @@
-/*
- * @(#)IPUtils.java 2016年9月29日下午3:42:37
- * dat2.0_common
- * Copyright 2016 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.common.utils;
 
 import java.net.InetAddress;

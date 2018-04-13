@@ -2,7 +2,7 @@ package com.ustb.ssjgl.login.dao.bean;
 
 import java.sql.Timestamp;
 
-import com.ustb.ssjgl.common.ConfigFile;
+import com.ustb.ssjgl.common.MailConfigFile;
 import com.ustb.ssjgl.common.utils.DateUtils;
 import com.ustb.ssjgl.common.utils.SsjglUtils;
 
@@ -26,7 +26,7 @@ public class TEmailRecord {
         super();
         this.cId = SsjglUtils.getUuid();
         this.dSendTime = DateUtils.getCurrentDate();
-        this.dOverdueTime = DateUtils.addMinutes(this.dSendTime, ConfigFile.failureTime);
+        this.dOverdueTime = DateUtils.addMinutes(this.dSendTime, MailConfigFile.failureTime);
     }
 
     public String getcId() {

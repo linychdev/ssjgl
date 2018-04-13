@@ -5,9 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ustb.ssjgl.common.ConfigFile;
+import com.ustb.ssjgl.common.MailConfigFile;
 import com.ustb.ssjgl.common.utils.LogUtils;
-import com.ustb.ssjgl.common.utils.MailUtil;
+import com.ustb.ssjgl.common.utils.MailUtils;
 import com.ustb.ssjgl.common.utils.SsjglUtils;
 import com.ustb.ssjgl.login.dao.IEmailRecordDao;
 import com.ustb.ssjgl.login.dao.bean.TEmailRecord;
@@ -28,13 +28,13 @@ public class EmailServiceImpl implements IEmailService{
     @Override
     public String sendVerificationMessage(String emailAddress) {
         try {
-            String verificationCode = SsjglUtils.getVerMessage(ConfigFile.verCodeLength);
+            String verificationCode = SsjglUtils.getVerMessage(MailConfigFile.verCodeLength);
             String html = "<div>您的验证码是：</div><br/><hr/><div>"+verificationCode+"</div><br/><hr/><div>如果不是您自己的操作，请忽略此邮件</div>";
             TEmailRecord emailRecord = new TEmailRecord();
             emailRecord.setcEmail(emailAddress);
             emailRecord.setcVerificationCode(verificationCode);
             emailRecord.setcHtml(html);
-            MailUtil.sendMail(emailAddress, ConfigFile.subject, html);
+            MailUtils.sendMail(emailAddress, MailConfigFile.subject, html);
             emailRecordDao.saveEmailRecord(emailRecord);
             return verificationCode;
         } catch (Exception e) {

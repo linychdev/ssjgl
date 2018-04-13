@@ -9,20 +9,20 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import com.ustb.ssjgl.common.ConfigFile;
+import com.ustb.ssjgl.common.MailConfigFile;
 
 /**
  * Created by linych on 2018/03/31.
  * 资源文件方式
  **/
-public class MailUtil {
-    private static final String HOST = ConfigFile.host;
-    private static final Integer PORT = ConfigFile.port;
-    private static final String USERNAME = ConfigFile.userName;
-    private static final String PASSWORD = ConfigFile.passWord;
-    private static final String emailForm = ConfigFile.emailForm;
-    private static final String timeout = ConfigFile.timeout;
-    private static final String personal = ConfigFile.personal;
+public class MailUtils {
+    private static final String HOST = MailConfigFile.host;
+    private static final Integer PORT = MailConfigFile.port;
+    private static final String USERNAME = MailConfigFile.userName;
+    private static final String PASSWORD = MailConfigFile.passWord;
+    private static final String emailForm = MailConfigFile.emailForm;
+    private static final String timeout = MailConfigFile.timeout;
+    private static final String personal = MailConfigFile.personal;
     private static JavaMailSenderImpl mailSender = createMailSender();
 
     /**

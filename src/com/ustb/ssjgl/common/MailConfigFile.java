@@ -1,18 +1,18 @@
 package com.ustb.ssjgl.common;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 import org.slf4j.Logger;
 
 import com.ustb.ssjgl.common.utils.LogUtils;
+import com.ustb.ssjgl.common.utils.PropertiesUtils;
 
 /**
  * Created by linych on 2018/03/28.
  * 读取资源文件数据
  **/
-public class ConfigFile {
+public class MailConfigFile {
     
     private static final Logger LOG = LogUtils.getLogger();
     private static final String PROPERTIES_DEFAULT = "props/config.properties";
@@ -35,11 +35,8 @@ public class ConfigFile {
      * 初始化
      */
     private static void init() {
-        properties = new Properties();
+        properties = PropertiesUtils.getProperties(PROPERTIES_DEFAULT);
         try{
-            InputStream inputStream = ConfigFile.class.getClassLoader().getResourceAsStream(PROPERTIES_DEFAULT);
-            properties.load(inputStream);
-            inputStream.close();
             host = properties.getProperty("mailHost");
             port = Integer.parseInt(properties.getProperty("mailPort"));
             userName = properties.getProperty("mailUsername");
