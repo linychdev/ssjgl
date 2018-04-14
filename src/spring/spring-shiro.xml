@@ -53,6 +53,7 @@
             <property name="filterChainDefinitions">  
                 <value>  
 	                    /index.jsp=anon
+	                    /jmeditor.jsp=anon
 	                    /register.jsp=anon
 	                    /success.jsp=anon
 	                    /fail.jsp=anon
