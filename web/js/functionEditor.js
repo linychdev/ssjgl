@@ -5,6 +5,5 @@ $(function(){
 });
 
 function addfunconfirm(){
-	alert("a");
 	alert(JMEditor.html('content'));
 }
