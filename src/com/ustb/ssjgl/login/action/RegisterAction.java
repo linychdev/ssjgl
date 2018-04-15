@@ -91,6 +91,12 @@ public class RegisterAction extends AbstractAction{
         this.writeAjaxObject(response, result);
     }
     
+    /**
+     * 邮件验证码是否正确
+     * @param emailAddress
+     * @param vercode
+     * @return
+     */
     private boolean isValidVerCode(String emailAddress, String vercode) {
         List<String> validCodeList = emailService.getValidVerificationCodeByEmail(emailAddress);
         if(validCodeList.contains(vercode)){
@@ -99,6 +105,12 @@ public class RegisterAction extends AbstractAction{
         return false;
     }
 
+    /**
+     * 获取加密后的密码值
+     * @param username
+     * @param password
+     * @return
+     */
     private String getEncryptionPassword(String username, String password) {
         String hashAlgorithmName = "MD5";//加密方式  
         Object crdentials = password;//密码原值  

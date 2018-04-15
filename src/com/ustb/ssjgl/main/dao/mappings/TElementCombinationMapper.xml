@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TElementCombinationMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_ptentials_file_id" property="cPtentialsFileId" jdbcType="VARCHAR" />
+    <result column="c_comb_name" property="cCombName" jdbcType="VARCHAR" />
+    <result column="c_description" property="cDescription" jdbcType="VARCHAR" />
+    <result column="c_reference_description" property="cReferenceDescription" jdbcType="VARCHAR" />
+    <result column="c_note" property="cNote" jdbcType="VARCHAR" />
+    <result column="n_order" property="nOrder" jdbcType="INTEGER" />
+    <result column="n_valid" property="nValid" jdbcType="INTEGER" />
+    <result column="d_create_time" property="dCreateTime" jdbcType="TIMESTAMP" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_ptentials_file_id, c_comb_name, c_description, c_reference_description, c_note, 
+    n_order, n_valid, d_create_time, d_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element_combination
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_element_combination
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
+    insert into t_element_combination (c_id, c_ptentials_file_id, c_comb_name, 
+      c_description, c_reference_description, c_note, 
+      n_order, n_valid, d_create_time, 
+      d_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cPtentialsFileId,jdbcType=VARCHAR}, #{cCombName,jdbcType=VARCHAR}, 
+      #{cDescription,jdbcType=VARCHAR}, #{cReferenceDescription,jdbcType=VARCHAR}, #{cNote,jdbcType=VARCHAR}, 
+      #{nOrder,jdbcType=INTEGER}, #{nValid,jdbcType=INTEGER}, #{dCreateTime,jdbcType=TIMESTAMP}, 
+      #{dTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
+    insert into t_element_combination
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cPtentialsFileId != null" >
+        c_ptentials_file_id,
+      </if>
+      <if test="cCombName != null" >
+        c_comb_name,
+      </if>
+      <if test="cDescription != null" >
+        c_description,
+      </if>
+      <if test="cReferenceDescription != null" >
+        c_reference_description,
+      </if>
+      <if test="cNote != null" >
+        c_note,
+      </if>
+      <if test="nOrder != null" >
+        n_order,
+      </if>
+      <if test="nValid != null" >
+        n_valid,
+      </if>
+      <if test="dCreateTime != null" >
+        d_create_time,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cPtentialsFileId != null" >
+        #{cPtentialsFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="cCombName != null" >
+        #{cCombName,jdbcType=VARCHAR},
+      </if>
+      <if test="cDescription != null" >
+        #{cDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cReferenceDescription != null" >
+        #{cReferenceDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cNote != null" >
+        #{cNote,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dCreateTime != null" >
+        #{dCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
+    update t_element_combination
+    <set >
+      <if test="cPtentialsFileId != null" >
+        c_ptentials_file_id = #{cPtentialsFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="cCombName != null" >
+        c_comb_name = #{cCombName,jdbcType=VARCHAR},
+      </if>
+      <if test="cDescription != null" >
+        c_description = #{cDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cReferenceDescription != null" >
+        c_reference_description = #{cReferenceDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cNote != null" >
+        c_note = #{cNote,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        n_order = #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        n_valid = #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dCreateTime != null" >
+        d_create_time = #{dCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
+    update t_element_combination
+    set c_ptentials_file_id = #{cPtentialsFileId,jdbcType=VARCHAR},
+      c_comb_name = #{cCombName,jdbcType=VARCHAR},
+      c_description = #{cDescription,jdbcType=VARCHAR},
+      c_reference_description = #{cReferenceDescription,jdbcType=VARCHAR},
+      c_note = #{cNote,jdbcType=VARCHAR},
+      n_order = #{nOrder,jdbcType=INTEGER},
+      n_valid = #{nValid,jdbcType=INTEGER},
+      d_create_time = #{dCreateTime,jdbcType=TIMESTAMP},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

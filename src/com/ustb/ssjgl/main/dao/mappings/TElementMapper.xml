@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TElementMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TElement" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_elment_name" property="cElmentName" jdbcType="VARCHAR" />
+    <result column="c_symbol" property="cSymbol" jdbcType="VARCHAR" />
+    <result column="c_electron_configuration" property="cElectronConfiguration" jdbcType="VARCHAR" />
+    <result column="n_electronegativity" property="nElectronegativity" jdbcType="DECIMAL" />
+    <result column="n_atomic_number" property="nAtomicNumber" jdbcType="INTEGER" />
+    <result column="n_relative_atomic_mass" property="nRelativeAtomicMass" jdbcType="DECIMAL" />
+    <result column="n_melting_point" property="nMeltingPoint" jdbcType="INTEGER" />
+    <result column="n_boiling_point" property="nBoilingPoint" jdbcType="INTEGER" />
+    <result column="c_crystal_structure" property="cCrystalStructure" jdbcType="VARCHAR" />
+    <result column="n_inization_energy" property="nInizationEnergy" jdbcType="DECIMAL" />
+    <result column="n_radius" property="nRadius" jdbcType="INTEGER" />
+    <result column="n_cycle" property="nCycle" jdbcType="INTEGER" />
+    <result column="n_race" property="nRace" jdbcType="INTEGER" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_elment_name, c_symbol, c_electron_configuration, n_electronegativity, n_atomic_number, 
+    n_relative_atomic_mass, n_melting_point, n_boiling_point, c_crystal_structure, n_inization_energy, 
+    n_radius, n_cycle, n_race, d_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_element
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TElement" >
+    insert into t_element (c_id, c_elment_name, c_symbol, 
+      c_electron_configuration, n_electronegativity, 
+      n_atomic_number, n_relative_atomic_mass, n_melting_point, 
+      n_boiling_point, c_crystal_structure, n_inization_energy, 
+      n_radius, n_cycle, n_race, 
+      d_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cElmentName,jdbcType=VARCHAR}, #{cSymbol,jdbcType=VARCHAR}, 
+      #{cElectronConfiguration,jdbcType=VARCHAR}, #{nElectronegativity,jdbcType=DECIMAL}, 
+      #{nAtomicNumber,jdbcType=INTEGER}, #{nRelativeAtomicMass,jdbcType=DECIMAL}, #{nMeltingPoint,jdbcType=INTEGER}, 
+      #{nBoilingPoint,jdbcType=INTEGER}, #{cCrystalStructure,jdbcType=VARCHAR}, #{nInizationEnergy,jdbcType=DECIMAL}, 
+      #{nRadius,jdbcType=INTEGER}, #{nCycle,jdbcType=INTEGER}, #{nRace,jdbcType=INTEGER}, 
+      #{dTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElement" >
+    insert into t_element
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cElmentName != null" >
+        c_elment_name,
+      </if>
+      <if test="cSymbol != null" >
+        c_symbol,
+      </if>
+      <if test="cElectronConfiguration != null" >
+        c_electron_configuration,
+      </if>
+      <if test="nElectronegativity != null" >
+        n_electronegativity,
+      </if>
+      <if test="nAtomicNumber != null" >
+        n_atomic_number,
+      </if>
+      <if test="nRelativeAtomicMass != null" >
+        n_relative_atomic_mass,
+      </if>
+      <if test="nMeltingPoint != null" >
+        n_melting_point,
+      </if>
+      <if test="nBoilingPoint != null" >
+        n_boiling_point,
+      </if>
+      <if test="cCrystalStructure != null" >
+        c_crystal_structure,
+      </if>
+      <if test="nInizationEnergy != null" >
+        n_inization_energy,
+      </if>
+      <if test="nRadius != null" >
+        n_radius,
+      </if>
+      <if test="nCycle != null" >
+        n_cycle,
+      </if>
+      <if test="nRace != null" >
+        n_race,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElmentName != null" >
+        #{cElmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="cSymbol != null" >
+        #{cSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="cElectronConfiguration != null" >
+        #{cElectronConfiguration,jdbcType=VARCHAR},
+      </if>
+      <if test="nElectronegativity != null" >
+        #{nElectronegativity,jdbcType=DECIMAL},
+      </if>
+      <if test="nAtomicNumber != null" >
+        #{nAtomicNumber,jdbcType=INTEGER},
+      </if>
+      <if test="nRelativeAtomicMass != null" >
+        #{nRelativeAtomicMass,jdbcType=DECIMAL},
+      </if>
+      <if test="nMeltingPoint != null" >
+        #{nMeltingPoint,jdbcType=INTEGER},
+      </if>
+      <if test="nBoilingPoint != null" >
+        #{nBoilingPoint,jdbcType=INTEGER},
+      </if>
+      <if test="cCrystalStructure != null" >
+        #{cCrystalStructure,jdbcType=VARCHAR},
+      </if>
+      <if test="nInizationEnergy != null" >
+        #{nInizationEnergy,jdbcType=DECIMAL},
+      </if>
+      <if test="nRadius != null" >
+        #{nRadius,jdbcType=INTEGER},
+      </if>
+      <if test="nCycle != null" >
+        #{nCycle,jdbcType=INTEGER},
+      </if>
+      <if test="nRace != null" >
+        #{nRace,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElement" >
+    update t_element
+    <set >
+      <if test="cElmentName != null" >
+        c_elment_name = #{cElmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="cSymbol != null" >
+        c_symbol = #{cSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="cElectronConfiguration != null" >
+        c_electron_configuration = #{cElectronConfiguration,jdbcType=VARCHAR},
+      </if>
+      <if test="nElectronegativity != null" >
+        n_electronegativity = #{nElectronegativity,jdbcType=DECIMAL},
+      </if>
+      <if test="nAtomicNumber != null" >
+        n_atomic_number = #{nAtomicNumber,jdbcType=INTEGER},
+      </if>
+      <if test="nRelativeAtomicMass != null" >
+        n_relative_atomic_mass = #{nRelativeAtomicMass,jdbcType=DECIMAL},
+      </if>
+      <if test="nMeltingPoint != null" >
+        n_melting_point = #{nMeltingPoint,jdbcType=INTEGER},
+      </if>
+      <if test="nBoilingPoint != null" >
+        n_boiling_point = #{nBoilingPoint,jdbcType=INTEGER},
+      </if>
+      <if test="cCrystalStructure != null" >
+        c_crystal_structure = #{cCrystalStructure,jdbcType=VARCHAR},
+      </if>
+      <if test="nInizationEnergy != null" >
+        n_inization_energy = #{nInizationEnergy,jdbcType=DECIMAL},
+      </if>
+      <if test="nRadius != null" >
+        n_radius = #{nRadius,jdbcType=INTEGER},
+      </if>
+      <if test="nCycle != null" >
+        n_cycle = #{nCycle,jdbcType=INTEGER},
+      </if>
+      <if test="nRace != null" >
+        n_race = #{nRace,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TElement" >
+    update t_element
+    set c_elment_name = #{cElmentName,jdbcType=VARCHAR},
+      c_symbol = #{cSymbol,jdbcType=VARCHAR},
+      c_electron_configuration = #{cElectronConfiguration,jdbcType=VARCHAR},
+      n_electronegativity = #{nElectronegativity,jdbcType=DECIMAL},
+      n_atomic_number = #{nAtomicNumber,jdbcType=INTEGER},
+      n_relative_atomic_mass = #{nRelativeAtomicMass,jdbcType=DECIMAL},
+      n_melting_point = #{nMeltingPoint,jdbcType=INTEGER},
+      n_boiling_point = #{nBoilingPoint,jdbcType=INTEGER},
+      c_crystal_structure = #{cCrystalStructure,jdbcType=VARCHAR},
+      n_inization_energy = #{nInizationEnergy,jdbcType=DECIMAL},
+      n_radius = #{nRadius,jdbcType=INTEGER},
+      n_cycle = #{nCycle,jdbcType=INTEGER},
+      n_race = #{nRace,jdbcType=INTEGER},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

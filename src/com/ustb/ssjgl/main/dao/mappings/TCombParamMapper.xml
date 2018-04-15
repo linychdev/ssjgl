@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TCombParamMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TCombParam" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_element_comb_id" property="cElementCombId" jdbcType="VARCHAR" />
+    <result column="c_ptentials_function_id" property="cPtentialsFunctionId" jdbcType="VARCHAR" />
+    <result column="c_param_id" property="cParamId" jdbcType="VARCHAR" />
+    <result column="c_class" property="cClass" jdbcType="VARCHAR" />
+    <result column="c_value" property="cValue" jdbcType="VARCHAR" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_element_comb_id, c_ptentials_function_id, c_param_id, c_class, c_value, d_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_comb_param
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_comb_param
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
+    insert into t_comb_param (c_id, c_element_comb_id, c_ptentials_function_id, 
+      c_param_id, c_class, c_value, 
+      d_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cPtentialsFunctionId,jdbcType=VARCHAR}, 
+      #{cParamId,jdbcType=VARCHAR}, #{cClass,jdbcType=VARCHAR}, #{cValue,jdbcType=VARCHAR}, 
+      #{dTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
+    insert into t_comb_param
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cElementCombId != null" >
+        c_element_comb_id,
+      </if>
+      <if test="cPtentialsFunctionId != null" >
+        c_ptentials_function_id,
+      </if>
+      <if test="cParamId != null" >
+        c_param_id,
+      </if>
+      <if test="cClass != null" >
+        c_class,
+      </if>
+      <if test="cValue != null" >
+        c_value,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElementCombId != null" >
+        #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="cPtentialsFunctionId != null" >
+        #{cPtentialsFunctionId,jdbcType=VARCHAR},
+      </if>
+      <if test="cParamId != null" >
+        #{cParamId,jdbcType=VARCHAR},
+      </if>
+      <if test="cClass != null" >
+        #{cClass,jdbcType=VARCHAR},
+      </if>
+      <if test="cValue != null" >
+        #{cValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
+    update t_comb_param
+    <set >
+      <if test="cElementCombId != null" >
+        c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="cPtentialsFunctionId != null" >
+        c_ptentials_function_id = #{cPtentialsFunctionId,jdbcType=VARCHAR},
+      </if>
+      <if test="cParamId != null" >
+        c_param_id = #{cParamId,jdbcType=VARCHAR},
+      </if>
+      <if test="cClass != null" >
+        c_class = #{cClass,jdbcType=VARCHAR},
+      </if>
+      <if test="cValue != null" >
+        c_value = #{cValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
+    update t_comb_param
+    set c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      c_ptentials_function_id = #{cPtentialsFunctionId,jdbcType=VARCHAR},
+      c_param_id = #{cParamId,jdbcType=VARCHAR},
+      c_class = #{cClass,jdbcType=VARCHAR},
+      c_value = #{cValue,jdbcType=VARCHAR},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

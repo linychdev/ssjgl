@@ -18,6 +18,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="jmeditor/JMEditor.js"></script>
+	<style type="text/css">
+	.mathquill-rendered-math {
+		font-size: 40px !important;
+	}
+	</style>
   </head>
   
   <body>

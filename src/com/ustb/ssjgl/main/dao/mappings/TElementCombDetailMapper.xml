@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TElementCombDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TElementCombDetail" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_element_comb_id" property="cElementCombId" jdbcType="VARCHAR" />
+    <result column="c_element_id" property="cElementId" jdbcType="VARCHAR" />
+    <result column="n_order" property="nOrder" jdbcType="INTEGER" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_element_comb_id, c_element_id, n_order, d_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element_comb_detail
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_element_comb_detail
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombDetail" >
+    insert into t_element_comb_detail (c_id, c_element_comb_id, c_element_id, 
+      n_order, d_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cElementId,jdbcType=VARCHAR}, 
+      #{nOrder,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombDetail" >
+    insert into t_element_comb_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cElementCombId != null" >
+        c_element_comb_id,
+      </if>
+      <if test="cElementId != null" >
+        c_element_id,
+      </if>
+      <if test="nOrder != null" >
+        n_order,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElementCombId != null" >
+        #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElementId != null" >
+        #{cElementId,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombDetail" >
+    update t_element_comb_detail
+    <set >
+      <if test="cElementCombId != null" >
+        c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElementId != null" >
+        c_element_id = #{cElementId,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        n_order = #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombDetail" >
+    update t_element_comb_detail
+    set c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      c_element_id = #{cElementId,jdbcType=VARCHAR},
+      n_order = #{nOrder,jdbcType=INTEGER},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

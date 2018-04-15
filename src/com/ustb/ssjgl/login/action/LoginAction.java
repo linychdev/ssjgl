@@ -3,14 +3,13 @@ package com.ustb.ssjgl.login.action;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ustb.ssjgl.login.dao.bean.TUser;
+import com.ustb.ssjgl.common.utils.LogUtils;
 
 /**
  * 登录控制器
@@ -21,6 +20,9 @@ import com.ustb.ssjgl.login.dao.bean.TUser;
  */
 @Controller
 public class LoginAction {
+    
+    private static final Logger LOG = LogUtils.getLogger();
+    
     @RequestMapping("/login")
     public String login(@RequestParam("username") String username,
              @RequestParam("password")String password){
@@ -34,7 +36,7 @@ public class LoginAction {
             try {
                subject.login(token);
            } catch (AuthenticationException e) {
-               System.out.println("验证不通过，无法登录！");
+               LOG.warn("验证不通过，无法登录！", e);
                return "error";
            }
         }

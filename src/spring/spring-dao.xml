@@ -8,7 +8,6 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		    <property name="jdbcTemplate" ref="jdbcTemplate" />
 		    <property name="transactionTemplate" ref="transactionTemplate"/>
 		</bean>
-		<bean id="testDao" class="com.ustb.ssjgl.dao.impl.TestDao" parent="abstractDao"></bean>
 		<bean id="userDao" class="com.ustb.ssjgl.login.dao.impl.UserDaoImpl" parent="abstractDao"></bean>
 		<bean id="roleDao" class="com.ustb.ssjgl.login.dao.impl.RoleDaoImpl" parent="abstractDao"></bean>
 		<bean id="permissionDao" class="com.ustb.ssjgl.login.dao.impl.PermissionDaoImpl" parent="abstractDao"></bean>

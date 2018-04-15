@@ -26,7 +26,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		width:90%;
 		padding:10px;
 	}
-	
+	.editDemo p span{
+		font-size: 40px !important;
+	}
 	</style>
 	
 	

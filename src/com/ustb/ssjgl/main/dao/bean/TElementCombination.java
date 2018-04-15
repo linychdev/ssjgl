@@ -1,0 +1,116 @@
+package com.ustb.ssjgl.main.dao.bean;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class TElementCombination {
+    /** 主键 */
+    private String cId;
+
+    /** 势数据文件主键 */
+    private String cPtentialsFileId;
+
+    /** 组合名称 */
+    private String cCombName;
+
+    /** 组合描述 */
+    private String cDescription;
+
+    /** 参考文献总体描述 */
+    private String cReferenceDescription;
+
+    /** 备注 */
+    private String cNote;
+
+    /** 排序字段 */
+    private Integer nOrder;
+
+    /** 是否有效 */
+    private Integer nValid;
+
+    /** 创建时间 */
+    private Date dCreateTime;
+
+    /** 时间戳 */
+    private Timestamp dTime;
+
+    public String getcId() {
+        return cId;
+    }
+
+    public void setcId(String cId) {
+        this.cId = cId == null ? null : cId.trim();
+    }
+
+    public String getcPtentialsFileId() {
+        return cPtentialsFileId;
+    }
+
+    public void setcPtentialsFileId(String cPtentialsFileId) {
+        this.cPtentialsFileId = cPtentialsFileId == null ? null : cPtentialsFileId.trim();
+    }
+
+    public String getcCombName() {
+        return cCombName;
+    }
+
+    public void setcCombName(String cCombName) {
+        this.cCombName = cCombName == null ? null : cCombName.trim();
+    }
+
+    public String getcDescription() {
+        return cDescription;
+    }
+
+    public void setcDescription(String cDescription) {
+        this.cDescription = cDescription == null ? null : cDescription.trim();
+    }
+
+    public String getcReferenceDescription() {
+        return cReferenceDescription;
+    }
+
+    public void setcReferenceDescription(String cReferenceDescription) {
+        this.cReferenceDescription = cReferenceDescription == null ? null : cReferenceDescription.trim();
+    }
+
+    public String getcNote() {
+        return cNote;
+    }
+
+    public void setcNote(String cNote) {
+        this.cNote = cNote == null ? null : cNote.trim();
+    }
+
+    public Integer getnOrder() {
+        return nOrder;
+    }
+
+    public void setnOrder(Integer nOrder) {
+        this.nOrder = nOrder;
+    }
+
+    public Integer getnValid() {
+        return nValid;
+    }
+
+    public void setnValid(Integer nValid) {
+        this.nValid = nValid;
+    }
+
+    public Date getdCreateTime() {
+        return dCreateTime;
+    }
+
+    public void setdCreateTime(Date dCreateTime) {
+        this.dCreateTime = dCreateTime;
+    }
+
+    public Timestamp getdTime() {
+        return dTime;
+    }
+
+    public void setdTime(Timestamp dTime) {
+        this.dTime = dTime;
+    }
+}

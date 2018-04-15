@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TPtentialsFileMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_element_comb_id" property="cElementCombId" jdbcType="VARCHAR" />
+    <result column="c_file_name" property="cFileName" jdbcType="VARCHAR" />
+    <result column="c_ftp_url_path" property="cFtpUrlPath" jdbcType="VARCHAR" />
+    <result column="c_suffix" property="cSuffix" jdbcType="VARCHAR" />
+    <result column="n_size" property="nSize" jdbcType="INTEGER" />
+    <result column="n_valid" property="nValid" jdbcType="INTEGER" />
+    <result column="d_upload_time" property="dUploadTime" jdbcType="TIMESTAMP" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_element_comb_id, c_file_name, c_ftp_url_path, c_suffix, n_size, n_valid, 
+    d_upload_time, d_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ptentials_file
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_ptentials_file
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
+    insert into t_ptentials_file (c_id, c_element_comb_id, c_file_name, 
+      c_ftp_url_path, c_suffix, n_size, 
+      n_valid, d_upload_time, d_time
+      )
+    values (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cFileName,jdbcType=VARCHAR}, 
+      #{cFtpUrlPath,jdbcType=VARCHAR}, #{cSuffix,jdbcType=VARCHAR}, #{nSize,jdbcType=INTEGER}, 
+      #{nValid,jdbcType=INTEGER}, #{dUploadTime,jdbcType=TIMESTAMP}, #{dTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
+    insert into t_ptentials_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cElementCombId != null" >
+        c_element_comb_id,
+      </if>
+      <if test="cFileName != null" >
+        c_file_name,
+      </if>
+      <if test="cFtpUrlPath != null" >
+        c_ftp_url_path,
+      </if>
+      <if test="cSuffix != null" >
+        c_suffix,
+      </if>
+      <if test="nSize != null" >
+        n_size,
+      </if>
+      <if test="nValid != null" >
+        n_valid,
+      </if>
+      <if test="dUploadTime != null" >
+        d_upload_time,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElementCombId != null" >
+        #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="cFileName != null" >
+        #{cFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="cFtpUrlPath != null" >
+        #{cFtpUrlPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cSuffix != null" >
+        #{cSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="nSize != null" >
+        #{nSize,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dUploadTime != null" >
+        #{dUploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
+    update t_ptentials_file
+    <set >
+      <if test="cElementCombId != null" >
+        c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="cFileName != null" >
+        c_file_name = #{cFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="cFtpUrlPath != null" >
+        c_ftp_url_path = #{cFtpUrlPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cSuffix != null" >
+        c_suffix = #{cSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="nSize != null" >
+        n_size = #{nSize,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        n_valid = #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dUploadTime != null" >
+        d_upload_time = #{dUploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
+    update t_ptentials_file
+    set c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      c_file_name = #{cFileName,jdbcType=VARCHAR},
+      c_ftp_url_path = #{cFtpUrlPath,jdbcType=VARCHAR},
+      c_suffix = #{cSuffix,jdbcType=VARCHAR},
+      n_size = #{nSize,jdbcType=INTEGER},
+      n_valid = #{nValid,jdbcType=INTEGER},
+      d_upload_time = #{dUploadTime,jdbcType=TIMESTAMP},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TPtentialsFunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TPtentialsFunction" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_scope_id" property="cScopeId" jdbcType="VARCHAR" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_formula" property="cFormula" jdbcType="VARCHAR" />
+    <result column="c_description" property="cDescription" jdbcType="VARCHAR" />
+    <result column="n_valid" property="nValid" jdbcType="INTEGER" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ustb.ssjgl.main.dao.bean.TPtentialsFunction" extends="BaseResultMap" >
+    <result column="c_formula_html" property="cFormulaHtml" jdbcType="LONGVARCHAR" />
+    <result column="b_image" property="bImage" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_scope_id, c_name, c_formula, c_description, n_valid, d_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    c_formula_html, b_image
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_ptentials_function
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_ptentials_function
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFunction" >
+    insert into t_ptentials_function (c_id, c_scope_id, c_name, 
+      c_formula, c_description, n_valid, 
+      d_time, c_formula_html, b_image
+      )
+    values (#{cId,jdbcType=VARCHAR}, #{cScopeId,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, 
+      #{cFormula,jdbcType=VARCHAR}, #{cDescription,jdbcType=VARCHAR}, #{nValid,jdbcType=INTEGER}, 
+      #{dTime,jdbcType=TIMESTAMP}, #{cFormulaHtml,jdbcType=LONGVARCHAR}, #{bImage,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFunction" >
+    insert into t_ptentials_function
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cScopeId != null" >
+        c_scope_id,
+      </if>
+      <if test="cName != null" >
+        c_name,
+      </if>
+      <if test="cFormula != null" >
+        c_formula,
+      </if>
+      <if test="cDescription != null" >
+        c_description,
+      </if>
+      <if test="nValid != null" >
+        n_valid,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+      <if test="cFormulaHtml != null" >
+        c_formula_html,
+      </if>
+      <if test="bImage != null" >
+        b_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cScopeId != null" >
+        #{cScopeId,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cFormula != null" >
+        #{cFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="cDescription != null" >
+        #{cDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="nValid != null" >
+        #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cFormulaHtml != null" >
+        #{cFormulaHtml,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bImage != null" >
+        #{bImage,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFunction" >
+    update t_ptentials_function
+    <set >
+      <if test="cScopeId != null" >
+        c_scope_id = #{cScopeId,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cFormula != null" >
+        c_formula = #{cFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="cDescription != null" >
+        c_description = #{cDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="nValid != null" >
+        n_valid = #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cFormulaHtml != null" >
+        c_formula_html = #{cFormulaHtml,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bImage != null" >
+        b_image = #{bImage,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFunction" >
+    update t_ptentials_function
+    set c_scope_id = #{cScopeId,jdbcType=VARCHAR},
+      c_name = #{cName,jdbcType=VARCHAR},
+      c_formula = #{cFormula,jdbcType=VARCHAR},
+      c_description = #{cDescription,jdbcType=VARCHAR},
+      n_valid = #{nValid,jdbcType=INTEGER},
+      d_time = #{dTime,jdbcType=TIMESTAMP},
+      c_formula_html = #{cFormulaHtml,jdbcType=LONGVARCHAR},
+      b_image = #{bImage,jdbcType=LONGVARBINARY}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFunction" >
+    update t_ptentials_function
+    set c_scope_id = #{cScopeId,jdbcType=VARCHAR},
+      c_name = #{cName,jdbcType=VARCHAR},
+      c_formula = #{cFormula,jdbcType=VARCHAR},
+      c_description = #{cDescription,jdbcType=VARCHAR},
+      n_valid = #{nValid,jdbcType=INTEGER},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

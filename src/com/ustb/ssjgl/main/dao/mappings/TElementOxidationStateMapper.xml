@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TElementOxidationStateMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TElementOxidationState" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_element_id" property="cElementId" jdbcType="VARCHAR" />
+    <result column="n_oxidation_state" property="nOxidationState" jdbcType="INTEGER" />
+    <result column="c_oxidation_state" property="cOxidationState" jdbcType="VARCHAR" />
+    <result column="n_order" property="nOrder" jdbcType="INTEGER" />
+    <result column="n_valid" property="nValid" jdbcType="INTEGER" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_element_id, n_oxidation_state, c_oxidation_state, n_order, n_valid, d_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element_oxidation_state
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_element_oxidation_state
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TElementOxidationState" >
+    insert into t_element_oxidation_state (c_id, c_element_id, n_oxidation_state, 
+      c_oxidation_state, n_order, n_valid, 
+      d_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cElementId,jdbcType=VARCHAR}, #{nOxidationState,jdbcType=INTEGER}, 
+      #{cOxidationState,jdbcType=VARCHAR}, #{nOrder,jdbcType=INTEGER}, #{nValid,jdbcType=INTEGER}, 
+      #{dTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElementOxidationState" >
+    insert into t_element_oxidation_state
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cElementId != null" >
+        c_element_id,
+      </if>
+      <if test="nOxidationState != null" >
+        n_oxidation_state,
+      </if>
+      <if test="cOxidationState != null" >
+        c_oxidation_state,
+      </if>
+      <if test="nOrder != null" >
+        n_order,
+      </if>
+      <if test="nValid != null" >
+        n_valid,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElementId != null" >
+        #{cElementId,jdbcType=VARCHAR},
+      </if>
+      <if test="nOxidationState != null" >
+        #{nOxidationState,jdbcType=INTEGER},
+      </if>
+      <if test="cOxidationState != null" >
+        #{cOxidationState,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElementOxidationState" >
+    update t_element_oxidation_state
+    <set >
+      <if test="cElementId != null" >
+        c_element_id = #{cElementId,jdbcType=VARCHAR},
+      </if>
+      <if test="nOxidationState != null" >
+        n_oxidation_state = #{nOxidationState,jdbcType=INTEGER},
+      </if>
+      <if test="cOxidationState != null" >
+        c_oxidation_state = #{cOxidationState,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        n_order = #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        n_valid = #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TElementOxidationState" >
+    update t_element_oxidation_state
+    set c_element_id = #{cElementId,jdbcType=VARCHAR},
+      n_oxidation_state = #{nOxidationState,jdbcType=INTEGER},
+      c_oxidation_state = #{cOxidationState,jdbcType=VARCHAR},
+      n_order = #{nOrder,jdbcType=INTEGER},
+      n_valid = #{nValid,jdbcType=INTEGER},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>
