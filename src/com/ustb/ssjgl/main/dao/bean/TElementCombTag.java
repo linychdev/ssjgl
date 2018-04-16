@@ -2,6 +2,10 @@ package com.ustb.ssjgl.main.dao.bean;
 
 import java.sql.Timestamp;
 
+import com.ustb.ssjgl.common.SsjglContants;
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.SsjglUtils;
+
 public class TElementCombTag {
     /** 主键 */
     private String cId;
@@ -17,6 +21,13 @@ public class TElementCombTag {
 
     /** 时间戳 */
     private Timestamp dTime;
+    
+    public TElementCombTag() {
+        super();
+        this.cId = SsjglUtils.getUuid();
+        this.nValid = SsjglContants.COMMON_VALID;
+        this.dTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;

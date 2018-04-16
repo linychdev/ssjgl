@@ -7,6 +7,7 @@
 	    xmlns:tx="http://www.springframework.org/schema/tx"  
 	    xmlns:task="http://www.springframework.org/schema/task"  
 	    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
+	    xmlns:cache="http://www.springframework.org/schema/cache"
 	    xsi:schemaLocation="http://www.springframework.org/schema/beans   
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
         http://www.springframework.org/schema/mvc   
@@ -20,8 +21,9 @@
         http://www.springframework.org/schema/task  
         http://www.springframework.org/schema/task/spring-task-4.0.xsd  
         http://code.alibabatech.com/schema/dubbo          
-        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">  
-    
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/cache
+  		http://www.springframework.org/schema/cache/spring-cache-3.2.xsd">  
 
     <description>spring mvc</description>
     <mvc:default-servlet-handler/> 
@@ -96,5 +98,4 @@
             </props>  
         </property>  
     </bean>   
-    
 </beans>

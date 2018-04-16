@@ -11,9 +11,12 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.ustb.ssjgl.common.utils.SpringBeanUtils;
 import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.bean.TCombFunction;
 import com.ustb.ssjgl.main.dao.bean.TCombParam;
+import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
@@ -39,6 +42,8 @@ public class InteratomicPotentials {
     
     private TPtentialsFile ptentialsFile;
 
+    private IElementDao elementDao = (IElementDao) SpringBeanUtils.getBean("elementDao");
+    
     /**
      * @param jasonObject
      */
@@ -83,6 +88,20 @@ public class InteratomicPotentials {
             }
         }
         
+        
+        //TODO 需要确认标签组合是全排列还是组合
+        List<TElement> elements = Lists.newArrayList();
+        for (TElementCombDetail combDetail : elementCombDetails) {
+            TElement element = elementDao.getElementById(combDetail.getcElementId());
+            elements.add(element);
+//            TElementCombTag combTag = new TElementCombTag();
+//            combTag.setcElementCombId(elementComb.getcId());
+//            combTag.setcTag(cTag);
+        }
+        
+        for (TElement element : elements) {
+            
+        }
         
     }
 

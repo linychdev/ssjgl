@@ -24,4 +24,5 @@ public interface IElementDao extends IAbstractDao {
      * @return
      */
     public TElement getElementBySymbol(String symbol);
+    
 }
