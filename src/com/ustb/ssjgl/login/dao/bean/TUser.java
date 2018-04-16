@@ -36,8 +36,8 @@ public class TUser {
     public TUser(){
         super();
         this.cId = SsjglUtils.getUuid();
-        this.nIslock = SsjglContants.USER_LOCK_NO;
-        this.nValid = SsjglContants.USER_VALID_YES;
+        this.nIslock = SsjglContants.USER_UNLOCKED;
+        this.nValid = SsjglContants.USER_VALID;
         this.dCreateTime = DateUtils.getCurrentDate();
         this.dTime = DateUtils.getCurrentDate();
     }

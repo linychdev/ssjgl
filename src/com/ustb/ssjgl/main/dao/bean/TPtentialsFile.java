@@ -1,7 +1,10 @@
 package com.ustb.ssjgl.main.dao.bean;
 
 import java.sql.Timestamp;
-import java.util.Date;
+
+import com.ustb.ssjgl.common.SsjglContants;
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.SsjglUtils;
 
 public class TPtentialsFile {
     /** 主键 */
@@ -26,10 +29,18 @@ public class TPtentialsFile {
     private Integer nValid;
 
     /** 上传时间 */
-    private Date dUploadTime;
+    private Timestamp dUploadTime;
 
     /** 时间戳 */
     private Timestamp dTime;
+
+    public TPtentialsFile() {
+        super();
+        this.cId = SsjglUtils.getUuid();
+        this.nValid = SsjglContants.COMMON_VALID;
+        this.dUploadTime = DateUtils.getCurrentDate();
+        this.dTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;
@@ -87,11 +98,11 @@ public class TPtentialsFile {
         this.nValid = nValid;
     }
 
-    public Date getdUploadTime() {
+    public Timestamp getdUploadTime() {
         return dUploadTime;
     }
 
-    public void setdUploadTime(Date dUploadTime) {
+    public void setdUploadTime(Timestamp dUploadTime) {
         this.dUploadTime = dUploadTime;
     }
 

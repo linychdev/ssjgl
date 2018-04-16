@@ -1,7 +1,10 @@
 package com.ustb.ssjgl.main.dao.bean;
 
 import java.sql.Timestamp;
-import java.util.Date;
+
+import com.ustb.ssjgl.common.SsjglContants;
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.SsjglUtils;
 
 public class TElementCombination {
     /** 主键 */
@@ -29,10 +32,18 @@ public class TElementCombination {
     private Integer nValid;
 
     /** 创建时间 */
-    private Date dCreateTime;
+    private Timestamp dCreateTime;
 
     /** 时间戳 */
     private Timestamp dTime;
+    
+    public TElementCombination() {
+        super();
+        this.cId = SsjglUtils.getUuid();
+        this.nValid = SsjglContants.COMMON_VALID;
+        this.dCreateTime = DateUtils.getCurrentDate();
+        this.dTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;
@@ -98,11 +109,11 @@ public class TElementCombination {
         this.nValid = nValid;
     }
 
-    public Date getdCreateTime() {
+    public Timestamp getdCreateTime() {
         return dCreateTime;
     }
 
-    public void setdCreateTime(Date dCreateTime) {
+    public void setdCreateTime(Timestamp dCreateTime) {
         this.dCreateTime = dCreateTime;
     }
 
