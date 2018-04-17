@@ -6,7 +6,7 @@ import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.DateUtils;
 import com.ustb.ssjgl.common.utils.SsjglUtils;
 
-public class TPtentialsFile {
+public class TPotentialsFile {
     /** 主键 */
     private String cId;
 
@@ -34,7 +34,7 @@ public class TPtentialsFile {
     /** 时间戳 */
     private Timestamp dTime;
 
-    public TPtentialsFile() {
+    public TPotentialsFile() {
         super();
         this.cId = SsjglUtils.getUuid();
         this.nValid = SsjglContants.COMMON_VALID;

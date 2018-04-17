@@ -2,7 +2,7 @@ package com.ustb.ssjgl.main.dao.bean;
 
 import java.sql.Timestamp;
 
-public class TPtentialsScope {
+public class TPotentialsScope {
     /** 主键 */
     private String cId;
 

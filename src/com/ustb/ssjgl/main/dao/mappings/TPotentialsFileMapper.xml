@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TPtentialsFileMapper" >
-  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TPotentialsFileMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
     <result column="c_element_comb_id" property="cElementCombId" jdbcType="VARCHAR" />
     <result column="c_file_name" property="cFileName" jdbcType="VARCHAR" />
@@ -19,15 +19,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from t_ptentials_file
+    from t_potentials_file
     where c_id = #{cId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_ptentials_file
+    delete from t_potentials_file
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
-    insert into t_ptentials_file (c_id, c_element_comb_id, c_file_name, 
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
+    insert into t_potentials_file (c_id, c_element_comb_id, c_file_name, 
       c_ftp_url_path, c_suffix, n_size, 
       n_valid, d_upload_time, d_time
       )
@@ -36,8 +36,8 @@
       #{nValid,jdbcType=INTEGER}, #{dUploadTime,jdbcType=TIMESTAMP}, #{dTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
-    insert into t_ptentials_file
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
+    insert into t_potentials_file
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="cId != null" >
         c_id,
@@ -97,8 +97,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
-    update t_ptentials_file
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
+    update t_potentials_file
     <set >
       <if test="cElementCombId != null" >
         c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
@@ -127,8 +127,8 @@
     </set>
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsFile" >
-    update t_ptentials_file
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
+    update t_potentials_file
     set c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
       c_file_name = #{cFileName,jdbcType=VARCHAR},
       c_ftp_url_path = #{cFtpUrlPath,jdbcType=VARCHAR},

@@ -15,7 +15,7 @@ import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
-import com.ustb.ssjgl.main.dao.bean.TPtentialsFile;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 
 /**
  * InteratomicPotentials
@@ -35,7 +35,7 @@ public class InteratomicPotentials {
 
     private List<TCombParam> combParams = Lists.newArrayList();
 
-    private TPtentialsFile ptentialsFile;
+    private TPotentialsFile ptentialsFile;
 
     private IElementDao elementDao = SpringBeanUtils.getBean(IElementDao.class, "elementDao");
 
@@ -153,7 +153,7 @@ public class InteratomicPotentials {
 
     private void setPtentialsFile(JSONObject jasonObject) {
         String cFileName = SsjglUtils.getStrFromJson(jasonObject, "uploadFileName");
-        ptentialsFile = new TPtentialsFile();
+        ptentialsFile = new TPotentialsFile();
         ptentialsFile.setcFileName(cFileName);
         ptentialsFile.setcElementCombId(elementComb.getcId());
     }
@@ -249,14 +249,14 @@ public class InteratomicPotentials {
     /**
      * @return the ptentialsFile
      */
-    public TPtentialsFile getPtentialsFile() {
+    public TPotentialsFile getPtentialsFile() {
         return ptentialsFile;
     }
 
     /**
      * @param ptentialsFile the ptentialsFile to set
      */
-    public void setPtentialsFile(TPtentialsFile ptentialsFile) {
+    public void setPtentialsFile(TPotentialsFile ptentialsFile) {
         this.ptentialsFile = ptentialsFile;
     }
 }

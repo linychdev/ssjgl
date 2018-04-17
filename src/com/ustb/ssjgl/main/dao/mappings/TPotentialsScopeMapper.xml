@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TPtentialsScopeMapper" >
-  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TPtentialsScope" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TPotentialsScopeMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TPotentialsScope" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
     <result column="c_name" property="cName" jdbcType="VARCHAR" />
     <result column="c_description" property="cDescription" jdbcType="VARCHAR" />
@@ -15,23 +15,23 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from t_ptentials_scope
+    from t_potentials_scope
     where c_id = #{cId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_ptentials_scope
+    delete from t_potentials_scope
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsScope" >
-    insert into t_ptentials_scope (c_id, c_name, c_description, 
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsScope" >
+    insert into t_potentials_scope (c_id, c_name, c_description, 
       n_order, n_valid, d_time
       )
     values (#{cId,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, #{cDescription,jdbcType=VARCHAR}, 
       #{nOrder,jdbcType=INTEGER}, #{nValid,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsScope" >
-    insert into t_ptentials_scope
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsScope" >
+    insert into t_potentials_scope
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="cId != null" >
         c_id,
@@ -73,8 +73,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsScope" >
-    update t_ptentials_scope
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsScope" >
+    update t_potentials_scope
     <set >
       <if test="cName != null" >
         c_name = #{cName,jdbcType=VARCHAR},
@@ -94,8 +94,8 @@
     </set>
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TPtentialsScope" >
-    update t_ptentials_scope
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsScope" >
+    update t_potentials_scope
     set c_name = #{cName,jdbcType=VARCHAR},
       c_description = #{cDescription,jdbcType=VARCHAR},
       n_order = #{nOrder,jdbcType=INTEGER},
