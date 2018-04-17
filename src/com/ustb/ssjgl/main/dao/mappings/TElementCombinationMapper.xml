@@ -3,7 +3,6 @@
 <mapper namespace="com.ustb.ssjgl.main.dao.mappings.TElementCombinationMapper" >
   <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
-    <result column="c_ptentials_file_id" property="cPtentialsFileId" jdbcType="VARCHAR" />
     <result column="c_comb_name" property="cCombName" jdbcType="VARCHAR" />
     <result column="c_description" property="cDescription" jdbcType="VARCHAR" />
     <result column="c_reference_description" property="cReferenceDescription" jdbcType="VARCHAR" />
@@ -14,7 +13,7 @@
     <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    c_id, c_ptentials_file_id, c_comb_name, c_description, c_reference_description, c_note, 
+    c_id, c_comb_name, c_description, c_reference_description, c_note, 
     n_order, n_valid, d_create_time, d_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -28,11 +27,11 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
-    insert into t_element_combination (c_id, c_ptentials_file_id, c_comb_name, 
+    insert into t_element_combination (c_id, c_comb_name, 
       c_description, c_reference_description, c_note, 
       n_order, n_valid, d_create_time, 
       d_time)
-    values (#{cId,jdbcType=VARCHAR}, #{cPtentialsFileId,jdbcType=VARCHAR}, #{cCombName,jdbcType=VARCHAR}, 
+    values (#{cId,jdbcType=VARCHAR}, #{cCombName,jdbcType=VARCHAR}, 
       #{cDescription,jdbcType=VARCHAR}, #{cReferenceDescription,jdbcType=VARCHAR}, #{cNote,jdbcType=VARCHAR}, 
       #{nOrder,jdbcType=INTEGER}, #{nValid,jdbcType=INTEGER}, #{dCreateTime,jdbcType=TIMESTAMP}, 
       #{dTime,jdbcType=TIMESTAMP})
@@ -42,9 +41,6 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="cId != null" >
         c_id,
-      </if>
-      <if test="cPtentialsFileId != null" >
-        c_ptentials_file_id,
       </if>
       <if test="cCombName != null" >
         c_comb_name,
@@ -75,9 +71,6 @@
       <if test="cId != null" >
         #{cId,jdbcType=VARCHAR},
       </if>
-      <if test="cPtentialsFileId != null" >
-        #{cPtentialsFileId,jdbcType=VARCHAR},
-      </if>
       <if test="cCombName != null" >
         #{cCombName,jdbcType=VARCHAR},
       </if>
@@ -107,9 +100,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
     update t_element_combination
     <set >
-      <if test="cPtentialsFileId != null" >
-        c_ptentials_file_id = #{cPtentialsFileId,jdbcType=VARCHAR},
-      </if>
       <if test="cCombName != null" >
         c_comb_name = #{cCombName,jdbcType=VARCHAR},
       </if>
@@ -139,8 +129,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombination" >
     update t_element_combination
-    set c_ptentials_file_id = #{cPtentialsFileId,jdbcType=VARCHAR},
-      c_comb_name = #{cCombName,jdbcType=VARCHAR},
+    set c_comb_name = #{cCombName,jdbcType=VARCHAR},
       c_description = #{cDescription,jdbcType=VARCHAR},
       c_reference_description = #{cReferenceDescription,jdbcType=VARCHAR},
       c_note = #{cNote,jdbcType=VARCHAR},

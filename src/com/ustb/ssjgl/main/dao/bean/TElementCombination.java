@@ -10,9 +10,6 @@ public class TElementCombination {
     /** 主键 */
     private String cId;
 
-    /** 势数据文件主键 */
-    private String cPtentialsFileId;
-
     /** 组合名称 */
     private String cCombName;
 
@@ -51,14 +48,6 @@ public class TElementCombination {
 
     public void setcId(String cId) {
         this.cId = cId == null ? null : cId.trim();
-    }
-
-    public String getcPtentialsFileId() {
-        return cPtentialsFileId;
-    }
-
-    public void setcPtentialsFileId(String cPtentialsFileId) {
-        this.cPtentialsFileId = cPtentialsFileId == null ? null : cPtentialsFileId.trim();
     }
 
     public String getcCombName() {

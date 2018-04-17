@@ -32,4 +32,9 @@ public class SsjglContants {
      */
     public static final Integer COMMON_INVALID = 0;
 
+    /**
+     * 标签连接符
+     */
+    public static final String TAG_JOINT = "-";
+
 }

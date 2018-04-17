@@ -2,6 +2,9 @@ package com.ustb.ssjgl.main.dao.bean;
 
 import java.sql.Timestamp;
 
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.SsjglUtils;
+
 public class TCombParam {
     /** 主键 */
     private String cId;
@@ -23,6 +26,12 @@ public class TCombParam {
 
     /** 时间戳 */
     private Timestamp dTime;
+
+    public TCombParam() {
+        super();
+        this.cId = SsjglUtils.getUuid();
+        this.dTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;

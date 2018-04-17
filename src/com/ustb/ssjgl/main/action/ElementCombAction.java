@@ -40,15 +40,17 @@ public class ElementCombAction extends AbstractAction{
     @ResponseBody
     public void getServiceDirectory(@RequestBody String json,HttpServletResponse response) {
         
-        JSONObject jasonObject = null;
+        JSONObject interPotenJson = null;
         try{
-             jasonObject = JSONObject.parseObject(json);
+            interPotenJson = JSONObject.parseObject(json);
         }catch(Exception e){
+            LOG.error("无法解析Json串:{}", json, e);
             throw new RuntimeException("无法解析的json！"+e.getMessage());
         }
         
-        InteratomicPotentials interPoten = new InteratomicPotentials(jasonObject);
+        InteratomicPotentials interPoten = new InteratomicPotentials(interPotenJson);
         
+        elementCombService.addInteratomicPotentials(interPoten);
         
 //        this.writeAjaxString(response, datService.getServiceDirectory(json));
     }
