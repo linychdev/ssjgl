@@ -30,5 +30,12 @@ public interface ICombFunctionDao extends IAbstractDao {
      * @param combId
      */
     public void deleteCombFunctionByCombId(String combId);
+
+    /**
+     * 根据组合id和函数id删除元素组合的函数
+     * @param combId
+     * @param functionId
+     */
+    public void deleteCombFunByCombIdAndFunId(String combId, String functionId);
     
 }

@@ -60,7 +60,7 @@ public class InteratomicPotentialsAction extends AbstractAction{
     }
 
     /**
-     * 新增原子间势
+     * 删除原子间势
      * @param request
      * @param response
      */
@@ -78,6 +78,28 @@ public class InteratomicPotentialsAction extends AbstractAction{
         }
         this.writeAjaxObject(response, result);
     }
+    
+    /**
+     * 删除元素组合的函数
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/manage/deleteCombFunction")
+    @ResponseBody
+    public void deleteCombFunction(HttpServletRequest request, HttpServletResponse response) {
+        String pId = request.getParameter("potentialsId");
+        String functionId = request.getParameter("functionId");
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            interatomicPotentialsService.deleteCombFunction(pId, functionId);
+            result.put("success", true);
+        } catch (Exception e) {
+            LOG.error("删除原子间势出错！", e);
+            result.put("success", false);
+        }
+        this.writeAjaxObject(response, result);
+    }
+    
     
     /**
      * 新增势函数

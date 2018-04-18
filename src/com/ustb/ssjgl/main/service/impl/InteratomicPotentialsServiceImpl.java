@@ -61,4 +61,13 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
         elementCombDetailDao.deleteDetailByCombId(combId);
         elementCombDao.deleteByPrimaryKey(TElementCombination.class, combId);
     }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.service.IInteratomicPotentialsService#deleteCombFunction(java.lang.String, java.lang.String)
+     */
+    @Override
+    public void deleteCombFunction(String combId, String functionId) {
+        // TODO Auto-generated method stub
+        combFunctionDao.deleteCombFunByCombIdAndFunId(combId,functionId);
+    }
 }

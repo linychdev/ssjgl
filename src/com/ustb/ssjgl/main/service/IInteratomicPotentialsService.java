@@ -21,4 +21,11 @@ public interface IInteratomicPotentialsService {
      * @param combId
      */
     public void deletePotentialsById(String combId);
+
+    /**
+     * 删除元素组合的函数
+     * @param combId
+     * @param functionId
+     */
+    public void deleteCombFunction(String combId, String functionId);
 }
