@@ -10,7 +10,7 @@ public class TCombFunction {
     private String cElementCombId;
 
     /** 势函数主键 */
-    private String cPtentialsFunctionId;
+    private String cPotentialsFunctionId;
 
     /**
      * 排序字段
@@ -38,12 +38,12 @@ public class TCombFunction {
         this.cElementCombId = cElementCombId == null ? null : cElementCombId.trim();
     }
 
-    public String getcPtentialsFunctionId() {
-        return cPtentialsFunctionId;
+    public String getcPotentialsFunctionId() {
+        return cPotentialsFunctionId;
     }
 
-    public void setcPtentialsFunctionId(String cPtentialsFunctionId) {
-        this.cPtentialsFunctionId = cPtentialsFunctionId == null ? null : cPtentialsFunctionId.trim();
+    public void setcPotentialsFunctionId(String cPotentialsFunctionId) {
+        this.cPotentialsFunctionId = cPotentialsFunctionId == null ? null : cPotentialsFunctionId.trim();
     }
 
     /**

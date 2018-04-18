@@ -4,14 +4,14 @@
   <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TCombParam" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
     <result column="c_element_comb_id" property="cElementCombId" jdbcType="VARCHAR" />
-    <result column="c_ptentials_function_id" property="cPtentialsFunctionId" jdbcType="VARCHAR" />
+    <result column="c_potentials_function_id" property="cPotentialsFunctionId" jdbcType="VARCHAR" />
     <result column="c_param_id" property="cParamId" jdbcType="VARCHAR" />
     <result column="c_class" property="cClass" jdbcType="VARCHAR" />
     <result column="c_value" property="cValue" jdbcType="VARCHAR" />
     <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    c_id, c_element_comb_id, c_ptentials_function_id, c_param_id, c_class, c_value, d_time
+    c_id, c_element_comb_id, c_potentials_function_id, c_param_id, c_class, c_value, d_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -24,10 +24,10 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
-    insert into t_comb_param (c_id, c_element_comb_id, c_ptentials_function_id, 
+    insert into t_comb_param (c_id, c_element_comb_id, c_potentials_function_id, 
       c_param_id, c_class, c_value, 
       d_time)
-    values (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cPtentialsFunctionId,jdbcType=VARCHAR}, 
+    values (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cPotentialsFunctionId,jdbcType=VARCHAR}, 
       #{cParamId,jdbcType=VARCHAR}, #{cClass,jdbcType=VARCHAR}, #{cValue,jdbcType=VARCHAR}, 
       #{dTime,jdbcType=TIMESTAMP})
   </insert>
@@ -40,8 +40,8 @@
       <if test="cElementCombId != null" >
         c_element_comb_id,
       </if>
-      <if test="cPtentialsFunctionId != null" >
-        c_ptentials_function_id,
+      <if test="cPotentialsFunctionId != null" >
+        c_potentials_function_id,
       </if>
       <if test="cParamId != null" >
         c_param_id,
@@ -63,8 +63,8 @@
       <if test="cElementCombId != null" >
         #{cElementCombId,jdbcType=VARCHAR},
       </if>
-      <if test="cPtentialsFunctionId != null" >
-        #{cPtentialsFunctionId,jdbcType=VARCHAR},
+      <if test="cPotentialsFunctionId != null" >
+        #{cPotentialsFunctionId,jdbcType=VARCHAR},
       </if>
       <if test="cParamId != null" >
         #{cParamId,jdbcType=VARCHAR},
@@ -86,8 +86,8 @@
       <if test="cElementCombId != null" >
         c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
       </if>
-      <if test="cPtentialsFunctionId != null" >
-        c_ptentials_function_id = #{cPtentialsFunctionId,jdbcType=VARCHAR},
+      <if test="cPotentialsFunctionId != null" >
+        c_potentials_function_id = #{cPotentialsFunctionId,jdbcType=VARCHAR},
       </if>
       <if test="cParamId != null" >
         c_param_id = #{cParamId,jdbcType=VARCHAR},
@@ -107,7 +107,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
     update t_comb_param
     set c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
-      c_ptentials_function_id = #{cPtentialsFunctionId,jdbcType=VARCHAR},
+      c_potentials_function_id = #{cPotentialsFunctionId,jdbcType=VARCHAR},
       c_param_id = #{cParamId,jdbcType=VARCHAR},
       c_class = #{cClass,jdbcType=VARCHAR},
       c_value = #{cValue,jdbcType=VARCHAR},

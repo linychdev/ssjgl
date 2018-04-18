@@ -39,6 +39,9 @@ public class InteratomicPotentials {
 
     private IElementDao elementDao = SpringBeanUtils.getBean(IElementDao.class, "elementDao");
 
+    public InteratomicPotentials() {
+        super();
+    }
     /**
      * @param interPotenJson
      */
@@ -70,7 +73,7 @@ public class InteratomicPotentials {
                 String functionId = SsjglUtils.getStrFromJson(function, "functionId");
                 TCombFunction combFunction = new TCombFunction();
                 combFunction.setcElementCombId(elementComb.getcId());
-                combFunction.setcPtentialsFunctionId(functionId);
+                combFunction.setcPotentialsFunctionId(functionId);
                 combFunction.setnOrder(order);
                 combFunctions.add(combFunction);
                 order++;
@@ -92,7 +95,7 @@ public class InteratomicPotentials {
             combParam.setcClass(paramClass);
             combParam.setcElementCombId(elementComb.getcId());
             combParam.setcParamId(paramId);
-            combParam.setcPtentialsFunctionId(functionId);
+            combParam.setcPotentialsFunctionId(functionId);
             combParam.setcValue(paramValue);
 
             combParams.add(combParam);

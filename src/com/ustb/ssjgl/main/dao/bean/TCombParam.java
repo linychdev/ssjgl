@@ -13,7 +13,7 @@ public class TCombParam {
     private String cElementCombId;
 
     /** 势函数主键 */
-    private String cPtentialsFunctionId;
+    private String cPotentialsFunctionId;
 
     /** 参数主键 */
     private String cParamId;
@@ -49,12 +49,12 @@ public class TCombParam {
         this.cElementCombId = cElementCombId == null ? null : cElementCombId.trim();
     }
 
-    public String getcPtentialsFunctionId() {
-        return cPtentialsFunctionId;
+    public String getcPotentialsFunctionId() {
+        return cPotentialsFunctionId;
     }
 
-    public void setcPtentialsFunctionId(String cPtentialsFunctionId) {
-        this.cPtentialsFunctionId = cPtentialsFunctionId == null ? null : cPtentialsFunctionId.trim();
+    public void setcPotentialsFunctionId(String cPotentialsFunctionId) {
+        this.cPotentialsFunctionId = cPotentialsFunctionId == null ? null : cPotentialsFunctionId.trim();
     }
 
     public String getcParamId() {
