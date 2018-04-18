@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.SpringBeanUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.bean.TCombFunction;
 import com.ustb.ssjgl.main.dao.bean.TCombParam;
@@ -64,13 +64,13 @@ public class InteratomicPotentials {
     }
 
     private void setCombFunctions(JSONObject jasonObject) {
-        JSONArray functions = SsjglUtils.getJSONArrayFromJson(jasonObject, "functions");
+        JSONArray functions = JsonUtils.getJSONArrayFromJson(jasonObject, "functions");
         if (functions != null) {
             int order = 1;
             for (Object obj : functions) {
                 //设置元素组合函数桥表
                 JSONObject function = (JSONObject) obj;
-                String functionId = SsjglUtils.getStrFromJson(function, "functionId");
+                String functionId = JsonUtils.getStrFromJson(function, "functionId");
                 TCombFunction combFunction = new TCombFunction();
                 combFunction.setcElementCombId(elementComb.getcId());
                 combFunction.setcPotentialsFunctionId(functionId);
@@ -84,12 +84,12 @@ public class InteratomicPotentials {
     }
 
     private void setCombParams(JSONObject function, String functionId) {
-        JSONArray params = SsjglUtils.getJSONArrayFromJson(function, "params");
+        JSONArray params = JsonUtils.getJSONArrayFromJson(function, "params");
         for (Object paramObj : params) {
             JSONObject param = (JSONObject) paramObj;
-            String paramId = SsjglUtils.getStrFromJson(param, "paramId");
-            String paramClass = SsjglUtils.getStrFromJson(param, "paramClass");
-            String paramValue = SsjglUtils.getStrFromJson(param, "paramValue");
+            String paramId = JsonUtils.getStrFromJson(param, "paramId");
+            String paramClass = JsonUtils.getStrFromJson(param, "paramClass");
+            String paramValue = JsonUtils.getStrFromJson(param, "paramValue");
 
             TCombParam combParam = new TCombParam();
             combParam.setcClass(paramClass);
@@ -137,12 +137,12 @@ public class InteratomicPotentials {
     }
 
     private void setCombDetails(JSONObject jasonObject) {
-        JSONArray combDetails = SsjglUtils.getJSONArrayFromJson(jasonObject, "combDetails");
+        JSONArray combDetails = JsonUtils.getJSONArrayFromJson(jasonObject, "combDetails");
         if (combDetails != null) {
             int order = 1;
             for (Object obj : combDetails) {
                 JSONObject detail = (JSONObject) obj;
-                String elementId = SsjglUtils.getStrFromJson(detail, "elementId");
+                String elementId = JsonUtils.getStrFromJson(detail, "elementId");
 
                 TElementCombDetail combDetail = new TElementCombDetail();
                 combDetail.setcElementId(elementId);
@@ -155,17 +155,17 @@ public class InteratomicPotentials {
     }
 
     private void setPtentialsFile(JSONObject jasonObject) {
-        String cFileName = SsjglUtils.getStrFromJson(jasonObject, "uploadFileName");
+        String cFileName = JsonUtils.getStrFromJson(jasonObject, "uploadFileName");
         ptentialsFile = new TPotentialsFile();
         ptentialsFile.setcFileName(cFileName);
         ptentialsFile.setcElementCombId(elementComb.getcId());
     }
 
     private void setElementComb(JSONObject jasonObject) {
-        String cCombName = SsjglUtils.getStrFromJson(jasonObject, "combName");
-        String cDescription = SsjglUtils.getStrFromJson(jasonObject, "combDescription");
-        String cNote = SsjglUtils.getStrFromJson(jasonObject, "combNote");
-        String cReferenceDescription = SsjglUtils.getStrFromJson(jasonObject, "combReferenceDesc");
+        String cCombName = JsonUtils.getStrFromJson(jasonObject, "combName");
+        String cDescription = JsonUtils.getStrFromJson(jasonObject, "combDescription");
+        String cNote = JsonUtils.getStrFromJson(jasonObject, "combNote");
+        String cReferenceDescription = JsonUtils.getStrFromJson(jasonObject, "combReferenceDesc");
         elementComb = new TElementCombination();
         elementComb.setcCombName(cCombName);
         elementComb.setcDescription(cDescription);

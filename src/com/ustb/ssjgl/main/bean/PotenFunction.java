@@ -11,7 +11,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.main.dao.bean.TFunctionParam;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 
@@ -39,7 +39,7 @@ public class PotenFunction {
         setParams(potenFunctionJson, function);
     }
     private void setParams(JSONObject potenFunctionJson, TPotentialsFunction function) {
-        JSONArray params = SsjglUtils.getJSONArrayFromJson(potenFunctionJson, "functionParams");
+        JSONArray params = JsonUtils.getJSONArrayFromJson(potenFunctionJson, "functionParams");
         if(params == null){
             return;
         }
@@ -47,9 +47,9 @@ public class PotenFunction {
         for (Object obj : params) {
             JSONObject param = (JSONObject) obj;
             
-            String paramName = SsjglUtils.getStrFromJson(param, "paramName");
-            String paramUnit = SsjglUtils.getStrFromJson(param, "paramUnit");
-            String paramDesc = SsjglUtils.getStrFromJson(param, "paramDesc");
+            String paramName = JsonUtils.getStrFromJson(param, "paramName");
+            String paramUnit = JsonUtils.getStrFromJson(param, "paramUnit");
+            String paramDesc = JsonUtils.getStrFromJson(param, "paramDesc");
 
             TFunctionParam functionParam = new TFunctionParam();
             functionParam.setcFunctionId(function.getcId());
@@ -62,11 +62,11 @@ public class PotenFunction {
         }
     }
     private TPotentialsFunction setFunction(JSONObject potenFunctionJson) {
-        String functionName = SsjglUtils.getStrFromJson(potenFunctionJson, "functionName");
-        String functionScopeId = SsjglUtils.getStrFromJson(potenFunctionJson, "functionScopeId");
-        String functionFormula = SsjglUtils.getStrFromJson(potenFunctionJson, "functionFormula");
-        String functionFormulaHtml = SsjglUtils.getStrFromJson(potenFunctionJson, "functionFormulaHtml");
-        String functionDesc = SsjglUtils.getStrFromJson(potenFunctionJson, "functionDesc");
+        String functionName = JsonUtils.getStrFromJson(potenFunctionJson, "functionName");
+        String functionScopeId = JsonUtils.getStrFromJson(potenFunctionJson, "functionScopeId");
+        String functionFormula = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormula");
+        String functionFormulaHtml = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormulaHtml");
+        String functionDesc = JsonUtils.getStrFromJson(potenFunctionJson, "functionDesc");
         
         TPotentialsFunction function = new TPotentialsFunction();
         function.setcName(functionName);

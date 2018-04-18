@@ -1,6 +1,6 @@
 package com.ustb.ssjgl.main.dao.bean;
 
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TCombFunction {
     /** 主键 */
@@ -19,7 +19,7 @@ public class TCombFunction {
     
     public TCombFunction() {
         super();
-        this.cId = SsjglUtils.getUuid();
+        this.cId = UuidUtils.getUuid();
     }
 
     public String getcId() {

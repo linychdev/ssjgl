@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.DateUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TPotentialsFile {
     /** 主键 */
@@ -36,7 +36,7 @@ public class TPotentialsFile {
 
     public TPotentialsFile() {
         super();
-        this.cId = SsjglUtils.getUuid();
+        this.cId = UuidUtils.getUuid();
         this.nValid = SsjglContants.COMMON_VALID;
         this.dUploadTime = DateUtils.getCurrentDate();
         this.dTime = DateUtils.getCurrentDate();

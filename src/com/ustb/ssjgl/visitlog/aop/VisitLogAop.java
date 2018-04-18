@@ -21,7 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.ustb.ssjgl.common.utils.IPUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 import com.ustb.ssjgl.service.IVisitLogService;
 import com.ustb.ssjgl.visitlog.annotation.VisitLog;
 import com.ustb.ssjgl.visitlog.annotation.VisitLogType;
@@ -55,7 +55,7 @@ public class VisitLogAop {
     public void beforeExec(JoinPoint joinPoint) {
         time.set(System.currentTimeMillis());   
         //设置日志记录的唯一标识号
-        tag.set(SsjglUtils.getUuid());
+        tag.set(UuidUtils.getUuid());
         request=  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
     }

@@ -3,7 +3,7 @@ package com.ustb.ssjgl.main.dao.bean;
 import java.sql.Timestamp;
 
 import com.ustb.ssjgl.common.utils.DateUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TCombParam {
     /** 主键 */
@@ -29,7 +29,7 @@ public class TCombParam {
 
     public TCombParam() {
         super();
-        this.cId = SsjglUtils.getUuid();
+        this.cId = UuidUtils.getUuid();
         this.dTime = DateUtils.getCurrentDate();
     }
 

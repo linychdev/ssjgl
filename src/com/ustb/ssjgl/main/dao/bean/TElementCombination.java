@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.DateUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TElementCombination {
     /** 主键 */
@@ -36,7 +36,7 @@ public class TElementCombination {
     
     public TElementCombination() {
         super();
-        this.cId = SsjglUtils.getUuid();
+        this.cId = UuidUtils.getUuid();
         this.nValid = SsjglContants.COMMON_VALID;
         this.dCreateTime = DateUtils.getCurrentDate();
         this.dTime = DateUtils.getCurrentDate();

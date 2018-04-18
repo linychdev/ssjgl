@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.DateUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TFunctionParam {
     /** 主键 */
@@ -33,7 +33,7 @@ public class TFunctionParam {
 
     public TFunctionParam() {
         super();
-        this.cId = SsjglUtils.getUuid();
+        this.cId = UuidUtils.getUuid();
         this.nValid = SsjglContants.COMMON_VALID;
         this.dTime = DateUtils.getCurrentDate();
     }

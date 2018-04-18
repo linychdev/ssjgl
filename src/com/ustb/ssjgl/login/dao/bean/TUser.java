@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.DateUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TUser {
     private String cId;
@@ -35,7 +35,7 @@ public class TUser {
 
     public TUser(){
         super();
-        this.cId = SsjglUtils.getUuid();
+        this.cId = UuidUtils.getUuid();
         this.nIslock = SsjglContants.USER_UNLOCKED;
         this.nValid = SsjglContants.USER_VALID;
         this.dCreateTime = DateUtils.getCurrentDate();

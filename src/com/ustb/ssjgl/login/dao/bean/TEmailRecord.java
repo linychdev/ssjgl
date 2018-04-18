@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.ustb.ssjgl.common.MailConfigFile;
 import com.ustb.ssjgl.common.utils.DateUtils;
-import com.ustb.ssjgl.common.utils.SsjglUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TEmailRecord {
     private String cId;
@@ -24,7 +24,7 @@ public class TEmailRecord {
     
     public TEmailRecord() {
         super();
-        this.cId = SsjglUtils.getUuid();
+        this.cId = UuidUtils.getUuid();
         this.dSendTime = DateUtils.getCurrentDate();
         this.dOverdueTime = DateUtils.addMinutes(this.dSendTime, MailConfigFile.failureTime);
     }
