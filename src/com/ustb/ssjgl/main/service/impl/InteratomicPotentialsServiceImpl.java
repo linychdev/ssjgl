@@ -55,8 +55,8 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
     @Override
     public void deletePotentialsById(String combId) {
         potentialsFileDao.deletePtentialsFileByCombId(combId);
-        combParamDao.deleteCombParamByCombId(combId);
-        combFunctionDao.deleteCombFunctionByCombId(combId);
+        combParamDao.deleteByCombId(combId);
+        combFunctionDao.deleteByCombId(combId);
         elementCombTagDao.deleteTagByCombId(combId);
         elementCombDetailDao.deleteDetailByCombId(combId);
         elementCombDao.deleteByPrimaryKey(TElementCombination.class, combId);
@@ -67,7 +67,6 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
      */
     @Override
     public void deleteCombFunction(String combId, String functionId) {
-        // TODO Auto-generated method stub
-        combFunctionDao.deleteCombFunByCombIdAndFunId(combId,functionId);
+        combFunctionDao.deleteByCombIdAndFunId(combId,functionId);
     }
 }

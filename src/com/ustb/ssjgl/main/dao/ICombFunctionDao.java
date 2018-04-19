@@ -17,7 +17,7 @@ public interface ICombFunctionDao extends IAbstractDao {
      * 根据id删除元素组合的函数
      * @param id
      */
-    public void deleteCombFunctionById(String id);
+    public void deleteById(String id);
 
     /**
      * 批量为元素组合新增函数
@@ -29,13 +29,19 @@ public interface ICombFunctionDao extends IAbstractDao {
      * 根据组合id删除元素组合的函数
      * @param combId
      */
-    public void deleteCombFunctionByCombId(String combId);
+    public void deleteByCombId(String combId);
 
     /**
      * 根据组合id和函数id删除元素组合的函数
      * @param combId
      * @param functionId
      */
-    public void deleteCombFunByCombIdAndFunId(String combId, String functionId);
-    
+    public void deleteByCombIdAndFunId(String combId, String functionId);
+
+    /**
+     * 判断函数是否被引用
+     * @param functionId
+     * @return
+     */
+    public boolean isFunctionUsed(String functionId);
 }

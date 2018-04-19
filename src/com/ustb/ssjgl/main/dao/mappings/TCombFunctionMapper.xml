@@ -68,4 +68,30 @@
       c_potentials_function_id = #{cPotentialsFunctionId,jdbcType=VARCHAR}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <insert id="batchInsert">
+    insert into t_comb_function (c_id, c_element_comb_id, c_potentials_function_id)
+     values
+    <foreach collection ="list" item="combFunctions" separator =",">
+      (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cPotentialsFunctionId,jdbcType=VARCHAR})
+    </foreach >
+  </insert>
+  
+  <delete id="deleteByCombId" parameterType="java.lang.String" >
+    delete from t_comb_function
+    where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByCombIdAndFunId" parameterType="java.util.Map" >
+    delete from t_comb_function
+    where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+      and c_potentials_function_id = {cPotentialsFunctionId,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="selectByFunctionId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_comb_function
+    where c_potentials_function_id = #{cPotentialsFunctionId,jdbcType=VARCHAR}
+  </select>
 </mapper>

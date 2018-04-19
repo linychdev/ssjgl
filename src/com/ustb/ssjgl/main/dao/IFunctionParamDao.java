@@ -18,5 +18,16 @@ public interface IFunctionParamDao extends IAbstractDao {
      * @param funParam
      */
     public void addFunParam(TFunctionParam funParam);
-    
+
+    /**
+     * 批量新增势函数参数
+     * @param functionParams
+     */
+    public void addFunParams(List<TFunctionParam> functionParams);
+
+    /**
+     * 根据函数id删除参数信息
+     * @param functionId
+     */
+    public void deleteParamsByFunctionId(String functionId);
 }

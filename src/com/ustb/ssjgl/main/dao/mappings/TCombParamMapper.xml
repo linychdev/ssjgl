@@ -114,4 +114,40 @@
       d_time = #{dTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <insert id="batchInsert" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
+    insert into t_comb_param (c_id, c_element_comb_id, c_potentials_function_id, 
+      c_param_id, c_class, c_value, d_time)
+    values 
+    <foreach collection ="list" item="combFunctions" separator =",">
+      (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cPotentialsFunctionId,jdbcType=VARCHAR}, 
+      #{cParamId,jdbcType=VARCHAR}, #{cClass,jdbcType=VARCHAR}, #{cValue,jdbcType=VARCHAR}, #{dTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  
+  <delete id="deleteByCombId" parameterType="java.lang.String" >
+    delete from t_comb_param
+    where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByCombIdAndFunId" parameterType="java.util.Map" >
+    delete from t_comb_param
+    where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+      and c_potentials_function_id = #{cPotentialsFunctionId,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="selectByParamId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_comb_param
+    where c_param_id = #{cParamId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCombIdAndFunId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_comb_param
+   where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+     and c_potentials_function_id = #{cPotentialsFunctionId,jdbcType=VARCHAR}
+  </select>
 </mapper>
