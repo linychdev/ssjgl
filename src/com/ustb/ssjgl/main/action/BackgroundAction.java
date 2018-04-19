@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ustb.ssjgl.common.action.AbstractAction;
+import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.FtpUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
+import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.service.IInteratomicPotentialsService;
 import com.ustb.ssjgl.main.service.IPotentialsFunctionService;
 
@@ -33,7 +35,7 @@ import com.ustb.ssjgl.main.service.IPotentialsFunctionService;
  *
  */
 @Controller
-public class InteratomicPotentialsAction extends AbstractAction{
+public class BackgroundAction extends AbstractAction{
     
     /**
      * logger
@@ -46,6 +48,7 @@ public class InteratomicPotentialsAction extends AbstractAction{
     
     /**
      * 新增原子间势
+     * 包括原子间势描述、标签、组合详情
      * @param request
      * @param response
      */
@@ -67,6 +70,71 @@ public class InteratomicPotentialsAction extends AbstractAction{
     }
 
     /**
+     * 新增元素组合的函数
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/manage/addCombFunction")
+    @ResponseBody
+    public void addCombFunction(HttpServletRequest request, HttpServletResponse response) {
+        String json = request.getParameter("combFunctionJson");
+        Map<String, Object> result = new HashMap<String, Object>();
+        try{
+            JSONObject combFunJson = JSONObject.parseObject(json);
+            CombFunctionInfo combFunInfo = new CombFunctionInfo(combFunJson);
+            interatomicPotentialsService.addCombFunction(combFunInfo);
+            result.put("success", true);
+        }catch(Exception e){
+            LOG.error("无法保存原子间势，json为:{}", json, e);
+            result.put("success", false);
+        }
+        this.writeAjaxObject(response, result);
+    }
+    
+    /**
+     * 上传势文件
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value="/manage/uploadPotentialsFile", method=RequestMethod.POST)
+    @ResponseBody
+    public void uploadPotenFile(HttpServletRequest request, HttpServletResponse response,
+            @RequestParam("potentialsId") String potentialsId,
+            @RequestParam("potenFile") MultipartFile multipartFile) {
+        //如果文件不为空，写入上传路径
+        if(!multipartFile.isEmpty()) {
+            File file = null;
+            String remoteFileName = potentialsId + "-" + multipartFile.getOriginalFilename();
+            try {
+                file = File.createTempFile(multipartFile.getName(), null);
+                
+                FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);  
+                FtpUtils ftpUtils = new FtpUtils();
+                ftpUtils.setLocal(file);
+                ftpUtils.setRemotePath("pub");
+                ftpUtils.setRemote(remoteFileName);
+                ftpUtils.upload();
+                
+                TPotentialsFile ptentialsFile = new TPotentialsFile();
+                ptentialsFile.setcFileName(multipartFile.getOriginalFilename());
+                ptentialsFile.setcElementCombId(potentialsId);
+                ptentialsFile.setnSize(FileUtils.sizeOf(file));
+                ptentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
+                ptentialsFile.setcFtpUrlPath("pub/" + remoteFileName);
+                interatomicPotentialsService.addPotentialsFile(ptentialsFile);
+            } catch (Exception e) {
+                LOG.error("上传文件到ftp服务器失败！", e);
+                //TODO 增加向前端返回错误的处理
+            }finally{
+                FileUtils.deleteQuietly(file);
+            }
+            
+        }
+        
+//        this.writeAjaxObject(response, result);
+    }
+    
+    /**
      * 删除原子间势
      * @param request
      * @param response
@@ -87,6 +155,26 @@ public class InteratomicPotentialsAction extends AbstractAction{
     }
     
     /**
+     * 删除上传的势数据文件
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/manage/deletePotenFile")
+    @ResponseBody
+    public void deletePotenFile(HttpServletRequest request, HttpServletResponse response) {
+        String pId = request.getParameter("potentialsId");
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            interatomicPotentialsService.deletePotenFileByPotenId(pId);
+            result.put("success", true);
+        } catch (Exception e) {
+            LOG.error("删除势数据文件出错！", e);
+            result.put("success", false);
+        }
+        this.writeAjaxObject(response, result);
+    }
+    
+    /**
      * 删除元素组合的函数
      * @param request
      * @param response
@@ -101,41 +189,11 @@ public class InteratomicPotentialsAction extends AbstractAction{
             interatomicPotentialsService.deleteCombFunction(pId, functionId);
             result.put("success", true);
         } catch (Exception e) {
-            LOG.error("删除原子间势出错！", e);
+            LOG.error("删除组合的势函数出错！", e);
             result.put("success", false);
         }
         this.writeAjaxObject(response, result);
     }
-    
-    /**
-     * 上传势文件
-     * @param request
-     * @param response
-     */
-    @RequestMapping(value="/manage/uploadPotentialsFile", method=RequestMethod.POST)
-    @ResponseBody
-    public void uploadPotenFile(HttpServletRequest request, HttpServletResponse response,
-            @RequestParam("potentialsId") String description,
-            @RequestParam("potenFile") MultipartFile multipartFile) {
-        
-        //如果文件不为空，写入上传路径
-        if(!multipartFile.isEmpty()) {
-            try {
-                File file = File.createTempFile(multipartFile.getName(), null);
-                FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);  
-                FtpUtils ftpUtils = new FtpUtils();
-                ftpUtils.setLocal(file);
-                ftpUtils.setRemotePath("pub");
-                ftpUtils.setRemote(multipartFile.getOriginalFilename());
-                ftpUtils.upload();
-            } catch (Exception e) {
-                LOG.error("上传文件到ftp服务器失败！", e);
-            }
-        }
-        
-//        this.writeAjaxObject(response, result);
-    }
-    
     /**
      * 新增势函数
      * @param request

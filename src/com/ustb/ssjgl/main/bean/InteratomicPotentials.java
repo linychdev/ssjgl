@@ -6,8 +6,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.ustb.ssjgl.common.SsjglContants;
-import com.ustb.ssjgl.common.utils.SpringBeanUtils;
 import com.ustb.ssjgl.common.utils.JsonUtils;
+import com.ustb.ssjgl.common.utils.SpringBeanUtils;
 import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.bean.TCombFunction;
 import com.ustb.ssjgl.main.dao.bean.TCombParam;
@@ -50,56 +50,11 @@ public class InteratomicPotentials {
         //设置元素组合信息
         setElementComb(interPotenJson);
 
-        //设置上传势数据文件的部分信息
-        setPtentialsFile(interPotenJson);
-
         //设置元素组合详情数据信息
         setCombDetails(interPotenJson);
 
-        //设置元素组合函数
-        setCombFunctions(interPotenJson);
-
         //设置元素标签
         setCombTags();
-    }
-
-    private void setCombFunctions(JSONObject jasonObject) {
-        JSONArray functions = JsonUtils.getJSONArrayFromJson(jasonObject, "functions");
-        if (functions != null) {
-            int order = 1;
-            for (Object obj : functions) {
-                //设置元素组合函数桥表
-                JSONObject function = (JSONObject) obj;
-                String functionId = JsonUtils.getStrFromJson(function, "functionId");
-                TCombFunction combFunction = new TCombFunction();
-                combFunction.setcElementCombId(elementComb.getcId());
-                combFunction.setcPotentialsFunctionId(functionId);
-                combFunction.setnOrder(order);
-                combFunctions.add(combFunction);
-                order++;
-                //设置函数的参数信息
-                setCombParams(function, functionId);
-            }
-        }
-    }
-
-    private void setCombParams(JSONObject function, String functionId) {
-        JSONArray params = JsonUtils.getJSONArrayFromJson(function, "params");
-        for (Object paramObj : params) {
-            JSONObject param = (JSONObject) paramObj;
-            String paramId = JsonUtils.getStrFromJson(param, "paramId");
-            String paramClass = JsonUtils.getStrFromJson(param, "paramClass");
-            String paramValue = JsonUtils.getStrFromJson(param, "paramValue");
-
-            TCombParam combParam = new TCombParam();
-            combParam.setcClass(paramClass);
-            combParam.setcElementCombId(elementComb.getcId());
-            combParam.setcParamId(paramId);
-            combParam.setcPotentialsFunctionId(functionId);
-            combParam.setcValue(paramValue);
-
-            combParams.add(combParam);
-        }
     }
 
     private void setCombTags() {
@@ -152,13 +107,6 @@ public class InteratomicPotentials {
                 order++;
             }
         }
-    }
-
-    private void setPtentialsFile(JSONObject jasonObject) {
-        String cFileName = JsonUtils.getStrFromJson(jasonObject, "uploadFileName");
-        ptentialsFile = new TPotentialsFile();
-        ptentialsFile.setcFileName(cFileName);
-        ptentialsFile.setcElementCombId(elementComb.getcId());
     }
 
     private void setElementComb(JSONObject jasonObject) {

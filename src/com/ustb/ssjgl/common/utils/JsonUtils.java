@@ -2,10 +2,7 @@ package com.ustb.ssjgl.common.utils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
@@ -19,18 +16,6 @@ import com.alibaba.fastjson.JSONObject;
  *
  */
 public class JsonUtils {
-    public static String getVerMessage(int length) {
-        //随机字符串的随机字符库
-        String KeyString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuffer sb = new StringBuffer();
-        int len = KeyString.length();
-        for (int i = 0; i < length; i++) {
-            sb.append(KeyString.charAt((int) Math.round(Math.random() * (len - 1))));
-        }
-        return sb.toString();
-    }
-    
-    
     /**
      * 获得json中的key对应的value
      * @param json json字符串

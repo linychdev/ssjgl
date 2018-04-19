@@ -1,6 +1,8 @@
 package com.ustb.ssjgl.main.service;
 
+import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 
 /**
  * IInteratomicPotentialsService
@@ -17,6 +19,18 @@ public interface IInteratomicPotentialsService {
     public void addInteratomicPotentials(InteratomicPotentials interatomicPotentials);
 
     /**
+     * 新增元素组合函数
+     * @param combFunInfo
+     */
+    public void addCombFunction(CombFunctionInfo combFunInfo);
+    
+    /**
+     * 新增势数据文件元数据
+     * @param ptentialsFile
+     */
+    public void addPotentialsFile(TPotentialsFile ptentialsFile);
+
+    /**
      * 删除原子间势
      * @param combId
      */
@@ -28,4 +42,10 @@ public interface IInteratomicPotentialsService {
      * @param functionId
      */
     public void deleteCombFunction(String combId, String functionId);
+    
+    /**
+     * 删除势文件
+     * @param pId
+     */
+    public void deletePotenFileByPotenId(String pId);
 }

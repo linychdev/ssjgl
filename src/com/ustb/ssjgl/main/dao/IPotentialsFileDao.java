@@ -21,5 +21,5 @@ public interface IPotentialsFileDao extends IAbstractDao{
      * 根据组合id删除势数据文件元数据
      * @param combName
      */
-    public void deletePtentialsFileByCombId(String combId);
+    public void deleteByCombId(String combId);
 }

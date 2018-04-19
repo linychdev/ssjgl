@@ -23,7 +23,7 @@ public class TPotentialsFile {
     private String cSuffix;
 
     /** 大小(单位:k) */
-    private Integer nSize;
+    private Long nSize;
 
     /** 是否有效 */
     private Integer nValid;
@@ -82,11 +82,11 @@ public class TPotentialsFile {
         this.cSuffix = cSuffix == null ? null : cSuffix.trim();
     }
 
-    public Integer getnSize() {
+    public Long getnSize() {
         return nSize;
     }
 
-    public void setnSize(Integer nSize) {
+    public void setnSize(Long nSize) {
         this.nSize = nSize;
     }
 
