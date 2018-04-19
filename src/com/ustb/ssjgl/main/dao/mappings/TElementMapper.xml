@@ -210,4 +210,18 @@
       d_time = #{dTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectElementByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element
+    where c_elment_name = #{cElmentName,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectElementBySymbol" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element
+    where c_symbol = #{cSymbol,jdbcType=VARCHAR}
+  </select>
 </mapper>

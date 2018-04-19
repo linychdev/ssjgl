@@ -125,4 +125,30 @@
       d_time = #{dTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectParamsByFunId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_function_param
+    where c_function_id = #{cFunctionId,jdbcType=VARCHAR}
+      and n_valid = 1
+  </select>
+  
+  <delete id="deleteParamsByFunId" parameterType="java.lang.String" >
+    delete from t_function_param
+    where c_function_id = #{cFunctionId,jdbcType=VARCHAR}
+      and n_valid = 1
+  </delete>
+  
+  <insert id="insertBatch">
+    insert into t_function_param (c_id, c_function_id, c_name, c_unit, c_description, 
+    n_order, n_valid, d_time)
+     values
+    <foreach collection ="list" item="functionParams" separator =",">
+      (#{cId,jdbcType=VARCHAR}, #{cFunctionId,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, 
+      #{cUnit,jdbcType=VARCHAR}, #{cDescription,jdbcType=VARCHAR}, #{nOrder,jdbcType=INTEGER}, 
+      #{nValid,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP})
+    </foreach >
+  </insert>
+  
 </mapper>

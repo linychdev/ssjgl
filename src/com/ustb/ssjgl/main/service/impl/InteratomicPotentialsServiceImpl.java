@@ -67,7 +67,6 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
      */
     @Override
     public void deleteCombFunction(String combId, String functionId) {
-        // TODO Auto-generated method stub
         combFunctionDao.deleteCombFunByCombIdAndFunId(combId,functionId);
     }
 }
