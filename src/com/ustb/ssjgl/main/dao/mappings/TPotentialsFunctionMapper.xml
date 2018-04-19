@@ -155,4 +155,13 @@
       d_time = #{dTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectFunctionByCombId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_potentials_function
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -1,9 +1,6 @@
 package com.ustb.ssjgl.main.dao;
 
-import java.util.List;
-
 import com.ustb.ssjgl.common.dao.IAbstractDao;
-import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 
 public interface IPotentialsFunctionDao extends IAbstractDao {
@@ -20,10 +17,10 @@ public interface IPotentialsFunctionDao extends IAbstractDao {
      */
     public void updateFunction(TPotentialsFunction function);
     
+    
     /**
-     * 根据元素组合获取函数列表
-     * @param elementComb
-     * @return
+     * 删除函数
+     * @param functionId
      */
-    public List<TPotentialsFunction> getFunByElementComb(TElementCombination elementComb);
+    public void deleteFunction(String functionId);
 }

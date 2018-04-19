@@ -150,5 +150,4 @@
       #{nValid,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP})
     </foreach >
   </insert>
-  
 </mapper>
