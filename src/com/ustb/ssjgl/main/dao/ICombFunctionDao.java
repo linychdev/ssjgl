@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.ustb.ssjgl.common.dao.IAbstractDao;
 import com.ustb.ssjgl.main.dao.bean.TCombFunction;
-import com.ustb.ssjgl.main.dao.bean.TElementCombination;
-import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 
 public interface ICombFunctionDao extends IAbstractDao {
     
@@ -19,7 +17,7 @@ public interface ICombFunctionDao extends IAbstractDao {
      * 根据id删除元素组合的函数
      * @param id
      */
-    public void deleteCombFunctionById(String id);
+    public void deleteById(String id);
 
     /**
      * 批量为元素组合新增函数
@@ -39,17 +37,11 @@ public interface ICombFunctionDao extends IAbstractDao {
      * @param functionId
      */
     public void deleteByCombIdAndFunId(String combId, String functionId);
-    
-    /**
-     * 根据元素组合主键获取函数列表
-     * @param combId
-     * @return
-     */
-    public List<TPotentialsFunction> getFunByElementCombId(String combId);
 
     /**
-     * @param elementComb
+     * 判断函数是否被引用
+     * @param functionId
      * @return
      */
-    public List<TPotentialsFunction> getFunByElementComb(TElementCombination elementComb);
+    public boolean isFunctionUsed(String functionId);
 }

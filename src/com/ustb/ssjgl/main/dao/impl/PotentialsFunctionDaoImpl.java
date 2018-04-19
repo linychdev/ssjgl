@@ -12,7 +12,6 @@ import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
  */
 public class PotentialsFunctionDaoImpl extends AbstractDao implements IPotentialsFunctionDao {
 
-    private String mapperNamespace = "com.ustb.ssjgl.main.dao.mappings.TPotentialsFunctionMapper";
     {
         super.mapperNamespace = "com.ustb.ssjgl.main.dao.mappings.";
     }

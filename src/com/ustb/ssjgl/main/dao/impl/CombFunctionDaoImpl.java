@@ -9,12 +9,12 @@ package com.ustb.ssjgl.main.dao.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.dao.AbstractDao;
 import com.ustb.ssjgl.main.dao.ICombFunctionDao;
 import com.ustb.ssjgl.main.dao.bean.TCombFunction;
-import com.ustb.ssjgl.main.dao.bean.TElementCombination;
-import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 
 /**
  * CombFunctionDaoImpl
@@ -38,10 +38,10 @@ public class CombFunctionDaoImpl extends AbstractDao implements ICombFunctionDao
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.dao.ICombFunctionDao#deleteCombFunctionById(java.lang.String)
+     * @see com.ustb.ssjgl.main.dao.ICombFunctionDao#deleteById(java.lang.String)
      */
     @Override
-    public void deleteCombFunctionById(String id) {
+    public void deleteById(String id) {
         deleteByPrimaryKey(TCombFunction.class, id);
     }
 
@@ -76,20 +76,15 @@ public class CombFunctionDaoImpl extends AbstractDao implements ICombFunctionDao
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.dao.ICombFunctionDao#getFunByElementCombId(java.lang.String)
+     * @see com.ustb.ssjgl.main.dao.ICombFunctionDao#isFunctionUsed(java.lang.String)
      */
     @Override
-    public List<TPotentialsFunction> getFunByElementCombId(String combId) {
-        String statement = mapperNamespace + ".selectFunctionsByCombId";
-        List<TPotentialsFunction> functions = this.getSqlSession().selectList(statement, combId);
-        return functions;
-    }
-
-    /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.dao.ICombFunctionDao#getFunByElementComb(com.ustb.ssjgl.main.dao.bean.TElementCombination)
-     */
-    @Override
-    public List<TPotentialsFunction> getFunByElementComb(TElementCombination elementComb) {
-        return getFunByElementCombId(elementComb.getcId());
+    public boolean isFunctionUsed(String functionId) {
+        String statement = mapperNamespace + ".selectByFunctionId";
+        List<TCombFunction> combFunctionList = this.getSqlSession().selectList(statement, functionId);
+        if(CollectionUtils.isEmpty(combFunctionList)){
+            return false;
+        }
+        return true;
     }
 }

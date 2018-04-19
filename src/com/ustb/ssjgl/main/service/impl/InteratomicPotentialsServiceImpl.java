@@ -55,7 +55,7 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
     @Override
     public void deletePotentialsById(String combId) {
         potentialsFileDao.deletePtentialsFileByCombId(combId);
-        combParamDao.deleteCombParamByCombId(combId);
+        combParamDao.deleteByCombId(combId);
         combFunctionDao.deleteByCombId(combId);
         elementCombTagDao.deleteTagByCombId(combId);
         elementCombDetailDao.deleteDetailByCombId(combId);

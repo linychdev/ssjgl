@@ -14,11 +14,17 @@ public interface IPotentialsFunctionService {
      * 新增势函数
      * @param function
      */
-    public void addFunction(PotenFunction function);
+    public boolean addFunction(PotenFunction function);
 
     /**
-     * 根据id删除势函数
+     * 根据id删除势函数,删除前会校验是否有原子势使用到了该函数
      * @param functionId
      */
-    public void deleteFunctionById(String functionId);
+    public boolean deleteFunctionById(String functionId);
+    
+    /**
+     * 根据id删除函数的参数，删除前会校验是否有原子势使用到了该参数
+     * @param paramId
+     */
+    public boolean deleteFunParamById(String paramId);
 }

@@ -23,18 +23,32 @@ public interface ICombParamDao extends IAbstractDao {
      * 根据id删除参数
      * @param id
      */
-    public void deleteCombParamById(String id);
+    public void deleteById(String id);
 
     /**
      * 根据元素组合id删除参数
      * @param combId
      */
-    public void deleteCombParamByCombId(String combId);
+    public void deleteByCombId(String combId);
 
     /**
      * 根据元素组合id和函数id删除参数
      * @param combId
      * @param funId
      */
-    public void deleteCombParamByCombIdAndFunId(String combId, String funId);
+    public void deleteByCombIdAndFunId(String combId, String funId);
+
+    /**
+     * 根据元素组合id和函数id查询参数
+     * @param combId
+     * @param funId
+     */
+    public void selectByCombIdAndFunId(String combId, String funId);
+
+    /**
+     * 判断参数是否被引用
+     * @param paramId
+     * @return
+     */
+    public boolean isParamUsed(String paramId);
 }
