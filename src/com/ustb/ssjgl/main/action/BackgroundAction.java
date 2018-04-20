@@ -1,6 +1,8 @@
 package com.ustb.ssjgl.main.action;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
-import com.ustb.ssjgl.common.utils.FtpUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
@@ -27,6 +31,7 @@ import com.ustb.ssjgl.main.bean.PotenFunction;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.service.IInteratomicPotentialsService;
 import com.ustb.ssjgl.main.service.IPotentialsFunctionService;
+import com.ustb.ssjgl.main.service.impl.FtpService;
 
 /**
  * InteratomicPotentialsAction
@@ -42,10 +47,14 @@ public class BackgroundAction extends AbstractAction{
      */
     private final static Logger LOG = LogUtils.getLogger();
 
+    @Autowired
     private IInteratomicPotentialsService interatomicPotentialsService;
 
+    @Autowired
     private IPotentialsFunctionService potentialsFunctionService;
     
+    @Autowired
+    private FtpService ftpService;
     /**
      * 新增原子间势
      * 包括原子间势描述、标签、组合详情
@@ -104,23 +113,22 @@ public class BackgroundAction extends AbstractAction{
         //如果文件不为空，写入上传路径
         if(!multipartFile.isEmpty()) {
             File file = null;
-            String remoteFileName = potentialsId + "-" + multipartFile.getOriginalFilename();
+            String remoteFileName = potentialsId + "." + CommonUtils.getFileSuffix(multipartFile.getOriginalFilename());
             try {
                 file = File.createTempFile(multipartFile.getName(), null);
                 
                 FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);  
-                FtpUtils ftpUtils = new FtpUtils();
-                ftpUtils.setLocal(file);
-                ftpUtils.setRemotePath("pub");
-                ftpUtils.setRemote(remoteFileName);
-                ftpUtils.upload();
+                ftpService.setLocal(file);
+                ftpService.setRemotePath("pub");
+                ftpService.setRemote(remoteFileName);
+                ftpService.upload();
                 
                 TPotentialsFile ptentialsFile = new TPotentialsFile();
                 ptentialsFile.setcFileName(multipartFile.getOriginalFilename());
                 ptentialsFile.setcElementCombId(potentialsId);
                 ptentialsFile.setnSize(FileUtils.sizeOf(file));
                 ptentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
-                ptentialsFile.setcFtpUrlPath("pub/" + remoteFileName);
+                ptentialsFile.setcFtpUrlPath("pub/");
                 interatomicPotentialsService.addPotentialsFile(ptentialsFile);
             } catch (Exception e) {
                 LOG.error("上传文件到ftp服务器失败！", e);
@@ -128,10 +136,37 @@ public class BackgroundAction extends AbstractAction{
             }finally{
                 FileUtils.deleteQuietly(file);
             }
-            
         }
-        
 //        this.writeAjaxObject(response, result);
+    }
+    
+    /**
+     * 上传势文件
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value="/manage/downloadPotentialsFile")
+    @ResponseBody
+    public ResponseEntity<byte[]> downloadPotenFile(HttpServletRequest request, HttpServletResponse response) {
+        String potentialsId = request.getParameter("potentialsId");
+        TPotentialsFile fileMeta = interatomicPotentialsService.getPotentialsFileMetaByCombId(potentialsId);
+        String suffix = CommonUtils.getFileSuffix(fileMeta.getcFileName());
+        File file = null;
+        try {
+            file = File.createTempFile("potenFile", suffix);
+            ftpService.setLocal(file);
+            ftpService.setRemote(fileMeta.getFtpFileName());
+            ftpService.setRemotePath(fileMeta.getcFtpUrlPath());
+            ftpService.download();
+            response.setContentType("application/force-download");
+            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileMeta.getcFileName(), "UTF-8"));
+            return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), HttpStatus.CREATED);  
+        } catch (IOException e) {
+            LOG.error("下载势数据文件出错！ftpPath:{},fileName:{}",fileMeta.getcFtpUrlPath() ,fileMeta.getcFileName(), e);
+            throw new RuntimeException(e);
+        }finally{
+            FileUtils.deleteQuietly(file);
+        }
     }
     
     /**

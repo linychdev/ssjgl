@@ -22,6 +22,14 @@ public class CommonUtils {
         String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);  
         return suffix;  
     }
+
+    public static String getFileSuffix(String fileName){
+        if(fileName == null){
+            return "";
+        }
+        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);  
+        return suffix;  
+    }
     
     
     public static String getVerMessage(int length) {

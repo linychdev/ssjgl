@@ -1,4 +1,4 @@
-package com.ustb.ssjgl.common.utils;
+package com.ustb.ssjgl.main.service.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +15,8 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
 import com.ustb.ssjgl.common.exception.CommonsException;
+import com.ustb.ssjgl.common.utils.PropertiesUtils;
+import com.ustb.ssjgl.common.utils.ResourceUtils;
 
 /**
  * FtpUtilss
@@ -22,7 +24,7 @@ import com.ustb.ssjgl.common.exception.CommonsException;
  * @version 1.0
  *
  */
-public class FtpUtils {
+public class FtpService {
     
     /**
      * 默认端口
@@ -122,15 +124,15 @@ public class FtpUtils {
      * password:password
      * </pre>
      */
-    public FtpUtils() {
+    public FtpService() {
         this.init(FTP_CONFIG_PATH);
     }
     
-    public FtpUtils(String host, int port, String userName, String password){
+    public FtpService(String host, int port, String userName, String password){
         this.init(host, port, userName, password);
     }
     
-    public FtpUtils(Properties prop){
+    public FtpService(Properties prop){
         this.init(prop);
     }
     
@@ -138,7 +140,7 @@ public class FtpUtils {
      * 
      * @param configPath classpath路径
      */
-    public FtpUtils(String configPath){
+    public FtpService(String configPath){
         this.init(configPath);
     }
     

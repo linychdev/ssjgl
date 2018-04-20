@@ -18,7 +18,7 @@ public class TPotentialsFile {
 
     /** ftp地址 */
     private String cFtpUrlPath;
-
+    
     /** 后缀 */
     private String cSuffix;
 
@@ -112,5 +112,9 @@ public class TPotentialsFile {
 
     public void setdTime(Timestamp dTime) {
         this.dTime = dTime;
+    }
+    
+    public String getFtpFileName(){
+        return this.cElementCombId + "." + this.cSuffix;
     }
 }

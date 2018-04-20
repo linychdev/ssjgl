@@ -48,4 +48,10 @@ public interface IInteratomicPotentialsService {
      * @param pId
      */
     public void deletePotenFileByPotenId(String pId);
+
+    /**
+     * @param combId
+     * @return
+     */
+    public TPotentialsFile getPotentialsFileMetaByCombId(String combId);
 }

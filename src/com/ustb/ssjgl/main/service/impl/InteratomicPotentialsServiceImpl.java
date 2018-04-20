@@ -83,4 +83,12 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
         //ftp服务器上的文件不删除，有同名，覆盖即可
         potentialsFileDao.deleteByCombId(combId);
     }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.service.IInteratomicPotentialsService#getPotentialsFileMetaByCombId(java.lang.String)
+     */
+    @Override
+    public TPotentialsFile getPotentialsFileMetaByCombId(String combId) {
+        return potentialsFileDao.selectByCombId(combId);
+    }
 }

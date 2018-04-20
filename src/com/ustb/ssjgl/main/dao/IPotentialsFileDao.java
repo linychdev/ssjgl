@@ -22,4 +22,11 @@ public interface IPotentialsFileDao extends IAbstractDao{
      * @param combName
      */
     public void deleteByCombId(String combId);
+
+    /**
+     * 根据元素组合获取势数据文件
+     * @param combId
+     * @return
+     */
+    public TPotentialsFile selectByCombId(String combId);
 }
