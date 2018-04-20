@@ -13,9 +13,9 @@ import com.ustb.ssjgl.main.dao.IElementCombTagDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFileDao;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
-import com.ustb.ssjgl.main.service.IInteratomicPotentialsService;
+import com.ustb.ssjgl.main.service.IInterPotenService;
 
-public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsService {
+public class InterPotenServiceImpl implements IInterPotenService {
 
     @Autowired
     private IElementCombDao elementCombDao;
@@ -59,7 +59,7 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IInteratomicPotentialsService#deleteCombFunction(java.lang.String, java.lang.String)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#deleteCombFunction(java.lang.String, java.lang.String)
      */
     @Override
     public void deleteCombFunction(String combId, String functionId) {
@@ -85,7 +85,7 @@ public class InteratomicPotentialsServiceImpl implements IInteratomicPotentialsS
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IInteratomicPotentialsService#getPotentialsFileMetaByCombId(java.lang.String)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#getPotentialsFileMetaByCombId(java.lang.String)
      */
     @Override
     public TPotentialsFile getPotentialsFileMetaByCombId(String combId) {

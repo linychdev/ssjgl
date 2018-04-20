@@ -1,9 +1,3 @@
-/*
- * @(#)PotentialsFunctionServiceImpl.java 2018年4月19日上午10:43:18
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.main.service.impl;
 
 import org.slf4j.Logger;
@@ -18,15 +12,15 @@ import com.ustb.ssjgl.main.dao.IFunctionParamDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFunctionDao;
 import com.ustb.ssjgl.main.dao.bean.TFunctionParam;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
-import com.ustb.ssjgl.main.service.IPotentialsFunctionService;
+import com.ustb.ssjgl.main.service.IPotenFunctionService;
 
 /**
- * PotentialsFunctionServiceImpl
+ * PotenFunctionServiceImpl
  * @author linych
  * @version 1.0
  *
  */
-public class PotentialsFunctionServiceImpl implements IPotentialsFunctionService{
+public class PotenFunctionServiceImpl implements IPotenFunctionService{
 
     private static final Logger LOG = LogUtils.getLogger();
     
@@ -44,7 +38,7 @@ public class PotentialsFunctionServiceImpl implements IPotentialsFunctionService
     
     
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IPotentialsFunctionService#addFunction(com.ustb.ssjgl.main.bean.PotenFunction)
+     * @see com.ustb.ssjgl.main.service.IPotenFunctionService#addFunction(com.ustb.ssjgl.main.bean.PotenFunction)
      */
     @Transactional
     @Override
@@ -60,7 +54,7 @@ public class PotentialsFunctionServiceImpl implements IPotentialsFunctionService
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IPotentialsFunctionService#deleteFunctionById(java.lang.String)
+     * @see com.ustb.ssjgl.main.service.IPotenFunctionService#deleteFunctionById(java.lang.String)
      */
     @Transactional
     @Override
@@ -81,7 +75,7 @@ public class PotentialsFunctionServiceImpl implements IPotentialsFunctionService
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IPotentialsFunctionService#deleteFunParamById(java.lang.String)
+     * @see com.ustb.ssjgl.main.service.IPotenFunctionService#deleteFunParamById(java.lang.String)
      */
     @Transactional
     @Override

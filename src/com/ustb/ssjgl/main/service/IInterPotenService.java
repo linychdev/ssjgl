@@ -10,7 +10,7 @@ import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
  * @version 1.0
  *
  */
-public interface IInteratomicPotentialsService {
+public interface IInterPotenService {
     
     /**
      * 新增原子间势

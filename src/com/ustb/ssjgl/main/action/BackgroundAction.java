@@ -29,8 +29,8 @@ import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
-import com.ustb.ssjgl.main.service.IInteratomicPotentialsService;
-import com.ustb.ssjgl.main.service.IPotentialsFunctionService;
+import com.ustb.ssjgl.main.service.IInterPotenService;
+import com.ustb.ssjgl.main.service.IPotenFunctionService;
 import com.ustb.ssjgl.main.service.impl.FtpService;
 
 /**
@@ -48,10 +48,10 @@ public class BackgroundAction extends AbstractAction{
     private final static Logger LOG = LogUtils.getLogger();
 
     @Autowired
-    private IInteratomicPotentialsService interatomicPotentialsService;
+    private IInterPotenService interatomicPotentialsService;
 
     @Autowired
-    private IPotentialsFunctionService potentialsFunctionService;
+    private IPotenFunctionService potentialsFunctionService;
     
     @Autowired
     private FtpService ftpService;
@@ -110,6 +110,8 @@ public class BackgroundAction extends AbstractAction{
     public void uploadPotenFile(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("potentialsId") String potentialsId,
             @RequestParam("potenFile") MultipartFile multipartFile) {
+        
+        Map<String, Object> result = new HashMap<String, Object>();
         //如果文件不为空，写入上传路径
         if(!multipartFile.isEmpty()) {
             File file = null;
@@ -130,14 +132,15 @@ public class BackgroundAction extends AbstractAction{
                 ptentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
                 ptentialsFile.setcFtpUrlPath("pub/");
                 interatomicPotentialsService.addPotentialsFile(ptentialsFile);
+                result.put("success", true);
             } catch (Exception e) {
                 LOG.error("上传文件到ftp服务器失败！", e);
-                //TODO 增加向前端返回错误的处理
+                result.put("success", false);
             }finally{
                 FileUtils.deleteQuietly(file);
             }
         }
-//        this.writeAjaxObject(response, result);
+        this.writeAjaxObject(response, result);
     }
     
     /**

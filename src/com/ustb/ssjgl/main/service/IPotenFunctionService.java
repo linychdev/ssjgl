@@ -3,12 +3,12 @@ package com.ustb.ssjgl.main.service;
 import com.ustb.ssjgl.main.bean.PotenFunction;
 
 /**
- * IPotentialsFunctionService
+ * IPotenFunctionService
  * @author linych
  * @version 1.0
  *
  */
-public interface IPotentialsFunctionService {
+public interface IPotenFunctionService {
 
     /**
      * 新增势函数
