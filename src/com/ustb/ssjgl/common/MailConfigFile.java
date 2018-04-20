@@ -27,6 +27,7 @@ public class MailConfigFile {
     public static String subject;
     public static Integer verCodeLength;
     public static Properties properties;
+    public static String verMessageFormat;
     static{
         init();
     }
@@ -47,6 +48,8 @@ public class MailConfigFile {
             subject = new String(properties.getProperty("mailSubject").getBytes("ISO-8859-1"), "utf-8");
             failureTime = Integer.valueOf(properties.getProperty("mailFailureTime"));
             verCodeLength = Integer.valueOf(properties.getProperty("mailVerCodeLength"));
+            
+            verMessageFormat = "<div>您的验证码是：</div><br/><div>verificationCode</div><br/><div>如果不是您自己的操作，请忽略此邮件</div>";
         } catch(IOException e){
             LOG.error("读取配置文件出错！", e);
         }

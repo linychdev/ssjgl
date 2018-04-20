@@ -1,8 +1,6 @@
 package com.ustb.ssjgl.main.action;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +30,7 @@ import com.ustb.ssjgl.main.service.IPotenFunctionService;
 import com.ustb.ssjgl.main.service.impl.FtpService;
 
 /**
- * InteratomicPotentialsAction
+ * BackgroundAction
  * @author linych
  * @version 1.0
  *
@@ -142,36 +138,7 @@ public class BackgroundAction extends AbstractAction{
         }
         this.writeAjaxObject(response, result);
     }
-    
-    /**
-     * 上传势文件
-     * @param request
-     * @param response
-     */
-    @RequestMapping(value="/manage/downloadPotentialsFile")
-    @ResponseBody
-    public ResponseEntity<byte[]> downloadPotenFile(HttpServletRequest request, HttpServletResponse response) {
-        String potentialsId = request.getParameter("potentialsId");
-        TPotentialsFile fileMeta = interatomicPotentialsService.getPotentialsFileMetaByCombId(potentialsId);
-        String suffix = CommonUtils.getFileSuffix(fileMeta.getcFileName());
-        File file = null;
-        try {
-            file = File.createTempFile("potenFile", suffix);
-            ftpService.setLocal(file);
-            ftpService.setRemote(fileMeta.getFtpFileName());
-            ftpService.setRemotePath(fileMeta.getcFtpUrlPath());
-            ftpService.download();
-            response.setContentType("application/force-download");
-            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileMeta.getcFileName(), "UTF-8"));
-            return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), HttpStatus.CREATED);  
-        } catch (IOException e) {
-            LOG.error("下载势数据文件出错！ftpPath:{},fileName:{}",fileMeta.getcFtpUrlPath() ,fileMeta.getcFileName(), e);
-            throw new RuntimeException(e);
-        }finally{
-            FileUtils.deleteQuietly(file);
-        }
-    }
-    
+
     /**
      * 删除原子间势
      * @param request

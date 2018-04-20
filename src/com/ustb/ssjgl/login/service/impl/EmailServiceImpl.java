@@ -29,7 +29,8 @@ public class EmailServiceImpl implements IEmailService{
     public String sendVerificationMessage(String emailAddress) {
         try {
             String verificationCode = CommonUtils.getVerMessage(MailConfigFile.verCodeLength);
-            String html = "<div>您的验证码是：</div><br/><hr/><div>"+verificationCode+"</div><br/><hr/><div>如果不是您自己的操作，请忽略此邮件</div>";
+            String html = MailConfigFile.verMessageFormat;
+            html = html.replace("verificationCode", verificationCode);
             TEmailRecord emailRecord = new TEmailRecord();
             emailRecord.setcEmail(emailAddress);
             emailRecord.setcVerificationCode(verificationCode);
