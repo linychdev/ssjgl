@@ -44,10 +44,10 @@ public class BackgroundAction extends AbstractAction{
     private final static Logger LOG = LogUtils.getLogger();
 
     @Autowired
-    private IInterPotenService interatomicPotentialsService;
+    private IInterPotenService interPotenService;
 
     @Autowired
-    private IPotenFunctionService potentialsFunctionService;
+    private IPotenFunctionService potenFunctionService;
     
     @Autowired
     private FtpService ftpService;
@@ -65,7 +65,7 @@ public class BackgroundAction extends AbstractAction{
         try{
             JSONObject interPotenJson = JSONObject.parseObject(json);
             InteratomicPotentials interPoten = new InteratomicPotentials(interPotenJson);
-            interatomicPotentialsService.addInteratomicPotentials(interPoten);
+            interPotenService.addInteratomicPotentials(interPoten);
             result.put("success", true);
         }catch(Exception e){
             LOG.error("无法保存原子间势，json为:{}", json, e);
@@ -87,7 +87,7 @@ public class BackgroundAction extends AbstractAction{
         try{
             JSONObject combFunJson = JSONObject.parseObject(json);
             CombFunctionInfo combFunInfo = new CombFunctionInfo(combFunJson);
-            interatomicPotentialsService.addCombFunction(combFunInfo);
+            interPotenService.addCombFunction(combFunInfo);
             result.put("success", true);
         }catch(Exception e){
             LOG.error("无法保存原子间势，json为:{}", json, e);
@@ -127,7 +127,7 @@ public class BackgroundAction extends AbstractAction{
                 ptentialsFile.setnSize(FileUtils.sizeOf(file));
                 ptentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
                 ptentialsFile.setcFtpUrlPath("pub/");
-                interatomicPotentialsService.addPotentialsFile(ptentialsFile);
+                interPotenService.addPotentialsFile(ptentialsFile);
                 result.put("success", true);
             } catch (Exception e) {
                 LOG.error("上传文件到ftp服务器失败！", e);
@@ -150,7 +150,7 @@ public class BackgroundAction extends AbstractAction{
         String pId = request.getParameter("potentialsId");
         Map<String, Object> result = new HashMap<String, Object>();
         try {
-            interatomicPotentialsService.deletePotentialsById(pId);
+            interPotenService.deletePotentialsById(pId);
             result.put("success", true);
         } catch (Exception e) {
             LOG.error("删除原子间势出错！", e);
@@ -170,7 +170,7 @@ public class BackgroundAction extends AbstractAction{
         String pId = request.getParameter("potentialsId");
         Map<String, Object> result = new HashMap<String, Object>();
         try {
-            interatomicPotentialsService.deletePotenFileByPotenId(pId);
+            interPotenService.deletePotenFileByPotenId(pId);
             result.put("success", true);
         } catch (Exception e) {
             LOG.error("删除势数据文件出错！", e);
@@ -191,7 +191,7 @@ public class BackgroundAction extends AbstractAction{
         String functionId = request.getParameter("functionId");
         Map<String, Object> result = new HashMap<String, Object>();
         try {
-            interatomicPotentialsService.deleteCombFunction(pId, functionId);
+            interPotenService.deleteCombFunction(pId, functionId);
             result.put("success", true);
         } catch (Exception e) {
             LOG.error("删除组合的势函数出错！", e);
@@ -212,7 +212,7 @@ public class BackgroundAction extends AbstractAction{
             String json = request.getParameter("potenFunctionJson");
             JSONObject potenFunctionJson = JSONObject.parseObject(json);
             PotenFunction function = new PotenFunction(potenFunctionJson);
-            potentialsFunctionService.addFunction(function);
+            potenFunctionService.addFunction(function);
             result.put("success", true);
         } catch (Exception e) {
             LOG.error("新增势函数出错！", e);
@@ -232,7 +232,7 @@ public class BackgroundAction extends AbstractAction{
         Map<String, Object> result = new HashMap<String, Object>();
         try {
             String functionId = request.getParameter("functionId");
-            potentialsFunctionService.deleteFunctionById(functionId);
+            potenFunctionService.deleteFunctionById(functionId);
             result.put("success", true);
         } catch (Exception e) {
             LOG.error("新增势函数出错！", e);

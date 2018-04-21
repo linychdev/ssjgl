@@ -38,6 +38,8 @@ public class FtpService {
     private final static String USER_NAME = "userName";
     
     private final static String PASSWORD = "password";
+
+    private final static String REMOTEPATH = "remotePath";
     
     /**
      * 默认配置文件路径
@@ -128,8 +130,8 @@ public class FtpService {
         this.init(FTP_CONFIG_PATH);
     }
     
-    public FtpService(String host, int port, String userName, String password){
-        this.init(host, port, userName, password);
+    public FtpService(String host, int port, String userName, String password, String remotePath){
+        this.init(host, port, userName, password, remotePath);
     }
     
     public FtpService(Properties prop){
@@ -152,7 +154,8 @@ public class FtpService {
         init(prop.getProperty(HOST),
                 Integer.parseInt(prop.getProperty(PORT)),
                 prop.getProperty(USER_NAME),
-                prop.getProperty(PASSWORD));
+                prop.getProperty(PASSWORD),
+                prop.getProperty(REMOTEPATH));
     }
     
     /**
@@ -162,11 +165,12 @@ public class FtpService {
      * @param userName
      * @param password
      */
-    private void init(String host, int port, String userName, String password){
+    private void init(String host, int port, String userName, String password, String remotePath){
         this.host = host;
         this.port = port;
         this.userName = userName;
         this.password = password;
+        this.remotePath = remotePath;
     }
     
     private void init(String configPath){

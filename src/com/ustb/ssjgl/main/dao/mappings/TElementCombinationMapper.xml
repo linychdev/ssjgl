@@ -139,4 +139,41 @@
       d_time = #{dTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element_combination
+   where c_comb_name = #{cCombName,jdbcType=VARCHAR}
+     and n_valid = 1
+  </select>
+
+  <select id="selectByTag" resultMap="BaseResultMap" parameterType="java.lang.String" >
+       SELECT 
+		 comb.*
+	     from t_element_combination comb 
+	left join t_element_comb_tag tag on (comb.c_id = tag.c_element_comb_id)
+    	where tag.c_tag = #{cTag,jdbcType=VARCHAR}
+	      and tag.n_valid = 1
+		  and comb.n_valid = 1
+  </select>
+  
+  <select id="selectAllCombs" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element_combination
+   where n_valid = 1
+  </select>
+  
+  <select id="selectByeEementId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	SELECT 
+	comb.*
+	 from t_element_combination comb
+	inner join t_element_comb_detail detail on (comb.c_id = detail.c_element_comb_id)
+	inner JOIN t_element element on (detail.c_element_id = element.c_id)
+	where element.c_id = #{cId,jdbcType=VARCHAR}
+	  and comb.n_valid = 1
+  </select>
+  
+  
 </mapper>

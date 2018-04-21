@@ -12,5 +12,16 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<bean id="roleDao" class="com.ustb.ssjgl.login.dao.impl.RoleDaoImpl" parent="abstractDao"></bean>
 		<bean id="permissionDao" class="com.ustb.ssjgl.login.dao.impl.PermissionDaoImpl" parent="abstractDao"></bean>
 		<bean id="emailRecordDao" class="com.ustb.ssjgl.login.dao.impl.EmaiRecordDaoImpl" parent="abstractDao"></bean>
-		
+
+
+		<bean id="combFunctionDao" class="com.ustb.ssjgl.main.dao.impl.CombFunctionDaoImpl" parent="abstractDao"></bean>
+		<bean id="combParamDao" class="com.ustb.ssjgl.main.dao.impl.CombParamDaoImpl" parent="abstractDao"></bean>
+		<bean id="elementCombDao" class="com.ustb.ssjgl.main.dao.impl.ElementCombDaoImpl" parent="abstractDao"></bean>
+		<bean id="elementCombDetailDao" class="com.ustb.ssjgl.main.dao.impl.ElementCombDetailDaoImpl" parent="abstractDao"></bean>
+		<bean id="elementCombTagDao" class="com.ustb.ssjgl.main.dao.impl.ElementCombTagDaoImpl" parent="abstractDao"></bean>
+		<bean id="elementDao" class="com.ustb.ssjgl.main.dao.impl.ElementDaoImpl" parent="abstractDao"></bean>
+		<bean id="functionParamDao" class="com.ustb.ssjgl.main.dao.impl.FunctionParamDaoImpl" parent="abstractDao"></bean>
+		<bean id="potentialsFileDao" class="com.ustb.ssjgl.main.dao.impl.PotentialsFileDaoImpl" parent="abstractDao"></bean>
+		<bean id="potentialsFunctionDao" class="com.ustb.ssjgl.main.dao.impl.PotentialsFunctionDaoImpl" parent="abstractDao"></bean>
+		<bean id="potentialsScopeDao" class="com.ustb.ssjgl.main.dao.impl.PotentialsScopeDaoImpl" parent="abstractDao"></bean>
 </beans>
