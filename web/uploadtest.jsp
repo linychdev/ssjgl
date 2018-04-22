@@ -23,6 +23,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		font-size: 40px !important;
 	}
 	</style>
+	<script type="text/javascript">
+	  var contextPath = "<%=request.getContextPath()%>";
+	</script>
   </head>
   
   <body>
@@ -42,5 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
         </table>
     </form>
+    
+    <a class = "downLoad" href = "<%=basePath%>/manage/downloadPotentialsFile?potentialsId=sdfasdasdf">下载</a>
   </body>
 </html>
