@@ -1,11 +1,13 @@
 package com.ustb.ssjgl.main.service;
 
+import java.util.List;
+
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 
 /**
- * IInteratomicPotentialsService
+ * IInterPotenService
  * @author linych
  * @version 1.0
  *
@@ -50,8 +52,16 @@ public interface IInterPotenService {
     public void deletePotenFileByPotenId(String pId);
 
     /**
+     * 根据组合id获取势数据文件
      * @param combId
      * @return
      */
     public TPotentialsFile getPotentialsFileMetaByCombId(String combId);
+
+    /**
+     * 根据标签获取势数据信息
+     * @param tag
+     * @return
+     */
+    public List<InteratomicPotentials> getInterPotenListByTag(String tag);
 }

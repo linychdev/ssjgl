@@ -41,13 +41,15 @@ public class SearchAction extends AbstractAction{
     private final static Logger LOG = LogUtils.getLogger();
 
     @Autowired
-    private IInterPotenService interatomicPotentialsService;
+    private IInterPotenService interPotenService;
 
     @Autowired
     private FtpService ftpService;
     
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
+        interPotenService.getInterPotenListByTag(tag);
+        
         ModelAndView mode = new ModelAndView();
         mode.setViewName("elementCombList");
         mode.addObject("msg", "hello kitty");
@@ -63,7 +65,7 @@ public class SearchAction extends AbstractAction{
     @ResponseBody
     public ResponseEntity<byte[]> downloadPotenFile(HttpServletRequest request, HttpServletResponse response) {
         String potentialsId = request.getParameter("potentialsId");
-        TPotentialsFile fileMeta = interatomicPotentialsService.getPotentialsFileMetaByCombId(potentialsId);
+        TPotentialsFile fileMeta = interPotenService.getPotentialsFileMetaByCombId(potentialsId);
         String suffix = CommonUtils.getFileSuffix(fileMeta.getcFileName());
         File file = null;
         try {
