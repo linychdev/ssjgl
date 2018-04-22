@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
+import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 import com.ustb.ssjgl.main.service.impl.FtpService;
@@ -48,7 +49,7 @@ public class SearchAction extends AbstractAction{
     
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
-        interPotenService.getInterPotenListByTag(tag);
+        InteratomicPotentials interPoten = interPotenService.getInterPotenListByTag(tag);
         
         ModelAndView mode = new ModelAndView();
         mode.setViewName("elementCombList");
