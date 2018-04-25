@@ -3,6 +3,7 @@ package com.ustb.ssjgl.main.action;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +50,7 @@ public class SearchAction extends AbstractAction{
     
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
-        InteratomicPotentials interPoten = interPotenService.getInterPotenListByTag(tag);
+        List<InteratomicPotentials> interPoten = interPotenService.getInterPotenListByTag(tag);
         
         ModelAndView mode = new ModelAndView();
         mode.setViewName("elementCombList");
