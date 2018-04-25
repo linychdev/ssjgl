@@ -71,11 +71,6 @@ public class UserRealm extends AuthorizingRealm {
         //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的  
         UsernamePasswordToken token = (UsernamePasswordToken)authcToken;  
           
-//        Session session = getSession();  
-//        String code = (String)session.getAttribute("");//Constants.VALIDATE_CODE);  
-//        if (token.getCaptcha() == null || !token.getCaptcha().toUpperCase().equals(code)){  
-//            throw new AuthenticationException("msg:验证码错误, 请重试.");  
-//        }  
         TUser user = userService.getUserByName(token.getUsername());
         if(user != null){
             if(user.getnIslock() !=null && user.getnIslock() == 1){  
@@ -93,7 +88,8 @@ public class UserRealm extends AuthorizingRealm {
             SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);  
             
 //            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getcLoginName(), user.getcPassword(), this.getName());  
-            this.setSession("currentUser", user.getcLoginName());
+//            this.setSession("currentUser", user.getcLoginName());
+            this.setSession("currentUser", user);
               
             return authcInfo;  
         }  

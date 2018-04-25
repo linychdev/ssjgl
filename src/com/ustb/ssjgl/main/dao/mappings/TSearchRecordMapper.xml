@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TSearchRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_user_id" property="cUserId" jdbcType="VARCHAR" />
+    <result column="c_user_name" property="cUserName" jdbcType="VARCHAR" />
+    <result column="c_client_ip" property="cClientIp" jdbcType="VARCHAR" />
+    <result column="c_search_text" property="cSearchText" jdbcType="VARCHAR" />
+    <result column="n_valid_search" property="nValidSearch" jdbcType="INTEGER" />
+    <result column="n_result_num" property="nResultNum" jdbcType="INTEGER" />
+    <result column="d_search_date" property="dSearchDate" jdbcType="DATE" />
+    <result column="d_search_time" property="dSearchTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_user_id, c_user_name, c_client_ip, c_search_text, n_valid_search, n_result_num, 
+    d_search_date, d_search_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_search_record
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_search_record
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+    insert into t_search_record (c_id, c_user_id, c_user_name, 
+      c_client_ip, c_search_text, n_valid_search, 
+      n_result_num, d_search_date, d_search_time
+      )
+    values (#{cId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, #{cUserName,jdbcType=VARCHAR}, 
+      #{cClientIp,jdbcType=VARCHAR}, #{cSearchText,jdbcType=VARCHAR}, #{nValidSearch,jdbcType=INTEGER}, 
+      #{nResultNum,jdbcType=INTEGER}, #{dSearchDate,jdbcType=DATE}, #{dSearchTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+    insert into t_search_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cUserId != null" >
+        c_user_id,
+      </if>
+      <if test="cUserName != null" >
+        c_user_name,
+      </if>
+      <if test="cClientIp != null" >
+        c_client_ip,
+      </if>
+      <if test="cSearchText != null" >
+        c_search_text,
+      </if>
+      <if test="nValidSearch != null" >
+        n_valid_search,
+      </if>
+      <if test="nResultNum != null" >
+        n_result_num,
+      </if>
+      <if test="dSearchDate != null" >
+        d_search_date,
+      </if>
+      <if test="dSearchTime != null" >
+        d_search_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserId != null" >
+        #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserName != null" >
+        #{cUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="cClientIp != null" >
+        #{cClientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="cSearchText != null" >
+        #{cSearchText,jdbcType=VARCHAR},
+      </if>
+      <if test="nValidSearch != null" >
+        #{nValidSearch,jdbcType=INTEGER},
+      </if>
+      <if test="nResultNum != null" >
+        #{nResultNum,jdbcType=INTEGER},
+      </if>
+      <if test="dSearchDate != null" >
+        #{dSearchDate,jdbcType=DATE},
+      </if>
+      <if test="dSearchTime != null" >
+        #{dSearchTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+    update t_search_record
+    <set >
+      <if test="cUserId != null" >
+        c_user_id = #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserName != null" >
+        c_user_name = #{cUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="cClientIp != null" >
+        c_client_ip = #{cClientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="cSearchText != null" >
+        c_search_text = #{cSearchText,jdbcType=VARCHAR},
+      </if>
+      <if test="nValidSearch != null" >
+        n_valid_search = #{nValidSearch,jdbcType=INTEGER},
+      </if>
+      <if test="nResultNum != null" >
+        n_result_num = #{nResultNum,jdbcType=INTEGER},
+      </if>
+      <if test="dSearchDate != null" >
+        d_search_date = #{dSearchDate,jdbcType=DATE},
+      </if>
+      <if test="dSearchTime != null" >
+        d_search_time = #{dSearchTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+    update t_search_record
+    set c_user_id = #{cUserId,jdbcType=VARCHAR},
+      c_user_name = #{cUserName,jdbcType=VARCHAR},
+      c_client_ip = #{cClientIp,jdbcType=VARCHAR},
+      c_search_text = #{cSearchText,jdbcType=VARCHAR},
+      n_valid_search = #{nValidSearch,jdbcType=INTEGER},
+      n_result_num = #{nResultNum,jdbcType=INTEGER},
+      d_search_date = #{dSearchDate,jdbcType=DATE},
+      d_search_time = #{dSearchTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

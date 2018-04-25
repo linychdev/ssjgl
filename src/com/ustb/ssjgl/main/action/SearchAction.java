@@ -23,10 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
+import com.ustb.ssjgl.login.dao.bean.TUser;
+import com.ustb.ssjgl.login.service.ISessionService;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 import com.ustb.ssjgl.main.service.impl.FtpService;
+import com.ustb.ssjgl.visitlog.annotation.VisitLog;
+import com.ustb.ssjgl.visitlog.annotation.VisitLogType;
 
 /**
  * SearchAction
@@ -48,9 +52,17 @@ public class SearchAction extends AbstractAction{
     @Autowired
     private FtpService ftpService;
     
+    @Autowired
+    private ISessionService sessionService;
+    
+    @VisitLog(VisitLogType.SEARCH)
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
         List<InteratomicPotentials> interPoten = interPotenService.getInterPotenListByTag(tag);
+        
+        TUser user = sessionService.getCurrentUser();
+        
+        System.out.println(user.getcName());
         
         ModelAndView mode = new ModelAndView();
         mode.setViewName("elementCombList");

@@ -36,5 +36,15 @@ public class SsjglContants {
      * 标签连接符
      */
     public static final String TAG_JOINT = "-";
+    
+    /**
+     * 匿名账号
+     */
+    public static final String SSJGL_ANONYMOUS = "ssjglAnonymous";
+
+    /**
+     * 超级管理员账号
+     */
+    public static final String SSJGL_ADMIN = "admin";
 
 }

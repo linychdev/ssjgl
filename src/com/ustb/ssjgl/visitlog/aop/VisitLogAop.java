@@ -78,6 +78,7 @@ public class VisitLogAop {
             VisitLog log = method.getAnnotation(VisitLog.class);
             VisitLogType businessType = log.value();
             LOG.info("客户端IP为:{},执行的操作为:{}", IPUtils.getBrowserIpAddress(request), businessType.getName());
+            info(pjp);
         } catch (Exception e) {
             LOG.error("获取执行方法信息出错！", e);
         }

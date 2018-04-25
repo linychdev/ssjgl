@@ -9,4 +9,5 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	<bean id = "ftpService" class="com.ustb.ssjgl.main.service.impl.FtpService"></bean>
 	<bean id = "interPotenService" class="com.ustb.ssjgl.main.service.impl.InterPotenServiceImpl"></bean>
 	<bean id = "potenFunctionService" class="com.ustb.ssjgl.main.service.impl.PotenFunctionServiceImpl"></bean>
+	<bean id = "sessionService" class="com.ustb.ssjgl.login.service.impl.SessionService"></bean>
 </beans>

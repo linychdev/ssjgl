@@ -48,6 +48,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <a class = "downLoad" href = "<%=basePath%>manage/downloadPotentialsFile?potentialsId=sdfasdasdf">下载</a>
 
-    <a class = "downLoad" href = "<%=basePath%>search/list/tag">列表</a>
+    <a class = "downLoad" href = "<%=basePath%>search/list/tag888">列表</a>
   </body>
 </html>

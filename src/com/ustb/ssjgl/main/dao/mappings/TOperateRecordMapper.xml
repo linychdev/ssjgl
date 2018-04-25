@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TOperateRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TOperateRecord" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_user_id" property="cUserId" jdbcType="VARCHAR" />
+    <result column="c_user_name" property="cUserName" jdbcType="VARCHAR" />
+    <result column="c_client_ip" property="cClientIp" jdbcType="VARCHAR" />
+    <result column="n_operate_type" property="nOperateType" jdbcType="INTEGER" />
+    <result column="d_operate_date" property="dOperateDate" jdbcType="DATE" />
+    <result column="d_operate_time" property="dOperateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_user_id, c_user_name, c_client_ip, n_operate_type, d_operate_date, d_operate_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_operate_record
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_operate_record
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TOperateRecord" >
+    insert into t_operate_record (c_id, c_user_id, c_user_name, 
+      c_client_ip, n_operate_type, d_operate_date, 
+      d_operate_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, #{cUserName,jdbcType=VARCHAR}, 
+      #{cClientIp,jdbcType=VARCHAR}, #{nOperateType,jdbcType=INTEGER}, #{dOperateDate,jdbcType=DATE}, 
+      #{dOperateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TOperateRecord" >
+    insert into t_operate_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cUserId != null" >
+        c_user_id,
+      </if>
+      <if test="cUserName != null" >
+        c_user_name,
+      </if>
+      <if test="cClientIp != null" >
+        c_client_ip,
+      </if>
+      <if test="nOperateType != null" >
+        n_operate_type,
+      </if>
+      <if test="dOperateDate != null" >
+        d_operate_date,
+      </if>
+      <if test="dOperateTime != null" >
+        d_operate_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserId != null" >
+        #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserName != null" >
+        #{cUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="cClientIp != null" >
+        #{cClientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="nOperateType != null" >
+        #{nOperateType,jdbcType=INTEGER},
+      </if>
+      <if test="dOperateDate != null" >
+        #{dOperateDate,jdbcType=DATE},
+      </if>
+      <if test="dOperateTime != null" >
+        #{dOperateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TOperateRecord" >
+    update t_operate_record
+    <set >
+      <if test="cUserId != null" >
+        c_user_id = #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserName != null" >
+        c_user_name = #{cUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="cClientIp != null" >
+        c_client_ip = #{cClientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="nOperateType != null" >
+        n_operate_type = #{nOperateType,jdbcType=INTEGER},
+      </if>
+      <if test="dOperateDate != null" >
+        d_operate_date = #{dOperateDate,jdbcType=DATE},
+      </if>
+      <if test="dOperateTime != null" >
+        d_operate_time = #{dOperateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TOperateRecord" >
+    update t_operate_record
+    set c_user_id = #{cUserId,jdbcType=VARCHAR},
+      c_user_name = #{cUserName,jdbcType=VARCHAR},
+      c_client_ip = #{cClientIp,jdbcType=VARCHAR},
+      n_operate_type = #{nOperateType,jdbcType=INTEGER},
+      d_operate_date = #{dOperateDate,jdbcType=DATE},
+      d_operate_time = #{dOperateTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>
