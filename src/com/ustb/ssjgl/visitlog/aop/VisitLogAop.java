@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -59,12 +60,12 @@ public class VisitLogAop {
         request=  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
     }
-    @After("log()")
-    public void afterExec(JoinPoint joinPoint) {
+    @AfterReturning(pointcut="log()", returning="returnValue")
+    public void afterExec(JoinPoint joinPoint, Object returnValue) {
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method method = ms.getMethod();
         LOG.debug("标记为" + tag.get() + "的方法" + method.getName()
-                + "运行消耗" + (System.currentTimeMillis() - time.get()) + "ms");   
+                + "运行消耗" + (System.currentTimeMillis() - time.get()) + "ms" + "返回值为:" + returnValue);   
     }
     //在执行目标方法的过程中，会执行这个方法，可以在这里实现日志的记录
     @Around("log()")
