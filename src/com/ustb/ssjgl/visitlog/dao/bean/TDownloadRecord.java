@@ -1,30 +1,30 @@
-package com.ustb.ssjgl.main.dao.bean;
+package com.ustb.ssjgl.visitlog.dao.bean;
 
 import java.util.Date;
 
 public class TDownloadRecord {
-    /** Ö÷¼ü */
+    /** ä¸»é”® */
     private String cId;
 
-    /** ÓÃ»§id */
+    /** ç”¨æˆ·id */
     private String cUserId;
 
-    /** ÓÃ»§Ãû */
+    /** ç”¨æˆ·å */
     private String cUserName;
 
-    /** ¿Í»§¶Ëip */
+    /** å®¢æˆ·ç«¯ip */
     private String cClientIp;
 
-    /** ËÑË÷ÄÚÈİ */
+    /** æœç´¢å†…å®¹ */
     private String cDownloadFileId;
 
-    /** ÏÂÔØÎÄ¼şÃû */
+    /** ä¸‹è½½æ–‡ä»¶å */
     private String cDownloadFileName;
 
-    /** ÏÂÔØÈÕÆÚ */
+    /** ä¸‹è½½æ—¥æœŸ */
     private Date dDownloadDate;
 
-    /** ÏÂÔØÊ±¼ä */
+    /** ä¸‹è½½æ—¶é—´ */
     private Date dDownloadTime;
 
     public String getcId() {

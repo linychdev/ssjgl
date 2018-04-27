@@ -1,28 +1,28 @@
-package com.ustb.ssjgl.main.dao.bean;
+package com.ustb.ssjgl.visitlog.dao.bean;
 
 import java.util.Date;
 
-public class TOperateRecord {
-    /** Ö÷¼ü */
+public class TLoginRecord {
+    /** ä¸»é”® */
     private String cId;
 
-    /** ÓÃ»§id */
+    /** ç”¨æˆ·id */
     private String cUserId;
 
-    /** ÓÃ»§Ãû */
+    /** ç”¨æˆ·å */
     private String cUserName;
 
-    /** ¿Í»§¶Ëip */
+    /** å®¢æˆ·ç«¯ip */
     private String cClientIp;
 
-    /** ²Ù×÷ÀàĞÍ */
-    private Integer nOperateType;
+    /** ç™»å½•æ—¥æœŸ */
+    private Date dLoginDate;
 
-    /** ²Ù×÷ÈÕÆÚ */
-    private Date dOperateDate;
+    /** ç™»å½•æ—¶é—´ */
+    private Date dLoginTime;
 
-    /** ²Ù×÷Ê±¼ä */
-    private Date dOperateTime;
+    /** ç™»å‡ºæ—¶é—´ */
+    private Date dLogoutTime;
 
     public String getcId() {
         return cId;
@@ -56,27 +56,27 @@ public class TOperateRecord {
         this.cClientIp = cClientIp == null ? null : cClientIp.trim();
     }
 
-    public Integer getnOperateType() {
-        return nOperateType;
+    public Date getdLoginDate() {
+        return dLoginDate;
     }
 
-    public void setnOperateType(Integer nOperateType) {
-        this.nOperateType = nOperateType;
+    public void setdLoginDate(Date dLoginDate) {
+        this.dLoginDate = dLoginDate;
     }
 
-    public Date getdOperateDate() {
-        return dOperateDate;
+    public Date getdLoginTime() {
+        return dLoginTime;
     }
 
-    public void setdOperateDate(Date dOperateDate) {
-        this.dOperateDate = dOperateDate;
+    public void setdLoginTime(Date dLoginTime) {
+        this.dLoginTime = dLoginTime;
     }
 
-    public Date getdOperateTime() {
-        return dOperateTime;
+    public Date getdLogoutTime() {
+        return dLogoutTime;
     }
 
-    public void setdOperateTime(Date dOperateTime) {
-        this.dOperateTime = dOperateTime;
+    public void setdLogoutTime(Date dLogoutTime) {
+        this.dLogoutTime = dLogoutTime;
     }
 }

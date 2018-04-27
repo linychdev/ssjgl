@@ -1,13 +1,13 @@
-package com.ustb.ssjgl.main.dao.bean;
+package com.ustb.ssjgl.visitlog.dao.bean;
 
 public class TSearchElement {
-    /** Ö÷¼ü */
+    /** ä¸»é”® */
     private String cId;
 
-    /** ËÑË÷¼ÇÂ¼Ö÷¼ü */
+    /** æœç´¢è®°å½•ä¸»é”® */
     private String cSearchId;
 
-    /** ËÑË÷ÔªËØÖ÷¼ü */
+    /** æœç´¢å…ƒç´ ä¸»é”® */
     private String cElementId;
 
     public String getcId() {

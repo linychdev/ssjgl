@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TSearchRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+<mapper namespace="com.ustb.ssjgl.visitlog.dao.mappings.TSearchRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
     <result column="c_user_id" property="cUserId" jdbcType="VARCHAR" />
     <result column="c_user_name" property="cUserName" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
     delete from t_search_record
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+  <insert id="insert" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord" >
     insert into t_search_record (c_id, c_user_id, c_user_name, 
       c_client_ip, c_search_text, n_valid_search, 
       n_result_num, d_search_date, d_search_time
@@ -36,7 +36,7 @@
       #{nResultNum,jdbcType=INTEGER}, #{dSearchDate,jdbcType=DATE}, #{dSearchTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord" >
     insert into t_search_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="cId != null" >
@@ -97,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord" >
     update t_search_record
     <set >
       <if test="cUserId != null" >
@@ -127,7 +127,7 @@
     </set>
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TSearchRecord" >
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord" >
     update t_search_record
     set c_user_id = #{cUserId,jdbcType=VARCHAR},
       c_user_name = #{cUserName,jdbcType=VARCHAR},

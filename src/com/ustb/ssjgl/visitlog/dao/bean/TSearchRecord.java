@@ -1,33 +1,33 @@
-package com.ustb.ssjgl.main.dao.bean;
+package com.ustb.ssjgl.visitlog.dao.bean;
 
 import java.util.Date;
 
 public class TSearchRecord {
-    /** Ö÷¼ü */
+    /** ä¸»é”® */
     private String cId;
 
-    /** ÓÃ»§id */
+    /** ç”¨æˆ·id */
     private String cUserId;
 
-    /** ÓÃ»§Ãû */
+    /** ç”¨æˆ·å */
     private String cUserName;
 
-    /** ¿Í»§¶Ëip */
+    /** å®¢æˆ·ç«¯ip */
     private String cClientIp;
 
-    /** ËÑË÷ÄÚÈİ */
+    /** æœç´¢å†…å®¹ */
     private String cSearchText;
 
-    /** ÊÇ·ñÎªÓĞĞ§ËÑË÷ */
+    /** æ˜¯å¦ä¸ºæœ‰æ•ˆæœç´¢ */
     private Integer nValidSearch;
 
-    /** ·µ»ØÊı¾İÌõÊı */
+    /** è¿”å›æ•°æ®æ¡æ•° */
     private Integer nResultNum;
 
-    /** ËÑË÷ÈÕÆÚ */
+    /** æœç´¢æ—¥æœŸ */
     private Date dSearchDate;
 
-    /** ËÑË÷Ê±¼ä */
+    /** æœç´¢æ—¶é—´ */
     private Date dSearchTime;
 
     public String getcId() {

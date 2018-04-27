@@ -22,9 +22,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.ustb.ssjgl.common.utils.IPUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.UuidUtils;
-import com.ustb.ssjgl.service.IVisitLogService;
 import com.ustb.ssjgl.visitlog.annotation.VisitLog;
 import com.ustb.ssjgl.visitlog.annotation.VisitLogType;
+import com.ustb.ssjgl.visitlog.service.IVisitLogService;
 
 @Aspect
 @Component

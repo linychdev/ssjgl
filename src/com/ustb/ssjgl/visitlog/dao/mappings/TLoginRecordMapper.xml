@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TLoginRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TLoginRecord" >
+<mapper namespace="com.ustb.ssjgl.visitlog.dao.mappings.TLoginRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
     <result column="c_user_id" property="cUserId" jdbcType="VARCHAR" />
     <result column="c_user_name" property="cUserName" jdbcType="VARCHAR" />
@@ -23,7 +23,7 @@
     delete from t_login_record
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TLoginRecord" >
+  <insert id="insert" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord" >
     insert into t_login_record (c_id, c_user_id, c_user_name, 
       c_client_ip, d_login_date, d_login_time, 
       d_logout_time)
@@ -31,7 +31,7 @@
       #{cClientIp,jdbcType=VARCHAR}, #{dLoginDate,jdbcType=DATE}, #{dLoginTime,jdbcType=TIMESTAMP}, 
       #{dLogoutTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TLoginRecord" >
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord" >
     insert into t_login_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="cId != null" >
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TLoginRecord" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord" >
     update t_login_record
     <set >
       <if test="cUserId != null" >
@@ -104,7 +104,7 @@
     </set>
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TLoginRecord" >
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord" >
     update t_login_record
     set c_user_id = #{cUserId,jdbcType=VARCHAR},
       c_user_name = #{cUserName,jdbcType=VARCHAR},
