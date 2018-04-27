@@ -4,9 +4,15 @@ package com.ustb.ssjgl.visitlog.service.impl;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.ustb.ssjgl.visitlog.dao.IDownloadRecordDao;
+import com.ustb.ssjgl.visitlog.dao.ILoginRecordDao;
+import com.ustb.ssjgl.visitlog.dao.IOperateRecordDao;
+import com.ustb.ssjgl.visitlog.dao.ISearchElementDao;
+import com.ustb.ssjgl.visitlog.dao.ISearchRecordDao;
 import com.ustb.ssjgl.visitlog.dao.bean.TDownloadRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TOperateRecord;
@@ -17,17 +23,40 @@ import com.ustb.ssjgl.visitlog.service.IVisitLogService;
 @Service
 public class VisitLogService implements IVisitLogService {
     
-    ConcurrentLinkedQueue<TLoginRecord> loginQueue = new ConcurrentLinkedQueue<TLoginRecord>();
-    ConcurrentLinkedQueue<TSearchRecord> searchQueue = new ConcurrentLinkedQueue<TSearchRecord>();
-    ConcurrentLinkedQueue<TSearchElement> searchElementQueue = new ConcurrentLinkedQueue<TSearchElement>();
-    ConcurrentLinkedQueue<TOperateRecord> operateQueue = new ConcurrentLinkedQueue<TOperateRecord>();
-    ConcurrentLinkedQueue<TDownloadRecord> downloadQueue = new ConcurrentLinkedQueue<TDownloadRecord>();
+    private ConcurrentLinkedQueue<TLoginRecord> loginQueue = new ConcurrentLinkedQueue<TLoginRecord>();
+    private ConcurrentLinkedQueue<TSearchRecord> searchQueue = new ConcurrentLinkedQueue<TSearchRecord>();
+    private ConcurrentLinkedQueue<TSearchElement> searchElementQueue = new ConcurrentLinkedQueue<TSearchElement>();
+    private ConcurrentLinkedQueue<TOperateRecord> operateQueue = new ConcurrentLinkedQueue<TOperateRecord>();
+    private ConcurrentLinkedQueue<TDownloadRecord> downloadQueue = new ConcurrentLinkedQueue<TDownloadRecord>();
     
-//    private 
+    @Autowired
+    private IDownloadRecordDao downloadRecordDao;
+    
+    @Autowired
+    private ILoginRecordDao loginRecordDao;
+    
+    @Autowired
+    private IOperateRecordDao operateRecordDao;
+    
+    @Autowired
+    private ISearchElementDao searchElementDao;
+    
+    @Autowired
+    private ISearchRecordDao searchRecordDao;
     
     @Override
     public void flushLogToDb() {
-        // TODO Auto-generated method stub
+        List<TLoginRecord> loginRecordList = pollQueueElements(TLoginRecord.class);
+        List<TSearchRecord> searchRecordList = pollQueueElements(TSearchRecord.class);
+        List<TSearchElement> searchElementList = pollQueueElements(TSearchElement.class);
+        List<TOperateRecord> operateRecordList = pollQueueElements(TOperateRecord.class);
+        List<TDownloadRecord> downLoadRecordList = pollQueueElements(TDownloadRecord.class);
+        
+        loginRecordDao.batchInsert(loginRecordList);
+        searchRecordDao.batchInsert(searchRecordList);
+        searchElementDao.batchInsert(searchElementList);
+        operateRecordDao.batchInsert(operateRecordList);
+        downloadRecordDao.batchInsert(downLoadRecordList);
         
     }
 
@@ -57,7 +86,7 @@ public class VisitLogService implements IVisitLogService {
     
     
     @SuppressWarnings("unchecked")
-    public <T> List<T> pollQueueElements(Class<T> element) {
+    private <T> List<T> pollQueueElements(Class<T> element) {
         List<T> list = Lists.newArrayList();
         if (TLoginRecord.class.isAssignableFrom(element)) {
             while (!loginQueue.isEmpty()) {
