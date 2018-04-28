@@ -2,6 +2,9 @@ package com.ustb.ssjgl.visitlog.dao.bean;
 
 import java.util.Date;
 
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
+
 public class TSearchRecord {
     /** 主键 */
     private String cId;
@@ -29,6 +32,24 @@ public class TSearchRecord {
 
     /** 搜索时间 */
     private Date dSearchTime;
+
+    
+    
+    
+    public TSearchRecord() {
+        super();
+        this.cId = UuidUtils.getUuid();
+    }
+    
+    public TSearchRecord(String cUserId, String cUserName, String cClientIp) {
+        super();
+        this.cId = UuidUtils.getUuid();
+        this.cUserId = cUserId;
+        this.cUserName = cUserName;
+        this.cClientIp = cClientIp;
+        this.dSearchDate = DateUtils.getCurrentDate();
+        this.dSearchTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;

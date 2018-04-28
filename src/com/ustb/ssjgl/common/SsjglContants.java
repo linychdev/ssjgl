@@ -2,6 +2,11 @@ package com.ustb.ssjgl.common;
 
 public class SsjglContants {
 
+    
+    private SsjglContants() {
+        throw new IllegalStateException("Utility class");
+      }
+    
     /**
      * 用户模块_不锁定用户
      */
@@ -46,5 +51,30 @@ public class SsjglContants {
      * 超级管理员账号
      */
     public static final String SSJGL_ADMIN = "admin";
+
+    /**
+     * 访问类型_登录
+     */
+    public static final Integer VISIT_TYPE_LOGIN = 1;
+
+    /**
+     * 访问类型_登出
+     */
+    public static final Integer VISIT_TYPE_LOGOUT = 2;
+
+    /**
+     * 访问类型_搜索
+     */
+    public static final Integer VISIT_TYPE_SEARCH = 3;
+
+    /**
+     * 访问类型_浏览
+     */
+    public static final Integer VISIT_TYPE_BROWSE = 4;
+
+    /**
+     * 访问类型_下载
+     */
+    public static final Integer VISIT_TYPE_DOWNLOAD = 5;
 
 }

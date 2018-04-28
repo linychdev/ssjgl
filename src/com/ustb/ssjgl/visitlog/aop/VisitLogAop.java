@@ -1,12 +1,13 @@
 package com.ustb.ssjgl.visitlog.aop;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -19,12 +20,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.IPUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.UuidUtils;
+import com.ustb.ssjgl.login.dao.bean.TUser;
+import com.ustb.ssjgl.login.service.ISessionService;
+import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
+import com.ustb.ssjgl.main.dao.bean.TElement;
+import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.visitlog.annotation.VisitLog;
 import com.ustb.ssjgl.visitlog.annotation.VisitLogType;
+import com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord;
+import com.ustb.ssjgl.visitlog.dao.bean.TOperateRecord;
+import com.ustb.ssjgl.visitlog.dao.bean.TSearchElement;
+import com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord;
 import com.ustb.ssjgl.visitlog.service.IVisitLogService;
 
 @Aspect
@@ -35,12 +47,15 @@ public class VisitLogAop {
     @Autowired
     IVisitLogService visitLogService;
 
+    @Autowired
+    ISessionService sessionService;
+    
     HttpServletRequest request = null;
 
-    ThreadLocal<Long> time = new ThreadLocal<Long>();
-
-    //用于生成操作日志的唯一标识，用于业务流程审计日志调用
-    public static ThreadLocal<String> tag = new ThreadLocal<String>();
+//    ThreadLocal<Long> time = new ThreadLocal<Long>();
+//
+//    //用于生成操作日志的唯一标识，用于业务流程审计日志调用
+//    public static ThreadLocal<String> tag = new ThreadLocal<String>();
 
     //声明AOP切入点，凡是使用了VisitLog的方法均被拦截
     @Pointcut("@annotation(com.ustb.ssjgl.visitlog.annotation.VisitLog)")
@@ -54,18 +69,76 @@ public class VisitLogAop {
      */
     @Before("log()")
     public void beforeExec(JoinPoint joinPoint) {
-        time.set(System.currentTimeMillis());   
-        //设置日志记录的唯一标识号
-        tag.set(UuidUtils.getUuid());
-        request=  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-
+        request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        TUser user = sessionService.getCurrentUser();
+        MethodSignature ms = (MethodSignature) joinPoint.getSignature();
+        Method method = ms.getMethod();
+        VisitLog log = method.getAnnotation(VisitLog.class);
+        VisitLogType businessType = log.value();
+        if(user != null){
+            TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+            operateRecord.setnOperateType(businessType.getValue());
+            visitLogService.addQueueElement(operateRecord);
+        }
     }
     @AfterReturning(pointcut="log()", returning="returnValue")
     public void afterExec(JoinPoint joinPoint, Object returnValue) {
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method method = ms.getMethod();
-        LOG.debug("标记为" + tag.get() + "的方法" + method.getName()
-                + "运行消耗" + (System.currentTimeMillis() - time.get()) + "ms" + "返回值为:" + returnValue);   
+        LOG.debug("方法" + method.getName() + "返回值为:" + returnValue);
+        
+        VisitLog log = method.getAnnotation(VisitLog.class);
+        VisitLogType businessType = log.value();
+        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_LOGIN)){
+            TUser user = sessionService.getCurrentUser();
+            if(user != null){
+                TLoginRecord loginRecord = new TLoginRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+                visitLogService.addQueueElement(loginRecord);
+            }
+        }
+        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_BROWSE)){
+            TUser user = sessionService.getCurrentUser();
+            if(user != null){
+                TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+                operateRecord.setnOperateType(SsjglContants.VISIT_TYPE_BROWSE);
+                visitLogService.addQueueElement(operateRecord);
+            }
+        }
+
+        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH)){
+            TUser user = sessionService.getCurrentUser();
+            if(user != null){
+                TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+                operateRecord.setnOperateType(SsjglContants.VISIT_TYPE_SEARCH);
+                visitLogService.addQueueElement(operateRecord);
+                
+                Object[] orgs = joinPoint.getArgs();
+                String searchTag = (String) orgs[0];
+                ModelAndView mod = (ModelAndView) returnValue;
+                Integer validSearch = (Integer) mod.getModelMap().get("validSearch");
+                
+                List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
+                TSearchRecord searchRecord = new TSearchRecord(user.getcId(), user.getcLoginName(), IPUtils.getBrowserIpAddress(request));
+                searchRecord.setcSearchText(searchTag);
+                searchRecord.setnValidSearch(validSearch);
+                searchRecord.setnResultNum(combList.size());
+                visitLogService.addQueueElement(searchRecord);
+                
+                if(CollectionUtils.isNotEmpty(combList)){
+                    for (ElementCombShowInfo comb : combList) {
+                        List<TElement> elementList = comb.getElementList();
+                        for (TElement element : elementList) {
+                            TSearchElement searchElement = new TSearchElement(searchRecord.getcId());
+                            searchElement.setcElementId(element.getcId());
+                            visitLogService.addQueueElement(searchElement);
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        joinPoint.getArgs();
     }
     //在执行目标方法的过程中，会执行这个方法，可以在这里实现日志的记录
     @Around("log()")

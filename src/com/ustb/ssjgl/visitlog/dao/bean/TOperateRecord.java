@@ -2,6 +2,9 @@ package com.ustb.ssjgl.visitlog.dao.bean;
 
 import java.util.Date;
 
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
+
 public class TOperateRecord {
     /** 主键 */
     private String cId;
@@ -23,6 +26,24 @@ public class TOperateRecord {
 
     /** 操作时间 */
     private Date dOperateTime;
+
+    
+    
+    
+    public TOperateRecord() {
+        super();
+        this.cId = UuidUtils.getUuid();
+    }
+    
+    public TOperateRecord(String cUserId, String cUserName, String cClientIp) {
+        super();
+        this.cId = UuidUtils.getUuid();
+        this.cUserId = cUserId;
+        this.cUserName = cUserName;
+        this.cClientIp = cClientIp;
+        this.dOperateDate = DateUtils.getCurrentDate();
+        this.dOperateTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;

@@ -1,12 +1,15 @@
 package com.ustb.ssjgl.visitlog.annotation;
 
+import com.ustb.ssjgl.common.SsjglContants;
+
 
 public enum VisitLogType {
     
-    SEARCH("搜索",1),
-    BROWSE("浏览",2),
-    DOWNLOAD("下载",3),
-    ;
+    LOGIN("登录",SsjglContants.VISIT_TYPE_LOGIN),
+    LOGOUT("登出",SsjglContants.VISIT_TYPE_LOGOUT),
+    SEARCH("搜索",SsjglContants.VISIT_TYPE_SEARCH),
+    BROWSE("浏览",SsjglContants.VISIT_TYPE_BROWSE),
+    DOWNLOAD("下载",SsjglContants.VISIT_TYPE_DOWNLOAD);
     private final String name;
     private final Integer value;
     

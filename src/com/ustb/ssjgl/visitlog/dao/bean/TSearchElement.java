@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.visitlog.dao.bean;
 
+import com.ustb.ssjgl.common.utils.UuidUtils;
+
 public class TSearchElement {
     /** 主键 */
     private String cId;
@@ -9,6 +11,18 @@ public class TSearchElement {
 
     /** 搜索元素主键 */
     private String cElementId;
+
+    
+    public TSearchElement() {
+        super();
+        this.cId = UuidUtils.getUuid();
+    }
+
+    public TSearchElement(String cSearchId) {
+        super();
+        this.cId = UuidUtils.getUuid();
+        this.cSearchId = cSearchId;
+    }
 
     public String getcId() {
         return cId;

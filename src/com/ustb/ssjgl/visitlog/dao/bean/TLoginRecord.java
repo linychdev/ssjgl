@@ -2,6 +2,9 @@ package com.ustb.ssjgl.visitlog.dao.bean;
 
 import java.util.Date;
 
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
+
 public class TLoginRecord {
     /** 主键 */
     private String cId;
@@ -23,6 +26,21 @@ public class TLoginRecord {
 
     /** 登出时间 */
     private Date dLogoutTime;
+
+    public TLoginRecord() {
+        super();
+        this.cId = UuidUtils.getUuid();
+    }
+
+    public TLoginRecord(String cUserId, String cUserName, String cClientIp) {
+        super();
+        this.cId = UuidUtils.getUuid();
+        this.cUserId = cUserId;
+        this.cUserName = cUserName;
+        this.cClientIp = cClientIp;
+        this.dLoginDate = DateUtils.getCurrentDate();
+        this.dLoginTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;
