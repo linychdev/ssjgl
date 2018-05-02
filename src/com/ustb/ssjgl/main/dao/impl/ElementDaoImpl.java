@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.main.dao.impl;
 
+import java.util.List;
+
 import com.ustb.ssjgl.common.dao.AbstractDao;
 import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.bean.TElement;
@@ -19,14 +21,21 @@ public class ElementDaoImpl extends AbstractDao implements IElementDao {
     @Override
     public TElement getElementByName(String name) {
         String statement = mapperNamespace + ".selectElementByName";
-        TElement element = this.getSqlSession().selectOne(statement, name);
-        return element;
+        return this.getSqlSession().selectOne(statement, name);
     }
 
     @Override
     public TElement getElementBySymbol(String symbol) {
         String statement = mapperNamespace + ".selectElementBySymbol";
-        TElement element = this.getSqlSession().selectOne(statement, symbol);
-        return element;
+        return this.getSqlSession().selectOne(statement, symbol);
+    }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.dao.IElementDao#selectByCombId(java.lang.String)
+     */
+    @Override
+    public List<TElement> selectByCombId(String combId) {
+        String statement = mapperNamespace + ".selectByCombId";
+        return this.getSqlSession().selectList(statement, combId);
     }
 }

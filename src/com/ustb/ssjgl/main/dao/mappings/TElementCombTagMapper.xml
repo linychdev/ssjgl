@@ -104,5 +104,12 @@
       #{nValid,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
+  <select id="selectByCombId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element_comb_tag
+   where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+     and n_valid = 1 
+  </select>
   
 </mapper>

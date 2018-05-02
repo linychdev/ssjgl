@@ -24,4 +24,11 @@ public interface IElementCombDetailDao extends IAbstractDao{
      * @param combId
      */
     public void deleteDetailByCombId(String combId);
+
+    /**
+     * 根据组合id查询组合详情
+     * @param combId
+     * @return 
+     */
+    public List<TElementCombDetail> selectByCombId(String combId);
 }

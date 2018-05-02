@@ -104,4 +104,10 @@
     delete from t_element_comb_detail
     where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
   </delete>
+  <select id="selectByCombId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element_comb_detail
+    where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+  </select>
 </mapper>

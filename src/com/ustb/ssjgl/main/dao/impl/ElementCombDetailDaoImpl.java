@@ -30,4 +30,13 @@ public class ElementCombDetailDaoImpl extends AbstractDao implements IElementCom
         this.getSqlSession().delete(statement, combId);
     }
 
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.dao.IElementCombDetailDao#selectByCombId(java.lang.String)
+     */
+    @Override
+    public List<TElementCombDetail> selectByCombId(String combId) {
+        String statement = mapperNamespace + ".selectByCombId";
+        return this.getSqlSession().selectList(statement, combId);
+    }
+
 }

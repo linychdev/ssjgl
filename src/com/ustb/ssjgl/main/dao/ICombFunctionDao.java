@@ -44,4 +44,10 @@ public interface ICombFunctionDao extends IAbstractDao {
      * @return
      */
     public boolean isFunctionUsed(String functionId);
+
+    /**
+     * @param combId
+     * @return
+     */
+    public List<TCombFunction> selectByCombId(String combId);
 }

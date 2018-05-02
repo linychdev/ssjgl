@@ -83,21 +83,18 @@ public class CombParamDaoImpl extends AbstractDao implements ICombParamDao {
     public boolean isParamUsed(String paramId) {
         String statement = mapperNamespace + ".selectByParamId";
         List<TCombParam> list = this.getSqlSession().selectList(statement, paramId);
-        if(CollectionUtils.isEmpty(list)){
-            return false;
-        }
-        return true;
+        return CollectionUtils.isNotEmpty(list);
     }
 
     /** (non-Javadoc)
      * @see com.ustb.ssjgl.main.dao.ICombParamDao#selectByCombIdAndFunId(java.lang.String, java.lang.String)
      */
     @Override
-    public void selectByCombIdAndFunId(String combId, String funId) {
+    public List<TCombParam> selectByCombIdAndFunId(String combId, String funId) {
         String statement = mapperNamespace + ".selectByCombIdAndFunId";
         Map<String, String> map = Maps.newHashMap();
         map.put("cElementCombId", combId);
         map.put("cPotentialsFunctionId", funId);
-        this.getSqlSession().selectList(statement, map);
+        return this.getSqlSession().selectList(statement, map);
     }
 }

@@ -9,8 +9,6 @@ import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.common.utils.SpringBeanUtils;
 import com.ustb.ssjgl.main.dao.IElementDao;
-import com.ustb.ssjgl.main.dao.bean.TCombFunction;
-import com.ustb.ssjgl.main.dao.bean.TCombParam;
 import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
@@ -31,9 +29,7 @@ public class InteratomicPotentials {
 
     private List<TElementCombTag> elementCombTags = Lists.newArrayList();
 
-    private List<TCombFunction> combFunctions = Lists.newArrayList();
-
-    private List<TCombParam> combParams = Lists.newArrayList();
+    private List<CombFunParamInfo> combFunParamInfos;
 
     private TPotentialsFile ptentialsFile;
 
@@ -168,35 +164,7 @@ public class InteratomicPotentials {
     public void setElementCombTags(List<TElementCombTag> elementCombTags) {
         this.elementCombTags = elementCombTags;
     }
-
-    /**
-     * @return the combFunctions
-     */
-    public List<TCombFunction> getCombFunctions() {
-        return combFunctions;
-    }
-
-    /**
-     * @param combFunctions the combFunctions to set
-     */
-    public void setCombFunctions(List<TCombFunction> combFunctions) {
-        this.combFunctions = combFunctions;
-    }
-
-    /**
-     * @return the combParams
-     */
-    public List<TCombParam> getCombParams() {
-        return combParams;
-    }
-
-    /**
-     * @param combParams the combParams to set
-     */
-    public void setCombParams(List<TCombParam> combParams) {
-        this.combParams = combParams;
-    }
-
+    
     /**
      * @return the ptentialsFile
      */
@@ -209,5 +177,17 @@ public class InteratomicPotentials {
      */
     public void setPtentialsFile(TPotentialsFile ptentialsFile) {
         this.ptentialsFile = ptentialsFile;
+    }
+    /**
+     * @return the combFunParamInfos
+     */
+    public List<CombFunParamInfo> getCombFunParamInfos() {
+        return combFunParamInfos;
+    }
+    /**
+     * @param combFunParamInfos the combFunParamInfos to set
+     */
+    public void setCombFunParamInfos(List<CombFunParamInfo> combFunParamInfos) {
+        this.combFunParamInfos = combFunParamInfos;
     }
 }

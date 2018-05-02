@@ -224,4 +224,26 @@
     from t_element
     where c_symbol = #{cSymbol,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByCombId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+	    element.c_id, 
+		element.c_elment_name, 
+		element.c_symbol, 
+		element.c_electron_configuration, 
+		element.n_electronegativity, 
+		element.n_atomic_number, 
+		element.n_relative_atomic_mass, 
+		element.n_melting_point, 
+		element.n_boiling_point, 
+		element.c_crystal_structure, 
+		element.n_inization_energy, 
+		element.n_radius, 
+		element.n_cycle, 
+		element.n_race, 
+		element.d_time
+    from t_element element, t_element_comb_detail detail
+   where detail.c_element_id = element.c_id
+     and detail.c_element_comb_id = #{combId,jdbcType=VARCHAR}
+  </select>
 </mapper>

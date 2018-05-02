@@ -23,4 +23,11 @@ public interface IElementCombTagDao extends IAbstractDao {
      * 根据组合id删除标签
      */
     public void deleteTagByCombId(String combId);
+
+    /**
+     * 根据组合id查询标签列表
+     * @param combId
+     * @return
+     */
+    public List<TElementCombTag> selectByCombId(String combId);
 }

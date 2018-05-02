@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
+import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 
 /**
@@ -60,8 +61,15 @@ public interface IInterPotenService {
 
     /**
      * 根据标签获取势数据信息
+     * @param combId
+     * @return
+     */
+    public InteratomicPotentials getInterPotenByCombId(String combId);
+
+    /**
+     * 根据标签获取势数据信息
      * @param tag
      * @return
      */
-    public List<InteratomicPotentials> getInterPotenListByTag(String tag);
+    public List<ElementCombShowInfo> getElementCombShowInfoListByTag(String tag);
 }

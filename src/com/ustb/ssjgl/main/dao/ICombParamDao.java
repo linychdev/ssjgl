@@ -43,7 +43,7 @@ public interface ICombParamDao extends IAbstractDao {
      * @param combId
      * @param funId
      */
-    public void selectByCombIdAndFunId(String combId, String funId);
+    public List<TCombParam> selectByCombIdAndFunId(String combId, String funId);
 
     /**
      * 判断参数是否被引用

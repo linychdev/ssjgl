@@ -23,9 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
-import com.ustb.ssjgl.login.dao.bean.TUser;
 import com.ustb.ssjgl.login.service.ISessionService;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
+import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 import com.ustb.ssjgl.main.service.impl.FtpService;
@@ -58,15 +58,24 @@ public class SearchAction extends AbstractAction{
     @VisitLog(VisitLogType.SEARCH)
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
-        List<InteratomicPotentials> interPoten = interPotenService.getInterPotenListByTag(tag);
-        
-        TUser user = sessionService.getCurrentUser();
-        
-        System.out.println(user.getcName());
-        
+        List<ElementCombShowInfo> combList = interPotenService.getElementCombShowInfoListByTag(tag);
         ModelAndView mode = new ModelAndView();
         mode.setViewName("elementCombList");
         mode.addObject("msg", "hello kitty");
+        mode.addObject("validSearch", 1);
+        mode.addObject("combList", combList);
+        return mode;
+    }  
+
+    @RequestMapping(value = "/search/detail/{combId}", method=RequestMethod.GET)
+    public ModelAndView getElementCombDetail(@PathVariable(value = "combId") String combId) {
+        //TODO 根据页面请求方式返回
+        InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(combId);
+        ModelAndView mode = new ModelAndView();
+        mode.setViewName("aaa");
+        mode.addObject("msg", "hello kitty");
+        mode.addObject("validSearch", 1);
+        mode.addObject("interPoten", interPoten);
         return mode;
     }  
     

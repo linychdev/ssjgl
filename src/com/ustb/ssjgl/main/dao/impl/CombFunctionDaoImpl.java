@@ -87,4 +87,13 @@ public class CombFunctionDaoImpl extends AbstractDao implements ICombFunctionDao
         }
         return true;
     }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.dao.ICombFunctionDao#selectByCombId(java.lang.String)
+     */
+    @Override
+    public List<TCombFunction> selectByCombId(String combId) {
+        String statement = mapperNamespace + ".selectByCombId";
+        return this.getSqlSession().selectList(statement, combId);
+    }
 }

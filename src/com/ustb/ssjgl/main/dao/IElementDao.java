@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.main.dao;
 
+import java.util.List;
+
 import com.ustb.ssjgl.common.dao.IAbstractDao;
 import com.ustb.ssjgl.main.dao.bean.TElement;
 
@@ -24,5 +26,11 @@ public interface IElementDao extends IAbstractDao {
      * @return
      */
     public TElement getElementBySymbol(String symbol);
+
+    /**
+     * @param getcId
+     * @return
+     */
+    public List<TElement> selectByCombId(String getcId);
     
 }

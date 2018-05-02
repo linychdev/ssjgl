@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
+import com.ustb.ssjgl.main.bean.CombFunParamInfo;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.ICombFunctionDao;
@@ -14,6 +16,12 @@ import com.ustb.ssjgl.main.dao.IElementCombDetailDao;
 import com.ustb.ssjgl.main.dao.IElementCombTagDao;
 import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFileDao;
+import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
+import com.ustb.ssjgl.main.dao.bean.TCombFunction;
+import com.ustb.ssjgl.main.dao.bean.TCombParam;
+import com.ustb.ssjgl.main.dao.bean.TElement;
+import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
+import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.service.IInterPotenService;
@@ -120,21 +128,49 @@ public class InterPotenServiceImpl implements IInterPotenService {
 
     /**
      * (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IInterPotenService#getInterPotenListByTag(java.lang.String)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#getInterPotenListByCombId(java.lang.String)
      */
     @Override
-    public List<InteratomicPotentials> getInterPotenListByTag(String tag) {
-        //TODO 完善展示列表对象
-        List<TElementCombination> elements = elementCombDao.getElementCombsByTag(tag);
-        for (TElementCombination elementComb : elements) {
-//            elementDao.
-            
-            
-            
-            InteratomicPotentials interPoten = new InteratomicPotentials();
-            interPoten.setElementComb(elementComb);
-//            interPoten.set
+    public InteratomicPotentials getInterPotenByCombId(String id) {
+        TElementCombination elementComb = elementCombDao.selectByPrimaryKey(TElementCombination.class, id);
+        List<TElementCombDetail> combDetails = elementCombDetailDao.selectByCombId(elementComb.getcId());
+        TPotentialsFile ptentialsFile = potentialsFileDao.selectByCombId(elementComb.getcId());
+        List<TElementCombTag> elementCombTags = elementCombTagDao.selectByCombId(elementComb.getcId());
+        List<TCombFunction> combFunctions = combFunctionDao.selectByCombId(elementComb.getcId());
+        
+        List<CombFunParamInfo> combFunParamInfos = Lists.newArrayList();
+        for (TCombFunction combFunction : combFunctions) {
+            CombFunParamInfo combFunParamInfo = new CombFunParamInfo();
+            List<TCombParam> combParams = Lists.newArrayList();
+            combParams.addAll(combParamDao.selectByCombIdAndFunId(elementComb.getcId(), combFunction.getcId()));
+            combFunParamInfo.setCombFunction(combFunction);
+            combFunParamInfo.setCombParams(combParams);
+            combFunParamInfos.add(combFunParamInfo);
         }
-        return null;
+        
+        InteratomicPotentials interPoten = new InteratomicPotentials();
+        interPoten.setElementComb(elementComb);
+        interPoten.setElementCombDetails(combDetails);
+        interPoten.setPtentialsFile(ptentialsFile);
+        interPoten.setElementCombTags(elementCombTags);
+        interPoten.setCombFunParamInfos(combFunParamInfos);
+        return interPoten;
+    }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#getElementCombShowInfoListByTag(java.lang.String)
+     */
+    @Override
+    public List<ElementCombShowInfo> getElementCombShowInfoListByTag(String tag) {
+        List<ElementCombShowInfo> elementCombShowInfos = Lists.newArrayList();
+        List<TElementCombination> elementCombs = elementCombDao.getElementCombsByTag(tag);
+        for (TElementCombination elementComb : elementCombs) {
+            ElementCombShowInfo elementCombShowInfo = new ElementCombShowInfo();
+            List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
+            elementCombShowInfo.setElementComb(elementComb);
+            elementCombShowInfo.setElementList(elementList);
+            elementCombShowInfos.add(elementCombShowInfo);
+        }
+        return elementCombShowInfos;
     }
 }

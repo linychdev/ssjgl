@@ -94,4 +94,11 @@
     from t_comb_function
     where c_potentials_function_id = #{cPotentialsFunctionId,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByCombId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_comb_function
+    where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+  </select>
 </mapper>
