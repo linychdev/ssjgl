@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+  
+    <bean id="flushVisitLog"
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="visitLogService"></property>
+        <property name="targetMethod" value="flushLogToDb"></property>
+        <property name="concurrent" value="false"></property>
+    </bean>
+  
+    <bean id="flushVisitLogTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="flushLog" ref="flushVisitLog"></property>
+        <property name="cronExpression" value="0 0/1 * * * ?"></property>
+    </bean>
+  
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="flushVisitLogTrigger" />
+            </list>
+        </property>
+    </bean>
+</beans>

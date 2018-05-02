@@ -7,11 +7,15 @@ import com.ustb.ssjgl.visitlog.dao.IDownloadRecordDao;
 import com.ustb.ssjgl.visitlog.dao.bean.TDownloadRecord;
 
 public class DownloadRecordDaoImpl extends AbstractDao implements IDownloadRecordDao {
+    private String mapperNamespace = "com.ustb.ssjgl.visitlog.dao.mappings.TDownloadRecordMapper";
+    {
+        super.mapperNamespace = "com.ustb.ssjgl.visitlog.dao.mappings.";
+    }
 
     @Override
     public void batchInsert(List<TDownloadRecord> downLoadRecordList) {
-        // TODO Auto-generated method stub
+        String statement = mapperNamespace + ".batchInsert";
+        this.getSqlSession().insert(statement, downLoadRecordList);
 
     }
-
 }

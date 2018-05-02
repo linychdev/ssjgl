@@ -25,14 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.IPUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
-import com.ustb.ssjgl.common.utils.UuidUtils;
 import com.ustb.ssjgl.login.dao.bean.TUser;
 import com.ustb.ssjgl.login.service.ISessionService;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
 import com.ustb.ssjgl.main.dao.bean.TElement;
-import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.visitlog.annotation.VisitLog;
 import com.ustb.ssjgl.visitlog.annotation.VisitLogType;
+import com.ustb.ssjgl.visitlog.dao.bean.TDownloadRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TOperateRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TSearchElement;
@@ -52,11 +51,6 @@ public class VisitLogAop {
     
     HttpServletRequest request = null;
 
-//    ThreadLocal<Long> time = new ThreadLocal<Long>();
-//
-//    //用于生成操作日志的唯一标识，用于业务流程审计日志调用
-//    public static ThreadLocal<String> tag = new ThreadLocal<String>();
-
     //声明AOP切入点，凡是使用了VisitLog的方法均被拦截
     @Pointcut("@annotation(com.ustb.ssjgl.visitlog.annotation.VisitLog)")
     public void log() {
@@ -74,8 +68,8 @@ public class VisitLogAop {
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method method = ms.getMethod();
         VisitLog log = method.getAnnotation(VisitLog.class);
-        VisitLogType businessType = log.value();
         if(user != null){
+            VisitLogType businessType = log.value();
             TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
             operateRecord.setnOperateType(businessType.getValue());
             visitLogService.addQueueElement(operateRecord);
@@ -85,26 +79,34 @@ public class VisitLogAop {
     public void afterExec(JoinPoint joinPoint, Object returnValue) {
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method method = ms.getMethod();
-        LOG.debug("方法" + method.getName() + "返回值为:" + returnValue);
+        LOG.debug("方法:{}的返回值为:{}", method.getName(), returnValue);
         
         VisitLog log = method.getAnnotation(VisitLog.class);
         VisitLogType businessType = log.value();
-        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_LOGIN)){
-            TUser user = sessionService.getCurrentUser();
-            if(user != null){
-                TLoginRecord loginRecord = new TLoginRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
-                visitLogService.addQueueElement(loginRecord);
-            }
-        }
-        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_BROWSE)){
-            TUser user = sessionService.getCurrentUser();
-            if(user != null){
-                TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
-                operateRecord.setnOperateType(SsjglContants.VISIT_TYPE_BROWSE);
-                visitLogService.addQueueElement(operateRecord);
-            }
-        }
+        
+        addLoginRecord(businessType);
+        
+        addBrowseRecord(businessType);
 
+        addSearchRecord(joinPoint, returnValue, businessType);
+        
+        addDownloadRecord(joinPoint, businessType);
+    }
+
+    private void addDownloadRecord(JoinPoint joinPoint, VisitLogType businessType) {
+        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_DOWNLOAD)){
+            TUser user = sessionService.getCurrentUser();
+            if(user != null){
+                TDownloadRecord downloadRecord = new TDownloadRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+                Object[] orgs = joinPoint.getArgs();
+                String potentialsId = (String) orgs[0];
+                downloadRecord.setcDownloadFileId(potentialsId);
+                visitLogService.addQueueElement(downloadRecord);
+            }
+        }
+    }
+
+    private void addSearchRecord(JoinPoint joinPoint, Object returnValue, VisitLogType businessType) {
         if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH)){
             TUser user = sessionService.getCurrentUser();
             if(user != null){
@@ -124,35 +126,56 @@ public class VisitLogAop {
                 searchRecord.setnResultNum(combList.size());
                 visitLogService.addQueueElement(searchRecord);
                 
-                if(CollectionUtils.isNotEmpty(combList)){
-                    for (ElementCombShowInfo comb : combList) {
-                        List<TElement> elementList = comb.getElementList();
-                        for (TElement element : elementList) {
-                            TSearchElement searchElement = new TSearchElement(searchRecord.getcId());
-                            searchElement.setcElementId(element.getcId());
-                            visitLogService.addQueueElement(searchElement);
-                        }
-                    }
-                }
+                addSearchElementRecord(combList, searchRecord);
                 
             }
         }
-        
-        joinPoint.getArgs();
+    }
+
+    private void addSearchElementRecord(List<ElementCombShowInfo> combList, TSearchRecord searchRecord) {
+        if(CollectionUtils.isNotEmpty(combList)){
+            for (ElementCombShowInfo comb : combList) {
+                List<TElement> elementList = comb.getElementList();
+                for (TElement element : elementList) {
+                    TSearchElement searchElement = new TSearchElement(searchRecord.getcId());
+                    searchElement.setcElementId(element.getcId());
+                    visitLogService.addQueueElement(searchElement);
+                }
+            }
+        }
+    }
+
+    private void addBrowseRecord(VisitLogType businessType) {
+        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_BROWSE)){
+            TUser user = sessionService.getCurrentUser();
+            if(user != null){
+                TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+                operateRecord.setnOperateType(SsjglContants.VISIT_TYPE_BROWSE);
+                visitLogService.addQueueElement(operateRecord);
+            }
+        }
+    }
+
+    private void addLoginRecord(VisitLogType businessType) {
+        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_LOGIN)){
+            TUser user = sessionService.getCurrentUser();
+            if(user != null){
+                TLoginRecord loginRecord = new TLoginRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+                visitLogService.addQueueElement(loginRecord);
+            }
+        }
     }
     //在执行目标方法的过程中，会执行这个方法，可以在这里实现日志的记录
     @Around("log()")
     public Object aroundExec(ProceedingJoinPoint pjp) throws Throwable {
         Object ret = pjp.proceed();
         try {
-            Object[] orgs = pjp.getArgs();
             MethodSignature ms = (MethodSignature) pjp.getSignature();
             Method method = ms.getMethod();
             //获取注解的操作日志信息
             VisitLog log = method.getAnnotation(VisitLog.class);
             VisitLogType businessType = log.value();
-            LOG.info("客户端IP为:{},执行的操作为:{}", IPUtils.getBrowserIpAddress(request), businessType.getName());
-            info(pjp);
+            LOG.debug("客户端IP为:{},执行的操作为:{}", IPUtils.getBrowserIpAddress(request), businessType.getName());
         } catch (Exception e) {
             LOG.error("获取执行方法信息出错！", e);
         }

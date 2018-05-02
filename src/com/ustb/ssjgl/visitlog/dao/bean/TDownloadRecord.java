@@ -2,6 +2,9 @@ package com.ustb.ssjgl.visitlog.dao.bean;
 
 import java.util.Date;
 
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
+
 public class TDownloadRecord {
     /** 主键 */
     private String cId;
@@ -26,6 +29,26 @@ public class TDownloadRecord {
 
     /** 下载时间 */
     private Date dDownloadTime;
+
+    
+    
+    
+    public TDownloadRecord() {
+        super();
+        this.cId = UuidUtils.getUuid();
+        this.dDownloadDate = DateUtils.getCurrentDate();
+        this.dDownloadTime = DateUtils.getCurrentDate();
+    }
+    
+    public TDownloadRecord(String cUserId, String cUserName, String cClientIp) {
+        super();
+        this.cId = UuidUtils.getUuid();
+        this.cUserId = cUserId;
+        this.cUserName = cUserName;
+        this.cClientIp = cClientIp;
+        this.dDownloadDate = DateUtils.getCurrentDate();
+        this.dDownloadTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;

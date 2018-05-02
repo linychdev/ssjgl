@@ -114,4 +114,16 @@
       d_logout_time = #{dLogoutTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <insert id="batchInsert" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord" >
+    insert into t_login_record (c_id, c_user_id, c_user_name, 
+      c_client_ip, d_login_date, d_login_time, 
+      d_logout_time)
+    values 
+     <foreach collection ="list" item="loginRecordList" separator =",">
+     (#{cId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, #{cUserName,jdbcType=VARCHAR}, 
+      #{cClientIp,jdbcType=VARCHAR}, #{dLoginDate,jdbcType=DATE}, #{dLoginTime,jdbcType=TIMESTAMP}, 
+      #{dLogoutTime,jdbcType=TIMESTAMP})
+      </foreach>
+  </insert>
 </mapper>

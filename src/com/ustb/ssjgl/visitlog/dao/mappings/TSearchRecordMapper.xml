@@ -139,4 +139,17 @@
       d_search_time = #{dSearchTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  <insert id="batchInsert" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord" >
+    insert into t_search_record (c_id, c_user_id, c_user_name, 
+      c_client_ip, c_search_text, n_valid_search, 
+      n_result_num, d_search_date, d_search_time
+      )
+    values 
+      <foreach collection ="list" item="searchRecordList" separator =",">
+     (#{cId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, #{cUserName,jdbcType=VARCHAR}, 
+      #{cClientIp,jdbcType=VARCHAR}, #{cSearchText,jdbcType=VARCHAR}, #{nValidSearch,jdbcType=INTEGER}, 
+      #{nResultNum,jdbcType=INTEGER}, #{dSearchDate,jdbcType=DATE}, #{dSearchTime,jdbcType=TIMESTAMP}
+      )
+      </foreach>
+  </insert>
 </mapper>

@@ -4,10 +4,12 @@ package com.ustb.ssjgl.visitlog.service.impl;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.visitlog.dao.IDownloadRecordDao;
 import com.ustb.ssjgl.visitlog.dao.ILoginRecordDao;
 import com.ustb.ssjgl.visitlog.dao.IOperateRecordDao;
@@ -22,6 +24,8 @@ import com.ustb.ssjgl.visitlog.service.IVisitLogService;
 
 @Service
 public class VisitLogService implements IVisitLogService {
+    
+    private static final Logger LOG = LogUtils.getLogger();
     
     private ConcurrentLinkedQueue<TLoginRecord> loginQueue = new ConcurrentLinkedQueue<TLoginRecord>();
     private ConcurrentLinkedQueue<TSearchRecord> searchQueue = new ConcurrentLinkedQueue<TSearchRecord>();
@@ -46,18 +50,22 @@ public class VisitLogService implements IVisitLogService {
     
     @Override
     public void flushLogToDb() {
-        List<TLoginRecord> loginRecordList = pollQueueElements(TLoginRecord.class);
-        List<TSearchRecord> searchRecordList = pollQueueElements(TSearchRecord.class);
-        List<TSearchElement> searchElementList = pollQueueElements(TSearchElement.class);
-        List<TOperateRecord> operateRecordList = pollQueueElements(TOperateRecord.class);
-        List<TDownloadRecord> downLoadRecordList = pollQueueElements(TDownloadRecord.class);
-        
-        loginRecordDao.batchInsert(loginRecordList);
-        searchRecordDao.batchInsert(searchRecordList);
-        searchElementDao.batchInsert(searchElementList);
-        operateRecordDao.batchInsert(operateRecordList);
-        downloadRecordDao.batchInsert(downLoadRecordList);
-        
+        try {
+            List<TLoginRecord> loginRecordList = pollQueueElements(TLoginRecord.class);
+            List<TSearchRecord> searchRecordList = pollQueueElements(TSearchRecord.class);
+            List<TSearchElement> searchElementList = pollQueueElements(TSearchElement.class);
+            List<TOperateRecord> operateRecordList = pollQueueElements(TOperateRecord.class);
+            List<TDownloadRecord> downLoadRecordList = pollQueueElements(TDownloadRecord.class);
+
+            loginRecordDao.batchInsert(loginRecordList);
+            searchRecordDao.batchInsert(searchRecordList);
+            searchElementDao.batchInsert(searchElementList);
+            operateRecordDao.batchInsert(operateRecordList);
+            downloadRecordDao.batchInsert(downLoadRecordList);
+        } catch (Exception e) {
+            LOG.warn("将队列中的访问信息写入数据库时出错！", e);
+        }
+
     }
 
     /** (non-Javadoc)

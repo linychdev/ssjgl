@@ -7,11 +7,14 @@ import com.ustb.ssjgl.visitlog.dao.IOperateRecordDao;
 import com.ustb.ssjgl.visitlog.dao.bean.TOperateRecord;
 
 public class OperateRecordDaoImpl extends AbstractDao implements IOperateRecordDao {
-
+    private String mapperNamespace = "com.ustb.ssjgl.visitlog.dao.mappings.TOperateRecordMapper";
+    {
+        super.mapperNamespace = "com.ustb.ssjgl.visitlog.dao.mappings.";
+    }
     @Override
     public void batchInsert(List<TOperateRecord> operateRecordList) {
-        // TODO Auto-generated method stub
-
+        String statement = mapperNamespace + ".batchInsert";
+        this.getSqlSession().insert(statement, operateRecordList);
     }
 
 }

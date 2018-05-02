@@ -7,11 +7,14 @@ import com.ustb.ssjgl.visitlog.dao.ISearchRecordDao;
 import com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord;
 
 public class SearchRecordDaoImpl extends AbstractDao implements ISearchRecordDao {
-
+    private String mapperNamespace = "com.ustb.ssjgl.visitlog.dao.mappings.TSearchRecordMapper";
+    {
+        super.mapperNamespace = "com.ustb.ssjgl.visitlog.dao.mappings.";
+    }
     @Override
     public void batchInsert(List<TSearchRecord> searchRecordList) {
-        // TODO Auto-generated method stub
-
+        String statement = mapperNamespace + ".batchInsert";
+        this.getSqlSession().insert(statement, searchRecordList);
     }
 
 }

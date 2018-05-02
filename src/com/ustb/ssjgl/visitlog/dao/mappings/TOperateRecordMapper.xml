@@ -114,4 +114,15 @@
       d_operate_time = #{dOperateTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  <insert id="batchInsert" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TOperateRecord" >
+    insert into t_operate_record (c_id, c_user_id, c_user_name, 
+      c_client_ip, n_operate_type, d_operate_date, 
+      d_operate_time)
+    values 
+     <foreach collection ="list" item="operateRecordList" separator =",">
+     (#{cId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, #{cUserName,jdbcType=VARCHAR}, 
+      #{cClientIp,jdbcType=VARCHAR}, #{nOperateType,jdbcType=INTEGER}, #{dOperateDate,jdbcType=DATE}, 
+      #{dOperateTime,jdbcType=TIMESTAMP})
+     </foreach>
+  </insert>
 </mapper>
