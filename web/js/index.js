@@ -26,10 +26,17 @@ $(function(){
 		"<div class = 'symbol-big'>"+$(this).find("div.symbol").text()+"</div>"+
 		"<div class = 'element-name-big'>"+$(this).find("div.element").text()+"</div>"+
 	    "</div>";
-	$(".show_element_detail").width(200);
-	$(".show_element_detail").height(200);
+	$(".show_element_detail").width(100);
+	$(".show_element_detail").height(103);
 	$(".show_element_detail").html(htmlstr);
+	
+	$(".show_element_detail").css("position", "absolute");
+    $(".show_element_detail").css("top", $(this).offset().top-$(this).height()*2-4);
+    $(".show_element_detail").css("left", $(this).offset().left+$(this).width()+2);
+//    if ($(".show_element_detail").css("display") == "none") {
+//        $(".show_element_detail").show("slow");
+//    } else {
+//        $(".show_element_detail").hide("slow");
+//    }
    });
-
-  
 });
