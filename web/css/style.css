@@ -1,0 +1,329 @@
+html, body{
+    /*font-size: 100%;*/
+    -webkit-text-size-adjust:none;
+	 background:#660099; 
+	/* background: -webkit-linear-gradient(left,rgba(255,180,0,0),rgba(255,180,0,1)); /* Safari 5.1 - 6 */ */
+  /* background: -o-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Opera 11.1 - 12*/ */
+  /* background: -moz-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Firefox 3.6 - 15*/ */
+  /* background: linear-gradient(to right, rgba(255,180,0,0),rgba(255,180,0,1)); /* 标准的语法 */ */
+	font-family: 'Raleway', sans-serif;
+}
+h1,h2,h3,h4,h5,h6,a{
+	margin:0;	
+	font-family: 'Ubuntu', sans-serif;
+}	
+p{
+	margin:0;
+}
+ul,label{
+	margin:0;
+	padding:0;
+}
+body a:hover{
+	text-decoration:none;
+}
+/*-- header --*/
+/*-- data-hover --*/
+/* Effect 14: border switch */
+.cl-effect-14 a {
+	padding:25px;
+	height: 70px;
+	line-height: 45px;
+}
+
+.cl-effect-14 a::before,
+.cl-effect-14 a::after {
+	position: absolute;
+	width: 70px;
+    height: 1px;
+	background:#B4646F;
+	content: '';
+	opacity: 0.2;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	pointer-events: none;
+}
+
+.cl-effect-14 a::before {
+	top: 0;
+	left: 0;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	transform-origin: 0 0;
+}
+
+.cl-effect-14 a::after {
+	right: 0;
+	bottom: 0;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transform-origin: 100% 0;
+	-moz-transform-origin: 100% 0;
+	transform-origin: 100% 0;
+}
+
+.cl-effect-14 a:hover::before,
+.cl-effect-14 a:hover::after,
+.cl-effect-14 a:focus::before,
+.cl-effect-14 a:focus::after,
+.cl-effect-14 a.active::before,
+.cl-effect-14 a.active::after {
+	opacity: 1;
+}
+
+.cl-effect-14 a:hover::before,
+.cl-effect-14 a:focus::before,.cl-effect-14 a.active::before {
+	left: 50%;
+	-webkit-transform: rotate(0deg) translateX(-50%);
+	-moz-transform: rotate(0deg) translateX(-50%);
+	transform: rotate(0deg) translateX(-50%);
+}
+
+.cl-effect-14 a:hover::after,
+.cl-effect-14 a:focus::after,.cl-effect-14 a.active::after{
+	right: 50%;
+	-webkit-transform: rotate(0deg) translateX(50%);
+	-moz-transform: rotate(0deg) translateX(50%);
+	transform: rotate(0deg) translateX(50%);
+}
+.copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
+/*-- //data-hover --*/
+.navbar-default .navbar-nav > li > a.active {
+    color:#00FFCC;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #00FFCC;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+	font-family: 'Raleway', sans-serif;
+}
+.navbar-brand{
+	font-size:2.5em;
+	color:#FFFFFF !important;
+	text-decoration:none;
+	height: 100px;
+    padding: 35px 0px;
+}
+
+.navbar-brand i{
+	font-size: 1em;
+    color:#EBEBEB;
+    left: -7px;
+    top: 0px;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
+}
+.navbar-default{
+	background:none !important;
+	border:none !important;
+}
+.navbar-nav {
+    float: right;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #999;
+    background:none;
+}
+.navbar-nav > li {
+    margin: 1em 0em 0 0;
+}
+.nav > li > a {
+    padding: 25px;
+    font-size: 14px;
+    position: relative;
+}
+.navbar {
+    margin-bottom: 0;
+}
+/*-- //header --*/
+/*-- banner --*/
+.banner{
+	 background:#000033; */
+	 /* background: -webkit-linear-gradient(left,rgba(139,0,139,0),rgba(130,0,139,1)); /* Safari 5.1 - 6 */  */
+     /* background: -o-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Opera 11.1 - 12*/  */
+     /* background: -moz-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Firefox 3.6 - 15*/  */
+     /* background: linear-gradient(to right, rgba(139,0,139,0),rgba(130,0,139,1)); /* 标准的语法 */  */
+	font-family: 'Raleway', sans-serif;
+	min-height:700px;
+	position:relative;
+}
+
+.search-form .search-wrapper {
+    position: relative;
+}
+
+.search-container {
+    width: 100%;
+    position: absolute;
+}
+
+.crystal{
+	font-size: 8px;
+	height:10px;
+}
+.elements {
+    /*box-shadow: 0px 0px 2px rgba(0,255,255,0.5);*/
+    border: 1px solid rgba(127,255,255,0.25); 
+    text-align: center;
+    cursor: default;
+	float:left;
+	width:50px;
+	height:50px;
+	margin-top:5px;
+	margin-left:5px;
+	color: #3399FF;
+	/* background: -webkit-linear-gradient(left,rgba(139,0,139,0),rgba(130,0,139,1)); /* Safari 5.1 - 6 */   */
+    /* background: -o-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Opera 11.1 - 12*/   */
+    /* background: -moz-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Firefox 3.6 - 15*/   */
+   /* background: linear-gradient(to right, rgba(139,0,139,0),rgba(130,0,139,1)); /* 标准的语法 */   */	
+}
+
+.elements .fontWhite{
+	color: #ffffff;
+}
+
+.elements .fontYellow{
+	color: #ffff33;
+}
+
+.elements .fontGreen{
+	color: #99ffcc;
+}
+
+.elements .fontPink{
+	color: #ff3399;
+}
+
+.atomic {
+    font-size: 75%;
+    line-height: 0;
+    float: right;
+    vertical-align: baseline;
+    margin-top: 6px;
+    margin-right: 2px;
+	}
+.symbol{
+    font-size: 16px;
+    font-weight: bold;
+    /* color: #3399FF; */
+    /* text-shadow: 0 0 2px rgba(0,255,255,0.95); */
+    height:30px;
+    line-height: 30px;
+}
+.element-name{
+	font-size: 8px;
+	height:10px;
+	margin-top: -6px;
+}
+.show-span{
+	display: none;
+}
+/* .elements {
+    box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
+    border: 1px solid rgba(127,255,255,0.25);
+    text-align: center;
+    cursor: default;
+	float:left;
+}
+.number {
+	position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 12px;
+    color: rgba(127,255,255,0.75);
+}
+.symbol{
+	position: absolute;
+    top: 40px;
+    left: 0px;
+    right: 0px;
+    font-size: 60px;
+    font-weight: bold;
+    color: rgba(255,255,255,0.75);
+    text-shadow: 0 0 10px rgba(0,255,255,0.95);
+}
+.details {
+	position: absolute;
+    bottom: 15px;
+    left: 0px;
+    right: 0px;
+    font-size: 12px;
+    color: rgba(127,255,255,0.75);
+} */
+
+/*-- footer --*/
+.footer {
+  padding: 4em 0;
+  background-color:#4D4D4D;
+}
+.footer-grid h3.title {
+    font-size: 1.8em;
+    color: #C9C9C9;
+	margin:0;
+}
+.footer-grid ul {
+  margin: 0;
+  padding: 2em 0 0;
+}
+.footer-grid ul li {
+    color: #818180;
+    font-size: 14px;
+    border-top: 1px dotted;
+    width: 75%;
+}
+.footer-grid ul li a {
+    font-size: 14px;
+    color: #8D8D8C;
+    text-decoration: none;
+    padding: 0.5em 0;
+    display: inline-block;
+	font-family: 'Raleway', sans-serif;
+}
+.footer-grid ul li:nth-child(5) {
+    border-bottom: 1px dotted;
+}
+.ctact-grid ul li:nth-child(4) {
+    border-bottom: 1px dotted;
+}
+.contact-grid ul li {
+    display: block;
+    margin: 0 0 10px;
+    border-top: none;
+}
+.footer-grid ul li a:hover {
+  color:#fff;
+}
+.contact-grid ul li span {
+  left: -15px;
+}
+.footer-grid ul li.adrs {
+    padding-left:1.1em;
+}
+.copy {
+  text-align: center;
+  background:#454545;
+  padding:1.5em 0;
+}
+.copy p {
+    color: #fff;
+    font-size: 14px;
+    margin: 0 0 1em;
+}
+.copy p a {
+  color:#55C3B6;
+  text-decoration:none;
+  font-family: 'Raleway', sans-serif;
+}
+.copy p a:hover{
+  color:#fff;
+  border-bottom:3px double #55C3B6;
+}
+/*-- //footer --*/
+/*-- blog --*/
