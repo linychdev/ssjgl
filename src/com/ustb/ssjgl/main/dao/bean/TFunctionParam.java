@@ -15,6 +15,9 @@ public class TFunctionParam {
 
     /** 参数名 */
     private String cName;
+    
+    /** 参数名的html串 */
+    private String cNameHtml;
 
     /** 参数单位 */
     private String cUnit;
@@ -62,6 +65,15 @@ public class TFunctionParam {
         this.cName = cName == null ? null : cName.trim();
     }
 
+    public String getcNameHtml() {
+        return cNameHtml;
+    }
+
+    public void setcNameHtml(String cNameHtml) {
+        this.cNameHtml = cNameHtml == null ? null : cNameHtml.trim();
+    }
+
+    
     public String getcUnit() {
         return cUnit;
     }

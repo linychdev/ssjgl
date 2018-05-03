@@ -5,6 +5,7 @@
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
     <result column="c_function_id" property="cFunctionId" jdbcType="VARCHAR" />
     <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_name_html" property="cNameHtml" jdbcType="VARCHAR" />
     <result column="c_unit" property="cUnit" jdbcType="VARCHAR" />
     <result column="c_description" property="cDescription" jdbcType="VARCHAR" />
     <result column="n_order" property="nOrder" jdbcType="INTEGER" />
@@ -12,7 +13,7 @@
     <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    c_id, c_function_id, c_name, c_unit, c_description, n_order, n_valid, d_time
+    c_id, c_function_id, c_name, c_name_html, c_unit, c_description, n_order, n_valid, d_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -25,10 +26,10 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TFunctionParam" >
-    insert into t_function_param (c_id, c_function_id, c_name, 
+    insert into t_function_param (c_id, c_function_id, c_name, c_name_html, 
       c_unit, c_description, n_order, 
       n_valid, d_time)
-    values (#{cId,jdbcType=VARCHAR}, #{cFunctionId,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, 
+    values (#{cId,jdbcType=VARCHAR}, #{cFunctionId,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, #{cNameHtml,jdbcType=VARCHAR},
       #{cUnit,jdbcType=VARCHAR}, #{cDescription,jdbcType=VARCHAR}, #{nOrder,jdbcType=INTEGER}, 
       #{nValid,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP})
   </insert>
@@ -43,6 +44,9 @@
       </if>
       <if test="cName != null" >
         c_name,
+      </if>
+      <if test="cNameHtml != null" >
+        c_name_html,
       </if>
       <if test="cUnit != null" >
         c_unit,
@@ -70,6 +74,9 @@
       <if test="cName != null" >
         #{cName,jdbcType=VARCHAR},
       </if>
+      <if test="cNameHtml != null" >
+        #{cNameHtml,jdbcType=VARCHAR},
+      </if>
       <if test="cUnit != null" >
         #{cUnit,jdbcType=VARCHAR},
       </if>
@@ -96,6 +103,9 @@
       <if test="cName != null" >
         c_name = #{cName,jdbcType=VARCHAR},
       </if>
+      <if test="cNameHtml != null" >
+        c_name_html = #{cNameHtml,jdbcType=VARCHAR},
+      </if>
       <if test="cUnit != null" >
         c_unit = #{cUnit,jdbcType=VARCHAR},
       </if>
@@ -118,6 +128,7 @@
     update t_function_param
     set c_function_id = #{cFunctionId,jdbcType=VARCHAR},
       c_name = #{cName,jdbcType=VARCHAR},
+      c_name_html = #{cNameHtml,jdbcType=VARCHAR},
       c_unit = #{cUnit,jdbcType=VARCHAR},
       c_description = #{cDescription,jdbcType=VARCHAR},
       n_order = #{nOrder,jdbcType=INTEGER},
@@ -141,11 +152,11 @@
   </delete>
   
   <insert id="insertBatch">
-    insert into t_function_param (c_id, c_function_id, c_name, c_unit, c_description, 
+    insert into t_function_param (c_id, c_function_id, c_name, c_name_html, c_unit, c_description, 
     n_order, n_valid, d_time)
      values
     <foreach collection ="list" item="functionParams" separator =",">
-      (#{cId,jdbcType=VARCHAR}, #{cFunctionId,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, 
+      (#{cId,jdbcType=VARCHAR}, #{cFunctionId,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, #{cNameHtml,jdbcType=VARCHAR},
       #{cUnit,jdbcType=VARCHAR}, #{cDescription,jdbcType=VARCHAR}, #{nOrder,jdbcType=INTEGER}, 
       #{nValid,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP})
     </foreach >
