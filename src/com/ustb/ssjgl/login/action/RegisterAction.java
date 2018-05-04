@@ -53,7 +53,7 @@ public class RegisterAction extends AbstractAction{
             user.setcPassword(encryptionPassword.toString());
             boolean success = userService.addUser(user);
             if(success){
-                return "login";
+                return "login/login";
             }else{
                 return "error";
             }

@@ -87,8 +87,6 @@ public class UserRealm extends AuthorizingRealm {
               
             SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);  
             
-//            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getcLoginName(), user.getcPassword(), this.getName());  
-//            this.setSession("currentUser", user.getcLoginName());
             this.setSession("currentUser", user);
               
             return authcInfo;  
