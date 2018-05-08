@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ustb.ssjgl.main.dao.mappings.TReferenceMapper" >
+  <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TReference" >
+    <id column="c_id" property="cId" jdbcType="VARCHAR" />
+    <result column="c_element_comb_id" property="cElementCombId" jdbcType="VARCHAR" />
+    <result column="n_source" property="nSource" jdbcType="INTEGER" />
+    <result column="c_content" property="cContent" jdbcType="VARCHAR" />
+    <result column="c_note" property="cNote" jdbcType="VARCHAR" />
+    <result column="c_doi" property="cDoi" jdbcType="VARCHAR" />
+    <result column="n_order" property="nOrder" jdbcType="INTEGER" />
+    <result column="n_valid" property="nValid" jdbcType="INTEGER" />
+    <result column="d_create_time" property="dCreateTime" jdbcType="TIMESTAMP" />
+    <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_element_comb_id, n_source, c_content, c_note, c_doi, n_order, n_valid, d_create_time, 
+    d_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_reference
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_reference
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TReference" >
+    insert into t_reference (c_id, c_element_comb_id, n_source, 
+      c_content, c_note, c_doi, 
+      n_order, n_valid, d_create_time, 
+      d_time)
+    values (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{nSource,jdbcType=INTEGER}, 
+      #{cContent,jdbcType=VARCHAR}, #{cNote,jdbcType=VARCHAR}, #{cDoi,jdbcType=VARCHAR}, 
+      #{nOrder,jdbcType=INTEGER}, #{nValid,jdbcType=INTEGER}, #{dCreateTime,jdbcType=TIMESTAMP}, 
+      #{dTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ustb.ssjgl.main.dao.bean.TReference" >
+    insert into t_reference
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cElementCombId != null" >
+        c_element_comb_id,
+      </if>
+      <if test="nSource != null" >
+        n_source,
+      </if>
+      <if test="cContent != null" >
+        c_content,
+      </if>
+      <if test="cNote != null" >
+        c_note,
+      </if>
+      <if test="cDoi != null" >
+        c_doi,
+      </if>
+      <if test="nOrder != null" >
+        n_order,
+      </if>
+      <if test="nValid != null" >
+        n_valid,
+      </if>
+      <if test="dCreateTime != null" >
+        d_create_time,
+      </if>
+      <if test="dTime != null" >
+        d_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+      <if test="cElementCombId != null" >
+        #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="nSource != null" >
+        #{nSource,jdbcType=INTEGER},
+      </if>
+      <if test="cContent != null" >
+        #{cContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cNote != null" >
+        #{cNote,jdbcType=VARCHAR},
+      </if>
+      <if test="cDoi != null" >
+        #{cDoi,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dCreateTime != null" >
+        #{dCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dTime != null" >
+        #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TReference" >
+    update t_reference
+    <set >
+      <if test="cElementCombId != null" >
+        c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      </if>
+      <if test="nSource != null" >
+        n_source = #{nSource,jdbcType=INTEGER},
+      </if>
+      <if test="cContent != null" >
+        c_content = #{cContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cNote != null" >
+        c_note = #{cNote,jdbcType=VARCHAR},
+      </if>
+      <if test="cDoi != null" >
+        c_doi = #{cDoi,jdbcType=VARCHAR},
+      </if>
+      <if test="nOrder != null" >
+        n_order = #{nOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nValid != null" >
+        n_valid = #{nValid,jdbcType=INTEGER},
+      </if>
+      <if test="dCreateTime != null" >
+        d_create_time = #{dCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dTime != null" >
+        d_time = #{dTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TReference" >
+    update t_reference
+    set c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      n_source = #{nSource,jdbcType=INTEGER},
+      c_content = #{cContent,jdbcType=VARCHAR},
+      c_note = #{cNote,jdbcType=VARCHAR},
+      c_doi = #{cDoi,jdbcType=VARCHAR},
+      n_order = #{nOrder,jdbcType=INTEGER},
+      n_valid = #{nValid,jdbcType=INTEGER},
+      d_create_time = #{dCreateTime,jdbcType=TIMESTAMP},
+      d_time = #{dTime,jdbcType=TIMESTAMP}
+    where c_id = #{cId,jdbcType=VARCHAR}
+  </update>
+</mapper>

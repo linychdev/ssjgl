@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.main.dao.impl;
 
+import java.util.List;
+
 import com.ustb.ssjgl.common.dao.AbstractDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFileDao;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
@@ -28,9 +30,9 @@ public class PotentialsFileDaoImpl extends AbstractDao implements IPotentialsFil
     }
 
     @Override
-    public TPotentialsFile selectByCombId(String combId) {
+    public List<TPotentialsFile> selectByCombId(String combId) {
         String statement = mapperNamespace + ".selectByCombId";
-        return this.getSqlSession().selectOne(statement, combId);
+        return this.getSqlSession().selectList(statement, combId);
     }
 
 }

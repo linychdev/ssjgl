@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.main.dao;
 
+import java.util.List;
+
 import com.ustb.ssjgl.common.dao.IAbstractDao;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 
@@ -23,4 +25,11 @@ public interface IPotentialsFunctionDao extends IAbstractDao {
      * @param functionId
      */
     public void deleteFunction(String functionId);
+
+    /**
+     * 根据组合id查找函数列表
+     * @param combId
+     * @return
+     */
+    public List<TPotentialsFunction> selectByCombId(String combId);
 }

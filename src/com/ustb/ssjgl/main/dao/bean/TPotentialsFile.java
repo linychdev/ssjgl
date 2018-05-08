@@ -113,8 +113,4 @@ public class TPotentialsFile {
     public void setdTime(Timestamp dTime) {
         this.dTime = dTime;
     }
-    
-    public String getFtpFileName(){
-        return this.cElementCombId + "." + this.cSuffix;
-    }
 }

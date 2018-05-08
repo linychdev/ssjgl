@@ -14,6 +14,7 @@ import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 
 /**
  * InteratomicPotentials
@@ -29,9 +30,11 @@ public class InteratomicPotentials {
 
     private List<TElementCombTag> elementCombTags = Lists.newArrayList();
 
-    private List<CombFunParamInfo> combFunParamInfos;
-
-    private TPotentialsFile ptentialsFile;
+    private List<TReferenceInfo> referenceInfos = Lists.newArrayList();
+    
+    private List<TPotentialsFile> ptentialsFiles = Lists.newArrayList();
+    
+    private List<TPotentialsFunction> functions = Lists.newArrayList();
 
     private IElementDao elementDao = SpringBeanUtils.getBean(IElementDao.class, "elementDao");
 
@@ -164,30 +167,22 @@ public class InteratomicPotentials {
     public void setElementCombTags(List<TElementCombTag> elementCombTags) {
         this.elementCombTags = elementCombTags;
     }
-    
-    /**
-     * @return the ptentialsFile
-     */
-    public TPotentialsFile getPtentialsFile() {
-        return ptentialsFile;
+    public List<TReferenceInfo> getReferenceInfos() {
+        return referenceInfos;
     }
-
-    /**
-     * @param ptentialsFile the ptentialsFile to set
-     */
-    public void setPtentialsFile(TPotentialsFile ptentialsFile) {
-        this.ptentialsFile = ptentialsFile;
+    public void setReferenceInfos(List<TReferenceInfo> referenceInfos) {
+        this.referenceInfos = referenceInfos;
     }
-    /**
-     * @return the combFunParamInfos
-     */
-    public List<CombFunParamInfo> getCombFunParamInfos() {
-        return combFunParamInfos;
+    public List<TPotentialsFile> getPtentialsFiles() {
+        return ptentialsFiles;
     }
-    /**
-     * @param combFunParamInfos the combFunParamInfos to set
-     */
-    public void setCombFunParamInfos(List<CombFunParamInfo> combFunParamInfos) {
-        this.combFunParamInfos = combFunParamInfos;
+    public void setPtentialsFiles(List<TPotentialsFile> ptentialsFiles) {
+        this.ptentialsFiles = ptentialsFiles;
+    }
+    public List<TPotentialsFunction> getFunctions() {
+        return functions;
+    }
+    public void setFunctions(List<TPotentialsFunction> functions) {
+        this.functions = functions;
     }
 }

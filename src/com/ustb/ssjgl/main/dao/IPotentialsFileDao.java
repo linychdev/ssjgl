@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.main.dao;
 
+import java.util.List;
+
 import com.ustb.ssjgl.common.dao.IAbstractDao;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 
@@ -28,5 +30,5 @@ public interface IPotentialsFileDao extends IAbstractDao{
      * @param combId
      * @return
      */
-    public TPotentialsFile selectByCombId(String combId);
+    public List<TPotentialsFile> selectByCombId(String combId);
 }

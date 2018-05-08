@@ -57,7 +57,7 @@ public interface IInterPotenService {
      * @param combId
      * @return
      */
-    public TPotentialsFile getPotentialsFileMetaByCombId(String combId);
+    public List<TPotentialsFile> getPotentialsFileMetaByCombId(String combId);
 
     /**
      * 根据标签获取势数据信息
@@ -72,4 +72,11 @@ public interface IInterPotenService {
      * @return
      */
     public List<ElementCombShowInfo> getElementCombShowInfoListByTag(String tag);
+
+    /**
+     * 根据主键获取势数据文件
+     * @param potentialsFileId
+     * @return
+     */
+    public TPotentialsFile getPotentialsFileMetaById(String potentialsFileId);
 }

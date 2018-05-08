@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
@@ -104,29 +105,29 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping(value="/manage/uploadPotentialsFile", method=RequestMethod.POST)
     @ResponseBody
     public void uploadPotenFile(HttpServletRequest request, HttpServletResponse response,
-            @RequestParam("potentialsId") String potentialsId,
+            @RequestParam("relatedId") String relatedId,
+            @RequestParam("potentialsType") Integer potentialsType,
             @RequestParam("potenFile") MultipartFile multipartFile) {
         
         Map<String, Object> result = new HashMap<String, Object>();
         //如果文件不为空，写入上传路径
         if(!multipartFile.isEmpty()) {
             File file = null;
-            String remoteFileName = potentialsId + "." + CommonUtils.getFileSuffix(multipartFile.getOriginalFilename());
+            String remoteFileName = UuidUtils.getUuid() + "." + CommonUtils.getFileSuffix(multipartFile.getOriginalFilename());
             try {
                 file = File.createTempFile(multipartFile.getName(), null);
                 
                 FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);  
                 ftpService.setLocal(file);
-                ftpService.setRemotePath("pub");
                 ftpService.setRemote(remoteFileName);
                 ftpService.upload();
                 
                 TPotentialsFile ptentialsFile = new TPotentialsFile();
                 ptentialsFile.setcFileName(multipartFile.getOriginalFilename());
-                ptentialsFile.setcElementCombId(potentialsId);
+                ptentialsFile.setcElementCombId(relatedId);
                 ptentialsFile.setnSize(FileUtils.sizeOf(file));
                 ptentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
-                ptentialsFile.setcFtpUrlPath("pub/");
+                ptentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+File.separator+remoteFileName);
                 interPotenService.addPotentialsFile(ptentialsFile);
                 result.put("success", true);
             } catch (Exception e) {

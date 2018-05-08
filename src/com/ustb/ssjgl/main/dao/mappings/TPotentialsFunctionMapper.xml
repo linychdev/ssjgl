@@ -156,12 +156,11 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
   
-  <select id="selectFunctionByCombId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+  <select id="selectByCombId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_potentials_function
-    where c_id = #{cId,jdbcType=VARCHAR}
+    		fun.*
+    from t_potentials_function fun, t_comb_function combfun
+    where fun.c_id = combfun.c_ptentials_function_id
+      and combfun.c_element_comb_id = #{combId,jdbcType=VARCHAR}
   </select>
 </mapper>

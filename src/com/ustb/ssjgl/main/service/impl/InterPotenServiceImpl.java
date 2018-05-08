@@ -16,6 +16,7 @@ import com.ustb.ssjgl.main.dao.IElementCombDetailDao;
 import com.ustb.ssjgl.main.dao.IElementCombTagDao;
 import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFileDao;
+import com.ustb.ssjgl.main.dao.IPotentialsFunctionDao;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
 import com.ustb.ssjgl.main.dao.bean.TCombFunction;
 import com.ustb.ssjgl.main.dao.bean.TCombParam;
@@ -24,6 +25,7 @@ import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 
 public class InterPotenServiceImpl implements IInterPotenService {
@@ -48,6 +50,9 @@ public class InterPotenServiceImpl implements IInterPotenService {
     
     @Autowired
     private IPotentialsFileDao potentialsFileDao;
+    
+    @Autowired
+    private IPotentialsFunctionDao potentialsFunctionDao;
     
     /**
      * (non-Javadoc)
@@ -122,7 +127,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
      * @see com.ustb.ssjgl.main.service.IInterPotenService#getPotentialsFileMetaByCombId(java.lang.String)
      */
     @Override
-    public TPotentialsFile getPotentialsFileMetaByCombId(String combId) {
+    public List<TPotentialsFile> getPotentialsFileMetaByCombId(String combId) {
         return potentialsFileDao.selectByCombId(combId);
     }
 
@@ -134,26 +139,16 @@ public class InterPotenServiceImpl implements IInterPotenService {
     public InteratomicPotentials getInterPotenByCombId(String id) {
         TElementCombination elementComb = elementCombDao.selectByPrimaryKey(TElementCombination.class, id);
         List<TElementCombDetail> combDetails = elementCombDetailDao.selectByCombId(elementComb.getcId());
-        TPotentialsFile ptentialsFile = potentialsFileDao.selectByCombId(elementComb.getcId());
+        List<TPotentialsFile> ptentialsFiles = potentialsFileDao.selectByCombId(elementComb.getcId());
         List<TElementCombTag> elementCombTags = elementCombTagDao.selectByCombId(elementComb.getcId());
-        List<TCombFunction> combFunctions = combFunctionDao.selectByCombId(elementComb.getcId());
-        
-        List<CombFunParamInfo> combFunParamInfos = Lists.newArrayList();
-        for (TCombFunction combFunction : combFunctions) {
-            CombFunParamInfo combFunParamInfo = new CombFunParamInfo();
-            List<TCombParam> combParams = Lists.newArrayList();
-            combParams.addAll(combParamDao.selectByCombIdAndFunId(elementComb.getcId(), combFunction.getcId()));
-            combFunParamInfo.setCombFunction(combFunction);
-            combFunParamInfo.setCombParams(combParams);
-            combFunParamInfos.add(combFunParamInfo);
-        }
-        
+        List<TPotentialsFunction> potenFunctions = potentialsFunctionDao.selectByCombId(elementComb.getcId());
+
         InteratomicPotentials interPoten = new InteratomicPotentials();
         interPoten.setElementComb(elementComb);
         interPoten.setElementCombDetails(combDetails);
-        interPoten.setPtentialsFile(ptentialsFile);
+        interPoten.setPtentialsFiles(ptentialsFiles);
         interPoten.setElementCombTags(elementCombTags);
-        interPoten.setCombFunParamInfos(combFunParamInfos);
+        interPoten.setFunctions(potenFunctions);
         return interPoten;
     }
 
@@ -172,5 +167,10 @@ public class InterPotenServiceImpl implements IInterPotenService {
             elementCombShowInfos.add(elementCombShowInfo);
         }
         return elementCombShowInfos;
+    }
+
+    @Override
+    public TPotentialsFile getPotentialsFileMetaById(String potentialsFileId) {
+        return potentialsFileDao.selectByPrimaryKey(TPotentialsFile.class, potentialsFileId);
     }
 }
