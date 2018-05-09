@@ -1,12 +1,12 @@
 html, body{
     /*font-size: 100%;*/
     -webkit-text-size-adjust:none;
-	 background:#660099; 
 	/* background: -webkit-linear-gradient(left,rgba(255,180,0,0),rgba(255,180,0,1)); /* Safari 5.1 - 6 */ */
   /* background: -o-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Opera 11.1 - 12*/ */
   /* background: -moz-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Firefox 3.6 - 15*/ */
   /* background: linear-gradient(to right, rgba(255,180,0,0),rgba(255,180,0,1)); /* 标准的语法 */ */
 	font-family: 'Raleway', sans-serif;
+	background:#000000;
 }
 h1,h2,h3,h4,h5,h6,a{
 	margin:0;	
@@ -144,8 +144,11 @@ body a:hover{
 }
 /*-- //header --*/
 /*-- banner --*/
+.header{
+	 background:#660099; 
+}
 .banner{
-	 background:#000033; */
+	  background:#000000; 
 	 /* background: -webkit-linear-gradient(left,rgba(139,0,139,0),rgba(130,0,139,1)); /* Safari 5.1 - 6 */  */
      /* background: -o-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Opera 11.1 - 12*/  */
      /* background: -moz-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Firefox 3.6 - 15*/  */
@@ -153,6 +156,8 @@ body a:hover{
 	font-family: 'Raleway', sans-serif;
 	min-height:700px;
 	position:relative;
+	/* width: 1080px;    */
+    margin: 0 auto;   
 }
 
 .search-form .search-wrapper {
@@ -179,10 +184,10 @@ body a:hover{
 	margin-top:5px;
 	margin-left:5px;
 	color: #3399FF;
-	/* background: -webkit-linear-gradient(left,rgba(139,0,139,0),rgba(130,0,139,1)); /* Safari 5.1 - 6 */   */
-    /* background: -o-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Opera 11.1 - 12*/   */
-    /* background: -moz-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Firefox 3.6 - 15*/   */
-   /* background: linear-gradient(to right, rgba(139,0,139,0),rgba(130,0,139,1)); /* 标准的语法 */   */	
+	/* background: -webkit-linear-gradient(left,rgba(139,0,139,0),rgba(130,0,139,1)); /* Safari 5.1 - 6   */ */
+    /* background: -o-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Opera 11.1 - 12*/    */
+    /* background: -moz-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Firefox 3.6 - 15*/    */
+   /* background: linear-gradient(to right, rgba(139,0,139,0),rgba(130,0,139,1)); /* 标准的语法 */   	 */
 }
 
 .elements .fontWhite{
