@@ -18,14 +18,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
+import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.UuidUtils;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
+import com.ustb.ssjgl.main.dao.bean.TReference;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 import com.ustb.ssjgl.main.service.IPotenFunctionService;
 import com.ustb.ssjgl.main.service.impl.FtpService;
@@ -70,6 +73,32 @@ public class BackgroundAction extends AbstractAction{
             result.put("success", true);
         }catch(Exception e){
             LOG.error("无法保存原子间势，json为:{}", json, e);
+            result.put("success", false);
+        }
+        this.writeAjaxObject(response, result);
+    }
+
+    @RequestMapping("/manage/addPotenReference")
+    @ResponseBody
+    public void addPotenReference(HttpServletRequest request, HttpServletResponse response) {
+        String json = request.getParameter("potenRefJson");
+        Map<String, Object> result = new HashMap<String, Object>();
+        try{
+            JSONObject reference = JSONObject.parseObject(json);
+            String combId = JsonUtils.getStrFromJson(reference, "combId");
+            String content = JsonUtils.getStrFromJson(reference, "content");
+            String doi = JsonUtils.getStrFromJson(reference, "doi");
+            String note = JsonUtils.getStrFromJson(reference, "note");
+            TReference ref = new TReference();
+            ref.setcElementCombId(combId);
+            ref.setcContent(content);
+            ref.setcDoi(doi);
+            ref.setcNote(note);
+            ref.setnSource(SsjglContants.REFERENCE_SOURCE_SSJGL);
+            interPotenService.addReference(ref);
+            result.put("success", true);
+        }catch(Exception e){
+            LOG.error("无法保存参考文献，json为:{}", json, e);
             result.put("success", false);
         }
         this.writeAjaxObject(response, result);

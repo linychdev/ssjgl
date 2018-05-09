@@ -26,6 +26,7 @@ import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
+import com.ustb.ssjgl.main.dao.bean.TReference;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 
 public class InterPotenServiceImpl implements IInterPotenService {
@@ -54,6 +55,8 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Autowired
     private IPotentialsFunctionDao potentialsFunctionDao;
     
+    @Autowired
+    private IReferenceDao referenceDao;
     /**
      * (non-Javadoc)
      * @see com.ustb.ssjgl.main.service.IInterPotenService#addInteratomicPotentials(com.ustb.ssjgl.main.bean.InteratomicPotentials)
@@ -172,5 +175,13 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public TPotentialsFile getPotentialsFileMetaById(String potentialsFileId) {
         return potentialsFileDao.selectByPrimaryKey(TPotentialsFile.class, potentialsFileId);
+    }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#addReference(com.ustb.ssjgl.main.dao.bean.TReference)
+     */
+    @Override
+    public void addReference(TReference ref) {
+        referenceDao.insertSelective(ref);
     }
 }

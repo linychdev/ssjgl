@@ -9,12 +9,14 @@ import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.common.utils.SpringBeanUtils;
 import com.ustb.ssjgl.main.dao.IElementDao;
+import com.ustb.ssjgl.main.dao.bean.TCombFunction;
 import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
+import com.ustb.ssjgl.main.dao.bean.TReference;
 
 /**
  * InteratomicPotentials
@@ -31,6 +33,8 @@ public class InteratomicPotentials {
     private List<TElementCombTag> elementCombTags = Lists.newArrayList();
 
     private List<TReferenceInfo> referenceInfos = Lists.newArrayList();
+
+    private List<TReference> references = Lists.newArrayList();
     
     private List<TPotentialsFile> ptentialsFiles = Lists.newArrayList();
     
@@ -54,8 +58,46 @@ public class InteratomicPotentials {
 
         //设置元素标签
         setCombTags();
+        
+        //设置函数
+        setCombFunctions(interPotenJson);
+        
+        //设置相关文件
+        setReferences(interPotenJson);
     }
-
+    
+    /**
+     * @param interPotenJson
+     */
+    private void setReferences(JSONObject interPotenJson) {
+        JSONArray referencesJson = JsonUtils.getJSONArrayFromJson(interPotenJson, "references");
+        for (Object obj : referencesJson) {
+            JSONObject reference = (JSONObject) obj;
+            String content = JsonUtils.getStrFromJson(reference, "content");
+            String doi = JsonUtils.getStrFromJson(reference, "doi");
+            String note = JsonUtils.getStrFromJson(reference, "note");
+            TReference ref = new TReference();
+            ref.setcElementCombId(elementComb.getcId());
+            ref.setcContent(content);
+            ref.setcDoi(doi);
+            ref.setcNote(note);
+            ref.setnSource(SsjglContants.REFERENCE_SOURCE_SSJGL);
+            references.add(ref);
+        }
+    }
+    /**
+     * @param interPotenJson
+     */
+    private void setCombFunctions(JSONObject interPotenJson) {
+        JSONArray functionsJson = JsonUtils.getJSONArrayFromJson(interPotenJson, "functions");
+        for (Object obj : functionsJson) {
+            JSONObject function = (JSONObject) obj;
+            String functionId = JsonUtils.getStrFromJson(function, "functionId");
+            TCombFunction combfunction = new TCombFunction();
+            combfunction.setcPotentialsFunctionId(functionId);
+            combfunction.setcElementCombId(elementComb.getcId());
+        }
+    }
     private void setCombTags() {
         //查询出组合元素列表
         List<TElement> elements = Lists.newArrayList();
@@ -184,5 +226,17 @@ public class InteratomicPotentials {
     }
     public void setFunctions(List<TPotentialsFunction> functions) {
         this.functions = functions;
+    }
+    /**
+     * @return the references
+     */
+    public List<TReference> getReferences() {
+        return references;
+    }
+    /**
+     * @param references the references to set
+     */
+    public void setReferences(List<TReference> references) {
+        this.references = references;
     }
 }

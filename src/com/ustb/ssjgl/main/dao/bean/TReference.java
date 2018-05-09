@@ -1,6 +1,11 @@
 package com.ustb.ssjgl.main.dao.bean;
 
+import java.sql.Timestamp;
 import java.util.Date;
+
+import com.ustb.ssjgl.common.SsjglContants;
+import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TReference {
     /** 主键 */
@@ -28,10 +33,18 @@ public class TReference {
     private Integer nValid;
 
     /** 创建时间 */
-    private Date dCreateTime;
+    private Timestamp dCreateTime;
 
     /** 时间戳 */
-    private Date dTime;
+    private Timestamp dTime;
+
+    public TReference() {
+        super();
+        this.cId = UuidUtils.getUuid();
+        this.nValid = SsjglContants.COMMON_VALID;
+        this.dCreateTime = DateUtils.getCurrentDate();
+        this.dTime = DateUtils.getCurrentDate();
+    }
 
     public String getcId() {
         return cId;
@@ -101,7 +114,7 @@ public class TReference {
         return dCreateTime;
     }
 
-    public void setdCreateTime(Date dCreateTime) {
+    public void setdCreateTime(Timestamp dCreateTime) {
         this.dCreateTime = dCreateTime;
     }
 
@@ -109,7 +122,7 @@ public class TReference {
         return dTime;
     }
 
-    public void setdTime(Date dTime) {
+    public void setdTime(Timestamp dTime) {
         this.dTime = dTime;
     }
 }
