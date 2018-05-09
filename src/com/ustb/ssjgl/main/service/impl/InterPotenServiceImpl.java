@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
-import com.ustb.ssjgl.main.bean.CombFunParamInfo;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
+import com.ustb.ssjgl.main.bean.TReferenceInfo;
 import com.ustb.ssjgl.main.dao.ICombFunctionDao;
 import com.ustb.ssjgl.main.dao.ICombParamDao;
 import com.ustb.ssjgl.main.dao.IElementCombDao;
@@ -17,9 +17,8 @@ import com.ustb.ssjgl.main.dao.IElementCombTagDao;
 import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFileDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFunctionDao;
+import com.ustb.ssjgl.main.dao.IReferenceDao;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
-import com.ustb.ssjgl.main.dao.bean.TCombFunction;
-import com.ustb.ssjgl.main.dao.bean.TCombParam;
 import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
@@ -145,13 +144,24 @@ public class InterPotenServiceImpl implements IInterPotenService {
         List<TPotentialsFile> ptentialsFiles = potentialsFileDao.selectByCombId(elementComb.getcId());
         List<TElementCombTag> elementCombTags = elementCombTagDao.selectByCombId(elementComb.getcId());
         List<TPotentialsFunction> potenFunctions = potentialsFunctionDao.selectByCombId(elementComb.getcId());
-
+        List<TReference> references = referenceDao.selectByCombId(elementComb.getcId());
+        
+        List<TReferenceInfo> referenceInfos = Lists.newArrayList();
+        for (TReference reference : references) {
+            List<TPotentialsFile> potenFiles = potentialsFileDao.selectByCombId(reference.getcId());
+            TReferenceInfo refInfo = new TReferenceInfo();
+            refInfo.setReference(reference);
+            refInfo.setPotentialsFiles(potenFiles);
+            referenceInfos.add(refInfo);
+        }
+        
         InteratomicPotentials interPoten = new InteratomicPotentials();
         interPoten.setElementComb(elementComb);
         interPoten.setElementCombDetails(combDetails);
         interPoten.setPtentialsFiles(ptentialsFiles);
         interPoten.setElementCombTags(elementCombTags);
         interPoten.setFunctions(potenFunctions);
+        interPoten.setReferenceInfos(referenceInfos);
         return interPoten;
     }
 

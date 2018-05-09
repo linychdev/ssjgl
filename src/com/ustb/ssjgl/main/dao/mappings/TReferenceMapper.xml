@@ -150,4 +150,12 @@
       d_time = #{dTime,jdbcType=TIMESTAMP}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectByCombId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_reference
+    where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+      and n_valid = 1
+  </select>  
 </mapper>
