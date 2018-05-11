@@ -358,4 +358,8 @@ public class FtpService {
     public void setLocal(File local) {
         this.local = local;
     }
+
+    public String getRemotePath() {
+        return remotePath;
+    }
 }

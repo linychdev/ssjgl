@@ -138,4 +138,5 @@
       #{cClientIp,jdbcType=VARCHAR}, #{cDownloadFileId,jdbcType=VARCHAR}, #{cDownloadFileName,jdbcType=VARCHAR}, 
       #{dDownloadDate,jdbcType=DATE}, #{dDownloadTime,jdbcType=TIMESTAMP})
     </foreach>
+    </insert>
 </mapper>

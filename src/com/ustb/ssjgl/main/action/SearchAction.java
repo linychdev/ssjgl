@@ -87,15 +87,16 @@ public class SearchAction extends AbstractAction{
     @RequestMapping(value="/manage/downloadPotentialsFile")
     @ResponseBody
     public ResponseEntity<byte[]> downloadPotenFile(HttpServletRequest request, HttpServletResponse response) {
-        String potentialsId = request.getParameter("potentialsId");
-        TPotentialsFile fileMeta = interPotenService.getPotentialsFileMetaByCombId(potentialsId);
+        String potentialsFileId = request.getParameter("potentialsFileId");
+        TPotentialsFile fileMeta = interPotenService.getPotentialsFileMetaById(potentialsFileId);
         String suffix = CommonUtils.getFileSuffix(fileMeta.getcFileName());
         File file = null;
         try {
             file = File.createTempFile("potenFile", suffix);
+            String remote = fileMeta.getcFtpUrlPath().replace(ftpService.getRemotePath(), "");
+            remote = remote.replace(File.separator, "");
             ftpService.setLocal(file);
-            ftpService.setRemote(fileMeta.getFtpFileName());
-            ftpService.setRemotePath(fileMeta.getcFtpUrlPath());
+            ftpService.setRemote(remote);
             ftpService.download();
             response.setContentType("application/force-download");
             response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileMeta.getcFileName(), "UTF-8"));

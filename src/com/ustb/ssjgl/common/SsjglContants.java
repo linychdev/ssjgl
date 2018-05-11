@@ -76,5 +76,15 @@ public class SsjglContants {
      * 访问类型_下载
      */
     public static final Integer VISIT_TYPE_DOWNLOAD = 5;
+    
+    /**
+     * 参考文献来源_势库
+     */
+    public static final Integer REFERENCE_SOURCE_SSJGL = 1;
+
+    /**
+     * 参考文献来源_其他
+     */
+    public static final Integer REFERENCE_SOURCE_OTHER = 2;
 
 }

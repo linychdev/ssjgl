@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.main.dao.impl;
 
+import java.util.List;
+
 import com.ustb.ssjgl.common.dao.AbstractDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFunctionDao;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
@@ -12,6 +14,7 @@ import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
  */
 public class PotentialsFunctionDaoImpl extends AbstractDao implements IPotentialsFunctionDao {
 
+    private String mapperNamespace = "com.ustb.ssjgl.main.dao.mappings.TPotentialsFunctionMapper";
     {
         super.mapperNamespace = "com.ustb.ssjgl.main.dao.mappings.";
     }
@@ -38,5 +41,11 @@ public class PotentialsFunctionDaoImpl extends AbstractDao implements IPotential
     @Override
     public void deleteFunction(String functionId) {
         deleteByPrimaryKey(TPotentialsFunction.class, functionId);
+    }
+
+    @Override
+    public List<TPotentialsFunction> selectByCombId(String combId) {
+        String statement = mapperNamespace + ".selectByCombId";
+        return this.getSqlSession().selectList(statement, combId);
     }
 }

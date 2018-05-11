@@ -6,6 +6,7 @@ import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
+import com.ustb.ssjgl.main.dao.bean.TReference;
 
 /**
  * IInterPotenService
@@ -57,7 +58,7 @@ public interface IInterPotenService {
      * @param combId
      * @return
      */
-    public TPotentialsFile getPotentialsFileMetaByCombId(String combId);
+    public List<TPotentialsFile> getPotentialsFileMetaByCombId(String combId);
 
     /**
      * 根据标签获取势数据信息
@@ -72,4 +73,17 @@ public interface IInterPotenService {
      * @return
      */
     public List<ElementCombShowInfo> getElementCombShowInfoListByTag(String tag);
+
+    /**
+     * 根据主键获取势数据文件
+     * @param potentialsFileId
+     * @return
+     */
+    public TPotentialsFile getPotentialsFileMetaById(String potentialsFileId);
+
+    /**
+     * 保存文献信息
+     * @param ref
+     */
+    public void addReference(TReference ref);
 }

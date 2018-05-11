@@ -13,6 +13,9 @@ public class TPotentialsFile {
     /** 元素组合id */
     private String cElementCombId;
 
+    /** 文件类型(1:参数描述,2:拟合曲线) */
+    private Integer nFileType;
+    
     /** 文件名 */
     private String cFileName;
 
@@ -113,8 +116,18 @@ public class TPotentialsFile {
     public void setdTime(Timestamp dTime) {
         this.dTime = dTime;
     }
-    
-    public String getFtpFileName(){
-        return this.cElementCombId + "." + this.cSuffix;
+
+    /**
+     * @return the nFileType
+     */
+    public Integer getnFileType() {
+        return nFileType;
+    }
+
+    /**
+     * @param nFileType the nFileType to set
+     */
+    public void setnFileType(Integer nFileType) {
+        this.nFileType = nFileType;
     }
 }
