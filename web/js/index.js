@@ -7,47 +7,53 @@ $(function(){
 
        var offset_top = $(this).offset().top-$(this).height()*2-4;
        var offset_left = $(this).offset().left+$(this).width()+2;
-       
-       var htmlstr="";
-       var oxidhtml="<div class='oxidation-big'>";
+       var column1 = new Array();
+       var column2 = new Array();
        var oxid = $(this).find("span.oxidation").text();
        if(oxid!=null&&oxid!=""&&oxid!=undefined){
-          var oxidArr= oxid.split(",");
-          for(i=0;i<oxidArr.length;i++){
-             oxidhtml+="<span style='display:inline-block;'>"+oxidArr[i]+"</span>";
-          }
+    	   var oxidArr= oxid.split(",");
+    	   for(i=0;i<oxidArr.length;i++){
+    		   if(i < 4){
+    			   column1.push(oxidArr[i]);
+    		   }else{
+    			   column2.push(oxidArr[i]);
+    		   }
+    		   oxidhtml+="<li>"+oxidArr[i]+"</li>";
+    	   }
        }
-       oxidhtml += "</div>";
+       var htmlstr="";
+       var oxidhtml = "<div class ='oxidation-big' title='oxidation state'>"+
+       					"<div class = 'oxidation-column1'><ul>";
+       for(i=0;i<column1.length;i++){
+    	   		oxidhtml += "<li>"+column1[i]+"</li>";
+       }
+       		oxidhtml += "</ul></div>"+
+       				  	"<div class = 'oxidation-column2'><ul>";
+        for(i=0;i<column2.length;i++){
+     	   		oxidhtml += "<li>"+column2[i]+"</li>";
+        }		
+        	oxidhtml += "</ul></div>";
+          oxidhtml += "<div class = 'float-clear'></div></div>";
 
     htmlstr+="<div class ='elements-big'>"+
-            "<div class = 'row-big-1'>"
+            "<div class = 'column-big-1'>"
                 +oxidhtml+
-                "<div class = 'crystal-big'>"+$(this).find("div.crystal").text()+"</div>"+
-                "<div class = 'atomic-big'>"+$(this).find("div.atomic").text()+"</div>"+
-                "<div class = 'float-clear'></div>"+
+                "<div class = 'radius-big' title = 'radius(pm)'>"+$(this).find("span.radius").text()+"</div>"+
+                "<div class = 'electron-big' title = 'electron configuration'>"+$(this).find("span.electron").html()+"</div>"+
+                "<div class = 'eleativity-big' title = 'electronegativity'>"+$(this).find("span.eleativity").text()+"</div>"+
             "</div>"+
-            "<div class = 'row-big-2'>"+
-                "<div class = 'radius-big'>"+$(this).find("span.radius").text()+"</div>"+
-                "<div class = 'relative-big'>"+$(this).find("span.relative").text()+"</div>"+
-                "<div class = 'float-clear'></div>"+
+            "<div class = 'column-big-2'>"+
+	            "<div class = 'crystal-big' title = 'crystal structure'>"+$(this).find("div.crystal").text()+"</div>"+
+	            "<div class = 'symbol-big' title = 'symbol'>"+$(this).find("div.symbol").text()+"</div>"+
+	            "<div class = 'element-name-big' title = 'element name'>"+$(this).find("div.element-name").text()+"</div>"+
             "</div>"+
-            "<div class = 'row-big-3'>"+
-                "<div class = 'symbol-big'>"+$(this).find("div.symbol").text()+"</div>"+
-                "<div class = 'melting-big'>"+$(this).find("span.melting").text()+"</div>"+
-                "<div class = 'float-clear'></div>"+
+            "<div class = 'column-big-3'>"+
+	            "<div class = 'atomic-big' title = 'atomic number'>"+$(this).find("div.atomic").text()+"</div>"+
+	            "<div class = 'relative-big' title = 'relative atomic mass'>"+$(this).find("span.relative").text()+"</div>"+
+                "<div class = 'melting-big' title = 'melting ponit(℃)'>"+$(this).find("span.melting").text()+"</div>"+
+                "<div class = 'boiling-big' title = 'boiling ponit(℃)'>"+$(this).find("span.boiling").text()+"</div>"+
+                "<div class = 'ionic-big' title = 'inizationenergy(eV)'>"+$(this).find("span.ionic").text()+"</div>"+
             "</div>"+
-            "<div class = 'row-big-4'>"+
-                "<div class = 'electron-big'>"+$(this).find("span.electron").text()+"</div>"+
-                "<div class = 'boiling-big'>"+$(this).find("span.boiling").text()+"</div>"+
-                "<div class = 'float-clear'></div>"+
-            "</div>"+
-            "<div class = 'row-big-5'>"+
-                "<div class = 'eleativity-big'>"+$(this).find("span.eleativity").text()+"</div>"+
-                "<div class = 'element-name-big'>"+$(this).find("div.element").text()+"</div>"+
-                "<div class = 'ionic-big'>"+$(this).find("span.ionic").text()+"</div>"+
-                "<div class = 'float-clear'></div>"+
-            "</div>"+
-            
 //            "<div class = 'crystal-big'>"+$(this).find("div.crystal").text()+"</div>"+
 //            "<div class = 'electron-big'>"+$(this).find("span.electron").text()+"</div>"+
 //            "<div class = 'eleativity-big'>"+$(this).find("span.eleativity").text()+"</div>"+
@@ -66,7 +72,7 @@ $(function(){
         layer.closeAll();
         layer.open({
             type: 1,
-            area: ['100px', '103px'],
+            area: ['150px', '150px'],
             offset: [ 
                offset_top
               ,offset_left
