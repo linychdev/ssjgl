@@ -3,7 +3,7 @@
 <mapper namespace="com.ustb.ssjgl.main.dao.mappings.TElementMapper" >
   <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TElement" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
-    <result column="c_elment_name" property="cElmentName" jdbcType="VARCHAR" />
+    <result column="c_element_name" property="cElementName" jdbcType="VARCHAR" />
     <result column="c_symbol" property="cSymbol" jdbcType="VARCHAR" />
     <result column="c_electron_configuration" property="cElectronConfiguration" jdbcType="VARCHAR" />
     <result column="n_electronegativity" property="nElectronegativity" jdbcType="DECIMAL" />
@@ -19,7 +19,7 @@
     <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    c_id, c_elment_name, c_symbol, c_electron_configuration, n_electronegativity, n_atomic_number, 
+    c_id, c_element_name, c_symbol, c_electron_configuration, n_electronegativity, n_atomic_number, 
     n_relative_atomic_mass, n_melting_point, n_boiling_point, c_crystal_structure, n_inization_energy, 
     n_radius, n_cycle, n_race, d_time
   </sql>
@@ -34,13 +34,13 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TElement" >
-    insert into t_element (c_id, c_elment_name, c_symbol, 
+    insert into t_element (c_id, c_element_name, c_symbol, 
       c_electron_configuration, n_electronegativity, 
       n_atomic_number, n_relative_atomic_mass, n_melting_point, 
       n_boiling_point, c_crystal_structure, n_inization_energy, 
       n_radius, n_cycle, n_race, 
       d_time)
-    values (#{cId,jdbcType=VARCHAR}, #{cElmentName,jdbcType=VARCHAR}, #{cSymbol,jdbcType=VARCHAR}, 
+    values (#{cId,jdbcType=VARCHAR}, #{cElementName,jdbcType=VARCHAR}, #{cSymbol,jdbcType=VARCHAR}, 
       #{cElectronConfiguration,jdbcType=VARCHAR}, #{nElectronegativity,jdbcType=DECIMAL}, 
       #{nAtomicNumber,jdbcType=INTEGER}, #{nRelativeAtomicMass,jdbcType=DECIMAL}, #{nMeltingPoint,jdbcType=INTEGER}, 
       #{nBoilingPoint,jdbcType=INTEGER}, #{cCrystalStructure,jdbcType=VARCHAR}, #{nInizationEnergy,jdbcType=DECIMAL}, 
@@ -53,8 +53,8 @@
       <if test="cId != null" >
         c_id,
       </if>
-      <if test="cElmentName != null" >
-        c_elment_name,
+      <if test="cElementName != null" >
+        c_element_name,
       </if>
       <if test="cSymbol != null" >
         c_symbol,
@@ -100,8 +100,8 @@
       <if test="cId != null" >
         #{cId,jdbcType=VARCHAR},
       </if>
-      <if test="cElmentName != null" >
-        #{cElmentName,jdbcType=VARCHAR},
+      <if test="cElementName != null" >
+        #{cElementName,jdbcType=VARCHAR},
       </if>
       <if test="cSymbol != null" >
         #{cSymbol,jdbcType=VARCHAR},
@@ -147,8 +147,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TElement" >
     update t_element
     <set >
-      <if test="cElmentName != null" >
-        c_elment_name = #{cElmentName,jdbcType=VARCHAR},
+      <if test="cElementName != null" >
+        c_element_name = #{cElementName,jdbcType=VARCHAR},
       </if>
       <if test="cSymbol != null" >
         c_symbol = #{cSymbol,jdbcType=VARCHAR},
@@ -194,7 +194,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TElement" >
     update t_element
-    set c_elment_name = #{cElmentName,jdbcType=VARCHAR},
+    set c_element_name = #{cElementName,jdbcType=VARCHAR},
       c_symbol = #{cSymbol,jdbcType=VARCHAR},
       c_electron_configuration = #{cElectronConfiguration,jdbcType=VARCHAR},
       n_electronegativity = #{nElectronegativity,jdbcType=DECIMAL},
@@ -215,7 +215,7 @@
     select 
     <include refid="Base_Column_List" />
     from t_element
-    where c_elment_name = #{cElmentName,jdbcType=VARCHAR}
+    where c_element_name = #{cElementName,jdbcType=VARCHAR}
   </select>
   
   <select id="selectElementBySymbol" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -228,7 +228,7 @@
   <select id="selectByCombId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
 	    element.c_id, 
-		element.c_elment_name, 
+		element.c_element_name, 
 		element.c_symbol, 
 		element.c_electron_configuration, 
 		element.n_electronegativity, 

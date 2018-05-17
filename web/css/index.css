@@ -4,7 +4,7 @@ html, body{
 	/* background: -webkit-linear-gradient(left,rgba(255,180,0,0),rgba(255,180,0,1)); /* Safari 5.1 - 6 */ */
   /* background: -o-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Opera 11.1 - 12*/ */
   /* background: -moz-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Firefox 3.6 - 15*/ */
-  /* background: linear-gradient(to right, rgba(255,180,0,0),rgba(255,180,0,1)); /* 标准的语法 */ */
+  /* background: linear-gradient(to right, rgba(255,180,0,0),rgba(255,180,0,1)); /* 鏍囧噯鐨勮娉�*/ */
 	font-family: 'Raleway', sans-serif;
 	background:#000000;
 }
@@ -14,7 +14,6 @@ html, body{
 	 height:90px;
 	 width:100%;
 	 font-weight:bold;
-	 
 }
 
 .navbar-default .navbar-nav > li > a.active {
@@ -88,7 +87,7 @@ html, body{
 	/* background: -webkit-linear-gradient(left,rgba(139,0,139,0),rgba(130,0,139,1)); /* Safari 5.1 - 6   */ */
     /* background: -o-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Opera 11.1 - 12*/    */
     /* background: -moz-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Firefox 3.6 - 15*/    */
-   /* background: linear-gradient(to right, rgba(139,0,139,0),rgba(130,0,139,1)); /* 标准的语法 */   	 */
+   /* background: linear-gradient(to right, rgba(139,0,139,0),rgba(130,0,139,1)); /* 鏍囧噯鐨勮娉�*/   	 */
 }
 
 .elements .fontWhite{
@@ -158,4 +157,125 @@ html, body{
 .crystal{
 	font-size: 8px;
 	height:10px;
+}
+
+.elements-big{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background-color: red;
+    
+    /*禁止光标移动到文字上显示I*/
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.elements-big{
+	display: flex;
+}
+/* 放大元素第一列 */
+.column-big-1{
+	width: 50px;
+	padding-top:10px;
+	padding-bottom:10px;
+    text-align: left;
+}
+
+.oxidation-column1, .oxidation-column2{
+	padding-bottom:0px;
+	float: left;
+}
+
+.oxidation-big{
+	height: 60px;
+}
+.oxidation-big ul{
+	padding-left: 5px;
+    margin-bottom: -5px;
+}
+.oxidation-big li{
+	list-style-type:none;
+	line-height: 8px;
+    padding-top: 0px;
+    margin-top: 5px;
+    font-size: 8px;
+}
+
+.radius-big, .electron-big, .eleativity-big{
+	padding-left: 5px;
+	margin-bottom: 5px;
+}
+.radius-big{
+	height: 20px;
+}
+.electron-big{
+	height: 20px;
+	font-size: 10px;	
+}
+
+/* 放大元素第二列 */
+.column-big-2{
+	flex:1;
+    text-align: center;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.eleativity-big{
+    font-size: 12px;
+    line-height: 24px;
+}
+.crystal-big{
+	font-size: 20px;
+	font-family: Microsoft YaHei;
+	font-weight: 900;
+}
+
+.symbol-big{
+	font-size: 60px;
+}
+
+.element-name-big{
+	height: 20px;
+}
+
+/* 放大元素第三列 */
+.column-big-3{
+	width: 50px;
+	padding-top:5px;
+	padding-bottom:5px;
+    text-align: right;
+}
+
+.atomic-big{
+    font-size: 18px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.melting-big, .boiling-big, .relative-big{
+    height: 20px;
+    font-size: 12px;
+    line-height: 24px;
+}
+.ionic-big{
+    height: 40px;
+    font-size: 12px;
+    line-height: 24px;
+    padding-top: 20px;
+	
+}
+
+.atomic-big, .relative-big, .melting-big, .boiling-big, .ionic-big{
+    padding-right: 5px;
+}
+
+.float-clear{
+    clear: both;
 }

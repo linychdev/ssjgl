@@ -8,7 +8,7 @@ public class TElement {
     private String cId;
 
     /** 元素名称 */
-    private String cElmentName;
+    private String cElementName;
 
     /** 符号 */
     private String cSymbol;
@@ -57,12 +57,12 @@ public class TElement {
         this.cId = cId == null ? null : cId.trim();
     }
 
-    public String getcElmentName() {
-        return cElmentName;
+    public String getcElementName() {
+        return cElementName;
     }
 
-    public void setcElmentName(String cElmentName) {
-        this.cElmentName = cElmentName == null ? null : cElmentName.trim();
+    public void setcElementName(String cElementName) {
+        this.cElementName = cElementName == null ? null : cElementName.trim();
     }
 
     public String getcSymbol() {

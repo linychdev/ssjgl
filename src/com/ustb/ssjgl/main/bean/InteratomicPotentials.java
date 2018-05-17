@@ -110,13 +110,13 @@ public class InteratomicPotentials {
         List<String> tagList = Lists.newArrayList();
         for (TElement e1 : elements) {
             String symbolTag1 = e1.getcSymbol();
-            String nameTag1 = e1.getcElmentName();
+            String nameTag1 = e1.getcElementName();
             addTagList(tagList, symbolTag1);
             addTagList(tagList, nameTag1);
 
             for (TElement e2 : elements) {
                 String symbolTag2 = e2.getcSymbol();
-                String nameTag2 = e2.getcElmentName();
+                String nameTag2 = e2.getcElementName();
                 String symbolTag = symbolTag1 + SsjglContants.TAG_JOINT + symbolTag2;
                 String nameTag = nameTag1 + SsjglContants.TAG_JOINT + nameTag2;
                 addTagList(tagList, symbolTag);
