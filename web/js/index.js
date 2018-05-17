@@ -5,34 +5,45 @@ $(function(){
   // var docs = $("div.elements");
    $("div.elements").click(function(){
 
-       var offset_top = $(this).offset().top-$(this).height()*2-4;
-       var offset_left = $(this).offset().left+$(this).width()+2;
+       var offset_top = $(this).offset().top-$(this).height();
+       var offset_left = $(this).offset().left+$(this).width()-100;
        var column1 = new Array();
        var column2 = new Array();
+       var column3 = new Array();
        var oxid = $(this).find("span.oxidation").text();
        if(oxid!=null&&oxid!=""&&oxid!=undefined){
     	   var oxidArr= oxid.split(",");
     	   for(i=0;i<oxidArr.length;i++){
     		   if(i < 4){
     			   column1.push(oxidArr[i]);
-    		   }else{
+    		   }else if(i < 8){
     			   column2.push(oxidArr[i]);
+    		   }else{
+    			   column3.push(oxidArr[i]);
     		   }
     		   oxidhtml+="<li>"+oxidArr[i]+"</li>";
     	   }
        }
        var htmlstr="";
        var oxidhtml = "<div class ='oxidation-big' title='oxidation state'>"+
-       					"<div class = 'oxidation-column1'><ul>";
+       					"<div class = 'oxidation-column'><ul>";
        for(i=0;i<column1.length;i++){
     	   		oxidhtml += "<li>"+column1[i]+"</li>";
        }
        		oxidhtml += "</ul></div>"+
-       				  	"<div class = 'oxidation-column2'><ul>";
+       				  	"<div class = 'oxidation-column'><ul>";
         for(i=0;i<column2.length;i++){
      	   		oxidhtml += "<li>"+column2[i]+"</li>";
-        }		
-        	oxidhtml += "</ul></div>";
+        }
+        //大于3列，额外增加一行
+		if(column3.length > 0){
+			oxidhtml += "</ul></div>"+
+			"<div class = 'oxidation-column'><ul>";
+			for(i=0;i<column3.length;i++){
+				oxidhtml += "<li>"+column3[i]+"</li>";
+			}
+		}        
+        		oxidhtml += "</ul></div>"
           oxidhtml += "<div class = 'float-clear'></div></div>";
 
     htmlstr+="<div class ='elements-big'>"+
@@ -54,16 +65,6 @@ $(function(){
                 "<div class = 'boiling-big' title = 'boiling ponit(℃)'>"+$(this).find("span.boiling").text()+"</div>"+
                 "<div class = 'ionic-big' title = 'inizationenergy(eV)'>"+$(this).find("span.ionic").text()+"</div>"+
             "</div>"+
-//            "<div class = 'crystal-big'>"+$(this).find("div.crystal").text()+"</div>"+
-//            "<div class = 'electron-big'>"+$(this).find("span.electron").text()+"</div>"+
-//            "<div class = 'eleativity-big'>"+$(this).find("span.eleativity").text()+"</div>"+
-//            "<div class = 'ionic-big'>"+$(this).find("span.ionic").text()+"</div>"+
-//            "<div class = 'boiling-big'>"+$(this).find("span.boiling").text()+"</div>"+
-//            "<div class = 'melting-big'>"+$(this).find("span.melting").text()+"</div>"+
-//            "<div class = 'relative-big'>"+$(this).find("span.relative").text()+"</div>"+
-//            "<div class = 'atomic-big'>"+$(this).find("div.atomic").text()+"</div>"+
-//            "<div class = 'symbol-big'>"+$(this).find("div.symbol").text()+"</div>"+
-//            "<div class = 'element-name-big'>"+$(this).find("div.element").text()+"</div>"+
         "</div>";
     
        clearTimeout(TimeFn);
@@ -72,7 +73,7 @@ $(function(){
         layer.closeAll();
         layer.open({
             type: 1,
-            area: ['150px', '150px'],
+            area: ['155px', '150px'],
             offset: [ 
                offset_top
               ,offset_left
@@ -83,6 +84,12 @@ $(function(){
             skin: 'yourclass',
             content: htmlstr
           });
+        //大于3列，调整电负性列宽
+		if(column3.length > 0){
+			$(".oxidation-column").addClass("oxidation-column3");
+		}else{
+			$(".oxidation-column").removeClass("oxidation-column3");
+		}
        }, 200);//延时时长设置   
 
    });

@@ -182,30 +182,40 @@ html, body{
 }
 /* 放大元素第一列 */
 .column-big-1{
-	width: 50px;
+	width: 40px;
 	padding-top:10px;
 	padding-bottom:10px;
     text-align: left;
 }
 
-.oxidation-column1, .oxidation-column2{
+.oxidation-column{
 	padding-bottom:0px;
 	float: left;
+	width: 15px;
+	margin-left: 2px;
+}
+
+.oxidation-column3{
+	width: 10px !important;
 }
 
 .oxidation-big{
-	height: 60px;
+	height: 55px;
+	/* -webkit-box-orient: vertical;
+	-webkit-line-clamp: 3; */
+	overflow: hidden;
 }
 .oxidation-big ul{
-	padding-left: 5px;
+	padding-left: 0px;
     margin-bottom: -5px;
 }
 .oxidation-big li{
 	list-style-type:none;
-	line-height: 8px;
+	line-height: 6px;
     padding-top: 0px;
     margin-top: 5px;
-    font-size: 8px;
+    font-size: 6px;
+    text-align: right;
 }
 
 .radius-big, .electron-big, .eleativity-big{
@@ -213,10 +223,10 @@ html, body{
 	margin-bottom: 5px;
 }
 .radius-big{
-	height: 20px;
+	height: 30px;
 }
 .electron-big{
-	height: 20px;
+	height: 15px;
 	font-size: 10px;	
 }
 
@@ -232,22 +242,27 @@ html, body{
     line-height: 24px;
 }
 .crystal-big{
-	font-size: 20px;
+	font-size: 25px;
 	font-family: Microsoft YaHei;
 	font-weight: 900;
+    height: 15px;
+    line-height: 25px;
 }
 
 .symbol-big{
 	font-size: 60px;
+	height: 90px;
+    line-height: 90px;
 }
 
 .element-name-big{
 	height: 20px;
+	margin-top: 5px;
 }
 
 /* 放大元素第三列 */
 .column-big-3{
-	width: 50px;
+	width: 45px;
 	padding-top:5px;
 	padding-bottom:5px;
     text-align: right;
