@@ -5,8 +5,8 @@ $(function(){
   // var docs = $("div.elements");
    $("div.elements").click(function(){
 
-       var offset_top = $(this).offset().top-$(this).height();
-       var offset_left = $(this).offset().left+$(this).width()-100;
+       var offset_top = $(this).offset().top - $(this).height();
+       var offset_left = $(this).offset().left - $(this).width();
        var column1 = new Array();
        var column2 = new Array();
        var column3 = new Array();
@@ -93,8 +93,31 @@ $(function(){
        }, 200);//延时时长设置   
 
    });
+   
+   //双击元素
    $("div.elements").dblclick(function(){
        clearTimeout(TimeFn);
        alert("a");
    });
+   
+   var timer=null;  
+   $("div.elements").mousedown(function(e){
+	   thisElement = $(this);
+	   timer=setTimeout(function () {
+		   thisElement.clone().addClass("clone").appendTo($("body")); 
+		   $(".clone").css("left",e.clientX-25); 
+		   $(".clone").css("top",e.clientY-50); 
+	   },100);
+   });
+	
+	$(document).mousemove(function(e){ 
+		if($(".clone").length>0) { 
+			$(".clone").css('left',e.clientX-25); 
+			$(".clone").css('top',e.clientY-50); 
+		} 
+	}); 
+	$(document).mouseup(function(e){ 
+		$(".clone").remove(); 
+		clearTimeout(timer);
+	}); 
 });

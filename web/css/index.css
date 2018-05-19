@@ -294,3 +294,9 @@ html, body{
 .float-clear{
     clear: both;
 }
+
+.clone{
+	position: absolute; 
+	border:1px solid #666;
+	z-index: 999;
+} 
