@@ -76,10 +76,19 @@ html, body{
 	height:55px;
 	margin-top:5px;
 	color: #3399FF;
-	/* background: -webkit-linear-gradient(left,rgba(139,0,139,0),rgba(130,0,139,1)); /* Safari 5.1 - 6   */ */
-    /* background: -o-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Opera 11.1 - 12*/    */
-    /* background: -moz-linear-gradient(right,rgba(139,0,139,0),rgba(130,0,139,1)); /* Firefox 3.6 - 15*/    */
-   /* background: linear-gradient(to right, rgba(139,0,139,0),rgba(130,0,139,1)); /* 鏍囧噯鐨勮娉�*/   	 */
+
+-webkit-touch-callout: none; /* iOS Safari */
+
+-webkit-user-select: none; /* Chrome/Safari/Opera */
+
+-khtml-user-select: none; /* Konqueror */
+
+-moz-user-select: none; /* Firefox */
+
+-ms-user-select: none; /* Internet Explorer/Edge */
+
+user-select: none; /* Non-prefixed version, currently not supported by any browser */
+
 }
 
 .elements .fontWhite{

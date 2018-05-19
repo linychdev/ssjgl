@@ -90,7 +90,7 @@ $(function(){
 		}else{
 			$(".oxidation-column").removeClass("oxidation-column3");
 		}
-       }, 200);//延时时长设置   
+       }, 300);//延时时长设置   
 
    });
    
@@ -107,6 +107,7 @@ $(function(){
 		   thisElement.clone().addClass("clone").appendTo($("body")); 
 		   $(".clone").css("left",e.clientX-25); 
 		   $(".clone").css("top",e.clientY-50); 
+		   $(".clone").css("background-color","#000000"); 
 	   },100);
    });
 	
