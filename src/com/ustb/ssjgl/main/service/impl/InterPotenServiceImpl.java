@@ -145,6 +145,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
         List<TElementCombTag> elementCombTags = elementCombTagDao.selectByCombId(elementComb.getcId());
         List<TPotentialsFunction> potenFunctions = potentialsFunctionDao.selectByCombId(elementComb.getcId());
         List<TReference> references = referenceDao.selectByCombId(elementComb.getcId());
+        List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
         
         List<TReferenceInfo> referenceInfos = Lists.newArrayList();
         for (TReference reference : references) {
@@ -162,6 +163,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
         interPoten.setElementCombTags(elementCombTags);
         interPoten.setFunctions(potenFunctions);
         interPoten.setReferenceInfos(referenceInfos);
+        interPoten.setElements(elementList);
         return interPoten;
     }
 

@@ -1,10 +1,12 @@
 package com.ustb.ssjgl.main.bean;
 
+import java.util.HashSet;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.common.utils.SpringBeanUtils;
@@ -39,6 +41,8 @@ public class InteratomicPotentials {
     private List<TPotentialsFile> ptentialsFiles = Lists.newArrayList();
     
     private List<TPotentialsFunction> functions = Lists.newArrayList();
+
+    private List<TElement> elements = Lists.newArrayList();
 
     private IElementDao elementDao = SpringBeanUtils.getBean(IElementDao.class, "elementDao");
 
@@ -238,5 +242,36 @@ public class InteratomicPotentials {
      */
     public void setReferences(List<TReference> references) {
         this.references = references;
+    }
+    public List<TElement> getElements() {
+        return elements;
+    }
+    public void setElements(List<TElement> elements) {
+        this.elements = elements;
+    }
+    
+    private HashSet<TElement> getElementsSet(){
+        return Sets.newHashSet(elements);
+    }
+    
+    public String getHoleCombName(){
+        String combName = elementComb.getcCombName();
+        String[] elementSymbols = combName.split(SsjglContants.TAG_JOINT);
+        List<String> elementHoleNames = Lists.newArrayList();
+        for (String elemet : elementSymbols) {
+            for (TElement e : getElementsSet()) {
+                if(e.getcSymbol().equals(elemet)){
+                    elementHoleNames.add(e.getcElementName());
+                }
+            }
+        }
+        StringBuilder holeNameComb = new StringBuilder();
+        for (int i = 0; i < elementHoleNames.size(); i++) {
+            holeNameComb.append(elementHoleNames.get(i));
+            if(i < elementHoleNames.size() - 1){
+                holeNameComb.append(SsjglContants.TAG_JOINT);
+            }
+        }
+        return holeNameComb.toString();
     }
 }
