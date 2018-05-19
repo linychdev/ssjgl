@@ -1,47 +1,38 @@
 html, body{
     /*font-size: 100%;*/
     -webkit-text-size-adjust:none;
-	/* background: -webkit-linear-gradient(left,rgba(255,180,0,0),rgba(255,180,0,1)); /* Safari 5.1 - 6 */ */
-  /* background: -o-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Opera 11.1 - 12*/ */
-  /* background: -moz-linear-gradient(right,rgba(255,180,0,0),rgba(255,180,0,1)); /* Firefox 3.6 - 15*/ */
-  /* background: linear-gradient(to right, rgba(255,180,0,0),rgba(255,180,0,1)); /* 鏍囧噯鐨勮娉�*/ */
 	font-family: 'Raleway', sans-serif;
 	background:#000000;
+	min-width:1200px;
 }
 
 .header{
-	 /* background:#895698;   */
 	 height:90px;
 	 width:100%;
 	 font-weight:bold;
+	 background-size: cover;
+	 background-image:url(../img/banner5.jpg);
+	 background-repeat: repeat-x;
+}
+
+.main{
+	width:1200px;
+	margin:0px auto;	
 }
 
 .navbar-default .navbar-nav > li > a.active {
     /* color:#00FFCC; */
-	color:#ffffff;
+	color:#ffff00;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     /* color: #00FFCC; */
-	color:#ffffff;
+	color:#ffff00;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #ffffff;
+    color: #000000;
 	font-family: 'Raleway', sans-serif;
 }
-.navbar-brand{
-	font-size:2.5em;
-	color:#ffffff!important;
-	text-decoration:none;
-	height: 100px;
-    padding: 35px 0px;
-}
 
-.navbar-brand i{
-	font-size: 1em;
-    color:#EBEBEB;
-    left: -7px;
-    top: 0px;
-}
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     border: none;
 }
@@ -63,17 +54,18 @@ html, body{
     padding: 25px;
     font-size: 14px;
     position: relative;
+	padding-right:0px;
+	padding-left:50px;
 }
 .navbar {
     margin-bottom: 0;
 }
 
-.main{
-	width:1024px;
-	margin:0px auto;
-	
+.logo{
+	margin-top:20px;
 }
 
+/* 主体样式 */
 .elements {
     /*box-shadow: 0px 0px 2px rgba(0,255,255,0.5);*/
     border: 1px solid rgba(127,255,255,0.25); 
@@ -106,6 +98,9 @@ html, body{
 	color: #ff3399;
 }
 
+.removePadding{
+	padding-right:0px;!important
+}
 .atomic {
     font-size: 75%;
     line-height: 0;
@@ -132,20 +127,6 @@ html, body{
 	display: none;
 }
 
-.jianxi{
-	padding-right:5px;
-	padding-left:0px;
-}
-
-.jiange{
-	margin-left:5px;
-	margin-right:5px;
-}
-
-.search{
-	margin-top:20px auto;
-	width:1200px;
-}
 
 .logo{
 	margin-top:20px;
@@ -300,3 +281,4 @@ html, body{
 	border:1px solid #666;
 	z-index: 999;
 } 
+
