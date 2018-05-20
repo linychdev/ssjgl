@@ -16,8 +16,8 @@ html, body{
 }
 
 .main{
-	width:1200px;
-	margin:0px auto;	
+	/* width:1230px; */
+	margin:0px auto;
 }
 
 .navbar-default .navbar-nav > li > a.active {
@@ -72,9 +72,9 @@ html, body{
     text-align: center;
     cursor: default;
 	float:left;
-	width:55px;
-	height:55px;
-	margin-top:5px;
+	width:60px;
+	height:60px;
+	margin-top:5px 0px 0px 0px;
 	color: #3399FF;
 
 -webkit-touch-callout: none; /* iOS Safari */
@@ -89,6 +89,12 @@ html, body{
 
 user-select: none; /* Non-prefixed version, currently not supported by any browser */
 
+}
+
+.element-main{
+	margin-left:10px;
+	margin-right:10px;
+	
 }
 
 .elements .fontWhite{
@@ -111,26 +117,26 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 	padding-right:0px;!important
 }
 .atomic {
-    font-size: 75%;
-    line-height: 0;
     float: right;
     vertical-align: baseline;
-    margin-top: 6px;
-    margin-right: 2px;
-	font-size: 8px;
+    margin-top: 0px;
+    margin-right: 1px;
+	font-size: 6px;
 	}
 .symbol{
     font-size: 16px;
     font-weight: bold;
     /* color: #3399FF; */
     /* text-shadow: 0 0 2px rgba(0,255,255,0.95); */
-    height:30px;
-    line-height: 30px;
+    height:36px;
+    line-height: 36px;
+	text-align:center;
 }
 .element-name{
 	font-size: 8px;
-	height:10px;
-	margin-top: -2px;
+	height:11px;
+	line-height:11px;
+	text-align:center;
 }
 .show-span{
 	display: none;
@@ -146,9 +152,10 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 }
 .crystal{
 	font-size: 8px;
-	height:10px;
+	height:11px;
+	line-height:11px;
+	text-align:center;
 }
-
 .elements-big{
     width:100%;
     height:100%;

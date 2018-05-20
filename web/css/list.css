@@ -111,9 +111,9 @@ li {
     border-right: 2px solid #fff;
 }
 
-a {
-    color: #43a047;
-}
+/* a { */
+    /* color: #43a047; */
+/* } */
 
 .sidebar-toggle {
     display: none;
