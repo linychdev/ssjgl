@@ -115,4 +115,12 @@ public class SearchAction extends AbstractAction{
             FileUtils.deleteQuietly(file);
         }
     }
+    
+    @VisitLog(VisitLogType.BROWSE)
+    @RequestMapping(value = "/index", method=RequestMethod.GET)
+    public ModelAndView showSearchIndex() {
+        ModelAndView mode = new ModelAndView();
+        mode.setViewName("main/index");
+        return mode;
+    }  
 }

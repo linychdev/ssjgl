@@ -102,7 +102,7 @@ $(function(){
        tmp.moveTo(0,0)  
        tmp.resizeTo(screen.width+20,screen.height)  
        tmp.focus()  
-       tmp.location=contextPath+"/search/list/K";  
+       tmp.location=contextPath+"/search/list/"+$(this).attr("id");  
        
        
    });

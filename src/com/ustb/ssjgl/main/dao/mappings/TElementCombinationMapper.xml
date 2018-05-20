@@ -156,6 +156,7 @@
     	where tag.c_tag = #{cTag,jdbcType=VARCHAR}
 	      and tag.n_valid = 1
 		  and comb.n_valid = 1
+	order by comb.c_comb_name
   </select>
   
   <select id="selectAllCombs" resultMap="BaseResultMap" parameterType="java.lang.String" >
