@@ -1,8 +1,6 @@
 $(function(){
  
     var TimeFn = null;
-   // 开始写 jQuery 代码...
-  // var docs = $("div.elements");
    $("div.elements").click(function(){
 
        var offset_top = $(this).offset().top - $(this).height();
