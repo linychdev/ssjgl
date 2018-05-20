@@ -1,8 +1,8 @@
 $(function(){
- 
-    var TimeFn = null;
+   var operationType = 0;
+   var TimeFn = null;
    $("div.elements").click(function(){
-
+	   operationType = 1;
        var offset_top = $(this).offset().top - $(this).height();
        var offset_left = $(this).offset().left - $(this).width();
        var column1 = new Array();
@@ -88,42 +88,117 @@ $(function(){
 		}else{
 			$(".oxidation-column").removeClass("oxidation-column3");
 		}
-       }, 300);//延时时长设置   
+		operationType = 0; 
+		removeCloneElement();
+		 
+       }, 240);//延时时长设置   
 
    });
    
    //双击元素
    $("div.elements").dblclick(function(){
+	   operationType = 2;
        clearTimeout(TimeFn);
-       
+       setTimeout(function (){
+    	   removeCloneElement();
+       },200);
        var tmp=window.open("about:blank")  
        tmp.moveTo(0,0)  
        tmp.resizeTo(screen.width+20,screen.height)  
        tmp.focus()  
        tmp.location=contextPath+"/search/list/"+$(this).attr("id");  
-       
-       
+       operationType = 0;
    });
    
+   //拖动事件，克隆一个div用于拖动
    var timer=null;  
    $("div.elements").mousedown(function(e){
 	   thisElement = $(this);
 	   timer=setTimeout(function () {
-		   thisElement.clone().addClass("clone").appendTo($("body")); 
-		   $(".clone").css("left",e.clientX-25); 
-		   $(".clone").css("top",e.clientY-50); 
-		   $(".clone").css("background-color","#000000"); 
-	   },100);
+		   if(!(operationType == 1 || operationType == 2)){
+			   thisElement.clone().addClass("clone").appendTo($("body")); 
+			   $(".clone").css("left",e.clientX-25); 
+			   $(".clone").css("top",e.clientY-50); 
+			   $(".clone").css("background-color","#000000"); 
+		   }
+	   },150);
    });
-	
+	//鼠标移动事件，拖动克隆的div
 	$(document).mousemove(function(e){ 
 		if($(".clone").length>0) { 
 			$(".clone").css('left',e.clientX-25); 
 			$(".clone").css('top',e.clientY-50); 
 		} 
 	}); 
+	
+	//鼠标松开事件，删除克隆的元素
 	$(document).mouseup(function(e){ 
-		$(".clone").remove(); 
+		if(!$(".clone").length>0){
+			return;
+		}
+		var top = $(".input-group").offset().top;
+		var left = $(".input-group").offset().left;
+		var ctop = $(".clone").offset().top;
+		var cleft = $(".clone").offset().left;
+		
+		if((ctop > top &&
+		   cleft > left &&
+		   ctop < (top+$(".input-group").height()) &&
+		   cleft < (left+$(".input-group").width())) ||
+		   ((ctop + $(".clone").height()) > top &&
+		   (cleft + $(".clone").width()) > left &&
+		   (ctop + $(".clone").height()) < (top+$(".input-group").height()) &&
+		   (cleft + $(".clone").width()) < (left+$(".input-group").width()))
+		){
+			//为input中增加元素
+			var inputElement = $(".input-group input").val();
+			inputElement += "-" + $(".clone").attr("id");
+			if (inputElement.substr(0,1)=='-') {
+				inputElement=inputElement.substr(1);
+			}
+			$(".input-group input").val(inputElement);
+		}
+		$(".clone").remove();
 		clearTimeout(timer);
 	}); 
+	
+	//移除克隆元素
+	function removeCloneElement(){
+		 if($(".clone")){
+			   $(".clone").remove();
+		   }
+	}
+	
+	//搜索按鈕事件
+	$(".input-group .input-group-addon").on("click",function(){
+		var selectVal = "";
+		var selectText = $(".input-group input").val();
+		if(!selectText.length > 0){
+			return;
+		}
+		var array = selectText.split(/[-,_\\#\\$\\*\\.\\|、。，\s]/);
+		for (var i = 0; i < array.length; i++) {
+			var element = array[i];
+			if(element.replace(/(^s*)|(s*$)/g, "").length != 0){
+				selectVal += "-"+ element;
+			}
+		}
+		
+		if (selectVal.substr(0,1)=='-') {
+			selectVal=selectVal.substr(1);
+		}
+		var tmp=window.open("about:blank")  
+	       tmp.moveTo(0,0)  
+	       tmp.resizeTo(screen.width+20,screen.height)  
+	       tmp.focus()  
+	       tmp.location=contextPath+"/search/list/"+selectVal;  
+	});
+	
+	
+	document.onkeydown = function(e){ 
+		var ev = document.all ? window.event : e;
+		if(ev.keyCode==13) {
+			$(".input-group .input-group-addon").click();
+		}
+	}
 });

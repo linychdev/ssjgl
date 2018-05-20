@@ -70,6 +70,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
         elementCombDao.addElementComb(elementComb);
         elementCombDetailDao.addCombDetails(interPoten.getElementCombDetails());
         elementCombTagDao.addElementCombTags(interPoten.getElementCombTags());
+        combFunctionDao.addCombFunctions(interPoten.getCombFunctions());
     }
 
     /**

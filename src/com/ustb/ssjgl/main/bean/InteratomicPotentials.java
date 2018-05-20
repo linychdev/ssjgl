@@ -44,6 +44,8 @@ public class InteratomicPotentials {
 
     private List<TElement> elements = Lists.newArrayList();
 
+    private List<TCombFunction> combFunctions = Lists.newArrayList();
+
     private IElementDao elementDao = SpringBeanUtils.getBean(IElementDao.class, "elementDao");
 
     public InteratomicPotentials() {
@@ -100,6 +102,7 @@ public class InteratomicPotentials {
             TCombFunction combfunction = new TCombFunction();
             combfunction.setcPotentialsFunctionId(functionId);
             combfunction.setcElementCombId(elementComb.getcId());
+            combFunctions.add(combfunction);
         }
     }
     private void setCombTags() {
@@ -155,11 +158,13 @@ public class InteratomicPotentials {
     }
 
     private void setElementComb(JSONObject jasonObject) {
+        String cScopeId = JsonUtils.getStrFromJson(jasonObject, "scopeId");
         String cCombName = JsonUtils.getStrFromJson(jasonObject, "combName");
         String cDescription = JsonUtils.getStrFromJson(jasonObject, "combDescription");
         String cNote = JsonUtils.getStrFromJson(jasonObject, "combNote");
         String cReferenceDescription = JsonUtils.getStrFromJson(jasonObject, "combReferenceDesc");
         elementComb = new TElementCombination();
+        elementComb.setcScopeId(cScopeId);
         elementComb.setcCombName(cCombName);
         elementComb.setcDescription(cDescription);
         elementComb.setcNote(cNote);
@@ -273,5 +278,11 @@ public class InteratomicPotentials {
             }
         }
         return holeNameComb.toString();
+    }
+    public List<TCombFunction> getCombFunctions() {
+        return combFunctions;
+    }
+    public void setCombFunctions(List<TCombFunction> combFunctions) {
+        this.combFunctions = combFunctions;
     }
 }

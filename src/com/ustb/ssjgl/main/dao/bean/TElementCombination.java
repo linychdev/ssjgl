@@ -10,6 +10,9 @@ public class TElementCombination {
     /** 主键 */
     private String cId;
 
+    /** 体系主键 */
+    private String cScopeId;
+    
     /** 组合名称 */
     private String cCombName;
 
@@ -48,6 +51,14 @@ public class TElementCombination {
 
     public void setcId(String cId) {
         this.cId = cId == null ? null : cId.trim();
+    }
+    
+    public String getcScopeId() {
+        return cScopeId;
+    }
+
+    public void setcScopeId(String cScopeId) {
+        this.cScopeId = cScopeId == null ? null : cScopeId.trim();
     }
 
     public String getcCombName() {
