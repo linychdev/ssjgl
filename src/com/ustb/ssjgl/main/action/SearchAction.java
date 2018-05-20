@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.collect.Lists;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
@@ -60,10 +61,16 @@ public class SearchAction extends AbstractAction{
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
         List<ElementCombShowInfo> combList = interPotenService.getElementCombShowInfoListByTag(tag);
         ModelAndView mode = new ModelAndView();
-        mode.setViewName("elementCombList");
-        mode.addObject("msg", "hello kitty");
+        mode.setViewName("main/list");
         mode.addObject("validSearch", 1);
         mode.addObject("combList", combList);
+        
+        List<InteratomicPotentials> combDetailList = Lists.newArrayList();
+        for (ElementCombShowInfo elementComb : combList) {
+            InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(elementComb.getElementComb().getcId());
+            combDetailList.add(interPoten);
+        }
+        mode.addObject("combDetailList", combDetailList);
         return mode;
     }  
 

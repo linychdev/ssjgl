@@ -52,7 +52,7 @@
             <!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截.  -->  
             <property name="filterChainDefinitions">  
                 <value>  
-	                    /index.jsp=anon
+	                 <!--    /index.jsp=anon
 	                    /jmeditor.jsp=anon
 	                    /register.jsp=anon
 	                    /success.jsp=anon
@@ -62,14 +62,14 @@
 	                    /logout = logout
 	                    /test = anon
 	                    /login = anon
-	                    /register/* = anon
+	                    /register/* = anon -->
+						/** = anon
 						/**/*.js = anon
 						/**/*.css = anon
 						/**/*.png = anon
 						/**/*.jpg = anon
 						/**/*.gif = anon
 						/**/*.swf = anon
-						/** = authc
                 </value>  
             </property>  
         </bean>  

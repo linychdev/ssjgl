@@ -24,6 +24,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		<bean id="potentialsFileDao" class="com.ustb.ssjgl.main.dao.impl.PotentialsFileDaoImpl" parent="abstractDao"></bean>
 		<bean id="potentialsFunctionDao" class="com.ustb.ssjgl.main.dao.impl.PotentialsFunctionDaoImpl" parent="abstractDao"></bean>
 		<bean id="potentialsScopeDao" class="com.ustb.ssjgl.main.dao.impl.PotentialsScopeDaoImpl" parent="abstractDao"></bean>
+		<bean id="referenceDao" class="com.ustb.ssjgl.main.dao.impl.ReferenceDaoImpl" parent="abstractDao"></bean>
 		
 		<bean id="downloadRecordDao" class="com.ustb.ssjgl.visitlog.dao.impl.DownloadRecordDaoImpl" parent="abstractDao"></bean>
 		<bean id="loginRecordDao" class="com.ustb.ssjgl.visitlog.dao.impl.LoginRecordDaoImpl" parent="abstractDao"></bean>

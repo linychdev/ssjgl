@@ -97,7 +97,14 @@ $(function(){
    //双击元素
    $("div.elements").dblclick(function(){
        clearTimeout(TimeFn);
-       alert("a");
+       
+       var tmp=window.open("about:blank")  
+       tmp.moveTo(0,0)  
+       tmp.resizeTo(screen.width+20,screen.height)  
+       tmp.focus()  
+       tmp.location=contextPath+"/search/list/K";  
+       
+       
    });
    
    var timer=null;  
