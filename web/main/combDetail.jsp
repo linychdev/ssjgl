@@ -101,7 +101,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href = "#">the potential of Ag</a></li>
 						<li><a href = "#">the potential of Ag</a></li>
 					</ul>
-					<h3> Rangking List For Download</h3>
+					<h3>Download Rangking</h3>
 					<ul class = "sidebar-nav ">
 						<li><a href = "#">the potential of Ag</a></li>
 						<li><a href = "#">the potential of Ag</a></li>
@@ -121,7 +121,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="label "><a href = "#">${comb.elementComb.cCombName}</a></span>
 				    </c:forEach> 
 				    
-					<c:forEach items="${combDetailList}" var="combDetail" varStatus="id">  
 						<div class="panel panel-default jiange">
 							  <div class="panel-body">
 									<h2>
@@ -129,58 +128,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</h2>
 									<p>
 										<strong>Function:</strong>
-										<c:forEach items="${combDetail.functions}" var="function" varStatus="id">
+										<c:forEach items="${combDetail.functions}" var="function" varStatus="fun">
 											${function.cFormulaHtml }
+											<p />
 										</c:forEach>
 									</p>
-									<c:forEach items="${combDetail.referenceInfos}" var="referenceInfo" varStatus="id">
+									<c:forEach items="${combDetail.referenceInfos}" var="referenceInfo" varStatus="ref">
 										<p>
-											${referenceInfo.reference.cContent } DOI: ${referenceInfo.reference.cContent.cDoi } 
+											<strong>From:</strong>
+											<c:choose> 
+										     	<c:when test="${referenceInfo.reference.nSource eq 1 }">MGED</c:when>      
+										     	<c:otherwise>OTHERS</c:otherwise> 
+											</c:choose>
+										</p>
+										<p>
+											<strong>Reference:</strong>
+											${referenceInfo.reference.cContent } 
+										</p>
+										<p>
+											<strong>DOI:</strong>
+											<a href="http://dx.doi.org/${referenceInfo.reference.cContent.cDoi }">${referenceInfo.reference.cContent.cDoi }</a>
 										</p>
 										<p>
 											<strong>Notes:</strong>
 											${referenceInfo.reference.cNote } 
 										</p>
-										<strong>File(s):  </strong>
-										<c:forEach items="${referenceInfo.potentialsFiles}" var="file" varStatus="id">
-											<a href = "#">${file.cFileName }</a>
-										</c:forEach>
 										<p>
-											<strong>Format:</strong>
-											<a href = "#">Moldy FS</a>
-										</p>
-									</c:forEach>
-									<c:forEach items="${combDetail.referenceInfos}" var="referenceInfo" varStatus="id">
-										<!-- 分割线 -->
-										 <hr>
-										<c:if test="${referenceInfo.reference.nSource eq 2}">
-											<p>
-												${referenceInfo.reference.cContent } DOI: ${referenceInfo.reference.cContent.cDoi } 
-											</p>
-											<p>
-												<strong>Notes:</strong>
-												${referenceInfo.reference.cNote } 
-											</p>
 											<strong>File(s):  </strong>
-											<c:forEach items="${referenceInfo.potentialsFiles}" var="file" varStatus="id">
+											<c:forEach items="${referenceInfo.potentialsFiles}" var="file" varStatus="f">
 												<a href = "#">${file.cFileName }</a>
 											</c:forEach>
-										</c:if>
-										<p>
-											<strong>Format:</strong>
-											<a href = "#">Moldy FS</a>
 										</p>
+										<c:if test="${!ref.last}">
+											<hr />
+										</c:if>
 									</c:forEach>
-									 
 							  </div>
 						</div>
-					</c:forEach>
 				</div>
 			</div>
 		</div >
 	</div>
-
 </body>
-	
-
 </html>

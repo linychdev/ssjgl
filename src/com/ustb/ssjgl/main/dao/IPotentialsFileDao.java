@@ -20,15 +20,15 @@ public interface IPotentialsFileDao extends IAbstractDao{
     public void deletePtentialsFileById(String id);
 
     /**
-     * 根据组合id删除势数据文件元数据
-     * @param combName
+     * 根据文献id删除势数据文件元数据
+     * @param referenceId
      */
-    public void deleteByCombId(String combId);
+    public void deleteByReferenceId(String referenceId);
 
     /**
-     * 根据元素组合获取势数据文件
-     * @param combId
+     * 根据文献获取势数据文件
+     * @param referenceId
      * @return
      */
-    public List<TPotentialsFile> selectByCombId(String combId);
+    public List<TPotentialsFile> selectByReferenceId(String referenceId);
 }

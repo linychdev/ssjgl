@@ -80,7 +80,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Transactional
     @Override
     public void deletePotentialsById(String combId) {
-        potentialsFileDao.deleteByCombId(combId);
+        potentialsFileDao.deleteByReferenceId(combId);
         combParamDao.deleteByCombId(combId);
         combFunctionDao.deleteByCombId(combId);
         elementCombTagDao.deleteTagByCombId(combId);
@@ -123,7 +123,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public void deletePotenFileByPotenId(String combId) {
         //ftp服务器上的文件不删除，有同名，覆盖即可
-        potentialsFileDao.deleteByCombId(combId);
+        potentialsFileDao.deleteByReferenceId(combId);
     }
 
     /** (non-Javadoc)
@@ -131,7 +131,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
      */
     @Override
     public List<TPotentialsFile> getPotentialsFileMetaByCombId(String combId) {
-        return potentialsFileDao.selectByCombId(combId);
+        return potentialsFileDao.selectByReferenceId(combId);
     }
 
     /**
@@ -142,15 +142,14 @@ public class InterPotenServiceImpl implements IInterPotenService {
     public InteratomicPotentials getInterPotenByCombId(String id) {
         TElementCombination elementComb = elementCombDao.selectByPrimaryKey(TElementCombination.class, id);
         List<TElementCombDetail> combDetails = elementCombDetailDao.selectByCombId(elementComb.getcId());
-        List<TPotentialsFile> ptentialsFiles = potentialsFileDao.selectByCombId(elementComb.getcId());
         List<TElementCombTag> elementCombTags = elementCombTagDao.selectByCombId(elementComb.getcId());
         List<TPotentialsFunction> potenFunctions = potentialsFunctionDao.selectByCombId(elementComb.getcId());
         List<TReference> references = referenceDao.selectByCombId(elementComb.getcId());
         List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
-        
         List<TReferenceInfo> referenceInfos = Lists.newArrayList();
+        
         for (TReference reference : references) {
-            List<TPotentialsFile> potenFiles = potentialsFileDao.selectByCombId(reference.getcId());
+            List<TPotentialsFile> potenFiles = potentialsFileDao.selectByReferenceId(reference.getcId());
             TReferenceInfo refInfo = new TReferenceInfo();
             refInfo.setReference(reference);
             refInfo.setPotentialsFiles(potenFiles);
@@ -160,7 +159,6 @@ public class InterPotenServiceImpl implements IInterPotenService {
         InteratomicPotentials interPoten = new InteratomicPotentials();
         interPoten.setElementComb(elementComb);
         interPoten.setElementCombDetails(combDetails);
-        interPoten.setPtentialsFiles(ptentialsFiles);
         interPoten.setElementCombTags(elementCombTags);
         interPoten.setFunctions(potenFunctions);
         interPoten.setReferenceInfos(referenceInfos);
@@ -177,6 +175,9 @@ public class InterPotenServiceImpl implements IInterPotenService {
         List<TElementCombination> elementCombs = elementCombDao.getElementCombsByTag(tag);
         for (TElementCombination elementComb : elementCombs) {
             ElementCombShowInfo elementCombShowInfo = new ElementCombShowInfo();
+            //TODO 查询搜索记录表,设置有效搜索次数
+            int searchTimes = 0;
+            elementCombShowInfo.setSearchTimes(searchTimes);
             List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
             elementCombShowInfo.setElementComb(elementComb);
             elementCombShowInfo.setElementList(elementList);

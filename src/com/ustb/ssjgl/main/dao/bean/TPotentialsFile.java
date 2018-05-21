@@ -10,8 +10,8 @@ public class TPotentialsFile {
     /** 主键 */
     private String cId;
 
-    /** 元素组合id */
-    private String cElementCombId;
+    /** 文献id */
+    private String cReferenceId;
 
     /** 文件类型(1:参数描述,2:拟合曲线) */
     private Integer nFileType;
@@ -53,12 +53,12 @@ public class TPotentialsFile {
         this.cId = cId == null ? null : cId.trim();
     }
 
-    public String getcElementCombId() {
-        return cElementCombId;
+    public String getcReferenceId() {
+        return cReferenceId;
     }
 
-    public void setcElementCombId(String cElementCombId) {
-        this.cElementCombId = cElementCombId == null ? null : cElementCombId.trim();
+    public void setcReferenceId(String cReferenceId) {
+        this.cReferenceId = cReferenceId == null ? null : cReferenceId.trim();
     }
 
     public String getcFileName() {

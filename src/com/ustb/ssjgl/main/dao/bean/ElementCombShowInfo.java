@@ -1,9 +1,3 @@
-/*
- * @(#)ElementCombShowInfo.java 2018年4月28日下午4:23:20
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.main.dao.bean;
 
 import java.util.List;
@@ -17,7 +11,7 @@ import java.util.List;
 public class ElementCombShowInfo {
     private TElementCombination elementComb;
     private List<TElement> elementList;
-    
+    private Integer searchTimes;
     /**
      * @return the elementComb
      */
@@ -41,5 +35,13 @@ public class ElementCombShowInfo {
      */
     public void setElementList(List<TElement> elementList) {
         this.elementList = elementList;
+    }
+    
+    public Integer getSearchTimes() {
+        return searchTimes;
+    }
+    
+    public void setSearchTimes(Integer searchTimes) {
+        this.searchTimes = searchTimes;
     }
 }

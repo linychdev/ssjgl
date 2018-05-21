@@ -24,15 +24,15 @@ public class PotentialsFileDaoImpl extends AbstractDao implements IPotentialsFil
     }
 
     @Override
-    public void deleteByCombId(String combId) {
-        String statement = mapperNamespace + ".deleteByCombId";
-        this.getSqlSession().delete(statement, combId);
+    public void deleteByReferenceId(String referenceId) {
+        String statement = mapperNamespace + ".deleteByReferenceId";
+        this.getSqlSession().delete(statement, referenceId);
     }
 
     @Override
-    public List<TPotentialsFile> selectByCombId(String combId) {
-        String statement = mapperNamespace + ".selectByCombId";
-        return this.getSqlSession().selectList(statement, combId);
+    public List<TPotentialsFile> selectByReferenceId(String referenceId) {
+        String statement = mapperNamespace + ".selectByReferenceId";
+        return this.getSqlSession().selectList(statement, referenceId);
     }
 
 }
