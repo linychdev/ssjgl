@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,29 +61,17 @@ public class SearchAction extends AbstractAction{
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
         List<ElementCombShowInfo> combList = interPotenService.getElementCombShowInfoListByTag(tag);
+       
         if(combList.size() == 1){
             String combId = combList.get(0).getElementComb().getcId();
-            ModelAndView detailModel = getElementCombDetail(combId);
-            return detailModel;
-        }
-        int max = 0;
-        int min = Integer.MAX_VALUE;
-        for (ElementCombShowInfo combInfo : combList) {
-            if(combInfo.getSearchTimes() > max){
-                max = combInfo.getSearchTimes();
-            }
-            if(combInfo.getSearchTimes() < min){
-                min = combInfo.getSearchTimes();
-            }
+            return getElementCombDetail(combId);
         }
         ModelAndView mode = new ModelAndView();
         mode.setViewName("main/list");
         mode.addObject("validSearch", 1);
         mode.addObject("combList", combList);
-        mode.addObject("maxSearchTimes", max);
-        mode.addObject("minSearchTimes", min);
         return mode;
-    }  
+    }
 
     @RequestMapping(value = "/search/detail/{combId}", method=RequestMethod.GET)
     public ModelAndView getElementCombDetail(@PathVariable(value = "combId") String combId) {

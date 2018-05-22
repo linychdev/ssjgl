@@ -2,6 +2,8 @@ package com.ustb.ssjgl.main.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -176,13 +178,14 @@ public class InterPotenServiceImpl implements IInterPotenService {
         for (TElementCombination elementComb : elementCombs) {
             ElementCombShowInfo elementCombShowInfo = new ElementCombShowInfo();
             //TODO 查询搜索记录表,设置有效搜索次数
-            int searchTimes = 0;
+            double searchTimes = 0.0;
             elementCombShowInfo.setSearchTimes(searchTimes);
             List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
             elementCombShowInfo.setElementComb(elementComb);
             elementCombShowInfo.setElementList(elementList);
             elementCombShowInfos.add(elementCombShowInfo);
         }
+        setWordCloudFontSize(elementCombShowInfos);
         return elementCombShowInfos;
     }
 
@@ -198,4 +201,33 @@ public class InterPotenServiceImpl implements IInterPotenService {
     public void addReference(TReference ref) {
         referenceDao.insertSelective(ref);
     }
+    
+    /**
+     * 设置词云的字体大小
+     * @param combList
+     */
+    private void setWordCloudFontSize(List<ElementCombShowInfo> combList) {
+        double[] searchTimes = new double[combList.size()];
+        for (int i = 0; i < combList.size(); i++) {
+            ElementCombShowInfo combInfo = combList.get(i);
+            searchTimes[i] = combInfo.getSearchTimes();
+        }
+        //计算avg(平均数)
+        Mean mean = new Mean(); // 算术平均值
+        double avg = mean.evaluate(searchTimes);
+        
+        //计算stddev(标准差)
+        StandardDeviation stdDev =new StandardDeviation();//apache.commons.math3 标准差  
+        double sd = stdDev.evaluate(searchTimes);
+        
+        for (ElementCombShowInfo combInfo : combList) {
+            Double times = combInfo.getSearchTimes();
+            if(sd == 0){
+                combInfo.setSearchTimes(0.0);
+            }else{
+                double val = (times - avg) / sd;
+                combInfo.setSearchTimes(val);
+            }
+        }
+    }  
 }

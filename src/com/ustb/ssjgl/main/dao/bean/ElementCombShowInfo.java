@@ -11,7 +11,7 @@ import java.util.List;
 public class ElementCombShowInfo {
     private TElementCombination elementComb;
     private List<TElement> elementList;
-    private Integer searchTimes;
+    private Double searchTimes;
     /**
      * @return the elementComb
      */
@@ -37,11 +37,11 @@ public class ElementCombShowInfo {
         this.elementList = elementList;
     }
     
-    public Integer getSearchTimes() {
+    public Double getSearchTimes() {
         return searchTimes;
     }
     
-    public void setSearchTimes(Integer searchTimes) {
+    public void setSearchTimes(Double searchTimes) {
         this.searchTimes = searchTimes;
     }
 }
