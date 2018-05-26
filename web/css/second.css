@@ -76,11 +76,40 @@ html, body{
 	margin:0px auto;
 }
 
+.wrap{
+	width:1200px;
+	margin:0px auto;
+}
 .logo{
 	margin-top:20px;
 }
-.vpd{
-	width:1200px;
-	margin:20px auto;
+
+.xuanzhuan{
+	width:700px;
+	margin:auto;
 }
 
+.tagBall {
+	width:600px;
+	height:600px;
+	margin:0px auto;
+	position:absolute;
+}
+.tag {
+	display:block;
+	position:absolute;
+	color:#000;
+	text-decoration:none;
+	font-size:15px;
+	font-family:"微软雅黑";
+	font-weight:bold;
+}
+.tag:hover {
+	border:1px solid #666;
+}
+.form_vav td {
+	color:#a78b6f;
+
+.element-label{
+	width:100%;
+}
