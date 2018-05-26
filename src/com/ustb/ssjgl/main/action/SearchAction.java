@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.common.collect.Lists;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
@@ -60,29 +61,25 @@ public class SearchAction extends AbstractAction{
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
         List<ElementCombShowInfo> combList = interPotenService.getElementCombShowInfoListByTag(tag);
+       
+        if(combList.size() == 1){
+            String combId = combList.get(0).getElementComb().getcId();
+            return getElementCombDetail(combId);
+        }
         ModelAndView mode = new ModelAndView();
         mode.setViewName("main/list");
         mode.addObject("validSearch", 1);
         mode.addObject("combList", combList);
-        
-        List<InteratomicPotentials> combDetailList = Lists.newArrayList();
-        for (ElementCombShowInfo elementComb : combList) {
-            InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(elementComb.getElementComb().getcId());
-            combDetailList.add(interPoten);
-        }
-        mode.addObject("combDetailList", combDetailList);
         return mode;
-    }  
+    }
 
     @RequestMapping(value = "/search/detail/{combId}", method=RequestMethod.GET)
     public ModelAndView getElementCombDetail(@PathVariable(value = "combId") String combId) {
-        //TODO 根据页面请求方式返回
         InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(combId);
         ModelAndView mode = new ModelAndView();
-        mode.setViewName("aaa");
-        mode.addObject("msg", "hello kitty");
+        mode.setViewName("main/combDetail");
         mode.addObject("validSearch", 1);
-        mode.addObject("interPoten", interPoten);
+        mode.addObject("combDetail", interPoten);
         return mode;
     }  
     
@@ -115,4 +112,12 @@ public class SearchAction extends AbstractAction{
             FileUtils.deleteQuietly(file);
         }
     }
+    
+    @VisitLog(VisitLogType.BROWSE)
+    @RequestMapping(value = "/index", method=RequestMethod.GET)
+    public ModelAndView showSearchIndex() {
+        ModelAndView mode = new ModelAndView();
+        mode.setViewName("main/index");
+        return mode;
+    }  
 }

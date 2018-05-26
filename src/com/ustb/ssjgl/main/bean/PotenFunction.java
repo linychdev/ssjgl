@@ -32,11 +32,12 @@ public class PotenFunction {
     }
     public PotenFunction(JSONObject potenFunctionJson) {
         super();
+        //FIXME 函数的参数不做展示，直接提供数据文件，暂时不设置参数信息 2018-05-20
         //设置函数主题信息
-        TPotentialsFunction function = setFunction(potenFunctionJson);
+        this.potenFunction = setFunction(potenFunctionJson);
         
         //设置函数参数信息
-        setParams(potenFunctionJson, function);
+//        setParams(potenFunctionJson, function);
     }
     private void setParams(JSONObject potenFunctionJson, TPotentialsFunction function) {
         JSONArray params = JsonUtils.getJSONArrayFromJson(potenFunctionJson, "functionParams");
@@ -63,14 +64,12 @@ public class PotenFunction {
     }
     private TPotentialsFunction setFunction(JSONObject potenFunctionJson) {
         String functionName = JsonUtils.getStrFromJson(potenFunctionJson, "functionName");
-        String functionScopeId = JsonUtils.getStrFromJson(potenFunctionJson, "functionScopeId");
         String functionFormula = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormula");
         String functionFormulaHtml = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormulaHtml");
         String functionDesc = JsonUtils.getStrFromJson(potenFunctionJson, "functionDesc");
         
         TPotentialsFunction function = new TPotentialsFunction();
         function.setcName(functionName);
-        function.setcScopeId(functionScopeId);
         function.setcFormula(functionFormula);
         function.setcFormulaHtml(functionFormulaHtml);
         function.setcDescription(functionDesc);

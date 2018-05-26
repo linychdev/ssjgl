@@ -153,7 +153,7 @@ public class BackgroundAction extends AbstractAction{
                 
                 TPotentialsFile ptentialsFile = new TPotentialsFile();
                 ptentialsFile.setcFileName(multipartFile.getOriginalFilename());
-                ptentialsFile.setcElementCombId(relatedId);
+                ptentialsFile.setcReferenceId(relatedId);
                 ptentialsFile.setnSize(FileUtils.sizeOf(file));
                 ptentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
                 ptentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+File.separator+remoteFileName);

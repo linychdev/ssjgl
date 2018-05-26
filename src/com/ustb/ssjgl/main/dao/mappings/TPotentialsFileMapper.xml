@@ -3,7 +3,7 @@
 <mapper namespace="com.ustb.ssjgl.main.dao.mappings.TPotentialsFileMapper" >
   <resultMap id="BaseResultMap" type="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
     <id column="c_id" property="cId" jdbcType="VARCHAR" />
-    <result column="c_element_comb_id" property="cElementCombId" jdbcType="VARCHAR" />
+    <result column="c_reference_id" property="cReferenceId" jdbcType="VARCHAR" />
     <result column="n_file_type" property="nFileType" jdbcType="INTEGER" />
     <result column="c_file_name" property="cFileName" jdbcType="VARCHAR" />
     <result column="c_ftp_url_path" property="cFtpUrlPath" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
     <result column="d_time" property="dTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    c_id, c_element_comb_id, n_file_type, c_file_name, c_ftp_url_path, c_suffix, n_size, n_valid, 
+    c_id, c_reference_id, n_file_type, c_file_name, c_ftp_url_path, c_suffix, n_size, n_valid, 
     d_upload_time, d_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -28,11 +28,11 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
-    insert into t_potentials_file (c_id, c_element_comb_id, n_file_type, c_file_name, 
+    insert into t_potentials_file (c_id, c_reference_id, n_file_type, c_file_name, 
       c_ftp_url_path, c_suffix, n_size, 
       n_valid, d_upload_time, d_time
       )
-    values (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{nFileType,jdbcType=INTEGER}, #{cFileName,jdbcType=VARCHAR}, 
+    values (#{cId,jdbcType=VARCHAR}, #{cReferenceId,jdbcType=VARCHAR}, #{nFileType,jdbcType=INTEGER}, #{cFileName,jdbcType=VARCHAR}, 
       #{cFtpUrlPath,jdbcType=VARCHAR}, #{cSuffix,jdbcType=VARCHAR}, #{nSize,jdbcType=INTEGER}, 
       #{nValid,jdbcType=INTEGER}, #{dUploadTime,jdbcType=TIMESTAMP}, #{dTime,jdbcType=TIMESTAMP}
       )
@@ -43,8 +43,8 @@
       <if test="cId != null" >
         c_id,
       </if>
-      <if test="cElementCombId != null" >
-        c_element_comb_id,
+      <if test="cReferenceId != null" >
+        c_reference_id,
       </if>
       <if test="nFileType != null" >
         n_file_type,
@@ -75,8 +75,8 @@
       <if test="cId != null" >
         #{cId,jdbcType=VARCHAR},
       </if>
-      <if test="cElementCombId != null" >
-        #{cElementCombId,jdbcType=VARCHAR},
+      <if test="cReferenceId != null" >
+        #{cReferenceId,jdbcType=VARCHAR},
       </if>
       <if test="nFileType != null" >
         #{nFileType,jdbcType=INTEGER},
@@ -107,8 +107,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
     update t_potentials_file
     <set >
-      <if test="cElementCombId != null" >
-        c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+      <if test="cReferenceId != null" >
+        c_reference_id = #{cReferenceId,jdbcType=VARCHAR},
       </if>
       <if test="nFileType != null" >
         n_file_type = #{nFileType,jdbcType=INTEGER},
@@ -139,7 +139,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ustb.ssjgl.main.dao.bean.TPotentialsFile" >
     update t_potentials_file
-    set c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR},
+    set c_reference_id = #{cReferenceId,jdbcType=VARCHAR},
       n_file_type = #{nFileType,jdbcType=INTEGER},
       c_file_name = #{cFileName,jdbcType=VARCHAR},
       c_ftp_url_path = #{cFtpUrlPath,jdbcType=VARCHAR},
@@ -151,17 +151,17 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
   
-  <select id="selectByCombId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByReferenceId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_potentials_file
-   where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+   where c_reference_id = #{cReferenceId,jdbcType=VARCHAR}
      and n_valid = 1
   </select>
   
-  <delete id="deleteByCombId" parameterType="java.lang.String" >
+  <delete id="deleteByReferenceId" parameterType="java.lang.String" >
     delete from t_potentials_file
-     where c_element_comb_id = #{cElementCombId,jdbcType=VARCHAR}
+     where c_reference_id = #{cReferenceId,jdbcType=VARCHAR}
        and n_valid = 1
   </delete>
   

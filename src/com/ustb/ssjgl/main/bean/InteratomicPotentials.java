@@ -16,9 +16,7 @@ import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TElementCombDetail;
 import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
-import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
-import com.ustb.ssjgl.main.dao.bean.TReference;
 
 /**
  * InteratomicPotentials
@@ -36,13 +34,11 @@ public class InteratomicPotentials {
 
     private List<TReferenceInfo> referenceInfos = Lists.newArrayList();
 
-    private List<TReference> references = Lists.newArrayList();
-    
-    private List<TPotentialsFile> ptentialsFiles = Lists.newArrayList();
-    
     private List<TPotentialsFunction> functions = Lists.newArrayList();
 
     private List<TElement> elements = Lists.newArrayList();
+
+    private List<TCombFunction> combFunctions = Lists.newArrayList();
 
     private IElementDao elementDao = SpringBeanUtils.getBean(IElementDao.class, "elementDao");
 
@@ -65,30 +61,8 @@ public class InteratomicPotentials {
         
         //设置函数
         setCombFunctions(interPotenJson);
-        
-        //设置相关文件
-        setReferences(interPotenJson);
     }
     
-    /**
-     * @param interPotenJson
-     */
-    private void setReferences(JSONObject interPotenJson) {
-        JSONArray referencesJson = JsonUtils.getJSONArrayFromJson(interPotenJson, "references");
-        for (Object obj : referencesJson) {
-            JSONObject reference = (JSONObject) obj;
-            String content = JsonUtils.getStrFromJson(reference, "content");
-            String doi = JsonUtils.getStrFromJson(reference, "doi");
-            String note = JsonUtils.getStrFromJson(reference, "note");
-            TReference ref = new TReference();
-            ref.setcElementCombId(elementComb.getcId());
-            ref.setcContent(content);
-            ref.setcDoi(doi);
-            ref.setcNote(note);
-            ref.setnSource(SsjglContants.REFERENCE_SOURCE_SSJGL);
-            references.add(ref);
-        }
-    }
     /**
      * @param interPotenJson
      */
@@ -100,6 +74,7 @@ public class InteratomicPotentials {
             TCombFunction combfunction = new TCombFunction();
             combfunction.setcPotentialsFunctionId(functionId);
             combfunction.setcElementCombId(elementComb.getcId());
+            combFunctions.add(combfunction);
         }
     }
     private void setCombTags() {
@@ -155,11 +130,13 @@ public class InteratomicPotentials {
     }
 
     private void setElementComb(JSONObject jasonObject) {
+        String cScopeId = JsonUtils.getStrFromJson(jasonObject, "scopeId");
         String cCombName = JsonUtils.getStrFromJson(jasonObject, "combName");
         String cDescription = JsonUtils.getStrFromJson(jasonObject, "combDescription");
         String cNote = JsonUtils.getStrFromJson(jasonObject, "combNote");
         String cReferenceDescription = JsonUtils.getStrFromJson(jasonObject, "combReferenceDesc");
         elementComb = new TElementCombination();
+        elementComb.setcScopeId(cScopeId);
         elementComb.setcCombName(cCombName);
         elementComb.setcDescription(cDescription);
         elementComb.setcNote(cNote);
@@ -219,29 +196,11 @@ public class InteratomicPotentials {
     public void setReferenceInfos(List<TReferenceInfo> referenceInfos) {
         this.referenceInfos = referenceInfos;
     }
-    public List<TPotentialsFile> getPtentialsFiles() {
-        return ptentialsFiles;
-    }
-    public void setPtentialsFiles(List<TPotentialsFile> ptentialsFiles) {
-        this.ptentialsFiles = ptentialsFiles;
-    }
     public List<TPotentialsFunction> getFunctions() {
         return functions;
     }
     public void setFunctions(List<TPotentialsFunction> functions) {
         this.functions = functions;
-    }
-    /**
-     * @return the references
-     */
-    public List<TReference> getReferences() {
-        return references;
-    }
-    /**
-     * @param references the references to set
-     */
-    public void setReferences(List<TReference> references) {
-        this.references = references;
     }
     public List<TElement> getElements() {
         return elements;
@@ -273,5 +232,11 @@ public class InteratomicPotentials {
             }
         }
         return holeNameComb.toString();
+    }
+    public List<TCombFunction> getCombFunctions() {
+        return combFunctions;
+    }
+    public void setCombFunctions(List<TCombFunction> combFunctions) {
+        this.combFunctions = combFunctions;
     }
 }
