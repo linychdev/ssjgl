@@ -164,10 +164,11 @@
 		 comb.*
 	     from t_element_combination comb 
 	left join t_element_comb_tag tag on (comb.c_id = tag.c_element_comb_id)
+	left join t_potentials_scope scope on (comb.c_scope_id = scope.c_id)
     	where tag.c_tag = #{cTag,jdbcType=VARCHAR}
 	      and tag.n_valid = 1
 		  and comb.n_valid = 1
-	order by comb.c_comb_name
+	order by scope.n_order, comb.c_comb_name
   </select>
   
   <select id="selectAllCombs" resultMap="BaseResultMap" parameterType="java.lang.String" >

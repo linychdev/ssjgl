@@ -19,6 +19,7 @@ import com.ustb.ssjgl.main.dao.IElementCombTagDao;
 import com.ustb.ssjgl.main.dao.IElementDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFileDao;
 import com.ustb.ssjgl.main.dao.IPotentialsFunctionDao;
+import com.ustb.ssjgl.main.dao.IPotentialsScopeDao;
 import com.ustb.ssjgl.main.dao.IReferenceDao;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
 import com.ustb.ssjgl.main.dao.bean.TElement;
@@ -27,6 +28,7 @@ import com.ustb.ssjgl.main.dao.bean.TElementCombTag;
 import com.ustb.ssjgl.main.dao.bean.TElementCombination;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsScope;
 import com.ustb.ssjgl.main.dao.bean.TReference;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 
@@ -55,6 +57,9 @@ public class InterPotenServiceImpl implements IInterPotenService {
     
     @Autowired
     private IPotentialsFunctionDao potentialsFunctionDao;
+
+    @Autowired
+    private IPotentialsScopeDao potentialsScopeDao;
     
     @Autowired
     private IReferenceDao referenceDao;
@@ -181,8 +186,10 @@ public class InterPotenServiceImpl implements IInterPotenService {
             double searchTimes = 0.0;
             elementCombShowInfo.setSearchTimes(searchTimes);
             List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
+            TPotentialsScope scope = potentialsScopeDao.selectByPrimaryKey(TPotentialsScope.class, elementComb.getcScopeId());
             elementCombShowInfo.setElementComb(elementComb);
             elementCombShowInfo.setElementList(elementList);
+            elementCombShowInfo.setScope(scope);
             elementCombShowInfos.add(elementCombShowInfo);
         }
         setWordCloudFontSize(elementCombShowInfos);

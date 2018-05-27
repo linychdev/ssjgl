@@ -5,7 +5,10 @@ import com.ustb.ssjgl.main.dao.IPotentialsScopeDao;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsScope;
 
 public class PotentialsScopeDaoImpl extends AbstractDao implements IPotentialsScopeDao {
-
+    private String mapperNamespace = "com.ustb.ssjgl.main.dao.mappings.TPotentialsScopeMapper";
+    {
+        super.mapperNamespace = "com.ustb.ssjgl.main.dao.mappings.";
+    }
     @Override
     public void addPtentialsScope(TPotentialsScope ptenScope) {
         insertSelective(ptenScope);

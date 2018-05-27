@@ -12,6 +12,7 @@ public class ElementCombShowInfo {
     private TElementCombination elementComb;
     private List<TElement> elementList;
     private Double searchTimes;
+    private TPotentialsScope scope;
     /**
      * @return the elementComb
      */
@@ -43,5 +44,11 @@ public class ElementCombShowInfo {
     
     public void setSearchTimes(Double searchTimes) {
         this.searchTimes = searchTimes;
+    }
+    public TPotentialsScope getScope() {
+        return scope;
+    }
+    public void setScope(TPotentialsScope scope) {
+        this.scope = scope;
     }
 }
