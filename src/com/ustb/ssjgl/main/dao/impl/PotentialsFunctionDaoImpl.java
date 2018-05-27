@@ -48,4 +48,10 @@ public class PotentialsFunctionDaoImpl extends AbstractDao implements IPotential
         String statement = mapperNamespace + ".selectByCombId";
         return this.getSqlSession().selectList(statement, combId);
     }
+
+    @Override
+    public List<TPotentialsFunction> selectAll() {
+        String statement = mapperNamespace + ".selectAll";
+        return this.getSqlSession().selectList(statement);
+    }
 }

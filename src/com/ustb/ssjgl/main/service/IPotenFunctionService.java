@@ -1,6 +1,9 @@
 package com.ustb.ssjgl.main.service;
 
+import java.util.List;
+
 import com.ustb.ssjgl.main.bean.PotenFunction;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 
 /**
  * IPotenFunctionService
@@ -27,4 +30,10 @@ public interface IPotenFunctionService {
      * @param paramId
      */
     public boolean deleteFunParamById(String paramId);
+    
+    /**
+     * 获取全部函数
+     * @return
+     */
+    public List<TPotentialsFunction> getAllFunction();
 }

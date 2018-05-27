@@ -1,5 +1,7 @@
 package com.ustb.ssjgl.main.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +47,8 @@ public class PotenFunctionServiceImpl implements IPotenFunctionService{
     public boolean addFunction(PotenFunction function) {
         try {
             potentialsFunctionDao.addFunction(function.getPotenFunction());
-            functionParamDao.addFunParams(function.getFunctionParams());
+            // FIXME 函数暂时没有参数
+//            functionParamDao.addFunParams(function.getFunctionParams());
             return true;
         } catch (Exception e) {
             LOG.error("新增函数及参数出错！", e);
@@ -92,5 +95,10 @@ public class PotenFunctionServiceImpl implements IPotenFunctionService{
             LOG.error("删除函数的参数失败！参数id:{}", paramId, e);
             return false;
         }
+    }
+
+    @Override
+    public List<TPotentialsFunction> getAllFunction() {
+        return potentialsFunctionDao.selectAll();
     }
 }

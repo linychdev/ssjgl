@@ -34,47 +34,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //js -->
 </head>
 	<body>
-<!-- header -->
-	<div class="header" style ="background:url(${pageContext.request.contextPath}/img/banner5.jpg) repeat-x; background-size: cover;" >
-		<div class="main">
-			<div class="header-nav">
-				<nav class="navbar navbar-default">
-					<div class="navbar-header">
-						<div class="logo">
-							<img src="${pageContext.request.contextPath}/img/logo20.png" alt="" style="width:150px; height:50px;">
-						</div>
-					</div>
-
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-					 <ul class="nav navbar-nav cl-effect-14">
-						<li><a href="index.html" class="active">Home</a></li>
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-								Resources <span class="caret"></span>
-						    </a>
-							<ul class="dropdown-menu">
-								<li><a href = "#">Semiconductors</a></li>
-								<li><a href = "#">Ionic Crystals</a></li>
-								<li><a href = "#">Interface</a></li>
-								<li><a href = "#">Metal Alloys</a></li>
-								<li><a href = "#">Others</a></li>
-								
-						    </ul>
-						</li>
-
-						<li><a href="services.html">Help</a></li>
-						<li><a href="AboutUs.html">About Us</a></li>
-						<li><a href="User.html">User</a></li>
-						<li><a href="background system.html">Background System</a></li>
-					  </ul>
-					</div><!-- /.navbar-collapse -->
-				</nav>
-			</div>
-		</div>
-	</div>
 <!-- //header -->
-					
+	<jsp:include page="/header.jsp" flush="true" />
 	<div class ="container vpad">
 		<div class = "row">
 		    <!-- 侧边框 -->

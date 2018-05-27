@@ -20,7 +20,7 @@ p{
   background: -webkit-linear-gradient(left,rgba(0,0,255,0),rgba(0,0,255,1)); /* Safari 5.1 - 6 */
   background: -o-linear-gradient(right,rgba(0,0,255,0),rgba(0,0,255,1)); /* Opera 11.1 - 12*/
   background: -moz-linear-gradient(right,rgba(0,0,255,0),rgba(0,0,255,1)); /* Firefox 3.6 - 15*/
-  background: linear-gradient(to right, rgba(0,0,255,0), rgba(0,0,255,1)); /* 标准的语法 */
+  background: linear-gradient(to right, rgba(0,0,255,0), rgba(0,0,255,1)); /* 鏍囧噯鐨勮娉�*/
   padding-bottom:15px;
   padding-top:15px;
   }
@@ -39,7 +39,7 @@ p{
 .sidebar .sub-menu li a { padding: 15px 30px; text-decoration: none; display: block; background-color: #fff; }
 .sidebar .sub-menu li[class*=active] > a { color: #00acac !important; }
 
-.maincontent { width: 100%; height: 100%; margin: 0 auto; min-width: 320px !important; overflow: hidden; }
+.maincontent { width: 100%; height: auto; margin: 0 auto; min-width: 320px !important; overflow: hidden; }
 .maincontent .breadcrumb { padding: 14px 15px;background:#40E0D0 }
 
 .table th, .table td {  
@@ -93,5 +93,11 @@ background: #777;
 font: 20px;
 }
 
+.display_none{
+	display: none;
+}
 
-
+/*函数模块样式*/
+.layui-layer-content{
+	overflow: hidden !important;
+}

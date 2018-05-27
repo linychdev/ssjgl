@@ -163,4 +163,13 @@
     where fun.c_id = combfun.c_ptentials_function_id
       and combfun.c_element_comb_id = #{combId,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectAll" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" />
+    from t_potentials_function
+    where n_valid = 1
+ order by d_time desc
+  </select>
 </mapper>

@@ -1,27 +1,32 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <link href="css/admin.css" rel="stylesheet" type="text/css" media="all" />
- <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" media="all" />
- <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
- <link href="css/bootstrap.min.css" rel="stylesheet" />
- <link href="css/dataurl.css" rel="stylesheet" />
- <link href="css/font-awesome.min.css" rel="stylesheet" />
-<!-- js -->
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/holder.js"></script>
-	<script src="js/default.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js"></script>
-	<script src="js/bootstrap-datetimepicker.js"></script>
-	<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
-	<script src="js/admin.js" type="text/javascript"></script>
-    <!--bootstrap库-->
- <!--页面加载进度条-->
-    <script src="js/pace.min.js"></script>
- <!--font-awesome字体库-->
+ <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css" media="all" />
+ <link href="${pageContext.request.contextPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" media="all" />
+ <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+ <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
+ <link href="${pageContext.request.contextPath}/css/dataurl.css" rel="stylesheet" />
+ <link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/holder.js"></script>
+<script src="${pageContext.request.contextPath}/js/default.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/admin.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="${pageContext.request.contextPath}/js/pace.min.js"></script>
+<script type="text/javascript">
+	var contextPath = "<%=request.getContextPath()%>";
+</script>
 </head>	
 <body>	
 	<!-- header -->
@@ -74,7 +79,8 @@
                 </li>
             </ul>
         </div>
-        <div class="maincontent row"> 
+        <%-- <jsp:include page="user.jsp" flush="true" /> --%>
+        <div class="maincontent row" style="display:none"> 
 			<!-- 通过给class 加style="display:none;隐藏DIV -->
             <!--主面板 start-->
             <ul class="breadcrumb">

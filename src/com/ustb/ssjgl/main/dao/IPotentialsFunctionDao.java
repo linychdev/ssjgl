@@ -32,4 +32,9 @@ public interface IPotentialsFunctionDao extends IAbstractDao {
      * @return
      */
     public List<TPotentialsFunction> selectByCombId(String combId);
+
+    /**
+     * 查询出全部有效函数
+     */
+    public List<TPotentialsFunction> selectAll();
 }

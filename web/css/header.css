@@ -1,0 +1,58 @@
+.header{
+	 height:90px;
+	 width:100%;
+	 font-weight:bold;
+	 background-size: cover;
+	 background-image:url(../img/banner5.jpg);
+	 background-repeat: repeat-x;
+}
+
+.main{
+	/* width:1230px; */
+	margin:0px auto;
+}
+
+.navbar-default .navbar-nav > li > a.active {
+    /* color:#00FFCC; */
+	color:#ffff00;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    /* color: #00FFCC; */
+	color:#ffff00;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #000000;
+	font-family: 'Raleway', sans-serif;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
+}
+.navbar-default{
+	background:none !important;
+	border:none !important;
+}
+.navbar-nav {
+    float: right;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #999;
+    background:none;
+}
+.navbar-nav > li {
+    margin: 1em 0em 0 0;
+}
+.nav > li > a {
+    padding: 25px;
+    font-size: 14px;
+    position: relative;
+	padding-right:0px;
+	padding-left:50px;
+}
+.navbar {
+    margin-bottom: 0;
+}
+
+.logo{
+	margin-top:20px;
+}

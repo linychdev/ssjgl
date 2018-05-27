@@ -2,6 +2,7 @@ package com.ustb.ssjgl.main.action;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ustb.ssjgl.common.SsjglContants;
@@ -28,6 +30,7 @@ import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 import com.ustb.ssjgl.main.dao.bean.TReference;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 import com.ustb.ssjgl.main.service.IPotenFunctionService;
@@ -262,12 +265,46 @@ public class BackgroundAction extends AbstractAction{
         Map<String, Object> result = new HashMap<String, Object>();
         try {
             String functionId = request.getParameter("functionId");
-            potenFunctionService.deleteFunctionById(functionId);
-            result.put("success", true);
+            boolean deleteSuccess = potenFunctionService.deleteFunctionById(functionId);
+            if(deleteSuccess){
+                result.put("success", true);
+            }else{
+                result.put("success", false);
+                result.put("msg", "有原子间势依赖此函数，无法删除！");
+            }
         } catch (Exception e) {
-            LOG.error("新增势函数出错！", e);
+            LOG.error("删除势函数出错！", e);
             result.put("success", false);
+            result.put("msg", e.getMessage());
         }
         this.writeAjaxObject(response, result);
+    }
+
+    /**
+     * 删除势函数
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/admin")
+    @ResponseBody
+    public ModelAndView backgroundIndex(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mode = new ModelAndView();
+        mode.setViewName("background/admin");
+        return mode;
+    }
+
+    /**
+     * 删除势函数
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/functionList")
+    @ResponseBody
+    public ModelAndView getFunctionList(HttpServletRequest request, HttpServletResponse response) {
+        List<TPotentialsFunction> functionList = potenFunctionService.getAllFunction();
+        ModelAndView mode = new ModelAndView();
+        mode.addObject("functionList", functionList);
+        mode.setViewName("background/function");
+        return mode;
     }
 }
