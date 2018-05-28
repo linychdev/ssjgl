@@ -152,7 +152,9 @@
       c_formula = #{cFormula,jdbcType=VARCHAR},
       c_description = #{cDescription,jdbcType=VARCHAR},
       n_valid = #{nValid,jdbcType=INTEGER},
-      d_time = #{dTime,jdbcType=TIMESTAMP}
+      d_time = #{dTime,jdbcType=TIMESTAMP},
+      c_formula_html = #{cFormulaHtml,jdbcType=LONGVARCHAR},
+      b_image = #{bImage,jdbcType=LONGVARBINARY}
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
   

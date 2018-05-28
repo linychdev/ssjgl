@@ -1,5 +1,6 @@
 $(function () {
-	
+	var operationType;
+	var functionId;
 	$("#userManager").on("click",function(){
 		$("#mainSpace").attr("src", "userList");  
 	});
@@ -13,6 +14,7 @@ $(function () {
 	});
 	
 	$("#addFunButton").on("click",function(){
+		operationType = "insert";
 		$("#addFunDiv").removeClass("display_none");
 	});
 	
@@ -22,12 +24,15 @@ $(function () {
 		var funDesc = $("#funDesc").val();
 		var json = '{"functionName":"'+funName+'","functionFormula":"","functionFormulaHtml":"'+funHtml+'","functionDesc":"'+funDesc+'"}';
 		 $.post(contextPath + "/manage/addFunction", {
-			 potenFunctionJson : json
+			 potenFunctionJson : json,
+			 operationType : operationType,
+			 functionId : functionId
 		  }, function(data) {
 		    if (data.success) {
-		    	layer.alert('保存成功');
 		    	$("#addFunDiv").addClass("display_none");
-		    	self.location.reload();
+		    	layer.alert('保存成功',function(){
+		    		self.location.reload();
+		    	});
 		    }else{
 		    	layer.alert('保存失败!请联系管理员');
 		    }
@@ -59,6 +64,21 @@ $(function () {
 		}, function(){
 			return;
 		});
+	});
+	
+	
+	$(".editFun").on("click",function(){
+		operationType = "update";
+		var bh = $(this).attr("id");
+		functionId = bh;
+		$.post(contextPath + "/manage/selectFunction", {
+			functionId : bh
+		  }, function(data) {
+			  $("#funName").val(data.fun.cName);
+			  $("#funDesc").val(data.fun.cDescription);
+			  $("#funEdit").html(data.fun.cFormulaHtml);
+			  $("#addFunDiv").removeClass("display_none");
+		  }, "json");
 	});
 	
 //    var picker1 = $('#datetimepicker1').datetimepicker({  

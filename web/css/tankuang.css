@@ -25,3 +25,15 @@
 .col-sm-8 .editDiv{
 	height: 100%;
 }
+
+#addFunDiv{
+	position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 450;
+    z-index: 999;
+    background-color: #ffffff;
+}

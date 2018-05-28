@@ -243,15 +243,38 @@ public class BackgroundAction extends AbstractAction{
         Map<String, Object> result = new HashMap<String, Object>();
         try {
             String json = request.getParameter("potenFunctionJson");
+            String operationType = request.getParameter("operationType");
+            String functionId = request.getParameter("functionId");
             JSONObject potenFunctionJson = JSONObject.parseObject(json);
-            PotenFunction function = new PotenFunction(potenFunctionJson);
-            potenFunctionService.addFunction(function);
+            if(operationType.equals("update")){
+                updateFunction(functionId, potenFunctionJson);
+            }else{
+                saveFunction(potenFunctionJson);
+            }
             result.put("success", true);
         } catch (Exception e) {
             LOG.error("新增势函数出错！", e);
             result.put("success", false);
         }
         this.writeAjaxObject(response, result);
+    }
+
+    private void updateFunction(String functionId, JSONObject potenFunctionJson) {
+        TPotentialsFunction function = potenFunctionService.selectById(functionId);
+        String functionName = JsonUtils.getStrFromJson(potenFunctionJson, "functionName");
+        String functionFormula = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormula");
+        String functionFormulaHtml = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormulaHtml");
+        String functionDesc = JsonUtils.getStrFromJson(potenFunctionJson, "functionDesc");
+        function.setcName(functionName);
+        function.setcFormula(functionFormula);
+        function.setcFormulaHtml(functionFormulaHtml);
+        function.setcDescription(functionDesc);
+        potenFunctionService.updateFunction(function);
+    }
+
+    private void saveFunction(JSONObject potenFunctionJson) {
+        PotenFunction function = new PotenFunction(potenFunctionJson);
+        potenFunctionService.addFunction(function);
     }
 
     /**
@@ -281,6 +304,21 @@ public class BackgroundAction extends AbstractAction{
     }
 
     /**
+     * 根据id查询势函数
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/manage/selectFunction")
+    @ResponseBody
+    public void selectPotentialsFunction(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        String functionId = request.getParameter("functionId");
+        TPotentialsFunction function = potenFunctionService.selectById(functionId);
+        result.put("fun", function);
+        this.writeAjaxObject(response, result);
+    }
+
+    /**
      * 删除势函数
      * @param request
      * @param response
@@ -294,7 +332,7 @@ public class BackgroundAction extends AbstractAction{
     }
 
     /**
-     * 删除势函数
+     * 势函数列表
      * @param request
      * @param response
      */
@@ -305,6 +343,21 @@ public class BackgroundAction extends AbstractAction{
         ModelAndView mode = new ModelAndView();
         mode.addObject("functionList", functionList);
         mode.setViewName("background/function");
+        return mode;
+    }
+
+    /**
+     * 势数据列表
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/dataList")
+    @ResponseBody
+    public ModelAndView getPotenDataList(HttpServletRequest request, HttpServletResponse response) {
+//        List<TPotentialsFunction> functionList = interPotenService.get
+        ModelAndView mode = new ModelAndView();
+//        mode.addObject("functionList", functionList);
+        mode.setViewName("background/data");
         return mode;
     }
 }

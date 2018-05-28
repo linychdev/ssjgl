@@ -101,4 +101,14 @@ public class PotenFunctionServiceImpl implements IPotenFunctionService{
     public List<TPotentialsFunction> getAllFunction() {
         return potentialsFunctionDao.selectAll();
     }
+
+    @Override
+    public TPotentialsFunction selectById(String functionId) {
+        return potentialsFunctionDao.selectByPrimaryKey(TPotentialsFunction.class, functionId);
+    }
+
+    @Override
+    public void updateFunction(TPotentialsFunction function) {
+        potentialsFunctionDao.update(function);
+    }
 }
