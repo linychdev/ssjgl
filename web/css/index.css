@@ -20,7 +20,7 @@ html, body{
 	float:left;
 	width:60px;
 	height:60px;
-	margin-top:5px 0px 0px 0px;
+	margin-top:5px 5px 0px 0px;
 	color: #3399FF;
 
 -webkit-touch-callout: none; /* iOS Safari */
@@ -37,11 +37,6 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 
 }
 
-.element-main{
-	margin-left:10px;
-	margin-right:10px;
-	
-}
 
 .elements .fontWhite{
 	color: #ffffff;
@@ -63,11 +58,11 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 	padding-right:0px;!important
 }
 .atomic {
-    float: right;
     vertical-align: baseline;
-    margin-top: 0px;
-    margin-right: 1px;
+    top: 0px;
+    right: 6px;
 	font-size: 6px;
+	position:absolute;
 	}
 .symbol{
     font-size: 16px;
@@ -76,13 +71,14 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
     /* text-shadow: 0 0 2px rgba(0,255,255,0.95); */
     height:36px;
     line-height: 36px;
-	text-align:center;
+	margin:0 auto;
 }
 .element-name{
 	font-size: 8px;
 	height:11px;
 	line-height:11px;
 	text-align:center;
+	margin:0 auto;
 }
 .show-span{
 	display: none;
