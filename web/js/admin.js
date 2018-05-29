@@ -17,7 +17,7 @@ $(function () {
 		operationType = "insert";
 		$("#addFunDiv").removeClass("display_none");
 	});
-	
+	//保存函数
 	$("#saveFun").on("click",function(){
 		var funHtml = JMEditor.html('funEdit').replace(/\"/g, "'");
 		var funName = $("#funName").val();
@@ -38,11 +38,12 @@ $(function () {
 		    }
 		  }, "json");
 	});
-	
+	//取消函数编辑
 	$("#cancel").on("click",function(){
 		$("#addFunDiv").addClass("display_none");
 	});
 	
+	//删除函数
 	$(".deleteFun").on("click",function(){
 		var bh = $(this).attr("id");
 		//询问框
@@ -66,7 +67,7 @@ $(function () {
 		});
 	});
 	
-	
+	//编辑函数
 	$(".editFun").on("click",function(){
 		operationType = "update";
 		var bh = $(this).attr("id");
@@ -80,7 +81,6 @@ $(function () {
 			  $("#addFunDiv").removeClass("display_none");
 		  }, "json");
 	});
-	
 //    var picker1 = $('#datetimepicker1').datetimepicker({  
 //        format: 'YYYY-MM-DD',  
 //        locale: moment.locale('zh-cn'),  
@@ -98,4 +98,4 @@ $(function () {
 //    picker2.on('dp.change', function (e) {  
 //        picker1.data('DateTimePicker').maxDate(e.date);  
 //    });  
-});  
+});

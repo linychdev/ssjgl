@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.action.AbstractAction;
+import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
@@ -354,9 +357,14 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/background/dataList")
     @ResponseBody
     public ModelAndView getPotenDataList(HttpServletRequest request, HttpServletResponse response) {
-//        List<TPotentialsFunction> functionList = interPotenService.get
+        Map<String, Object> filter = Maps.newHashMap();
+        int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex")) + 1;
+        //默认每页显示15行
+        int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
+        
+        Page<?> pageData = interPotenService.getShowInfoListByPaging(filter, pageSize, pageIndex);
         ModelAndView mode = new ModelAndView();
-//        mode.addObject("functionList", functionList);
+        mode.addObject("pageData", pageData);
         mode.setViewName("background/data");
         return mode;
     }
