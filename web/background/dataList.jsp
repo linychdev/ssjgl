@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css" media="all" />
+ <link href="${pageContext.request.contextPath}/css/background/admin.css" rel="stylesheet" type="text/css" media="all" />
  <link href="${pageContext.request.contextPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" media="all" />
  <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
  <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
@@ -19,15 +19,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" />
  <link href="${pageContext.request.contextPath}/layui/css/layui.css" rel="stylesheet" />
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script src="${pageContext.request.contextPath}/js/holder.js"></script>
 <script src="${pageContext.request.contextPath}/js/default.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/admin.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/js/background/dataList.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript">
 	var contextPath = "<%=request.getContextPath()%>";
+	var record = ${pageData.record};
+	var pageIndex = ${pageData.pageIndex};
+	var pageSize = ${pageData.pageSize};
 </script>
 </head>	
 <body>	
@@ -69,29 +72,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</table>
 			</div>
 	
-			<div class = "col-md-6 " id = "paging-div">
+			<div class = "col-md-8 col-md-offset-4 " id = "paging-div" >
 
 			</div>
-			<div class = "col-md-6 dataTables_paginate">
-					<ul class="pagination pagination-md">
-						<li class="disabled">当前您共有势数据：<strong>${pageData.record}</strong>个</li> 
-					</ul>	
-			</div>
+			
 		</div>
 		<!-- 势数据管理页面结束 -->
-	<script>
-		//处理分页
-		layui.use(['laypage', 'layer'], function(){
-		  var laypage = layui.laypage, layer = layui.layer;
-		  laypage.render({
-			    elem: 'paging-div'
-			    ,count: "${pageData.record}" //从服务器获取
-			    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-			    ,jump: function(obj){
-			      console.log(obj)
-			    }
-			  });
-		});
-	</script>
 </body>
 </html>

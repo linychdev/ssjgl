@@ -121,8 +121,8 @@ public class InterPotenServiceImpl implements IInterPotenService {
      * @see com.ustb.ssjgl.main.service.IInterPotenService#addPotentialsFile(com.ustb.ssjgl.main.dao.bean.TPotentialsFile)
      */
     @Override
-    public void addPotentialsFile(TPotentialsFile ptentialsFile) {
-        potentialsFileDao.addPtentialsFile(ptentialsFile);
+    public void addPotentialsFile(TPotentialsFile potentialsFile) {
+        potentialsFileDao.addPotentialsFile(potentialsFile);
     }
 
     /**

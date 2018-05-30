@@ -10,17 +10,17 @@ public class PotentialsScopeDaoImpl extends AbstractDao implements IPotentialsSc
         super.mapperNamespace = "com.ustb.ssjgl.main.dao.mappings.";
     }
     @Override
-    public void addPtentialsScope(TPotentialsScope ptenScope) {
+    public void addPotentialsScope(TPotentialsScope ptenScope) {
         insertSelective(ptenScope);
     }
 
     @Override
-    public void deletePtentialsScopeById(String id) {
+    public void deletePotentialsScopeById(String id) {
         deleteByPrimaryKey(TPotentialsScope.class, id);
     }
 
     @Override
-    public void updatePtentialsScopeById(TPotentialsScope ptenScope) {
+    public void updatePotentialsScopeById(TPotentialsScope ptenScope) {
         update(ptenScope);
     }
 
