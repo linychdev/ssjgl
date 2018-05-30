@@ -71,7 +71,7 @@ $(function(){
         layer.closeAll();
         layer.open({
             type: 1,
-            area: ['170px', '170px'],
+            area: ['220px', '200px'],
             offset: [ 
                offset_top
               ,offset_left
