@@ -123,8 +123,8 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 /* 放大元素第一列 */
 .column-big-1{
 	width: 40px;
-	padding-top:10px;
-	padding-bottom:10px;
+	 padding-top:25px; 
+	/* padding-bottom:10px; */
     text-align: left;
 }
 
@@ -140,10 +140,11 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 }
 
 .oxidation-big{
-	height: 55px;
+	height: 65px;
 	/* -webkit-box-orient: vertical;
 	-webkit-line-clamp: 3; */
 	overflow: hidden;
+	line-height:65px;
 }
 .oxidation-big ul{
 	padding-left: 0px;
@@ -158,78 +159,82 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
     text-align: right;
 }
 
-.radius-big, .electron-big, .eleativity-big{
-	padding-left: 5px;
-	margin-bottom: 5px;
-}
+/* .radius-big, .electron-big, .eleativity-big{ */
+	/* padding-left: 5px; */
+	/* margin-bottom: 5px; */
+/* } */
 .radius-big{
-	height: 30px;
+	height: 50px;
 }
 .electron-big{
-	height: 15px;
-	font-size: 10px;	
+	height: 20px;
+	font-size: 10px;
+	line-height:20px;
 }
 
 /* 放大元素第二列 */
 .column-big-2{
 	flex:1;
     text-align: center;
-	padding-top:10px;
-	padding-bottom:10px;
+	/* padding-top:10px; */
+	/* padding-bottom:10px; */
 }
 .eleativity-big{
     font-size: 12px;
-    line-height: 24px;
+    line-height: 40px;
+	height:40px;
 }
 .crystal-big{
-	font-size: 25px;
+	font-size: 24px;
 	font-family: Microsoft YaHei;
 	font-weight: 900;
-    height: 15px;
-    line-height: 25px;
+    height: 60px;
+    line-height: 60px;
 }
 
 .symbol-big{
 	font-size: 60px;
-	height: 90px;
-    line-height: 90px;
+	height: 100px;
+    line-height: 100px;
 }
 
 .element-name-big{
-	height: 20px;
-	margin-top: 5px;
+	height: 40px;
+	line-height:40px;
+	/* margin-top: 5px; */
 }
 
 /* 放大元素第三列 */
 .column-big-3{
 	width: 45px;
-	padding-top:5px;
-	padding-bottom:5px;
+	/* padding-top:5px; */
+	/* padding-bottom:5px; */
     text-align: right;
 }
 
 .atomic-big{
-    font-size: 18px;
-    height: 36px;
-    line-height: 36px;
+    font-size: 12px;
+    height: 12px;
+    line-height: 12px;
 }
 
 .melting-big, .boiling-big, .relative-big{
-    height: 20px;
+    height: 49px;
     font-size: 12px;
-    line-height: 24px;
+    line-height: 49px;
 }
 .ionic-big{
     height: 40px;
     font-size: 12px;
-    line-height: 24px;
-    padding-top: 20px;
+    line-height: 40px;
+    /* padding-top: 20px; */
 	
 }
 
-.atomic-big, .relative-big, .melting-big, .boiling-big, .ionic-big{
-    padding-right: 5px;
-}
+/* .atomic-big, .relative-big, .melting-big, .boiling-big, .ionic-big{ */
+    /* /* padding-right: 5px; */ */
+	
+/* } */
 
 .float-clear{
     clear: both;
