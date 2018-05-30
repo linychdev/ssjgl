@@ -1,6 +1,7 @@
 package com.ustb.ssjgl.main.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
+import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.TReferenceInfo;
@@ -236,5 +238,30 @@ public class InterPotenServiceImpl implements IInterPotenService {
                 combInfo.setSearchTimes(val);
             }
         }
+    }
+
+    @Override
+    public Page<?> getShowInfoListByPaging(Map<String, Object> filter, int pageSize, int pageIndex) {
+        Page<ElementCombShowInfo> page = new Page<ElementCombShowInfo>();
+        page.setPageSize(pageSize);
+        page.setPageIndex(pageIndex);
+        int count = elementCombDao.getCount(filter);
+        page.setRecord(count);
+        
+        filter.put("stratRow", page.getSartRow());
+        filter.put("endRow", page.getEndRow());
+        List<ElementCombShowInfo> elementCombShowInfos = Lists.newArrayList();
+        List<TElementCombination> elementCombs = elementCombDao.getElementCombsByFilter(filter);
+        for (TElementCombination elementComb : elementCombs) {
+            ElementCombShowInfo elementCombShowInfo = new ElementCombShowInfo();
+            List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
+            TPotentialsScope scope = potentialsScopeDao.selectByPrimaryKey(TPotentialsScope.class, elementComb.getcScopeId());
+            elementCombShowInfo.setElementComb(elementComb);
+            elementCombShowInfo.setElementList(elementList);
+            elementCombShowInfo.setScope(scope);
+            elementCombShowInfos.add(elementCombShowInfo);
+        }
+        page.setDataList(elementCombShowInfos);
+        return page;
     }  
 }

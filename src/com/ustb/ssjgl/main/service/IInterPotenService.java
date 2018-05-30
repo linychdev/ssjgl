@@ -1,7 +1,9 @@
 package com.ustb.ssjgl.main.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
@@ -86,4 +88,11 @@ public interface IInterPotenService {
      * @param ref
      */
     public void addReference(TReference ref);
+    
+    /**
+     * 根据分页信息获取势数据信息
+     * @return
+     */
+    public Page<?> getShowInfoListByPaging(Map<String, Object> filter, int pageSize, int pageIndex);
+
 }

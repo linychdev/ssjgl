@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,7 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
  <link href="${pageContext.request.contextPath}/css/dataurl.css" rel="stylesheet" />
  <link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" />
+ <link href="${pageContext.request.contextPath}/layui/css/layui.css" rel="stylesheet" />
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script src="${pageContext.request.contextPath}/js/holder.js"></script>
 <script src="${pageContext.request.contextPath}/js/default.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/admin.js" type="text/javascript"></script>
@@ -32,112 +35,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class = "maincontent row">
 			<ul class="breadcrumb">  
                 <li ><i class="fa fa-list-ul fa-fw"></i>&nbsp;势数据列表</a></li>
-				<li style="float:right"><a href = "#"><i class="fa fa-plus fa-fw"></i></a>新增势数据</a></li>
+				<li style="float:right"><a href = "javascript:void(0);" id = "addPotenButton"><i class="fa fa-plus fa-fw"></i></a>新增势数据</a></li>
             </ul>
 			<div class ="col-md-12">
 				<table class = "table table-striped table-responsive">
+					<tr>
+						<th>序号</th>
+						<th>名称</th>
+						<th>类别</th>
+						<th>相关元素</th>
+						<th>其他属性</th>
+						<th>说明</th>
+						<th>操作</th>
+					</tr>
+					<c:forEach items="${pageData.dataList}" var="combInfo" varStatus="status">
 						<tr>
-							<th>序号</th>
-							<th>名称</th>
-							<th>类别</th>
-							<th>相关元素</th>
-							<th>其他属性</th>
-							<th>说明</th>
-							<th>操作</th>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>AlN</td>
-							<td>Semiconductors</td>
-							<td>Al,N</td>
+							<td>${status.index + 1 }</td>
+							<td>${combInfo.elementComb.cCombName }</td>
+							<td>${combInfo.scope.cName }</td>
+							<td>
+								<c:forEach items="${combInfo.elementList}" var="element" varStatus="status">
+								${element.cSymbol }<c:if test="${status.last==false}">,</c:if>
+								</c:forEach>
+							</td>
 							<td>无</td>
-							<td>无</td>
+							<td>${combInfo.elementComb.cDescription }</td>
 							<td>
 							<a href = "#"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
 							<a href = "#"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
 							<a href = "#"><i class="fa fa-file-text fa-fw"></i></a>&nbsp;文件</td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>CaO</td>
-							<td>Ionic Crystals </td>
-							<td>Ca,O</td>
-							
-							<td>无</td>
-							<td>无</td>
-							<td>
-								<a href = "#"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
-								<a href = "#"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
-								<a href = "#"><i class="fa fa-file-text fa-fw"></i></a>&nbsp;文件</td>
-							</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>CaO</td>
-							<td>Ionic Crystals </td>
-							<td>Ca,O</td>
-							
-							<td>无</td>
-							<td>无</td>
-							<td>
-								<a href = "#"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
-								<a href = "#"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
-								<a href = "#"><i class="fa fa-file-text fa-fw"></i></a>&nbsp;文件</td>
-							</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Ag(111)/MgO(111)</td>
-							<td>Interface </td>
-							<td>Ag,Mg,O</td>
-							
-							<td>无</td>
-							<td>无</td>
-							<td>
-								<a href = "#"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
-								<a href = "#"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
-								<a href = "#"><i class="fa fa-file-text fa-fw"></i></a>&nbsp;文件</td>
-							</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>AlFe</td>
-							<td>Metal Alloys </td>
-							<td>Al,Fe</td>
-							
-							<td>无</td>
-							<td>无</td>
-							<td>
-								<a href = "#"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
-								<a href = "#"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
-								<a href = "#"><i class="fa fa-file-text fa-fw"></i></a>&nbsp;文件</td>
-							</td>
-							</tr>
+					</c:forEach>
 				</table>
 			</div>
 	
-			<div class = "col-md-6 ">
-					<ul class="pagination pagination-md">
-						<li class="disabled"><a href="#">&laquo;</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li ><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">6</a></li>
-						<li><a href="#">7</a></li>
-						<li><a href="#">8</a></li>
-						<li><a href="#">9</a></li>
-						<li><a href="#">&raquo;</a></li>
-					</ul>
+			<div class = "col-md-6 " id = "paging-div">
+
 			</div>
 			<div class = "col-md-6 dataTables_paginate">
 					<ul class="pagination pagination-md">
-						<li class="disabled">当前您共有势数据：500个</li> 
+						<li class="disabled">当前您共有势数据：<strong>${pageData.record}</strong>个</li> 
 					</ul>	
 			</div>
-
 		</div>
 		<!-- 势数据管理页面结束 -->
+	<script>
+		//处理分页
+		layui.use(['laypage', 'layer'], function(){
+		  var laypage = layui.laypage, layer = layui.layer;
+		  laypage.render({
+			    elem: 'paging-div'
+			    ,count: "${pageData.record}" //从服务器获取
+			    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+			    ,jump: function(obj){
+			      console.log(obj)
+			    }
+			  });
+		});
+	</script>
 </body>
 </html>

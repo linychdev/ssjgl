@@ -36,4 +36,17 @@ public interface IPotenFunctionService {
      * @return
      */
     public List<TPotentialsFunction> getAllFunction();
+
+    /**
+     * 根据id获取函数
+     * @return
+     * @param functionId 函数id
+     */
+    public TPotentialsFunction selectById(String functionId);
+    
+    /**
+     * 更新函数信息
+     * @param function
+     */
+    public void updateFunction(TPotentialsFunction function);
 }

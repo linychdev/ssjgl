@@ -31,3 +31,16 @@
 	border:1px solid #000000;
 	margin:70px auto ;
 }
+
+#addFunDiv{
+	position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 450;
+    z-index: 999;
+    background-color: #ffffff;
+}
+

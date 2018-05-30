@@ -135,7 +135,7 @@ init();
 animate();
 setTimeout(clickDShere, 10);
 setTimeout(clickGrid,  3000);
-setTimeout(clickTable, 10900);
+setTimeout(clickTable, 10600);
 //setTimeout(clickTable, 12000);
 
 function init() {
@@ -327,7 +327,7 @@ function animate() {
 	if(!ifxz){
 		scene.rotation.y = 0;
 	}else{
-		scene.rotation.y += 0.01;
+		scene.rotation.y += 0.005;
 	}		
 	requestAnimationFrame( animate );
 
