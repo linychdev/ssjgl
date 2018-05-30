@@ -25,3 +25,9 @@
 .col-sm-8 .editDiv{
 	height: 100%;
 }
+
+.addAdimintor{
+	width:400px;
+	border:1px solid #000000;
+	margin:70px auto ;
+}

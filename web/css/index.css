@@ -102,7 +102,8 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
     width:100%;
     height:100%;
     overflow:hidden;
-    background-color: red;
+    background-color: rgba(51,153,255,0.8);
+	color:#ffffff;
     
     /*禁止光标移动到文字上显示I*/
    -moz-user-select: -moz-none;
