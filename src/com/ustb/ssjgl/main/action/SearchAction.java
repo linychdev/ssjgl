@@ -129,7 +129,7 @@ public class SearchAction extends AbstractAction{
         File file = null;
         try {
             file = File.createTempFile("potenFile", suffix);
-            String remote = fileMeta.getcFtpUrlPath().replace(ftpService.getRemotePath(), "");
+            String remote = fileMeta.getRemote();
             remote = remote.replace(File.separator, "");
             ftpService.setLocal(file);
             ftpService.setRemote(remote);
