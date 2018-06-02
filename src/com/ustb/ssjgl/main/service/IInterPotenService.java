@@ -90,9 +90,11 @@ public interface IInterPotenService {
     public void addReference(TReference ref);
     
     /**
-     * 根据分页信息获取势数据信息
+     * 根据分页和过滤条件获取势数据列表
+     * @param filter
+     * @param pageSize
+     * @param pageIndex
      * @return
      */
     public Page<?> getShowInfoListByPaging(Map<String, Object> filter, int pageSize, int pageIndex);
-
 }

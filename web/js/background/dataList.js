@@ -11,7 +11,6 @@ $(function () {
   		,limits : [15, 30, 50, 100]
 	    ,jump: function(obj){
 	     if(obj.curr != pageIndex){
-	    	 console.log(obj);
 	    	 $(location).attr("href", "dataList?pageIndex="+obj.curr + "&pageSize="+obj.limit);
 	     }
 	    }

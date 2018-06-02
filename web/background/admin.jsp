@@ -24,6 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <script src="${pageContext.request.contextPath}/js/pace.min.js"></script>
+<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <script type="text/javascript">
 	var contextPath = "<%=request.getContextPath()%>";
 </script>
@@ -44,9 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="top1.html">您好，管理员！</a></li>
-                    <li><a href="top2.html">修改密码</a></li>
-                    <li><a href="top3.html">退出登录</a></li>
+                    <li><a href="javascript:void(0);">您好，${user.cName}！</a></li>
+                    <li><a href="javascript:void(0);" id= "modifyPassword">修改密码</a></li>
+                    <li><a href="javascript:void(0);" id = "logOut">退出登录</a></li>
                 </ul>
             </div>
         </div>
@@ -58,7 +59,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li class="has-sub">
                     <a href="javascript:void(0);"><span>用户管理</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
                     <ul class="sub-menu">
-                        <li><a href="javascript:void(0);" id = "userManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;注册用户管理</a></li>
+                        <li><a href="javascript:void(0);" id = "userManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;管理员</a></li>
+                        <!-- <li><a href="javascript:void(0);" id = "userManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;注册用户</a></li> -->
                     </ul>
                 </li>
 				 <li class="has-sub">
@@ -69,16 +71,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li><a href="javascript:void(0);" id = "dataManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;势数据管理</a></li>
                     </ul>
                 </li>
-				<li class="has-sub">
+			<!-- 	<li class="has-sub">
                     <a href="javascript:void(0);"><span>日志管理</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
                     <ul class="sub-menu">
                         <li><a href="element.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;活跃度</a></li>
 						<li><a href="function.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;检索统计</a></li>
 						<li><a href="add.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;下载统计</a></li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </div>
-        <iframe id = "mainSpace" src="user.jsp" width="100%" height="90%"></iframe>
+        <iframe id = "mainSpace" src="${pageContext.request.contextPath}/background/userList" width="100%" height="90%"></iframe>
 </body>
 </html>

@@ -141,13 +141,13 @@ $(function(){
 		var ctop = $(".clone").offset().top;
 		var cleft = $(".clone").offset().left;
 		
-		if((ctop > top &&
+		if((ctop > (top - 10) &&
 		   cleft > left &&
-		   ctop < (top+$(".input-group").height()) &&
+		   ctop < (top+$(".input-group").height()+10) &&
 		   cleft < (left+$(".input-group").width())) ||
-		   ((ctop + $(".clone").height()) > top &&
+		   ((ctop + $(".clone").height()) > (top - 10) &&
 		   (cleft + $(".clone").width()) > left &&
-		   (ctop + $(".clone").height()) < (top+$(".input-group").height()) &&
+		   (ctop + $(".clone").height()) < (top+$(".input-group").height()+10) &&
 		   (cleft + $(".clone").width()) < (left+$(".input-group").width()))
 		){
 			//为input中增加元素
@@ -187,10 +187,10 @@ $(function(){
 		if (selectVal.substr(0,1)=='-') {
 			selectVal=selectVal.substr(1);
 		}
-		var tmp=window.open("about:blank")  
-	       tmp.moveTo(0,0)  
-	       tmp.resizeTo(screen.width+20,screen.height)  
-	       tmp.focus()  
+		var tmp=window.open("about:blank");
+	       tmp.moveTo(0,0);
+	       tmp.resizeTo(screen.width+20,screen.height);
+	       tmp.focus();
 	       tmp.location=contextPath+"/search/list/"+selectVal;  
 	});
 	

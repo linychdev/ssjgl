@@ -62,6 +62,32 @@ public class RegisterAction extends AbstractAction{
         }
     }
 
+    @RequestMapping("/register/addManagerUser")
+    public void addManagerUser(HttpServletRequest request, HttpServletResponse response){
+        String userName = request.getParameter("userName");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        TUser user = new TUser();
+        user.setcEmail(email);
+        user.setcName(name);
+        user.setcLoginName(userName);
+        String password = "123456";
+        String encryptionPassword = getEncryptionPassword(userName, password);
+        user.setcPassword(encryptionPassword.toString());
+        boolean success = userService.addUser(user);
+        if(success){
+            result.put("success", true);
+            result.put("password", password);
+        }else{
+            result.put("success", false);
+            result.put("msg", "添加用户失败！");
+        }
+        this.writeAjaxObject(response, result);
+    }
+    
+    
     @RequestMapping("/register/sendEmail")
     public void sendEmail(HttpServletRequest request, HttpServletResponse response){
         String emailAddress = request.getParameter("emailAddress");
@@ -90,7 +116,7 @@ public class RegisterAction extends AbstractAction{
         }
         this.writeAjaxObject(response, result);
     }
-    
+
     /**
      * 邮件验证码是否正确
      * @param emailAddress

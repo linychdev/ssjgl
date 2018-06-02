@@ -106,3 +106,9 @@ font: 20px;
 .layui-box.layui-laypage.layui-laypage-default{
 	float:right;
 }
+.add-user-pop .layui-layer-content{
+	height: 130px !important;
+}
+.add-user-pop form{
+	padding-top: 30px;
+}

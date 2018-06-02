@@ -1,7 +1,9 @@
 package com.ustb.ssjgl.login.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.login.dao.bean.TPermission;
 import com.ustb.ssjgl.login.dao.bean.TRole;
 import com.ustb.ssjgl.login.dao.bean.TUser;
@@ -45,5 +47,21 @@ public interface IUserService {
      * @return
      */
     public TUser getUserByEmail(String emailAddress);
+
+    /**
+     * 根据主键删除用户
+     * @param userId
+     */
+    public void deleteUser(String userId);
+
+    /**
+     * 根据分页和过滤条件获取用户列表(普通管理员)
+     * @param filter 过滤条件map
+     * @param pageSize 页大小
+     * @param pageIndex 页码
+     * @return
+     */
+    public Page<?> getUserListByPaging(Map<String, Object> filter,
+            int pageSize, int pageIndex);
 
 }

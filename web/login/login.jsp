@@ -9,8 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>login</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -55,14 +54,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input name="password" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;" value="" type="password" placeholder="请输入密码">
 					</div>
 					<div class="mb2">
-						<a class="act-but submit" href="javascript:void(0);" style="color: #FFFFFF" onclick="document.getElementById('loginform').submit()">登录</a>
+						<a class="act-but submit" href="javascript:void(0);" style="color: #FFFFFF" >登录</a>
 					</div>
-					<div class="getpass">
+<!-- 					<div class="getpass">
 						<a href="javascript:void(0);" style="color: #FFFFFF">找回密码</a>
 					</div>
 					<div class="register">
 						<a href="javascript:void(0);" style="color: #FFFFFF">注册账号</a>
-					</div>
+					</div> -->
 				</form>
 			</div>
 		</div>

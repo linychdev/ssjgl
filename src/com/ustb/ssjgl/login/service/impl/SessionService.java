@@ -17,7 +17,7 @@ public class SessionService implements ISessionService {
     public Boolean isLogin() {
         Subject subject = SecurityUtils.getSubject();
         if(subject.isAuthenticated()){
-            TUser user = (TUser)subject.getPrincipal();
+            TUser user = (TUser) subject.getSession().getAttribute("currentUser");
             return !StringUtils.equals(user.getcName(), SsjglContants.SSJGL_ANONYMOUS);
         }else{
             return false;
