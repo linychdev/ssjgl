@@ -27,7 +27,7 @@ $(function () {
 			userId : userId
 		  }, function(data) {
 		    if (data.success) {
-		    	layer.msg('删除成功',{time:1000}, {icon: 1},function(){
+		    	layer.msg('删除成功',{time:1000, icon: 1},function(){
 		    		self.location.reload();
 		    	});
 		    }else{
@@ -41,23 +41,28 @@ $(function () {
 	
   });
   
+  
+  var usernamelegal = false;
   var addUserHtml =   "<div id = 'addUserDiv' class = 'info'>                                                   "+
 				  "	<form class='form-horizontal' >                                                             "+
 				  "			  <div class='form-group'>                                                          "+
 				  "				<label for='' class='col-sm-3 control-label'>用户名:</label>                      "+
-				  "				<div class='col-sm-8'>                                                          "+
+				  "				<div class='col-sm-6'>                                                          "+
 				  "				  <input type='text' class='form-control' id='userName' placeholder='用户名' />   "+
+				  "				</div>                                                                          "+
+				  "				<div class='col-sm-3 tips display_none'>                                        "+
+				  "				用户已存在                                                                          												    "+
 				  "				</div>                                                                          "+
 				  "			  </div>                                                                            "+
 				  "			  <div class='form-group'>                                                          "+
 				  "				<label for='' class='col-sm-3 control-label'>姓名:</label>                       "+
-				  "				<div class='col-sm-8'>                                                          "+
+				  "				<div class='col-sm-6'>                                                          "+
 				  "				  <input type='text' class='form-control' id='name' placeholder='姓名' />        "+
 				  "				</div>                                                                          "+
 				  "			  </div>                                                                            "+
 				  "			  <div class='form-group'>                                                          "+
 				  "				<label for='' class='col-sm-3 control-label'>邮箱:</label>                       "+
-				  "				<div class='col-sm-8'>                                                          "+
+				  "				<div class='col-sm-6'>                                                          "+
 				  "				  <input type='text' class='form-control' id='email' placeholder='邮箱' />       "+
 				  "				</div>                                                                          "+
 				  "			  </div>                                                                            "+
@@ -84,23 +89,44 @@ $(function () {
 			var userName = $("#userName").val();
 			var name = $("#name").val();
 			var email = $("#email").val();
-			$.post(contextPath + "/register/addManagerUser", {
-				userName : userName,
-				name : name,
-				email : email
-			  }, function(data) {
-				layer.closeAll();
-			    if (data.success) {
-			    	layer.msg('添加成功,默认密码为:'+data.password, {icon: 1}, function(){
-			    		self.location.reload();
-			    	});
-			    }else{
-			    	layer.msg(data.msg, {icon: 1});
-			    }
-			  }, "json");
+			if(usernamelegal){
+				$.post(contextPath + "/register/addManagerUser", {
+					userName : userName,
+					name : name,
+					email : email
+				}, function(data) {
+					layer.closeAll();
+					if (data.success) {
+						layer.msg('添加成功,默认密码为:'+data.password, {time:1000, icon: 1}, function(){
+							self.location.reload();
+						});
+					}else{
+						layer.msg(data.msg, {icon: 1});
+					}
+				}, "json");
+			}else{
+				layer.msg("用户已存在", {time:1000,icon: 1});
+			}
 		  },
 		  btn2:function(){
 			  layer.closeAll();
+		  },
+		  success:function(){
+			  $("#userName").change(function(){
+			  	var loginName = $("#userName").val();
+			  	 $.post(contextPath + "/register/checkName", {
+			  		 loginName : loginName
+			  	  }, function(data) {
+			  	    if (data.repeat) {
+			  	    	$(".add-user-pop .tips").removeClass("display_none");
+			  	    	usernamelegal = false;
+			  	    }else{
+			  	    	$('#check_name_reminder').empty();
+			  	    	$(".add-user-pop .tips").addClass("display_none");
+			  	    	usernamelegal = true;
+			  	    }
+			  	  }, "json");
+			  });
 		  }
 		});
   });

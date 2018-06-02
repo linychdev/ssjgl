@@ -106,6 +106,8 @@ font: 20px;
 .layui-box.layui-laypage.layui-laypage-default{
 	float:right;
 }
+
+/*用户管理模块样式*/
 .add-user-pop .layui-layer-content{
 	height: 180px !important;
 }
@@ -117,4 +119,12 @@ font: 20px;
 }
 .modify-password-pop form{
 	padding-top: 30px;
+}
+
+.add-user-pop .tips{
+    text-align: left;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 5;
+    color: red;
 }
