@@ -20,7 +20,8 @@ $(function () {
 	    var userId = $(this).attr("id");
 		//询问框
 		layer.confirm('删除后不可恢复！确认删除？', {
-		  btn: ['删除','取消'] //按钮
+		  btn: ['删除','取消'], //按钮
+		  btnAlign: 'c'
 		}, function(){
 		$.post(contextPath + "/background/deleteUser", {
 			userId : userId
@@ -71,36 +72,36 @@ $(function () {
 		  skin: 'add-user-pop',
 		  shadeClose: false, //开启遮罩
 		  closeBtn: 1,
-		  area: ['450px', '550px'], //宽高
+		  area: ['450px', '350px'], //宽高
 		  content: addUserHtml,
 		  cancel: function(){ 
 		    //右上角关闭回调
 		    //return false 开启该代码可禁止点击该按钮关闭
 		  },
-		  //btn: ['添加','取消'], //按钮
-//		  btnAlign: 'c',
-//		  yes:function(){
-//			var userName = $("#userName").val();
-//			var name = $("#name").val();
-//			var email = $("#email").val();
-//			$.post(contextPath + "/register/addManagerUser", {
-//				userName : userName,
-//				name : name,
-//				email : email
-//			  }, function(data) {
-//				layer.closeAll();
-//			    if (data.success) {
-//			    	layer.msg('添加成功,默认密码为:'+data.password, {icon: 1}, function(){
-//			    		self.location.reload();
-//			    	});
-//			    }else{
-//			    	layer.msg(data.msg, {icon: 1});
-//			    }
-//			  }, "json");
-//		  },
-//		  btn2:function(){
-//			  layer.closeAll();
-//		  }
+		  btn: ['添加','取消'], //按钮
+		  btnAlign: 'c',
+		  yes:function(){
+			var userName = $("#userName").val();
+			var name = $("#name").val();
+			var email = $("#email").val();
+			$.post(contextPath + "/register/addManagerUser", {
+				userName : userName,
+				name : name,
+				email : email
+			  }, function(data) {
+				layer.closeAll();
+			    if (data.success) {
+			    	layer.msg('添加成功,默认密码为:'+data.password, {icon: 1}, function(){
+			    		self.location.reload();
+			    	});
+			    }else{
+			    	layer.msg(data.msg, {icon: 1});
+			    }
+			  }, "json");
+		  },
+		  btn2:function(){
+			  layer.closeAll();
+		  }
 		});
   });
 });

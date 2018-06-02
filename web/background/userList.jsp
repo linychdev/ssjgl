@@ -37,7 +37,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <!--主面板 start-->
          <ul class="breadcrumb">
              <li> <a href="javascript:void(0);" class="active"><i class="fa fa-user fa-fw"></i>&nbsp;管理员列表</a></li>
-             <li style="float:right"><a href = "javascript:void(0);" class="addUser" ><i class="fa fa-plus fa-fw"></i></a>新增管理员</a></li>
+             <c:if test="${isAdmin }">
+	             <li style="float:right"><a href = "javascript:void(0);" class="addUser" ><i class="fa fa-plus fa-fw"></i></a>新增管理员</a></li>
+             </c:if>
          </ul>
          <div class="col-md-12">
 		<!-- 用户表 -->
@@ -45,22 +47,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr>
 				<th>序号</th>
 				<th>用户名</th>
+				<th>姓名</th>
 				<th>邮箱</th>
 				<th>注册时间</th>
 				<!-- <th>最近访问时间</th> -->
+				<c:if test="${isAdmin }">
 				<th>操作</th>
+				</c:if>
 			</tr>
 			
 			<c:forEach items="${pageData.dataList}" var="user" varStatus="status">
 			<tr>
 				<td>${status.index + 1 }</td>
 				<td>${user.cLoginName }</td>
+				<td>${user.cName }</td>
 				<td>${user.cEmail }</td>
 				<td>${user.dCreateTime }</td>
 				<!-- <td>2018-04-01 11:39:21</td> -->
+				<c:if test="${isAdmin }">
 				<td>
 				<a href = "javascript:void(0);" class = "deleteUser" id = "${user.cId }"><i class="fa fa-user-times fa-fw"></i></a>
 				</td>
+				</c:if>
 			</tr>
 			</c:forEach>
 		</table>

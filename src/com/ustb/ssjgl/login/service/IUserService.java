@@ -64,4 +64,10 @@ public interface IUserService {
     public Page<?> getUserListByPaging(Map<String, Object> filter,
             int pageSize, int pageIndex);
 
+    
+   /**
+    * 修改用户密码
+    * @param user
+    */
+    public void modifyPassword(TUser user);
 }

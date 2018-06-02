@@ -86,5 +86,10 @@ public class UserServiceImpl implements IUserService{
            e.printStackTrace();
            return null;
         }
+    }
+
+    @Override
+    public void modifyPassword(TUser user) {
+        userDao.updateSelective(user);
     }  
 }

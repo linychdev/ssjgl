@@ -408,8 +408,10 @@ public class BackgroundAction extends AbstractAction{
         int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
         
         Page<?> pageData = userService.getUserListByPaging(filter, pageSize, pageIndex);
+        boolean isAdmin = sessionService.isCurrentAdmin();
         ModelAndView mode = new ModelAndView();
         mode.addObject("pageData", pageData);
+        mode.addObject("isAdmin", isAdmin);
         mode.setViewName("background/userList");
         return mode;
     }

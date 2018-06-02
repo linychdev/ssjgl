@@ -107,8 +107,14 @@ font: 20px;
 	float:right;
 }
 .add-user-pop .layui-layer-content{
-	height: 130px !important;
+	height: 180px !important;
+}
+.modify-password-pop .layui-layer-content{
+	height: 180px !important;
 }
 .add-user-pop form{
+	padding-top: 30px;
+}
+.modify-password-pop form{
 	padding-top: 30px;
 }

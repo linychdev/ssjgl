@@ -34,4 +34,10 @@ public interface ISessionService {
      * 注销当前登录用户
      */
     public void logout();
+
+    /**
+     * 验证当前登录的用户是否为admin
+     * @return
+     */
+    public boolean isCurrentAdmin();
 }

@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
 	  <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css" />
   
-      <script src="${pageContext.request.contextPath}/js/heard.js"></script>
+      <script src="${pageContext.request.contextPath}/js/header.js"></script>
 	  <script type="text/javascript">
 	  	var contextPath = "<%=request.getContextPath()%>";
 	  </script>
