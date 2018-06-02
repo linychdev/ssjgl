@@ -10,16 +10,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css" media="all" />
  <link href="${pageContext.request.contextPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" media="all" />
  <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
  <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
  <link href="${pageContext.request.contextPath}/css/dataurl.css" rel="stylesheet" />
  <link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" />
+ <link href="${pageContext.request.contextPath}/css/background/admin.css" rel="stylesheet" type="text/css" media="all" />
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/holder.js"></script>
 <script src="${pageContext.request.contextPath}/js/default.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/admin.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/background/admin.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>

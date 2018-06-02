@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="${pageContext.request.contextPath}/css/list.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.contextPath}/css/main/combDetail.css" rel="stylesheet" type="text/css" media="all" />
 <!-- js -->
 <script type="text/javascript">
   var contextPath = "<%=request.getContextPath()%>";
@@ -25,6 +25,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/js/holder.js"></script>
 <script src="${pageContext.request.contextPath}/jmeditor/JMEditor.js"></script>
+<script src="${pageContext.request.contextPath}/js/main/combDetail.js" ></script>
 
 <style type="text/css">
 .mathquill-rendered-math {
@@ -41,11 +42,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    <!-- 侧边框 -->
 			<div class = "col-md-3">
 				<nav class = "sidebar collapse">
-					<a class="btn btn-default btn-lg btn-block sidebar-toggle"
+					<!-- <a class="btn btn-default btn-lg btn-block sidebar-toggle"
 						  data-toggle="collapse" href="#sidebar-nav" aria-expanded="false"
 						  aria-controls="sidebar-nav">
 						<i class="glyphicon glyphicon-menu-hamburger"></i> Navigation
-					</a>
+					</a> -->
 					<h3>resources</h3>
 					<ul class = "sidebar-nav ">
 						<li><a href = "#">Semiconductors</a></li>
@@ -54,7 +55,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href = "#">Metal Alloys</a></li>
 						<li><a href = "#">Others </a></li>
 					</ul>
-					<h3>Popular Searches</h3>
+<!-- 第一版没有访问量统计，暂不显示热门搜索和热门下载 	
+				<h3>Popular Searches</h3>
 					<ul class = "sidebar-nav ">
 						<li><a href = "#">the potential of Ag</a></li>
 						<li><a href = "#">the potential of Ag</a></li>
@@ -69,7 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href = "#">the potential of Ag</a></li>
 						<li><a href = "#">the potential of Ag</a></li>
 						<li><a href = "#">the potential of Ag</a></li>
-					</ul>
+					</ul> -->
 				</nav>
 			</div>
 			<!-- 主体右侧内容 -->
@@ -116,8 +118,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</p>
 										<p>
 											<strong>File(s):  </strong>
-											<c:forEach items="${referenceInfo.potentialsFiles}" var="file" varStatus="f">
-												<a href = "#">${file.cFileName }</a>
+											<c:forEach items="${referenceInfo.potentialsFiles}" var="file" varStatus="status">
+												<a style = "text-decoration:underline;" href = "<%=basePath%>manage/downloadPotentialsFile?potentialsFileId=${file.cId }">${file.cFileName }</a><c:if test="${status.last==false}">&nbsp;</c:if>
 											</c:forEach>
 										</p>
 										<c:if test="${!ref.last}">

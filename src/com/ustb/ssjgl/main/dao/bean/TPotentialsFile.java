@@ -130,4 +130,13 @@ public class TPotentialsFile {
     public void setnFileType(Integer nFileType) {
         this.nFileType = nFileType;
     }
+    
+    public String getRemote(){
+        if(getcFtpUrlPath().indexOf("/") == -1){
+            return getcFtpUrlPath();
+        }else{
+            return getcFtpUrlPath().split("/")[1];
+        }
+        
+    }
 }

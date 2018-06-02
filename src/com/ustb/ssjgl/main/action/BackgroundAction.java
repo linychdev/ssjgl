@@ -157,13 +157,13 @@ public class BackgroundAction extends AbstractAction{
                 ftpService.setRemote(remoteFileName);
                 ftpService.upload();
                 
-                TPotentialsFile ptentialsFile = new TPotentialsFile();
-                ptentialsFile.setcFileName(multipartFile.getOriginalFilename());
-                ptentialsFile.setcReferenceId(relatedId);
-                ptentialsFile.setnSize(FileUtils.sizeOf(file));
-                ptentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
-                ptentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+File.separator+remoteFileName);
-                interPotenService.addPotentialsFile(ptentialsFile);
+                TPotentialsFile potentialsFile = new TPotentialsFile();
+                potentialsFile.setcFileName(multipartFile.getOriginalFilename());
+                potentialsFile.setcReferenceId(relatedId);
+                potentialsFile.setnSize(FileUtils.sizeOf(file));
+                potentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
+                potentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+File.separator+remoteFileName);
+                interPotenService.addPotentialsFile(potentialsFile);
                 result.put("success", true);
             } catch (Exception e) {
                 LOG.error("上传文件到ftp服务器失败！", e);
@@ -358,14 +358,14 @@ public class BackgroundAction extends AbstractAction{
     @ResponseBody
     public ModelAndView getPotenDataList(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> filter = Maps.newHashMap();
-        int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex")) + 1;
+        int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
         //默认每页显示15行
         int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
         
         Page<?> pageData = interPotenService.getShowInfoListByPaging(filter, pageSize, pageIndex);
         ModelAndView mode = new ModelAndView();
         mode.addObject("pageData", pageData);
-        mode.setViewName("background/data");
+        mode.setViewName("background/dataList");
         return mode;
     }
 }

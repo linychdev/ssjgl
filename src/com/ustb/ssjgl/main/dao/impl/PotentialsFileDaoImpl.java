@@ -14,12 +14,12 @@ public class PotentialsFileDaoImpl extends AbstractDao implements IPotentialsFil
     }
     
     @Override
-    public void addPtentialsFile(TPotentialsFile ptenFile) {
+    public void addPotentialsFile(TPotentialsFile ptenFile) {
         insertSelective(ptenFile);
     }
 
     @Override
-    public void deletePtentialsFileById(String id) {
+    public void deletePotentialsFileById(String id) {
         deleteByPrimaryKey(TPotentialsFile.class, id);
     }
 

@@ -1,4 +1,4 @@
-host=117.121.38.63
+host=192.168.0.109
 port=21
 userName=ftpuser
 password=123456

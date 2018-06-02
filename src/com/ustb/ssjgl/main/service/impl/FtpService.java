@@ -303,6 +303,7 @@ public class FtpService {
             ftpRetrieveFile(output);
             output.flush();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CommonsException(e);
         }finally{
             ResourceUtils.close(output);

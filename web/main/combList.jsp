@@ -14,14 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="${pageContext.request.contextPath}/css/combList.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/main/combList.css" rel="stylesheet" type="text/css" media="all" />
 <!-- js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.simple.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts-wordcloud.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/combList.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/echarts.simple.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/echarts-wordcloud.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/combList.js"></script>
 
 <script type="text/javascript">
   var contextPath = "<%=request.getContextPath()%>";

@@ -32,9 +32,9 @@ public interface IInterPotenService {
     
     /**
      * 新增势数据文件元数据
-     * @param ptentialsFile
+     * @param potentialsFile
      */
-    public void addPotentialsFile(TPotentialsFile ptentialsFile);
+    public void addPotentialsFile(TPotentialsFile potentialsFile);
 
     /**
      * 删除原子间势

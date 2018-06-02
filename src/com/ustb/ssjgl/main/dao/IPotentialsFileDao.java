@@ -11,13 +11,13 @@ public interface IPotentialsFileDao extends IAbstractDao{
      * 新增势数据文件(元数据)
      * @param ptenFile
      */
-    public void addPtentialsFile(TPotentialsFile ptenFile);
+    public void addPotentialsFile(TPotentialsFile ptenFile);
     
     /**
      * 根据id删除势数据文件元数据
      * @param id
      */
-    public void deletePtentialsFileById(String id);
+    public void deletePotentialsFileById(String id);
 
     /**
      * 根据文献id删除势数据文件元数据

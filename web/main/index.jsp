@@ -12,14 +12,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> 
-  <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css" /> 
+  <link href="${pageContext.request.contextPath}/css/main/index.css" rel="stylesheet" type="text/css" /> 
   <!-- //js --> 
   <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
   <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-  <script src="${pageContext.request.contextPath}/js/index.js"></script>
   <script src="${pageContext.request.contextPath}/js/holder.js"></script>
   <script src="${pageContext.request.contextPath}/js/default.js"></script>
+  <script src="${pageContext.request.contextPath}/js/main/index.js"></script>
   <script type="text/javascript">
   	var contextPath = "<%=request.getContextPath()%>";
   </script>
