@@ -269,4 +269,15 @@ public class InterPotenServiceImpl implements IInterPotenService {
         page.setDataList(elementCombShowInfos);
         return page;
     }
+
+    @Override
+    public List<TElement> getAllElements() {
+        
+        return elementDao.getAllElements();
+    }
+
+    @Override
+    public List<TPotentialsFunction> getAllFunction() {
+        return potentialsFunctionDao.selectAll();
+    }
 }

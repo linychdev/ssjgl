@@ -107,6 +107,20 @@ font: 20px;
 	float:right;
 }
 
+.dropdown-menu.inner.selectpicker{
+	max-height: 180px !important;
+}
+
+.btn-group.bootstrap-select.show-tick{
+	width: 100% !important;
+}
+
+#fun-edit-poten-name{
+	line-height: 35px;
+}
+
+
+
 /*用户管理模块样式*/
 .add-user-pop .layui-layer-content{
 	height: 180px !important;

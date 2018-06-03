@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.SsjglContants;
@@ -35,6 +36,7 @@ import com.ustb.ssjgl.login.service.IUserService;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
+import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 import com.ustb.ssjgl.main.dao.bean.TReference;
@@ -388,10 +390,44 @@ public class BackgroundAction extends AbstractAction{
         int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
         
         Page<?> pageData = interPotenService.getShowInfoListByPaging(filter, pageSize, pageIndex);
+        List<TElement> elementList = interPotenService.getAllElements();
         ModelAndView mode = new ModelAndView();
         mode.addObject("pageData", pageData);
+        mode.addObject("elementList", elementList);
         mode.setViewName("background/dataList");
         return mode;
+    }
+
+    /**
+     * 元素列表
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/elementList")
+    @ResponseBody
+    public void getElementList(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        List<TElement> elementList = interPotenService.getAllElements();
+        List<TPotentialsFunction> functionList = interPotenService.getAllFunction();
+        
+        JSONArray elementJson = new JSONArray();
+        for (TElement element : elementList) {
+            JSONObject jo = new JSONObject();
+            jo.put("id", element.getcId());
+            jo.put("name", element.getcSymbol());
+            elementJson.add(jo);
+        }
+
+        JSONArray funJson = new JSONArray();
+        for (TPotentialsFunction fun : functionList) {
+            JSONObject jo = new JSONObject();
+            jo.put("id", fun.getcId());
+            jo.put("name", fun.getcName());
+            funJson.add(jo);
+        }
+        result.put("elementList", elementJson);
+        result.put("functionList", funJson);
+        this.writeAjaxObject(response, result);
     }
 
     /**

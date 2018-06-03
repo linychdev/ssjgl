@@ -32,5 +32,11 @@ public interface IElementDao extends IAbstractDao {
      * @return
      */
     public List<TElement> selectByCombId(String getcId);
+
+    /**
+     * 获取所有元素
+     * @return
+     */
+    public List<TElement> getAllElements();
     
 }

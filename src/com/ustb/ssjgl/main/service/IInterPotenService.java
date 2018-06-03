@@ -7,7 +7,9 @@ import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
+import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
+import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 import com.ustb.ssjgl.main.dao.bean.TReference;
 
 /**
@@ -97,4 +99,16 @@ public interface IInterPotenService {
      * @return
      */
     public Page<?> getShowInfoListByPaging(Map<String, Object> filter, int pageSize, int pageIndex);
+    
+    /**
+     * 获取全部元素
+     * @return
+     */
+    public List<TElement> getAllElements();
+
+    /**
+     * 获取全部函数
+     * @return
+     */
+    public List<TPotentialsFunction> getAllFunction();
 }
