@@ -115,8 +115,30 @@ font: 20px;
 	width: 100% !important;
 }
 
-#fun-edit-poten-name{
+#fun-edit-poten-name {
 	line-height: 35px;
+}
+#ref-edit-poten-name{
+	line-height: 35px;
+}
+
+#myul{
+	width:100%;
+}
+#myul li {
+	list-style:none;
+	padding-top:10px;
+	margin-bottom: 10px;
+	border:1px solid #5fb878;
+}
+#myul li span{
+	list-style:none; 
+	height:20px; 
+	display:block; 
+	padding-left:20px;  
+}
+#myul li span.hand{ 
+	cursor:pointer;
 }
 
 
