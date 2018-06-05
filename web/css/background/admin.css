@@ -134,13 +134,19 @@ font: 20px;
 #myul li span{
 	list-style:none; 
 	height:20px; 
-	display:block; 
 	padding-left:20px;  
 }
 #myul li span.hand{ 
 	cursor:pointer;
 }
-
+.fold-ref-div{
+	display:inline;
+}
+.remove-ref-div{
+	display:inline;
+	float:right;
+	margin-right:10px;
+}
 
 
 /*用户管理模块样式*/
