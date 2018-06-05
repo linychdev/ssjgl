@@ -1,124 +1,124 @@
 //showFPS.setParentElementId("info");
 //showFPS.go();
 var table = [
-	"H", "Hydrogen", "1.00794", 1, 1,
-	"He", "Helium", "4.002602", 18, 1,
-	"Li", "Lithium", "6.941", 1, 2,
-	"Be", "Beryllium", "9.012182", 2, 2,
-	"B", "Boron", "10.811", 13, 2,
-	"C", "Carbon", "12.0107", 14, 2,
-	"N", "Nitrogen", "14.0067", 15, 2,
-	"O", "Oxygen", "15.9994", 16, 2,
-	"F", "Fluorine", "18.9984032", 17, 2,
-	"Ne", "Neon", "20.1797", 18, 2,
-	"Na", "Sodium", "22.98976...", 1, 3,
-	"Mg", "Magnesium", "24.305", 2, 3,
-	"Al", "Aluminium", "26.9815386", 13, 3,
-	"Si", "Silicon", "28.0855", 14, 3,
-	"P", "Phosphorus", "30.973762", 15, 3,
-	"S", "Sulfur", "32.065", 16, 3,
-	"Cl", "Chlorine", "35.453", 17, 3,
-	"Ar", "Argon", "39.948", 18, 3,
-	"K", "Potassium", "39.948", 1, 4,
-	"Ca", "Calcium", "40.078", 2, 4,
-	"Sc", "Scandium", "44.955912", 3, 4,
-	"Ti", "Titanium", "47.867", 4, 4,
-	"V", "Vanadium", "50.9415", 5, 4,
-	"Cr", "Chromium", "51.9961", 6, 4,
-	"Mn", "Manganese", "54.938045", 7, 4,
-	"Fe", "Iron", "55.845", 8, 4,
-	"Co", "Cobalt", "58.933195", 9, 4,
-	"Ni", "Nickel", "58.6934", 10, 4,
-	"Cu", "Copper", "63.546", 11, 4,
-	"Zn", "Zinc", "65.38", 12, 4,
-	"Ga", "Gallium", "69.723", 13, 4,
-	"Ge", "Germanium", "72.63", 14, 4,
-	"As", "Arsenic", "74.9216", 15, 4,
-	"Se", "Selenium", "78.96", 16, 4,
-	"Br", "Bromine", "79.904", 17, 4,
-	"Kr", "Krypton", "83.798", 18, 4,
-	"Rb", "Rubidium", "85.4678", 1, 5,
-	"Sr", "Strontium", "87.62", 2, 5,
-	"Y", "Yttrium", "88.90585", 3, 5,
-	"Zr", "Zirconium", "91.224", 4, 5,
-	"Nb", "Niobium", "92.90628", 5, 5,
-	"Mo", "Molybdenum", "95.96", 6, 5,
-	"Tc", "Technetium", "(98)", 7, 5,
-	"Ru", "Ruthenium", "101.07", 8, 5,
-	"Rh", "Rhodium", "102.9055", 9, 5,
-	"Pd", "Palladium", "106.42", 10, 5,
-	"Ag", "Silver", "107.8682", 11, 5,
-	"Cd", "Cadmium", "112.411", 12, 5,
-	"In", "Indium", "114.818", 13, 5,
-	"Sn", "Tin", "118.71", 14, 5,
-	"Sb", "Antimony", "121.76", 15, 5,
-	"Te", "Tellurium", "127.6", 16, 5,
-	"I", "Iodine", "126.90447", 17, 5,
-	"Xe", "Xenon", "131.293", 18, 5,
-	"Cs", "Caesium", "132.9054", 1, 6,
-	"Ba", "Barium", "132.9054", 2, 6,
-	"La", "Lanthanum", "138.90547", 4, 9,
-	"Ce", "Cerium", "140.116", 5, 9,
-	"Pr", "Praseodymium", "140.90765", 6, 9,
-	"Nd", "Neodymium", "144.242", 7, 9,
-	"Pm", "Promethium", "(145)", 8, 9,
-	"Sm", "Samarium", "150.36", 9, 9,
-	"Eu", "Europium", "151.964", 10, 9,
-	"Gd", "Gadolinium", "157.25", 11, 9,
-	"Tb", "Terbium", "158.92535", 12, 9,
-	"Dy", "Dysprosium", "162.5", 13, 9,
-	"Ho", "Holmium", "164.93032", 14, 9,
-	"Er", "Erbium", "167.259", 15, 9,
-	"Tm", "Thulium", "168.93421", 16, 9,
-	"Yb", "Ytterbium", "173.054", 17, 9,
-	"Lu", "Lutetium", "174.9668", 18, 9,
-	"Hf", "Hafnium", "178.49", 4, 6,
-	"Ta", "Tantalum", "180.94788", 5, 6,
-	"W", "Tungsten", "183.84", 6, 6,
-	"Re", "Rhenium", "186.207", 7, 6,
-	"Os", "Osmium", "190.23", 8, 6,
-	"Ir", "Iridium", "192.217", 9, 6,
-	"Pt", "Platinum", "195.084", 10, 6,
-	"Au", "Gold", "196.966569", 11, 6,
-	"Hg", "Mercury", "200.59", 12, 6,
-	"Tl", "Thallium", "204.3833", 13, 6,
-	"Pb", "Lead", "207.2", 14, 6,
-	"Bi", "Bismuth", "208.9804", 15, 6,
-	"Po", "Polonium", "(209)", 16, 6,
-	"At", "Astatine", "(210)", 17, 6,
-	"Rn", "Radon", "(222)", 18, 6,
-	"Fr", "Francium", "(223)", 1, 7,
-	"Ra", "Radium", "(226)", 2, 7,
-	"Ac", "Actinium", "(227)", 4, 10,
-	"Th", "Thorium", "232.03806", 5, 10,
-	"Pa", "Protactinium", "231.0588", 6, 10,
-	"U", "Uranium", "238.02891", 7, 10,
-	"Np", "Neptunium", "(237)", 8, 10,
-	"Pu", "Plutonium", "(244)", 9, 10,
-	"Am", "Americium", "(243)", 10, 10,
-	"Cm", "Curium", "(247)", 11, 10,
-	"Bk", "Berkelium", "(247)", 12, 10,
-	"Cf", "Californium", "(251)", 13, 10,
-	"Es", "Einstenium", "(252)", 14, 10,
-	"Fm", "Fermium", "(257)", 15, 10,
-	"Md", "Mendelevium", "(258)", 16, 10,
-	"No", "Nobelium", "(259)", 17, 10,
-	"Lr", "Lawrencium", "(262)", 18, 10,
-	"Rf", "Rutherfordium", "(267)", 4, 7,
-	"Db", "Dubnium", "(268)", 5, 7,
-	"Sg", "Seaborgium", "(271)", 6, 7,
-	"Bh", "Bohrium", "(272)", 7, 7,
-	"Hs", "Hassium", "(270)", 8, 7,
-	"Mt", "Meitnerium", "(276)", 9, 7,
-	"Ds", "Darmstadium", "(281)", 10, 7,
-	"Rg", "Roentgenium", "(280)", 11, 7,
-	"Cn", "Copernicium", "(285)", 12, 7,
-	"Uut", "Unutrium", "(284)", 13, 7,
-	"Fl", "Flerovium", "(289)", 14, 7,
-	"Uup", "Ununpentium", "(288)", 15, 7,
-	"Lv", "Livermorium", "(293)", 16, 7,
-	"Uus", "Ununseptium", "(294)", 17, 7,
-	"Uuo", "Ununoctium", "(294)", 18, 7
+       "H", "hcp", "Hydrogen", 1, 1, "rgba(255,255,51,",
+    "He", "hcp", "Helium", 18, 1, "rgba(153,255,204,",
+    "Li", "bcc", "Lithium", 1, 2, "rgba(255,255,51,",
+    "Be", "hcp", "Beryllium", 2, 2, "rgba(255,255,51,",
+    "B", "hcp", "Boron", 13, 2, "rgba(255,51,153,",
+    "C", "hcp", "Carbon", 14, 2, "rgba(255,51,153,",
+    "N", "hcp", "Nitrogen", 15, 2, "rgba(255,51,153,",
+    "O", "hcp", "Oxygen", 16, 2, "rgba(255,51,153,",
+    "F", "", "Fluorine", 17, 2, "rgba(255,51,153,",
+    "Ne", "fcc", "Neon", 18, 2, "rgba(153,255,204,",
+    "Na", "bcc", "Sodium", 1, 3, "rgba(255,255,51,",
+    "Mg", "hcp", "Magnesium", 2, 3, "rgba(255,255,51,",
+    "Al", "fcc", "Aluminium", 13, 3, "rgba(51,153,255,",
+    "Si", "diamand", "Silicon", 14, 3, "rgba(255,51,153,",
+    "P", "cubic", "Phosphorus", 15, 3, "rgba(255,51,153,",
+    "S", "cubic", "Sulfur", 16, 3, "rgba(255,51,153,",
+    "Cl", "tetragonal", "Chlorine", 17, 3, "rgba(255,51,153,",
+    "Ar", "fcc", "Argon", 18, 3, "rgba(153,255,204,",
+    "K", "bcc", "Potassium", 1, 4, "rgba(255,255,51,",
+    "Ca", "fcc", "Calcium", 2, 4, "rgba(255,255,51,",
+    "Sc", "hcp", "Scandium", 3, 4, "rgba(51,153,255,",
+    "Ti", "hcp", "Titanium", 4, 4, "rgba(51,153,255,",
+    "V", "bcc", "Vanadium", 5, 4, "rgba(51,153,255,",
+    "Cr", "bcc", "Chromium", 6, 4, "rgba(51,153,255,",
+    "Mn", "cubic", "Manganese", 7, 4, "rgba(51,153,255,",
+    "Fe", "fcc", "Iron", 8, 4, "rgba(51,153,255,",
+    "Co", "hcp", "Cobalt", 9, 4, "rgba(51,153,255,",
+    "Ni", "fcc", "Nickel", 10, 4, "rgba(51,153,255,",
+    "Cu", "fcc", "Copper", 11, 4, "rgba(51,153,255,",
+    "Zn", "hcp", "Zinc", 12, 4, "rgba(51,153,255,",
+    "Ga", "cubic", "Gallium", 13, 4, "rgba(51,153,255,",
+    "Ge", "diamand", "Germanium", 14, 4, "rgba(51,153,255,",
+    "As", "trigonal", "Arsenic", 15, 4, "rgba(255,51,153,",
+    "Se", "hcp", "Selenium", 16, 4, "rgba(255,51,153,",
+    "Br", "cubic", "Bromine", 17, 4, "rgba(255,51,153,",
+    "Kr", "fcc", "Krypton", 18, 4, "rgba(153,255,204,",
+    "Rb", "bcc", "Rubidium", 1, 5, "rgba(255,255,51,",
+    "Sr", "fcc", "Strontium", 2, 5, "rgba(255,255,51,",
+    "Y", "hcp", "Yttrium", 3, 5, "rgba(51,153,255,",
+    "Zr", "hcp", "Zirconium", 4, 5, "rgba(51,153,255,",
+    "Nb", "bcc", "Niobium", 5, 5, "rgba(51,153,255,",
+    "Mo", "bcc", "Molybdenum", 6, 5, "rgba(51,153,255,",
+    "Tc", "", "Technetium", 7, 5, "rgba(51,153,255,",
+    "Ru", "hcp", "Ruthenium", 8, 5, "rgba(51,153,255,",
+    "Rh", "fcc", "Rhodium", 9, 5, "rgba(51,153,255,",
+    "Pd", "fcc", "Palladium", 10, 5, "rgba(51,153,255,",
+    "Ag", "fcc", "Silver", 11, 5, "rgba(51,153,255,",
+    "Cd", "hcp", "Cadmium", 12, 5, "rgba(51,153,255,",
+    "In", "tetragonal", "Indium", 13, 5, "rgba(51,153,255,",
+    "Sn", "tetragonal", "Tin", 14, 5, "rgba(51,153,255,",
+    "Sb", "trigonal", "Antimony", 15, 5, "rgba(51,153,255,",
+    "Te", "hcp", "Tellurium", 16, 5, "rgba(255,51,153,",
+    "I", "cubic", "Iodine", 17, 5, "rgba(255,51,153,",
+    "Xe", "fcc", "Xenon", 18, 5, "rgba(153,255,204,",
+    "Cs", "bcc", "Caesium", 1, 6, "rgba(255,255,51,",
+    "Ba", "bcc", "Barium", 2, 6, "rgba(255,255,51,",
+    "La", "hcp", "Lanthanum", 4, 9, "rgba(51,153,255,",
+    "Ce", "fcc", "Cerium", 5, 9, "rgba(51,153,255,",
+    "Pr", "hcp", "Praseodymium", 6, 9, "rgba(51,153,255,",
+    "Nd", "hcp", "Neodymium", 7, 9, "rgba(51,153,255,",
+    "Pm", "hcp", "Promethium", 8, 9, "rgba(51,153,255,",
+    "Sm", "trigonal", "Samarium", 9, 9, "rgba(51,153,255,",
+    "Eu", "bcc", "Europium", 10, 9, "rgba(51,153,255,",
+    "Gd", "hcp", "Gadolinium", 11, 9, "rgba(51,153,255,",
+    "Tb", "hcp", "Terbium", 12, 9, "rgba(51,153,255,",
+    "Dy", "hcp", "Dysprosium", 13, 9, "rgba(51,153,255,",
+    "Ho", "hcp", "Holmium", 14, 9, "rgba(51,153,255,",
+    "Er", "hcp", "Erbium", 15, 9, "rgba(51,153,255,",
+    "Tm", "hcp", "Thulium", 16, 9, "rgba(51,153,255,",
+    "Yb", "fcc", "Ytterbium", 17, 9, "rgba(51,153,255,",
+    "Lu", "hcp", "Lutetium", 18, 9, "rgba(51,153,255,",
+    "Hf", "hcp", "Hafnium", 4, 6, "rgba(51,153,255,",
+    "Ta", "bcc", "Tantalum", 5, 6, "rgba(51,153,255,",
+    "W", "bcc", "Tungsten", 6, 6, "rgba(51,153,255,",
+    "Re", "hcp", "Rhenium", 7, 6, "rgba(51,153,255,",
+    "Os", "hcp", "Osmium", 8, 6, "rgba(51,153,255,",
+    "Ir", "fcc", "Iridium", 9, 6, "rgba(51,153,255,",
+    "Pt", "fcc", "Platinum", 10, 6, "rgba(51,153,255,",
+    "Au", "fcc", "Gold", 11, 6, "rgba(51,153,255,",
+    "Hg", "trigonal", "Mercury", 12, 6, "rgba(51,153,255,",
+    "Tl", "hcp", "Thallium", 13, 6, "rgba(51,153,255,",
+    "Pb", "fcc", "Lead", 14, 6, "rgba(51,153,255,",
+    "Bi", "trigonal", "Bismuth", 15, 6, "rgba(51,153,255,",
+    "Po", "monoclinic", "Polonium", 16, 6, "rgba(51,153,255,",
+    "At", "", "Astatine", 17, 6, "rgba(255,51,153,",
+    "Rn", "fcc", "Radon", 18, 6, "rgba(153,255,204,",
+    "Fr", "bcc", "Francium", 1, 7, "rgba(255,255,51,",
+    "Ra", "", "Radium", 2, 7, "rgba(255,255,51,",
+    "Ac", "", "Actinium", 4, 10, "rgba(51,153,255,",
+    "Th", "fcc", "Thorium", 5, 10, "rgba(51,153,255,",
+    "Pa", "", "Protactinium", 6, 10, "rgba(51,153,255,",
+    "U", "cubic", "Uranium", 7, 10, "rgba(51,153,255,",
+    "Np", "", "Neptunium", 8, 10, "rgba(51,153,255,",
+    "Pu", "", "Plutonium", 9, 10, "rgba(51,153,255,",
+    "Am", "", "Americium", 10, 10, "rgba(51,153,255,",
+    "Cm", "", "Curium", 11, 10, "rgba(51,153,255,",
+    "Bk", "", "Berkelium", 12, 10, "rgba(51,153,255,",
+    "Cf", "", "Californium", 13, 10, "rgba(51,153,255,",
+    "Es", "", "Einstenium", 14, 10, "rgba(51,153,255,",
+    "Fm", "", "Fermium", 15, 10, "rgba(51,153,255,",
+    "Md", "", "Mendelevium", 16, 10, "rgba(51,153,255,",
+    "No", "", "Nobelium", 17, 10, "rgba(51,153,255,",
+    "Lr", "", "Lawrencium", 18, 10, "rgba(51,153,255,",
+    "Rf", "", "Rutherfordium", 4, 7, "rgba(51,153,255,",
+    "Db", "", "Dubnium", 5, 7, "rgba(51,153,255,",
+    "Sg", "", "Seaborgium", 6, 7, "rgba(51,153,255,",
+    "Bh", "", "Bohrium", 7, 7, "rgba(51,153,255,",
+    "Hs", "", "Hassium", 8, 7, "rgba(51,153,255,",
+    "Mt", "", "Meitnerium", 9, 7, "rgba(51,153,255,",
+    "Ds", "", "Darmstadium", 10, 7, "rgba(51,153,255,",
+    "Rg", "", "Roentgenium", 11, 7, "rgba(51,153,255,",
+    "Cn", "", "Copernicium", 12, 7, "rgba(51,153,255,",
+    "Uut", "", "Unutrium", 13, 7, "rgba(51,153,255,",
+    "Fl", "", "Flerovium", 14, 7, "rgba(51,153,255,",
+    "Uup", "", "Ununpentium", 15, 7, "rgba(51,153,255,",
+    "Lv", "", "Livermorium", 16, 7, "rgba(51,153,255,",
+    "Uus", "", "Ununseptium", 17, 7, "rgba(51,153,255,",
+    "Uuo", "", "Ununoctium", 18, 7 ,"rgba(153,255,204,"
 ];
 
 var camera, scene, renderer;
@@ -141,36 +141,48 @@ setTimeout(clickTable, 10600);
 function init() {
 
 	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / winHeigth, 1, 10000 );
+	//设置透视投影的相机,默认情况下相机的上方向为Y轴，右方向为X轴，沿着Z轴朝里（视野角：fov 纵横比：aspect 相机离视体积最近的距离：near 相机离视体积最远的距离：far）
 	camera.position.z = 3000;
+	////设置相机的位置坐标
 	scene = new THREE.Scene();
-
+	//设置场景
 	// table
-	for ( var i = 0; i < table.length; i += 5 ) {
+	for ( var i = 0; i < table.length; i += 6 ) {
 
 		var element = document.createElement( 'div' );
+		//创建元素
 		element.className = 'element';
-		element.style.backgroundColor = 'rgba(219,26,230,' + ( Math.random() * 0.5 + 0.25 ) + ')';
-
+		element.style.color = table[ i + 5 ] + 1 + ")"
 		var number = document.createElement( 'div' );
 		number.className = 'number';
-		number.textContent = (i/5) + 1;
+		number.textContent = (i/6) + 1;
 		element.appendChild( number );
+		//用createElement()函数创建元素 
+		//用setAttribute()函数设置属性值
 
 		var symbol = document.createElement( 'div' );
 		symbol.className = 'symbol';
 		symbol.textContent = table[ i ];
 		element.appendChild( symbol );
+		//插入节点
 
 		var details = document.createElement( 'div' );
 		details.className = 'details';
-		details.innerHTML = table[ i + 1 ] + '<br>' + table[ i + 2 ];
+		details.innerHTML = table[ i + 1 ] ;
 		element.appendChild( details );
-
+        
+		var struture = document.createElement('div');
+		struture.className = 'struture';
+		struture.innerHTML = table[ i + 2 ] ;
 		var object = new THREE.CSS3DObject( element );
-		object.position.x = Math.random() * 4000 - 2000;
+		element.appendChild( struture );
+		
+		//头像平贴平面
+		object.position.x = Math.random() * 4000 - 2000;//随机位置
 		object.position.y = Math.random() * 4000 - 2000;
 		object.position.z = Math.random() * 4000 - 2000;
 		scene.add( object );
+		//用于向场景中添加对象
 
 		objects.push( object );
 
