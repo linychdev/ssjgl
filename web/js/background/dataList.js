@@ -22,15 +22,16 @@ $(function () {
 		  var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 	});
 	
-var slideUpHtml = "<li>" +
-					"<span class = 'glyphicon glyphicon-menu-down'></span>"+
-					"<div class='hid'>"+
-					  "<div class='form-group'>"+
-					  "<label for='' class='col-sm-3 control-label'>相关文献:</label>"+
-					  "<div class='col-sm-8'>"+
-					  "<textarea type='text' rows='3' cols='20' class='form-control' name='referenceText' placeholder='reference text'></textarea>"+
-					  "</div>"+
-					  "</div>"+
+var slideUpHtml = "<li id = 'sdfasdf"+Math.random()*1000+"'>" +
+					  "<span class = 'glyphicon glyphicon-menu-down fold-ref-div'></span>"+
+					  "<div class = 'glyphicon glyphicon-remove remove-ref-div'></div>"+
+					  "<div class='hid'>"+
+						"<div class='form-group'>"+
+						  "<label for='' class='col-sm-3 control-label'>相关文献:</label>"+
+						  "<div class='col-sm-8'>"+
+						  	"<textarea type='text' rows='3' cols='20' class='form-control' name='referenceText' placeholder='reference text'></textarea>"+
+						  "</div>"+
+					    "</div>"+
 					  "<div class='form-group'>"+
 					  "<label for='' class='col-sm-3 control-label'>文献来源:</label>"+
 					  "<div class='col-sm-8'>"+
@@ -176,6 +177,8 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
 		}
 	};
 
+	var deleteRefBhArray = new Array();
+	
 	$("#addPotenButton").on("click",function(){
 		layer.open({
 			  type: 1,
@@ -188,7 +191,7 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
 			  content: html,
 			  cancel: function(){ 
 			    //右上角关闭回调
-			    //return false 开启该代码可禁止点击该按钮关闭
+				  deleteRefBhArray.splice(0,deleteRefBhArray.length);
 			  },
 			  success:function(){
 				  //注册下拉选事件
@@ -239,7 +242,7 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
 		                $(this).toggleClass("current");
 		                $(this).parent().siblings().find("span").removeClass("current");
 		                $(this).parent().find("div.hid").slideToggle("fast");
-		                $(this).parent().siblings().children("div").slideUp("fast");               
+		                $(this).parent().siblings().children("div.hid").slideUp("fast");               
 		               
 		                if($(this).hasClass("glyphicon glyphicon-menu-down")){
 		                	$(this).removeClass("glyphicon glyphicon-menu-down");
@@ -252,11 +255,20 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
 		                $(this).parent().siblings().children("span").addClass("glyphicon glyphicon-menu-right");
 		            });
 		            
+		            //添加文献页面，小表单删除图标事件
+		            $("#myul").on("click",".remove-ref-div",function(){
+		            	var refId = $(this).parent().attr("id");
+		            	if(refId && refId.trim() != ""){
+		            		deleteRefBhArray.push(refId);
+		            	}
+		            	$(this).parent().remove();
+		            });
+		            
 		            //点击继续添加文献按钮
 		            $("#addRefDivBtn").on("click",function(){
 		            	$(".slideUp").append(slideUpHtml);
 		            	$("#myul li span").addClass("hand"); 
-		            	$(".slideUp li:not(:last)").children("div").slideUp("fast");
+		            	$(".slideUp li:not(:last)").children("div.hid").slideUp("fast");
 		            	$(".slideUp li:not(:last)").children("span").removeClass("glyphicon glyphicon-menu-down");
 		            	$(".slideUp li:not(:last)").children("span").addClass("glyphicon glyphicon-menu-right");
 		            	
@@ -268,9 +280,12 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
 		            //点击保存文献数据按钮事件
 		            $("#saveRefBtn").on("click",function(){
 		            	$(".slideUp li").each(function(){
+		            		//TODO 保存全部文献信息
+		            		//回传删除文献id
 		            	    $(this).children("span");
 		            	  });
-		            	$(".upload-file-tab")
+		            	//TODO 为上传文件页面增加元素
+		            	$(".upload-file-tab");
 		            });
 			  }
 			});
