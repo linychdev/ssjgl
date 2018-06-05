@@ -17,6 +17,15 @@ $(function () {
 //	    }
 //	  });
 //	});
+	
+	var operationType;
+	var functionId;
+	
+	$("#addFunButton").on("click",function(){
+		operationType = "insert";
+		$("#addFunDiv").removeClass("display_none");
+	});
+	
 	//保存函数
 	$("#saveFun").on("click",function(){
 		var funHtml = JMEditor.html('funEdit').replace(/\"/g, "'");

@@ -203,6 +203,7 @@
     <include refid="Base_Column_List" />
     from t_user
     where n_valid = 1
+      and c_login_name <![CDATA[ <> ]]> 'admin'
   </select>
   
   <select id="selectUserByRole" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -222,5 +223,33 @@
      from t_user
     where c_email = #{cEmail,jdbcType=VARCHAR}
       and n_valid = 1
+  </select>
+  
+   <select id="selectCountByFilter" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select 
+	count(*)
+    from t_user user
+    where user.n_valid = 1
+      and user.c_login_name <![CDATA[ <> ]]> 'admin'
+    <where>  
+	   <if test="userName!=null">  
+	        and user.c_login_name = #{userName}  
+	   </if>  
+	</where>
+  </select>
+  
+  <select id="selectByFilter" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+      from t_user user
+     where user.n_valid = 1
+       and user.c_login_name <![CDATA[ <> ]]> 'admin'
+    <where>  
+	   <if test="userName!=null">  
+	        and user.c_login_name = #{userName}  
+	   </if>  
+	</where>
+order by user.n_order, user.d_time desc
+	limit #{stratRow}, #{endRow} 
   </select>
 </mapper>

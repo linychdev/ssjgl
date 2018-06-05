@@ -246,4 +246,9 @@
    where detail.c_element_id = element.c_id
      and detail.c_element_comb_id = #{combId,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_element
+  </select>
 </mapper>

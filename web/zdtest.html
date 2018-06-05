@@ -1,0 +1,53 @@
+HTML 代码 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <style type="text/css">
+    #myul{ width:504px;}
+    #myul li { list-style:none;border:1px solid #96C2F1; padding:1px;}
+    #myul li span{ list-style:none; background:#B2D3F5; width:480px; height:20px; display:block; padding-left:20px;  }
+    #myul li span.hand{ cursor:pointer;background:#B2D3F5 url(img/right.gif) no-repeat 5px center;}
+    #myul li span.current{ background:#b2d300 url(img/down.gif) no-repeat 5px center; }
+    #myul li div{ background:#EFF7FF;width:490px; padding:0px 5px 5px 5px; }
+  
+    
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#myul li div").hide(); 
+            $("#myul li span").addClass("hand"); 
+            $("#myul li span").click(function () {
+                $(this).toggleClass("current");
+                $(this).parent().siblings().find("span").removeClass("current");
+                $(this).parent().find("div.hid").slideToggle("fast");
+                $(this).parent().siblings().find("div").slideUp("fast");               
+            });
+        })
+    </script>
+</head>
+<body>
+<ul id="myul">
+<li><span>第一级菜单</span>
+   <div class="hid">
+     <p>武器哦的撒旦法发生的撒旦法打撒旦法 <br />asdfasfdasfd</p>
+     <p>武器哦的撒旦法发生的撒旦法打撒旦法 <br />asdfasfdasfd</p>
+   </div>
+
+</li>
+<li><span>第二级菜单</span>
+   <div class="hid">武器哦的撒旦法发生的撒旦法</div> </li>
+<li><span> 第三级菜单</span>
+<div class="hid">
+   <p>武器哦的撒旦法发生的撒旦法打撒旦法asdfasfdasfd</p>
+   <p>武器哦的撒旦法发生的撒旦法打撒旦法 <br />asdfasfdasfd</p>
+   <p>武器哦的撒旦法发生的撒旦法打撒旦法asdfasfdasfd</p>
+   <p>武器哦的撒旦法发生的撒旦法打撒旦法 <br />asdfasfdasfd</p>
+   </div>
+</li>
+</ul>
+</body>
+</html>

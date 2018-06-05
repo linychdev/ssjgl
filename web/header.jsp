@@ -13,8 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> 
 	  <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
-	  <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css" /> 
-	  <!-- //js --> 
+	  <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css" />
+  
+      <script src="${pageContext.request.contextPath}/js/header.js"></script>
 	  <script type="text/javascript">
 	  	var contextPath = "<%=request.getContextPath()%>";
 	  </script>
@@ -43,10 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <li><a href="#">Others</a></li> 
           </ul> 
           </li> 
-         <li><a href="services.html">Help</a></li> 
-         <li><a href="AboutUs.html">About Us</a></li> 
-         <li><a href="User.html">User</a></li> 
-         <li><a href="${pageContext.request.contextPath}/background/admin">Background System</a></li> 
+         <li><a href="javascript:void(0);">Help</a></li> 
+         <li><a href="javascript:void(0);">About Us</a></li> 
+         <li><a href="javascript:void(0);">User</a></li> 
+         <li><a href="javascript:void(0);" class = "background">Background System</a></li> 
         </ul> 
        </div> 
       </nav> 

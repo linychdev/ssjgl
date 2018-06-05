@@ -1,6 +1,7 @@
 package com.ustb.ssjgl.login.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ustb.ssjgl.common.dao.IAbstractDao;
 import com.ustb.ssjgl.login.dao.bean.TUser;
@@ -33,4 +34,8 @@ public interface IUserDao extends IAbstractDao{
     public void saveUser(TUser user);
 
     public TUser getUserByEmail(String emailAddress);
+
+    public int getCount(Map<String, Object> filter);
+
+    public List<TUser> getUserByFilter(Map<String, Object> filter);
 }

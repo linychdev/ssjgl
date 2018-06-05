@@ -182,4 +182,27 @@
         return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
     }
     
+    
+    $(".act-but.submit").on("click",function(){
+    	var loginName = $("input[name='username']").val();
+    	var password = $("input[name='password']").val();
+    	
+		$.post(contextPath + "/login", {
+			loginName : loginName,
+			password : password
+		  }, function(data) {
+		    if (data.success) {
+		    	window.location.href=contextPath+"/background/admin";
+		    }else{
+		    	layer.msg(data.msg, {icon: 1});
+		    }
+		  }, "json");
+    });
+    
+	document.onkeydown = function(e){ 
+		var ev = document.all ? window.event : e;
+		if(ev.keyCode==13) {
+			$(".act-but.submit").click();
+		}
+	}
 })();

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.SsjglContants;
@@ -29,9 +30,13 @@ import com.ustb.ssjgl.common.utils.CommonUtils;
 import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.UuidUtils;
+import com.ustb.ssjgl.login.dao.bean.TUser;
+import com.ustb.ssjgl.login.service.ISessionService;
+import com.ustb.ssjgl.login.service.IUserService;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
+import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 import com.ustb.ssjgl.main.dao.bean.TReference;
@@ -61,6 +66,13 @@ public class BackgroundAction extends AbstractAction{
     
     @Autowired
     private FtpService ftpService;
+    
+    @Autowired
+    private IUserService userService;
+
+    @Autowired
+    private ISessionService sessionService;
+    
     /**
      * 新增原子间势
      * 包括原子间势描述、标签、组合详情
@@ -322,7 +334,7 @@ public class BackgroundAction extends AbstractAction{
     }
 
     /**
-     * 删除势函数
+     * 跳转到后台管理页面
      * @param request
      * @param response
      */
@@ -330,7 +342,22 @@ public class BackgroundAction extends AbstractAction{
     @ResponseBody
     public ModelAndView backgroundIndex(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mode = new ModelAndView();
+        TUser user = sessionService.getCurrentUser();
+        mode.addObject("user", user);
         mode.setViewName("background/admin");
+        return mode;
+    }
+
+    /**
+     * 跳转到登录页面
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/login")
+    @ResponseBody
+    public ModelAndView loginIndex(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mode = new ModelAndView();
+        mode.setViewName("login/login");
         return mode;
     }
 
@@ -363,9 +390,82 @@ public class BackgroundAction extends AbstractAction{
         int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
         
         Page<?> pageData = interPotenService.getShowInfoListByPaging(filter, pageSize, pageIndex);
+        List<TElement> elementList = interPotenService.getAllElements();
         ModelAndView mode = new ModelAndView();
         mode.addObject("pageData", pageData);
+        mode.addObject("elementList", elementList);
         mode.setViewName("background/dataList");
         return mode;
+    }
+
+    /**
+     * 元素列表
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/elementList")
+    @ResponseBody
+    public void getElementList(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        List<TElement> elementList = interPotenService.getAllElements();
+        List<TPotentialsFunction> functionList = interPotenService.getAllFunction();
+        
+        JSONArray elementJson = new JSONArray();
+        for (TElement element : elementList) {
+            JSONObject jo = new JSONObject();
+            jo.put("id", element.getcId());
+            jo.put("name", element.getcSymbol());
+            elementJson.add(jo);
+        }
+
+        JSONArray funJson = new JSONArray();
+        for (TPotentialsFunction fun : functionList) {
+            JSONObject jo = new JSONObject();
+            jo.put("id", fun.getcId());
+            jo.put("name", fun.getcName());
+            funJson.add(jo);
+        }
+        result.put("elementList", elementJson);
+        result.put("functionList", funJson);
+        this.writeAjaxObject(response, result);
+    }
+
+    /**
+     * 用户列表(普通管理员)
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/userList")
+    @ResponseBody
+    public ModelAndView getUserList(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> filter = Maps.newHashMap();
+        int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
+        //默认每页显示15行
+        int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
+        
+        Page<?> pageData = userService.getUserListByPaging(filter, pageSize, pageIndex);
+        boolean isAdmin = sessionService.isCurrentAdmin();
+        ModelAndView mode = new ModelAndView();
+        mode.addObject("pageData", pageData);
+        mode.addObject("isAdmin", isAdmin);
+        mode.setViewName("background/userList");
+        return mode;
+    }
+    
+
+    @RequestMapping("/background/deleteUser")
+    @ResponseBody
+    public void deleteUser(HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            String userId = request.getParameter("userId");
+            userService.deleteUser(userId);
+            result.put("success", true);
+        } catch (Exception e) {
+            LOG.error("删除用户出错！", e);
+            result.put("success", false);
+            result.put("msg", e.getMessage());
+        }
+        this.writeAjaxObject(response, result);
     }
 }

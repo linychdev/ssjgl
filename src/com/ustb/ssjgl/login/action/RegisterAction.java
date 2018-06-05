@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ustb.ssjgl.common.action.AbstractAction;
+import com.ustb.ssjgl.common.utils.DateUtils;
 import com.ustb.ssjgl.login.dao.bean.TUser;
 import com.ustb.ssjgl.login.service.IEmailService;
+import com.ustb.ssjgl.login.service.ISessionService;
 import com.ustb.ssjgl.login.service.IUserService;
 
 /**
@@ -34,6 +36,9 @@ public class RegisterAction extends AbstractAction{
     
     @Autowired
     private IEmailService emailService;
+
+    @Autowired
+    private ISessionService sessionService;
     
     @RequestMapping("/register/regist")
     public String register(@RequestParam("username") String username,
@@ -62,6 +67,61 @@ public class RegisterAction extends AbstractAction{
         }
     }
 
+    @RequestMapping("/register/addManagerUser")
+    public void addManagerUser(HttpServletRequest request, HttpServletResponse response){
+        String userName = request.getParameter("userName");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        TUser user = new TUser();
+        user.setcEmail(email);
+        user.setcName(name);
+        user.setcLoginName(userName);
+        String password = "123456";
+        String encryptionPassword = getEncryptionPassword(userName, password);
+        user.setcPassword(encryptionPassword);
+        boolean success = userService.addUser(user);
+        if(success){
+            result.put("success", true);
+            result.put("password", password);
+        }else{
+            result.put("success", false);
+            result.put("msg", "添加用户失败！");
+        }
+        this.writeAjaxObject(response, result);
+    }
+
+    @RequestMapping("/register/modifyPassword")
+    public void modifyPassword(HttpServletRequest request, HttpServletResponse response){
+        String oldPass = request.getParameter("oldpass");
+        String newPass = request.getParameter("newpass");
+        Map<String, Object> result = new HashMap<String, Object>();
+        if(sessionService.isLogin()){
+            doModify(oldPass, newPass, result);
+        }else{
+            result.put("success", false);
+            result.put("msg", "请重新登录！");
+        }
+        this.writeAjaxObject(response, result);
+    }
+
+    private void doModify(String oldPass, String newPass,
+            Map<String, Object> result) {
+        TUser user = sessionService.getCurrentUser();
+        if(user.getcPassword().equals(getEncryptionPassword(user.getcLoginName(), oldPass))){
+            String encryptionPassword = getEncryptionPassword(user.getcLoginName(), newPass);
+            user.setcPassword(encryptionPassword);
+            user.setdTime(DateUtils.getCurrentDate());
+            userService.modifyPassword(user);
+            result.put("success", true);
+        }else{
+            result.put("success", false);
+            result.put("msg", "原始密码错误！");
+        }
+    }
+    
+    
     @RequestMapping("/register/sendEmail")
     public void sendEmail(HttpServletRequest request, HttpServletResponse response){
         String emailAddress = request.getParameter("emailAddress");
@@ -90,7 +150,7 @@ public class RegisterAction extends AbstractAction{
         }
         this.writeAjaxObject(response, result);
     }
-    
+
     /**
      * 邮件验证码是否正确
      * @param emailAddress

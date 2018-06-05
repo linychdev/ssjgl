@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 import com.ustb.ssjgl.common.paging.Page;
+import com.ustb.ssjgl.login.dao.IUserDao;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.TReferenceInfo;
@@ -65,6 +66,10 @@ public class InterPotenServiceImpl implements IInterPotenService {
     
     @Autowired
     private IReferenceDao referenceDao;
+    
+    @Autowired
+    private IUserDao userDao;
+    
     /**
      * (non-Javadoc)
      * @see com.ustb.ssjgl.main.service.IInterPotenService#addInteratomicPotentials(com.ustb.ssjgl.main.bean.InteratomicPotentials)
@@ -263,5 +268,16 @@ public class InterPotenServiceImpl implements IInterPotenService {
         }
         page.setDataList(elementCombShowInfos);
         return page;
-    }  
+    }
+
+    @Override
+    public List<TElement> getAllElements() {
+        
+        return elementDao.getAllElements();
+    }
+
+    @Override
+    public List<TPotentialsFunction> getAllFunction() {
+        return potentialsFunctionDao.selectAll();
+    }
 }

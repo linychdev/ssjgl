@@ -106,3 +106,61 @@ font: 20px;
 .layui-box.layui-laypage.layui-laypage-default{
 	float:right;
 }
+
+.dropdown-menu.inner.selectpicker{
+	max-height: 180px !important;
+}
+
+.btn-group.bootstrap-select.show-tick{
+	width: 100% !important;
+}
+
+#fun-edit-poten-name {
+	line-height: 35px;
+}
+#ref-edit-poten-name{
+	line-height: 35px;
+}
+
+#myul{
+	width:100%;
+}
+#myul li {
+	list-style:none;
+	padding-top:10px;
+	margin-bottom: 10px;
+	border:1px solid #5fb878;
+}
+#myul li span{
+	list-style:none; 
+	height:20px; 
+	display:block; 
+	padding-left:20px;  
+}
+#myul li span.hand{ 
+	cursor:pointer;
+}
+
+
+
+/*用户管理模块样式*/
+.add-user-pop .layui-layer-content{
+	height: 180px !important;
+}
+.modify-password-pop .layui-layer-content{
+	height: 180px !important;
+}
+.add-user-pop form{
+	padding-top: 30px;
+}
+.modify-password-pop form{
+	padding-top: 30px;
+}
+
+.add-user-pop .tips{
+    text-align: left;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 5;
+    color: red;
+}

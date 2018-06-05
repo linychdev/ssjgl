@@ -17,7 +17,7 @@ public class SessionService implements ISessionService {
     public Boolean isLogin() {
         Subject subject = SecurityUtils.getSubject();
         if(subject.isAuthenticated()){
-            TUser user = (TUser)subject.getPrincipal();
+            TUser user = (TUser) subject.getSession().getAttribute("currentUser");
             return !StringUtils.equals(user.getcName(), SsjglContants.SSJGL_ANONYMOUS);
         }else{
             return false;
@@ -37,7 +37,7 @@ public class SessionService implements ISessionService {
     public Boolean hasRole(String role) {
         Subject subject = SecurityUtils.getSubject();
         if(subject.isAuthenticated()){
-            if(isAdmin()){
+            if(isCurrentAdmin()){
                 return true;
             }
             return subject.hasRole(role);
@@ -45,10 +45,11 @@ public class SessionService implements ISessionService {
         return false;
     }
     
-    private boolean isAdmin(){
+    @Override
+    public boolean isCurrentAdmin(){
         Subject subject = SecurityUtils.getSubject();
         if(subject.isAuthenticated()){
-            TUser user= (TUser) subject.getPrincipal();
+            TUser user= (TUser) (TUser) subject.getSession().getAttribute("currentUser");
             return StringUtils.equalsIgnoreCase(SsjglContants.SSJGL_ADMIN, user.getcLoginName());
         }
         return false;
@@ -58,7 +59,7 @@ public class SessionService implements ISessionService {
     public Boolean hasRight(String right) {
         Subject subject = SecurityUtils.getSubject();
         if(subject.isAuthenticated()){
-            if(isAdmin()){
+            if(isCurrentAdmin()){
                 return true;
             }
             return subject.isPermitted(right);
