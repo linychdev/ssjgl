@@ -1,8 +1,13 @@
 $(function(){
    var operationType = 0;
    var TimeFn = null;
-   $("div.elements").click(function(){
-	   operationType = 1;
+   
+   $("body").on("mouseleave",".elements-big",function(){
+    	operationType = 0;
+        layer.closeAll();
+		removeCloneElement();
+   });
+   $("div").on("mouseenter",".elements",function(event){
        var offset_top = $(this).offset().top - $(this).height();
        var offset_left = $(this).offset().left - $(this).width();
        var column1 = new Array();
@@ -69,39 +74,40 @@ $(function(){
        //执行延时
        TimeFn = setTimeout(function () {
         layer.closeAll();
-        layer.open({
-            type: 1,
-            area: ['220px', '200px'],
-            offset: [ 
-               offset_top
-              ,offset_left
-            ],
-            title: false,
-            closeBtn: 0,
-            shadeClose: true,
-            skin: 'yourclass',
-            content: htmlstr
-          });
+    	layer.open({
+    		type: 1,
+    		area: ['220px', '200px'],
+    		offset: [ 
+    		         offset_top
+    		         ,offset_left
+    		         ],
+    		         title: false,
+    		         closeBtn: 0,
+    		         shadeClose: true,
+//            skin: 'yourclass',
+    		         shade: 0,
+    		         content: htmlstr
+    	});
         //大于3列，调整电负性列宽
 		if(column3.length > 0){
 			$(".oxidation-column").addClass("oxidation-column3");
 		}else{
 			$(".oxidation-column").removeClass("oxidation-column3");
 		}
-		operationType = 0; 
+		operationType = 1;
 		removeCloneElement();
 		 
-       }, 240);//延时时长设置   
+       }, 640);//延时时长设置   
 
    });
    
    //双击元素
-   $("div.elements").dblclick(function(){
+   $("div.elements").click(function(){
 	   operationType = 2;
        clearTimeout(TimeFn);
        setTimeout(function (){
     	   removeCloneElement();
-       },200);
+       },300);
        var tmp=window.open("about:blank")  
        tmp.moveTo(0,0)  
        tmp.resizeTo(screen.width+20,screen.height)  
@@ -113,6 +119,9 @@ $(function(){
    //拖动事件，克隆一个div用于拖动
    var timer=null;  
    $("div.elements").mousedown(function(e){
+	   if(event.which == 1){
+	       clearTimeout(TimeFn);
+	   }
 	   thisElement = $(this);
 	   timer=setTimeout(function () {
 		   if(!(operationType == 1 || operationType == 2)){
