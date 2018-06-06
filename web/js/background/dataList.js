@@ -23,6 +23,7 @@ $(function () {
     });
     
 var html = "";
+var slideUpHtml = "";
 $.post(contextPath + "/background/elementList", {}, function(data) {
     
     var elementOptionHtml = "";
@@ -37,8 +38,7 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
         var option = "<option>"+data.functionList[i].name+"</option>";
         funOptionHtml += option;
     }  
-    var slideUpHtml = "";
-    if(data.refList.length > 0){
+    if(data.refList && data.refList.length > 0){
         for(var i=0;i<data.refList.length;i++){
             var refBean = data.refList[i];
             slideUpHtml += "<li id = '"+refBean.cId+"'>" +
@@ -57,9 +57,9 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                                 "<label for='' class='col-sm-3 control-label'>文献来源:</label>"+
                                 "<div class='col-sm-8'>"+
                                     "<select class='form-control'>";
-                        if(refBean.nSource == 1){
-                            slideUpHtml +=
-                        }
+//                        if(refBean.nSource == 1){
+//                            slideUpHtml +=
+//                        }
                                     "<option value='1' selected>势库</option>"+
                                     "<option value='2'>其他</option>"+
                                     "</select>"+
@@ -201,7 +201,7 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                                "</div>"+
                           "</div>"+
                         "</form>";
-    
+    var fileEditHtml = "";
     html += "<div class='layui-tab layui-tab-brief' lay-filter='docDemoTabBrief'>"+
                   "<ul class='layui-tab-title'>"+
                   "<li class='layui-this'>新增原子间势</li>"+
