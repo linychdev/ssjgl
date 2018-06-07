@@ -148,6 +148,12 @@ font: 20px;
 	margin-right:10px;
 }
 
+.upload-file-tab .selectFileType{
+	width: 70% !important;
+}
+.refFileUpDiv{
+	border:1px solid #5fb878;
+}
 
 /*用户管理模块样式*/
 .add-user-pop .layui-layer-content{

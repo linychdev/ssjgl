@@ -24,6 +24,43 @@ $(function () {
     
 var html = "";
 var slideUpHtml = "";
+
+function getRefFileDivHtml(doi, existsFileHtml){
+	var doi = doi ? doi : "";
+	var existsFileHtml = existsFileHtml ? existsFileHtml: "";
+	var html = "<div class = 'refFileUpDiv'>" +
+				 "<form class='form-horizontal'>"+
+				  "<div class='form-group'>"+
+					"<label class='col-xs-2 control-label'>文献DOI:</label>"+
+				    "<div class='col-xs-10' id=''>"+
+				    	doi +
+				    "</div>"+
+				  "</div>"+
+				  "<div class = 'form-group'>"+
+				    "<div class='col-xs-12 existsFileBox'>"+
+				    	existsFileHtml +
+				    "</div>"+
+				  "</div>"+
+				  "<div class = 'form-group'>"+
+				    "<label for='' class='col-xs-2 control-label'>文件类型:</label>"+
+				    "<div class='col-xs-3'>"+
+				       "<select class='form-control selectFileType'>"+
+				        "<option>离散文件</option>"+
+				        "<option>参数文件</option>"+
+				       "</select>"+
+				    "</div>"+
+				    "<div class='col-xs-3' style = 'margin-top:7px;'>"+
+				    	"<input type='file' id='' />"+
+				    "</div>"+
+				    "<div class = 'col-xs-1' style = 'margin-top:10px;'>"+
+				    	"<span ><a href='javascript:void(0);' class = 'uploadFileBtn'><i class='fa fa-upload fa-fw'></i></a></span>"+
+				    "</div>"+
+				    "</div>"+
+				   "</form>" +
+				 "</div>";
+	return html;
+}
+
 $.post(contextPath + "/background/elementList", {}, function(data) {
     
     var elementOptionHtml = "";
@@ -185,7 +222,7 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
     var refEditHtml = "<form class='form-horizontal'>"+
                         "<div class='form-group'>"+
                         "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
-                            "<div class='col-sm-8' id = 'ref-edit-poten-name'>"+
+                        "<div class='col-sm-8' id = 'ref-edit-poten-name'>"+
                         "</div>"+
                         "</div>"+
                         "<ul id='myul'>"+
@@ -201,7 +238,8 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                                "</div>"+
                           "</div>"+
                         "</form>";
-    var fileEditHtml = "";
+    var fileEditHtml = getRefFileDivHtml();
+
     html += "<div class='layui-tab layui-tab-brief' lay-filter='docDemoTabBrief'>"+
                   "<ul class='layui-tab-title'>"+
                   "<li class='layui-this'>新增原子间势</li>"+
@@ -349,6 +387,11 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                       //TODO 为上传文件页面增加元素
                       $(".upload-file-tab");
                   });
+                  
+                  $(".refFileUpDiv").on("click",".uploadFileBtn",function(){
+                	  alert("上传啦！");
+                  });
+                  
             }
             });
     });
