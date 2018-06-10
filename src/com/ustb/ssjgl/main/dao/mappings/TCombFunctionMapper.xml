@@ -72,8 +72,8 @@
   <insert id="batchInsert">
     insert into t_comb_function (c_id, c_element_comb_id, c_potentials_function_id)
      values
-    <foreach collection ="list" item="combFunctions" separator =",">
-      (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cPotentialsFunctionId,jdbcType=VARCHAR})
+    <foreach collection ="list" item="item" separator =",">
+      (#{item.cId,jdbcType=VARCHAR}, #{item.cElementCombId,jdbcType=VARCHAR}, #{item.cPotentialsFunctionId,jdbcType=VARCHAR})
     </foreach >
   </insert>
   

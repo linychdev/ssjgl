@@ -97,11 +97,11 @@ $(function(){
 		operationType = 1;
 		removeCloneElement();
 		 
-       }, 640);//延时时长设置   
+       }, 540);//延时时长设置   
 
    });
    
-   //双击元素
+   //单击元素
    $("div.elements").click(function(){
 	   operationType = 2;
        clearTimeout(TimeFn);
