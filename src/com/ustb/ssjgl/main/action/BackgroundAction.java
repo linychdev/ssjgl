@@ -1,7 +1,6 @@
 package com.ustb.ssjgl.main.action;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.common.utils.CommonUtils;
@@ -57,7 +56,7 @@ public class BackgroundAction extends AbstractAction{
     /**
      * logger
      */
-    private final static Logger LOG = LogUtils.getLogger();
+    private static final Logger LOG = LogUtils.getLogger();
 
     @Autowired
     private IInterPotenService interPotenService;
@@ -83,7 +82,7 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/addPotentials")
     @ResponseBody
     public void addPotentials(HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         try{
             String combId = request.getParameter("combId");
             String potenGroup = request.getParameter("potenGroup");
@@ -142,25 +141,41 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/addPotenReference")
     @ResponseBody
     public void addPotenReference(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result =  Maps.newHashMap();
         String json = request.getParameter("potenRefJson");
-        Map<String, Object> result = new HashMap<String, Object>();
         try{
             JSONObject reference = JSONObject.parseObject(json);
             String combId = JsonUtils.getStrFromJson(reference, "combId");
-            String content = JsonUtils.getStrFromJson(reference, "content");
-            String doi = JsonUtils.getStrFromJson(reference, "doi");
-            String note = JsonUtils.getStrFromJson(reference, "note");
-            TReference ref = new TReference();
-            ref.setcElementCombId(combId);
-            ref.setcContent(content);
-            ref.setcDoi(doi);
-            ref.setcNote(note);
-            ref.setnSource(SsjglContants.REFERENCE_SOURCE_SSJGL);
-            interPotenService.addReference(ref);
+            JSONArray deleteRefIds = JsonUtils.getJSONArrayFromJson(reference, "deleteRefIds");
+            JSONArray references = JsonUtils.getJSONArrayFromJson(reference, "references");
+
+            for (Object deleteRefObj : deleteRefIds) {
+                JSONObject deleteRefId = (JSONObject) deleteRefObj;
+                String refId = JsonUtils.getStrFromJson(deleteRefId, "refId");
+                interPotenService.deleteReferenceById(refId);
+            }
+            List<TReference> refList = Lists.newArrayList();
+            for (Object refObj : references) {
+                JSONObject refJson = (JSONObject) refObj;
+                int refSource = JsonUtils.getIntegerFromJson(refJson, "refSource");
+                String content = JsonUtils.getStrFromJson(refJson, "content");
+                String doi = JsonUtils.getStrFromJson(refJson, "doi");
+                String note = JsonUtils.getStrFromJson(refJson, "note");
+                TReference ref = new TReference();
+                ref.setcElementCombId(combId);
+                ref.setcContent(content);
+                ref.setcDoi(doi);
+                ref.setcNote(note);
+                ref.setnSource(refSource);
+                refList.add(ref);
+                interPotenService.saveOrUpdateReference(ref);
+            }
             result.put("success", true);
+            result.put("refList", refList);
         }catch(Exception e){
             LOG.error("无法保存参考文献，json为:{}", json, e);
             result.put("success", false);
+            result.put("msg", "无法保存参考文献"+e.getMessage());
         }
         this.writeAjaxObject(response, result);
     }
@@ -174,7 +189,7 @@ public class BackgroundAction extends AbstractAction{
     @ResponseBody
     public void addCombFunction(HttpServletRequest request, HttpServletResponse response) {
         String json = request.getParameter("combFunctionJson");
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         try{
             JSONObject combFunJson = JSONObject.parseObject(json);
             CombFunctionInfo combFunInfo = new CombFunctionInfo(combFunJson);
@@ -195,11 +210,11 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping(value="/manage/uploadPotentialsFile", method=RequestMethod.POST)
     @ResponseBody
     public void uploadPotenFile(HttpServletRequest request, HttpServletResponse response,
-            @RequestParam("relatedId") String relatedId,
+            @RequestParam("refId") String refId,
             @RequestParam("potentialsType") Integer potentialsType,
             @RequestParam("potenFile") MultipartFile multipartFile) {
         
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         //如果文件不为空，写入上传路径
         if(!multipartFile.isEmpty()) {
             File file = null;
@@ -214,15 +229,17 @@ public class BackgroundAction extends AbstractAction{
                 
                 TPotentialsFile potentialsFile = new TPotentialsFile();
                 potentialsFile.setcFileName(multipartFile.getOriginalFilename());
-                potentialsFile.setcReferenceId(relatedId);
+                potentialsFile.setcReferenceId(refId);
                 potentialsFile.setnSize(FileUtils.sizeOf(file));
                 potentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
                 potentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+File.separator+remoteFileName);
                 interPotenService.addPotentialsFile(potentialsFile);
                 result.put("success", true);
+                result.put("potentialsFile", potentialsFile);
             } catch (Exception e) {
                 LOG.error("上传文件到ftp服务器失败！", e);
                 result.put("success", false);
+                result.put("msg", "上传文件到ftp服务器失败!" + e.getMessage());
             }finally{
                 FileUtils.deleteQuietly(file);
             }
@@ -238,8 +255,8 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/deletePotentials")
     @ResponseBody
     public void deletePotentials(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = Maps.newHashMap();
         String pId = request.getParameter("potentialsId");
-        Map<String, Object> result = new HashMap<String, Object>();
         try {
             interPotenService.deletePotentialsById(pId);
             result.put("success", true);
@@ -259,7 +276,7 @@ public class BackgroundAction extends AbstractAction{
     @ResponseBody
     public void deletePotenFile(HttpServletRequest request, HttpServletResponse response) {
         String pId = request.getParameter("potentialsId");
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         try {
             interPotenService.deletePotenFileByPotenId(pId);
             result.put("success", true);
@@ -280,7 +297,7 @@ public class BackgroundAction extends AbstractAction{
     public void deleteCombFunction(HttpServletRequest request, HttpServletResponse response) {
         String pId = request.getParameter("potentialsId");
         String functionId = request.getParameter("functionId");
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         try {
             interPotenService.deleteCombFunction(pId, functionId);
             result.put("success", true);
@@ -298,7 +315,7 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/addFunction")
     @ResponseBody
     public void addPotentialsFunction(HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         try {
             String json = request.getParameter("potenFunctionJson");
             String operationType = request.getParameter("operationType");
@@ -343,7 +360,7 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/deleteFunction")
     @ResponseBody
     public void deletePotentialsFunction(HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         try {
             String functionId = request.getParameter("functionId");
             boolean deleteSuccess = potenFunctionService.deleteFunctionById(functionId);
@@ -369,7 +386,7 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/selectFunction")
     @ResponseBody
     public void selectPotentialsFunction(HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         String functionId = request.getParameter("functionId");
         TPotentialsFunction function = potenFunctionService.selectById(functionId);
         result.put("fun", function);
@@ -449,7 +466,7 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/background/elementList")
     @ResponseBody
     public void getElementList(HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         List<TElement> elementList = interPotenService.getAllElements();
         List<TPotentialsFunction> functionList = interPotenService.getAllFunction();
         
@@ -499,7 +516,7 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/background/deleteUser")
     @ResponseBody
     public void deleteUser(HttpServletRequest request, HttpServletResponse response){
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = Maps.newHashMap();
         try {
             String userId = request.getParameter("userId");
             userService.deleteUser(userId);

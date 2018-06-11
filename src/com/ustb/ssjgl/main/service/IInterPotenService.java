@@ -89,7 +89,7 @@ public interface IInterPotenService {
      * 保存文献信息
      * @param ref
      */
-    public void addReference(TReference ref);
+    public void saveOrUpdateReference(TReference ref);
     
     /**
      * 根据分页和过滤条件获取势数据列表
@@ -149,4 +149,10 @@ public interface IInterPotenService {
      * @param combId
      */
     public void deleteCombFunctionBycombId(String combId);
+
+    /**
+     * 根据主键删除文献
+     * @param refId
+     */
+    public void deleteReferenceById(String refId);
 }
