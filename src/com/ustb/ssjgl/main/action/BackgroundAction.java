@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,20 +83,62 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/addPotentials")
     @ResponseBody
     public void addPotentials(HttpServletRequest request, HttpServletResponse response) {
-        String json = request.getParameter("interPotenJson");
         Map<String, Object> result = new HashMap<String, Object>();
         try{
-            JSONObject interPotenJson = JSONObject.parseObject(json);
+            String combId = request.getParameter("combId");
+            String potenGroup = request.getParameter("potenGroup");
+            String potenName = request.getParameter("potenName");
+            String potenDesc = request.getParameter("potenDesc");
+            String potenNote = request.getParameter("potenNote");
+            String elements = request.getParameter("elements");
+            String functions = request.getParameter("functions");
+            JSONObject interPotenJson = new JSONObject();
+            
+            interPotenJson.put("combId", combId);
+            interPotenJson.put("scopeId", potenGroup);
+            interPotenJson.put("combName", potenName);
+            interPotenJson.put("combDescription", potenDesc);
+            interPotenJson.put("combNote", potenNote);
+            
+            String[] functionArray = functions.split(",");
+            JSONArray funIdJsonArray = new JSONArray();
+            for (String funName : functionArray) {
+                TPotentialsFunction function = potenFunctionService.selectByName(StringUtils.trim(funName));
+                JSONObject funJson = new JSONObject();
+                funJson.put("functionId", function.getcId());
+                funIdJsonArray.add(funJson);
+            }
+            interPotenJson.put("functions", funIdJsonArray);
+            
+            String[] eles = elements.split(",");
+            JSONArray elementJsonArray = new JSONArray();
+            for (String eName : eles) {
+                TElement element = interPotenService.getElementBySymbol(StringUtils.trim(eName));
+                String eId = element.getcId();
+                JSONObject e = new JSONObject();
+                e.put("elementId", eId);
+                elementJsonArray.add(e);
+            }
+            interPotenJson.put("combDetails", elementJsonArray);
+            
+            if(StringUtils.isNotBlank(combId)){
+                interPotenService.deleteCombById(combId);
+                interPotenService.deleteCombDetailByCombId(combId);
+                interPotenService.deleteCombTagByCombId(combId);
+                interPotenService.deleteCombFunctionBycombId(combId);
+            }
             InteratomicPotentials interPoten = new InteratomicPotentials(interPotenJson);
             interPotenService.addInteratomicPotentials(interPoten);
             result.put("success", true);
+            result.put("combId", interPoten.getElementComb().getcId());
         }catch(Exception e){
-            LOG.error("无法保存原子间势，json为:{}", json, e);
+            LOG.error("无法保存原子间势", e);
             result.put("success", false);
+            result.put("msg", "无法保存原子间势!");
         }
         this.writeAjaxObject(response, result);
     }
-
+    
     @RequestMapping("/manage/addPotenReference")
     @ResponseBody
     public void addPotenReference(HttpServletRequest request, HttpServletResponse response) {

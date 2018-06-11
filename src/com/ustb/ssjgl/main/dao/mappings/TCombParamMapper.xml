@@ -115,13 +115,13 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
   
-  <insert id="batchInsert" parameterType="com.ustb.ssjgl.main.dao.bean.TCombParam" >
+  <insert id="batchInsert" parameterType="java.util.List" >
     insert into t_comb_param (c_id, c_element_comb_id, c_potentials_function_id, 
       c_param_id, c_class, c_value, d_time)
     values 
-    <foreach collection ="list" item="combFunctions" separator =",">
-      (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cPotentialsFunctionId,jdbcType=VARCHAR}, 
-      #{cParamId,jdbcType=VARCHAR}, #{cClass,jdbcType=VARCHAR}, #{cValue,jdbcType=VARCHAR}, #{dTime,jdbcType=TIMESTAMP})
+    <foreach collection ="list" item="item" separator =",">
+      (#{item.cId,jdbcType=VARCHAR}, #{item.cElementCombId,jdbcType=VARCHAR}, #{item.cPotentialsFunctionId,jdbcType=VARCHAR}, 
+      #{item.cParamId,jdbcType=VARCHAR}, #{item.cClass,jdbcType=VARCHAR}, #{item.cValue,jdbcType=VARCHAR}, #{item.dTime,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   

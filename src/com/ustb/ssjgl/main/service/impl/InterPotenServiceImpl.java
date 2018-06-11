@@ -118,7 +118,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public void addCombFunction(CombFunctionInfo combFunInfo) {
         combFunctionDao.addCombFunctions(combFunInfo.getCombFunctions());
-        combParamDao.addCombParams(combFunInfo.getCombParams());
+//        combParamDao.addCombParams(combFunInfo.getCombParams());
     }
 
     /**
@@ -279,5 +279,38 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public List<TPotentialsFunction> getAllFunction() {
         return potentialsFunctionDao.selectAll();
+    }
+
+    @Override
+    public TElement getElementBySymbol(String name) {
+        return elementDao.getElementBySymbol(name);
+    }
+
+    @Override
+    public void deleteCombById(String combId) {
+        elementCombDao.deleteByPrimaryKey(TElementCombination.class, combId);
+        
+    }
+
+    @Override
+    public void deleteCombDetailByCombId(String combId) {
+        elementCombDetailDao.deleteDetailByCombId(combId);
+        
+    }
+
+    @Override
+    public void deleteCombTagByCombId(String combId) {
+        elementCombTagDao.deleteTagByCombId(combId);
+        
+    }
+
+    @Override
+    public void addCombFunction(String combId, InteratomicPotentials interPoten) {
+        combFunctionDao.addCombFunctions(interPoten.getCombFunctions());
+    }
+
+    @Override
+    public void deleteCombFunctionBycombId(String combId) {
+        combFunctionDao.deleteByCombId(combId);
     }
 }

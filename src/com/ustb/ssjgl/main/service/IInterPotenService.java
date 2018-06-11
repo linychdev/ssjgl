@@ -111,4 +111,42 @@ public interface IInterPotenService {
      * @return
      */
     public List<TPotentialsFunction> getAllFunction();
+    
+    /**
+     * 根据元素名称获取元素
+     * @param name
+     * @return
+     */
+    public TElement getElementBySymbol(String name);
+
+    /**
+     * 根据组合id删除组合
+     * @param combId
+     */
+    public void deleteCombById(String combId);
+
+    /**
+     * 根据组合id删除组合详情
+     * @param combId
+     */
+    public void deleteCombDetailByCombId(String combId);
+
+    /**
+     * 根据组合id删除标签
+     * @param combId
+     */
+    public void deleteCombTagByCombId(String combId);
+
+    /**
+     * 添加函数组合映射
+     * @param combId 
+     * @param interPoten
+     */
+    public void addCombFunction(String combId, InteratomicPotentials interPoten);
+
+    /**
+     * 根据组合id删除函数组合映射
+     * @param combId
+     */
+    public void deleteCombFunctionBycombId(String combId);
 }

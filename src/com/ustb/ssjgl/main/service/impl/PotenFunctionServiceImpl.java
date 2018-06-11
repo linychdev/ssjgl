@@ -111,4 +111,9 @@ public class PotenFunctionServiceImpl implements IPotenFunctionService{
     public void updateFunction(TPotentialsFunction function) {
         potentialsFunctionDao.update(function);
     }
+
+    @Override
+    public TPotentialsFunction selectByName(String funName) {
+        return potentialsFunctionDao.selectByFunName(funName);
+    }
 }

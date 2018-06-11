@@ -49,4 +49,11 @@ public interface IPotenFunctionService {
      * @param function
      */
     public void updateFunction(TPotentialsFunction function);
+
+    /**
+     * 根据函数名称查询函数
+     * @param funName
+     * @return
+     */
+    public TPotentialsFunction selectByName(String funName);
 }

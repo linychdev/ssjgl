@@ -152,19 +152,30 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                         "</div>"+
                     "</li>";
     }
+    
     var potenEditHtml = "<form class='form-horizontal'>"+
                         "<div class='form-group'>"+
                         "<label for='' class='col-sm-3 control-label'>选择分组:</label>"+
                         "<div class='col-sm-8'>"+
-                            "<select class='form-control'>"+
-                            "<option value='1' selected>Metal Alloys</option>"+
-                            "<option value='2'>Semiconductors</option>"+
-                            "<option value='3'>Ionic Crystals</option>"+
-                            "<option value='4'>Interface</option>"+
-                            "<option value='5'>Others</option>"+
+                            "<select class='form-control potenSelectGroup'>"+
+                            "<option value='44192139591811e8a71b1c1b0da988f8' selected>Metal Alloys</option>"+
+                            "<option value='44192139591811e8a71b1c1b0da988f1'>Semiconductors</option>"+
+                            "<option value='44192139591811e8a71b1c1b0da988f2'>Ionic Crystals</option>"+
+                            "<option value='44192139591811e8a71b1c1b0da988f3'>Interface</option>"+
+                            "<option value='44192139591811e8a71b1c1b0da988f4'>Others</option>"+
+                            "<option value='6'>aa</option>"+
+                            "<option value='7'>bb</option>"+
                             "</select>"+
                         "</div>"+
                         "</div>"+
+                        "<div class='form-group'>"+
+	                        "<label for='tokens' class='col-sm-3 control-label'>选择函数:</label>"+
+	                        "<div class = 'col-sm-8 functionArray'>"+
+	                            "<select id='id_select_fun' class='selectpicker ' multiple data-live-search='true'>"+
+	                               funOptionHtml+
+	                            "</select>"+
+	                        "</div>"+
+	                    "</div>"+
                           "<div class='form-group'>"+
                           "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
                           "<div class='col-sm-8'>"+
@@ -173,7 +184,7 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                           "</div>"+
                           "<div class='form-group'>"+
                               "<label for='tokens' class='col-sm-3 control-label'>选择元素:</label>"+
-                              "<div class = 'col-sm-8'>"+
+                              "<div class = 'col-sm-8 elementsArray'>"+
                                   "<select id='id_select' class='selectpicker ' multiple data-live-search='true'>"+
                                      elementOptionHtml+
                                   "</select>"+
@@ -198,27 +209,6 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                         "</div>"+     
                        "</form>"; 
         
-    var funEditHtml = "<form class='form-horizontal'>"+
-                        "<div class='form-group'>"+
-                            "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
-                            "<div class='col-sm-8' id = 'fun-edit-poten-name'>"+
-                            "</div>"+
-                        "</div>"+
-                        "<div class='form-group'>"+
-                            "<label for='tokens' class='col-sm-3 control-label'>选择函数:</label>"+
-                            "<div class = 'col-sm-8'>"+
-                                "<select id='id_select_fun' class='selectpicker ' multiple data-live-search='true'>"+
-                                   funOptionHtml+
-                                "</select>"+
-                            "</div>"+
-                        "</div>"+
-                        "<div class='form-group' style = 'padding-top: 50px;'>"+
-                           "<div class='col-sm-4 col-sm-offset-4'>"+
-                              "<div class='btn-success form-control' style = 'text-align: center;' id='saveFunBtn'>保存</div>"+
-                           "</div>"+
-                        "</div>"+    
-                        "</form>";
-    
     var refEditHtml = "<form class='form-horizontal'>"+
                         "<div class='form-group'>"+
                         "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
@@ -230,10 +220,10 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                             slideUpHtml +
                         "</div>"+
                           "<div class='form-group' style = 'padding-top: 20px;'>"+
-                               "<div class='col-sm-4 col-sm-offset-2'>"+
+                               "<div class='col-sm-2 col-sm-offset-3'>"+
                                   "<div class='btn-success form-control' style = 'text-align: center;' id='addRefDivBtn'>继续添加</div>"+
                                "</div>"+
-                               "<div class='col-sm-4'>"+
+                               "<div class='col-sm-2 col-sm-offset-2'>"+
                                "<div class='btn-success form-control' style = 'text-align: center;' id='saveRefBtn'>保存全部</div>"+
                                "</div>"+
                           "</div>"+
@@ -243,7 +233,6 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
     html += "<div class='layui-tab layui-tab-brief' lay-filter='docDemoTabBrief'>"+
                   "<ul class='layui-tab-title'>"+
                   "<li class='layui-this'>新增原子间势</li>"+
-                  "<li>添加势函数</li>"+
                   "<li>添加相关文献</li>"+
                   "<li>上传势数据文件</li>"+
                 "</ul>"+
@@ -251,10 +240,6 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                   
                   "<div class='layui-tab-item layui-show edit-poten-tab'>"+
                       potenEditHtml+
-                    "</div>"+
-                    
-                  "<div class='layui-tab-item edit-fun-tab'>"+
-                      funEditHtml+
                   "</div>"+
                   
                   "<div class='layui-tab-item edit-ref-tab'>"+
@@ -299,8 +284,8 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                     'selectedText': 'H'
                 });
                 
-                //添加点击下拉选后事件
-                $(".edit-poten-tab .dropdown-menu").find("li").on("click", function(){
+                //添加点击选择元素下拉选后事件
+                $(".edit-poten-tab .elementsArray .dropdown-menu").find("li").on("click", function(){
                     var nameStr = $("#potenName").val();
                     var names= new Array(); //定义一数组 
                     names = nameStr.split("-"); //字符分割 
@@ -323,18 +308,43 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                         newName=newName.substr(1);
                     }
                     $("#potenName").val(newName);
-                    $("#fun-edit-poten-name").text(newName);
                     $("#ref-edit-poten-name").text(newName);
                 });
                 
                 //点击保存势数据按钮事件
                 $("#savePotenBtn").on("click",function(){
+                    var _this = $(this);
+                    var combId = _this.parents("form").attr("id");
+                    var potenGroup = $(".potenSelectGroup option:selected").val();
+                    var potenName = $("#potenName").val();
+                    var potenDesc = $("#potenDesc").val();
+                    var potenNote = $("#potenNote").val();
+                    var elements = $(".elementsArray button span.filter-option").text();
+                    var functions = $(".functionArray button span.filter-option").text();
+                    
+                    $.post(contextPath + "/manage/addPotentials", {
+                    	combId:combId,
+                    	potenGroup:potenGroup,
+                    	potenName:potenName,
+                    	potenDesc:potenDesc,
+                    	potenNote:potenNote,
+                    	elements:elements,
+                    	functions:functions
+                    }, 
+                    function(data) {
+                    	if(data.success){
+                    		_this.parents("form").attr("id",data.combId);
+                    		layer.msg("保存成功！");
+                    	}else{
+                    		layer.msg(data.msg);
+                    	}
+                    },"json");
                     
                 });
                 
-                    $(".slideUp").on("change","input[name='referenceDoi']",function(){
-                        $(this).parents('.hid').siblings("span").text($(this).val());
-                    });
+                $(".slideUp").on("change","input[name='referenceDoi']",function(){
+                    $(this).parents('.hid').siblings("span").text($(this).val());
+                });
                     
                     //添加文献页面折叠效果事件
                   $("#myul li span").addClass("hand"); 
@@ -388,8 +398,37 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                       $(".upload-file-tab");
                   });
                   
+                  $(".refFileUpDiv").on("click",".deleteFileBtn",function(){
+                	  var _this = $(this);
+                	  //TODO 弹框提示是否确认删除
+                	  layer.confirm('确认删除？', {
+                		  btn: ['删除','取消'] //按钮
+                		}, function(){
+                			//     在服务器删除文件
+                		  layer.msg('删除成功！', {time: 500, icon: 1}, function(){
+                			  _this.parents(".existsDiv").remove();
+                		  });
+                		}, function(){
+                			//默认关闭当前弹层
+                		});
+                  });
+                  
                   $(".refFileUpDiv").on("click",".uploadFileBtn",function(){
-                	  alert("上传啦！");
+                	  
+                	  //TODO ajax 上传，回调函数中增加已存在文件区域
+                	  var existsFileHtml = "<div class='col-xs-12 existsDiv' id = ''>" +
+                	    "<label for='' class='col-xs-2 control-label'>文件类型:</label>"+
+					    "<div class='col-xs-3'>"+
+					    	"参数文件"+
+					    "</div>"+
+					    "<div class='col-xs-3' style = 'margin-top:7px;'>"+
+					     "<span ><a href='javascript:void(0);' class = 'glyphicon glyphicon-file'>aaa.dat</a></span>"+
+					    "</div>"+
+					    "<div class = 'col-xs-1' style = 'margin-top:10px;'>"+
+					    	"<span ><a href='javascript:void(0);' class = 'deleteFileBtn'><i class='glyphicon glyphicon-remove'></i></a></span>"+
+					    "</div>" +
+					   "</div>";
+                	  $(this).parents(".form-horizontal").children().children(".existsFileBox").append(existsFileHtml);
                   });
                   
             }
