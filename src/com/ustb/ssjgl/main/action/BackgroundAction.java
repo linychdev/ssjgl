@@ -146,22 +146,20 @@ public class BackgroundAction extends AbstractAction{
         try{
             JSONObject reference = JSONObject.parseObject(json);
             String combId = JsonUtils.getStrFromJson(reference, "combId");
-            JSONArray deleteRefIds = JsonUtils.getJSONArrayFromJson(reference, "deleteRefIds");
             JSONArray references = JsonUtils.getJSONArrayFromJson(reference, "references");
 
-            for (Object deleteRefObj : deleteRefIds) {
-                JSONObject deleteRefId = (JSONObject) deleteRefObj;
-                String refId = JsonUtils.getStrFromJson(deleteRefId, "refId");
-                interPotenService.deleteReferenceById(refId);
-            }
             List<TReference> refList = Lists.newArrayList();
             for (Object refObj : references) {
                 JSONObject refJson = (JSONObject) refObj;
                 int refSource = JsonUtils.getIntegerFromJson(refJson, "refSource");
+                String refId = JsonUtils.getStrFromJson(refJson, "refId");
                 String content = JsonUtils.getStrFromJson(refJson, "content");
                 String doi = JsonUtils.getStrFromJson(refJson, "doi");
                 String note = JsonUtils.getStrFromJson(refJson, "note");
                 TReference ref = new TReference();
+                if(StringUtils.isNotBlank(refId)){
+                    ref.setcId(refId);
+                }
                 ref.setcElementCombId(combId);
                 ref.setcContent(content);
                 ref.setcDoi(doi);
@@ -176,6 +174,22 @@ public class BackgroundAction extends AbstractAction{
             LOG.error("无法保存参考文献，json为:{}", json, e);
             result.put("success", false);
             result.put("msg", "无法保存参考文献"+e.getMessage());
+        }
+        this.writeAjaxObject(response, result);
+    }
+    
+    @RequestMapping("/manage/deletePotenReference")
+    @ResponseBody
+    public void deletePotenReference(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result =  Maps.newHashMap();
+        String refId = request.getParameter("refId");
+        try{
+            interPotenService.deleteReferenceById(refId);
+            result.put("success", true);
+        }catch(Exception e){
+            LOG.error("删除参考文献失败！", e);
+            result.put("success", false);
+            result.put("msg", "删除参考文献失败！"+e.getMessage());
         }
         this.writeAjaxObject(response, result);
     }
