@@ -110,7 +110,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</p>
 										<p>
 											<strong>DOI:</strong>
-											<a href="http://dx.doi.org/${referenceInfo.reference.cContent.cDoi }">${referenceInfo.reference.cContent.cDoi }</a>
+											<a href="http://dx.doi.org/${referenceInfo.reference.cDoi }">${referenceInfo.reference.cDoi }</a>
 										</p>
 										<p>
 											<strong>Notes:</strong>
@@ -119,7 +119,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<p>
 											<strong>File(s):  </strong>
 											<c:forEach items="${referenceInfo.potentialsFiles}" var="file" varStatus="status">
-												<a style = "text-decoration:underline;" href = "<%=basePath%>manage/downloadPotentialsFile?potentialsFileId=${file.cId }">${file.cFileName }</a><c:if test="${status.last==false}">&nbsp;</c:if>
+												<a style = "text-decoration:underline;" target="view_window" href = "<%=basePath%>manage/downloadPotentialsFile?potentialsFileId=${file.cId }">${file.cFileName }</a><c:if test="${status.last==false}">&nbsp;</c:if>
 											</c:forEach>
 										</p>
 										<c:if test="${!ref.last}">

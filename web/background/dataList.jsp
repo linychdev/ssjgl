@@ -72,9 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>无</td>
 							<td>${combInfo.elementComb.cDescription }</td>
 							<td>
-							<a href = "#"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
-							<a href = "#"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
-							<a href = "#"><i class="fa fa-file-text fa-fw"></i></a>&nbsp;文件</td>
+							<a href = "javascript:void(0);"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
+							<a href = "javascript:void(0);"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
 						</tr>
 					</c:forEach>
 				</table>

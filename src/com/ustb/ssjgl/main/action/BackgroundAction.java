@@ -226,26 +226,27 @@ public class BackgroundAction extends AbstractAction{
     public void uploadPotenFile(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("refId") String refId,
             @RequestParam("potentialsType") Integer potentialsType,
-            @RequestParam("potenFile") MultipartFile multipartFile) {
+            @RequestParam("potenFile") MultipartFile potenFile) {
         
         Map<String, Object> result = Maps.newHashMap();
         //如果文件不为空，写入上传路径
-        if(!multipartFile.isEmpty()) {
+        if(!potenFile.isEmpty()) {
             File file = null;
-            String remoteFileName = UuidUtils.getUuid() + "." + CommonUtils.getFileSuffix(multipartFile.getOriginalFilename());
+            String remoteFileName = UuidUtils.getUuid() + "." + CommonUtils.getFileSuffix(potenFile.getOriginalFilename());
             try {
-                file = File.createTempFile(multipartFile.getName(), null);
+                file = File.createTempFile(potenFile.getName(), null);
                 
-                FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);  
+                FileUtils.copyInputStreamToFile(potenFile.getInputStream(), file);  
                 ftpService.setLocal(file);
                 ftpService.setRemote(remoteFileName);
                 ftpService.upload();
                 
                 TPotentialsFile potentialsFile = new TPotentialsFile();
-                potentialsFile.setcFileName(multipartFile.getOriginalFilename());
+                potentialsFile.setcFileName(potenFile.getOriginalFilename());
                 potentialsFile.setcReferenceId(refId);
+                potentialsFile.setnFileType(potentialsType);
                 potentialsFile.setnSize(FileUtils.sizeOf(file));
-                potentialsFile.setcSuffix(CommonUtils.getFileSuffix(multipartFile));
+                potentialsFile.setcSuffix(CommonUtils.getFileSuffix(potenFile));
                 potentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+File.separator+remoteFileName);
                 interPotenService.addPotentialsFile(potentialsFile);
                 result.put("success", true);
