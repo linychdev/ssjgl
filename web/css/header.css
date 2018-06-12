@@ -3,9 +3,9 @@
 	 width:100%;
 	 font-weight:bold;
 	 background-size: cover;
-	 /* background-image:url(../img/banner5.jpg); */
-	 /* background-repeat: repeat-x; */
-	 background-color:#ffffff;
+	 background-image:url(../img/banner5.jpg);
+	 background-repeat: repeat-x;
+	 /* background-color:#ffffff; */
 }
 
 
@@ -51,49 +51,28 @@
 }
 
 .logo{
-<<<<<<< HEAD
-	margin-top:20px;
+	margin-top:30px;
 	float:left;
-	width:150px;
+	width:100px;
 }
 
 .text1{
 	margin-top:20px;
 	float:left;
 	text-align:center;
-	font-size:15px;
+	font-size:16px;
 	line-height:30px;
-	color:#0000ff;
+	color:#000000;
 	font-weight:700;
+	padding-left:20px;
 }
 
 .text2{
 	float:right;
 	text-align:center;
-	font-size:14px;
+	font-size:10px;
 	line-height:20px;
-	color:#0000ff;
-	font-weight:700;
-=======
-	margin-top:25px;
->>>>>>> e2f491387ae0cb5a0b888b2976ef2f9ae786ad31
+	color:#000000;
+	margin-top:10px;
 }
 
-.ustb{
-    font-size:18px;
-    font-weight:5000;
-}
-
-.department{
-    font-size:16px;
-    text-align:right;
-}
-
-.right{
-    float:right;
-}
-
-.description{
-    float:left;
-    height:100%;
-}
