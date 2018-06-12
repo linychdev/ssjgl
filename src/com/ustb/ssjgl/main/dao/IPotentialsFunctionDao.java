@@ -37,4 +37,11 @@ public interface IPotentialsFunctionDao extends IAbstractDao {
      * 查询出全部有效函数
      */
     public List<TPotentialsFunction> selectAll();
+
+    /**
+     * 根据函数名称查询函数
+     * @param funName
+     * @return
+     */
+    public TPotentialsFunction selectByFunName(String funName);
 }

@@ -91,12 +91,12 @@
     where c_id = #{cId,jdbcType=VARCHAR}
   </update>
   
-    <insert id="batchInsert" parameterType="com.ustb.ssjgl.main.dao.bean.TElementCombDetail" >
+    <insert id="batchInsert" parameterType="java.util.List" >
     insert into t_element_comb_detail (c_id, c_element_comb_id, c_element_id, n_order, d_time)
     values 
-    <foreach collection ="list" item="elementCombDetails" separator =",">
-    (#{cId,jdbcType=VARCHAR}, #{cElementCombId,jdbcType=VARCHAR}, #{cElementId,jdbcType=VARCHAR}, 
-      #{nOrder,jdbcType=INTEGER}, #{dTime,jdbcType=TIMESTAMP})
+    <foreach collection ="list" item="item" separator =",">
+    (#{item.cId,jdbcType=VARCHAR}, #{item.cElementCombId,jdbcType=VARCHAR}, #{item.cElementId,jdbcType=VARCHAR}, 
+      #{item.nOrder,jdbcType=INTEGER}, #{item.dTime,jdbcType=TIMESTAMP})
     </foreach >
   </insert>
   

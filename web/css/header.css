@@ -30,7 +30,7 @@
 	border:none !important;
 }
 .navbar-nav {
-    float: right;
+   
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #999;
@@ -41,7 +41,7 @@
 }
 .nav > li > a {
     padding: 25px;
-    font-size: 14px;
+    font-size: 20px;
     position: relative;
 	padding-right:0px;
 	padding-left:50px;
@@ -51,6 +51,7 @@
 }
 
 .logo{
+<<<<<<< HEAD
 	margin-top:20px;
 	float:left;
 	width:150px;
@@ -73,4 +74,26 @@
 	line-height:20px;
 	color:#0000ff;
 	font-weight:700;
+=======
+	margin-top:25px;
+>>>>>>> e2f491387ae0cb5a0b888b2976ef2f9ae786ad31
+}
+
+.ustb{
+    font-size:18px;
+    font-weight:5000;
+}
+
+.department{
+    font-size:16px;
+    text-align:right;
+}
+
+.right{
+    float:right;
+}
+
+.description{
+    float:left;
+    height:100%;
 }

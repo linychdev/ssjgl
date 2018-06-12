@@ -23,14 +23,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <body> 
   <!-- 头部开始 --> 
   <div class="header"> 
-   <div class="main container"> 
+   <div class="main container-fluid"> 
     <div class="row"> 
-     <div class="col-md-2"> 
+     <div class="col-md-4"> 
       <div class="logo"> 
        <img src="${pageContext.request.contextPath}/img/logo20.png" alt="" style="width:150px; height:50px;" /> 
       </div> 
+      <div class = "description">
+        Interatomic Potentials Database<br>
+        Part of the Materials Genetic Engineering Data
+      </div>
+      </div>
      </div> 
-     <div class="col-md-10" style="padding-right:0px;"> 
+     <div class="col-md-6" > 
       <nav class="navbar navbar-default"> 
        <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
         <ul class="nav navbar-nav navbar-nav-right"> 
@@ -52,6 +57,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        </div> 
       </nav> 
      </div> 
+     <div class = "col-md-2 right">
+        <div class = "row">
+            <div class = "col-xs-12 ustb">
+                USTB 
+            </div>
+            <div class = "col-xs-12">
+                Department of Physics, 
+            </div>
+            <div class = "col-xs-12">
+                University of Science and Technology Beijing, 
+            </div>
+            <div class = "col-xs-12">
+                China
+            </div>
+        </div>
+     </div>
     </div> 
    </div> 
   </div> 

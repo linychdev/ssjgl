@@ -54,4 +54,10 @@ public class PotentialsFunctionDaoImpl extends AbstractDao implements IPotential
         String statement = mapperNamespace + ".selectAll";
         return this.getSqlSession().selectList(statement);
     }
+
+    @Override
+    public TPotentialsFunction selectByFunName(String funName) {
+        String statement = mapperNamespace + ".selectByFunName";
+        return this.getSqlSession().selectOne(statement, funName);
+    }
 }

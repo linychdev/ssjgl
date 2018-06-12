@@ -89,7 +89,7 @@ public interface IInterPotenService {
      * 保存文献信息
      * @param ref
      */
-    public void addReference(TReference ref);
+    public void saveOrUpdateReference(TReference ref);
     
     /**
      * 根据分页和过滤条件获取势数据列表
@@ -111,4 +111,48 @@ public interface IInterPotenService {
      * @return
      */
     public List<TPotentialsFunction> getAllFunction();
+    
+    /**
+     * 根据元素名称获取元素
+     * @param name
+     * @return
+     */
+    public TElement getElementBySymbol(String name);
+
+    /**
+     * 根据组合id删除组合
+     * @param combId
+     */
+    public void deleteCombById(String combId);
+
+    /**
+     * 根据组合id删除组合详情
+     * @param combId
+     */
+    public void deleteCombDetailByCombId(String combId);
+
+    /**
+     * 根据组合id删除标签
+     * @param combId
+     */
+    public void deleteCombTagByCombId(String combId);
+
+    /**
+     * 添加函数组合映射
+     * @param combId 
+     * @param interPoten
+     */
+    public void addCombFunction(String combId, InteratomicPotentials interPoten);
+
+    /**
+     * 根据组合id删除函数组合映射
+     * @param combId
+     */
+    public void deleteCombFunctionBycombId(String combId);
+
+    /**
+     * 根据主键删除文献
+     * @param refId
+     */
+    public void deleteReferenceById(String refId);
 }

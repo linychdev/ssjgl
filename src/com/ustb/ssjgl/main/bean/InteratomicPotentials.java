@@ -3,6 +3,8 @@ package com.ustb.ssjgl.main.bean;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
@@ -57,7 +59,7 @@ public class InteratomicPotentials {
         setCombDetails(interPotenJson);
 
         //设置元素标签
-        setCombTags();
+        setCombTags(interPotenJson);
         
         //设置函数
         setCombFunctions(interPotenJson);
@@ -77,7 +79,7 @@ public class InteratomicPotentials {
             combFunctions.add(combfunction);
         }
     }
-    private void setCombTags() {
+    private void setCombTags(JSONObject jasonObject) {
         //查询出组合元素列表
         List<TElement> elements = Lists.newArrayList();
         for (TElementCombDetail combDetail : elementCombDetails) {
@@ -87,6 +89,8 @@ public class InteratomicPotentials {
 
         //生成元素组合标签
         List<String> tagList = Lists.newArrayList();
+        String combName = JsonUtils.getStrFromJson(jasonObject, "combName");
+        tagList.add(combName);
         for (TElement e1 : elements) {
             String symbolTag1 = e1.getcSymbol();
             String nameTag1 = e1.getcElementName();
@@ -130,6 +134,7 @@ public class InteratomicPotentials {
     }
 
     private void setElementComb(JSONObject jasonObject) {
+        String combId = JsonUtils.getStrFromJson(jasonObject, "combId");
         String cScopeId = JsonUtils.getStrFromJson(jasonObject, "scopeId");
         String cCombName = JsonUtils.getStrFromJson(jasonObject, "combName");
         String cDescription = JsonUtils.getStrFromJson(jasonObject, "combDescription");
@@ -141,6 +146,9 @@ public class InteratomicPotentials {
         elementComb.setcDescription(cDescription);
         elementComb.setcNote(cNote);
         elementComb.setcReferenceDescription(cReferenceDescription);
+        if(StringUtils.isNotBlank(combId)){
+            elementComb.setcId(combId);
+        }
     }
 
     private void addTagList(List<String> tagList, String symbolTag1) {

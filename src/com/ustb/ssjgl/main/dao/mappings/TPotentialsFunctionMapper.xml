@@ -174,4 +174,14 @@
     where n_valid = 1
  order by d_time desc
   </select>
+
+  <select id="selectByFunName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" />
+    from t_potentials_function
+    where n_valid = 1
+      and c_name = #{cName,jdbcType=VARCHAR}
+ order by d_time desc
+  </select>
 </mapper>

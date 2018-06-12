@@ -24,45 +24,7 @@ $(function () {
     
 var html = "";
 var slideUpHtml = "";
-
-function getRefFileDivHtml(doi, existsFileHtml){
-	var doi = doi ? doi : "";
-	var existsFileHtml = existsFileHtml ? existsFileHtml: "";
-	var html = "<div class = 'refFileUpDiv'>" +
-				 "<form class='form-horizontal'>"+
-				  "<div class='form-group'>"+
-					"<label class='col-xs-2 control-label'>文献DOI:</label>"+
-				    "<div class='col-xs-10' id=''>"+
-				    	doi +
-				    "</div>"+
-				  "</div>"+
-				  "<div class = 'form-group'>"+
-				    "<div class='col-xs-12 existsFileBox'>"+
-				    	existsFileHtml +
-				    "</div>"+
-				  "</div>"+
-				  "<div class = 'form-group'>"+
-				    "<label for='' class='col-xs-2 control-label'>文件类型:</label>"+
-				    "<div class='col-xs-3'>"+
-				       "<select class='form-control selectFileType'>"+
-				        "<option>离散文件</option>"+
-				        "<option>参数文件</option>"+
-				       "</select>"+
-				    "</div>"+
-				    "<div class='col-xs-3' style = 'margin-top:7px;'>"+
-				    	"<input type='file' id='' />"+
-				    "</div>"+
-				    "<div class = 'col-xs-1' style = 'margin-top:10px;'>"+
-				    	"<span ><a href='javascript:void(0);' class = 'uploadFileBtn'><i class='fa fa-upload fa-fw'></i></a></span>"+
-				    "</div>"+
-				    "</div>"+
-				   "</form>" +
-				 "</div>";
-	return html;
-}
-
 $.post(contextPath + "/background/elementList", {}, function(data) {
-    
     var elementOptionHtml = "";
     for(var i=0;i<data.elementList.length;i++){  
         var option = "<option value = '"+ data.elementList[i].id +"'>"+data.elementList[i].name+"</option>";
@@ -78,172 +40,21 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
     if(data.refList && data.refList.length > 0){
         for(var i=0;i<data.refList.length;i++){
             var refBean = data.refList[i];
-            slideUpHtml += "<li id = '"+refBean.cId+"'>" +
-                                "<span class = 'glyphicon glyphicon-menu-down fold-ref-div'></span>"+
-                                "<div class = 'glyphicon glyphicon-remove remove-ref-div'></div>"+
-                                "<div class='hid'>"+
-                                    "<div class='form-group'>"+
-                                    "<label for='' class='col-sm-3 control-label'>相关文献:</label>"+
-                                    "<div class='col-sm-8'>"+
-                                        "<textarea type='text' rows='3' cols='20' class='form-control' name='referenceText' placeholder='reference text'>" +
-                                            refBean.cContent +
-                                        "</textarea>"+
-                                    "</div>"+
-                                  "</div>"+
-                                "<div class='form-group'>"+
-                                "<label for='' class='col-sm-3 control-label'>文献来源:</label>"+
-                                "<div class='col-sm-8'>"+
-                                    "<select class='form-control'>";
-//                        if(refBean.nSource == 1){
-//                            slideUpHtml +=
-//                        }
-                                    "<option value='1' selected>势库</option>"+
-                                    "<option value='2'>其他</option>"+
-                                    "</select>"+
-                                "</div>"+
-                                "</div>"+
-                                "<div class='form-group'>"+
-                                "<label for='' class='col-sm-3 control-label'>DOI:</label>"+
-                                "<div class='col-sm-8'>"+
-                                "<input type='text' class='form-control' name='referenceDoi' placeholder='reference DOI'>"+
-                                "</div>"+
-                                "</div>"+
-                                "<div class='form-group'>"+
-                                "<label for='' class='col-sm-3 control-label'>说明:</label>"+
-                                "<div class='col-sm-8'>"+
-                                "<textarea type='text' rows='2' cols='20' class='form-control' name='referenceDesc' placeholder='reference desc'></textarea>"+
-                                "</div>"+
-                                "</div>"+
-                                "</div>"+
-                            "</li>";
-            }
+            slideUpHtml += getRefSildUpHtml(refBean.cId, refBean.cContent);
+        }
     }else{
-        slideUpHtml = "<li id = ''>" +
-                        "<span class = 'glyphicon glyphicon-menu-down fold-ref-div'></span>"+
-                        "<div class = 'glyphicon glyphicon-remove remove-ref-div'></div>"+
-                        "<div class='hid'>"+
-                            "<div class='form-group'>"+
-                            "<label for='' class='col-sm-3 control-label'>相关文献:</label>"+
-                            "<div class='col-sm-8'>"+
-                                "<textarea type='text' rows='3' cols='20' class='form-control' name='referenceText' placeholder='reference text'></textarea>"+
-                            "</div>"+
-                          "</div>"+
-                        "<div class='form-group'>"+
-                        "<label for='' class='col-sm-3 control-label'>文献来源:</label>"+
-                        "<div class='col-sm-8'>"+
-                            "<select class='form-control'>"+
-                            "<option value='1' selected>势库</option>"+
-                            "<option value='2'>其他</option>"+
-                            "</select>"+
-                        "</div>"+
-                        "</div>"+
-                        "<div class='form-group'>"+
-                        "<label for='' class='col-sm-3 control-label'>DOI:</label>"+
-                        "<div class='col-sm-8'>"+
-                        "<input type='text' class='form-control' name='referenceDoi' placeholder='reference DOI'>"+
-                        "</div>"+
-                        "</div>"+
-                        "<div class='form-group'>"+
-                        "<label for='' class='col-sm-3 control-label'>说明:</label>"+
-                        "<div class='col-sm-8'>"+
-                        "<textarea type='text' rows='2' cols='20' class='form-control' name='referenceDesc' placeholder='reference desc'></textarea>"+
-                        "</div>"+
-                        "</div>"+
-                        "</div>"+
-                    "</li>";
+        slideUpHtml = getRefSildUpHtml();
     }
-    var potenEditHtml = "<form class='form-horizontal'>"+
-                        "<div class='form-group'>"+
-                        "<label for='' class='col-sm-3 control-label'>选择分组:</label>"+
-                        "<div class='col-sm-8'>"+
-                            "<select class='form-control'>"+
-                            "<option value='1' selected>Metal Alloys</option>"+
-                            "<option value='2'>Semiconductors</option>"+
-                            "<option value='3'>Ionic Crystals</option>"+
-                            "<option value='4'>Interface</option>"+
-                            "<option value='5'>Others</option>"+
-                            "</select>"+
-                        "</div>"+
-                        "</div>"+
-                          "<div class='form-group'>"+
-                          "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
-                          "<div class='col-sm-8'>"+
-                            "<input type='text' class='form-control' id='potenName' placeholder='Potentials name'>"+
-                          "</div>"+
-                          "</div>"+
-                          "<div class='form-group'>"+
-                              "<label for='tokens' class='col-sm-3 control-label'>选择元素:</label>"+
-                              "<div class = 'col-sm-8'>"+
-                                  "<select id='id_select' class='selectpicker ' multiple data-live-search='true'>"+
-                                     elementOptionHtml+
-                                  "</select>"+
-                              "</div>"+
-                          "</div>"+
-                          "<div class='form-group'>"+
-                              "<label for='' class='col-sm-3 control-label'>说明:</label>"+
-                              "<div class='col-sm-8'>"+
-                                  "<input type='text' class='form-control' id='potenDesc' placeholder='Potentials desc'>"+
-                              "</div>"+
-                          "</div>"+
-                        "<div class='form-group'>"+
-                          "<label for='' class='col-sm-3 control-label'>备注:</label>"+
-                          "<div class='col-sm-8'>"+
-                              "<textarea type='text' rows='4' cols='20' class='form-control' id='potenNote' placeholder='Potentials note'></textarea>"+
-                          "</div>"+
-                        "</div>"+
-                        "<div class='form-group' style = 'padding-top: 50px;'>"+
-                             "<div class='col-sm-4 col-sm-offset-4'>"+
-                                "<div class='btn-success form-control' style = 'text-align: center;' id='savePotenBtn'>保存</div>"+
-                             "</div>"+
-                        "</div>"+     
-                       "</form>"; 
-        
-    var funEditHtml = "<form class='form-horizontal'>"+
-                        "<div class='form-group'>"+
-                            "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
-                            "<div class='col-sm-8' id = 'fun-edit-poten-name'>"+
-                            "</div>"+
-                        "</div>"+
-                        "<div class='form-group'>"+
-                            "<label for='tokens' class='col-sm-3 control-label'>选择函数:</label>"+
-                            "<div class = 'col-sm-8'>"+
-                                "<select id='id_select_fun' class='selectpicker ' multiple data-live-search='true'>"+
-                                   funOptionHtml+
-                                "</select>"+
-                            "</div>"+
-                        "</div>"+
-                        "<div class='form-group' style = 'padding-top: 50px;'>"+
-                           "<div class='col-sm-4 col-sm-offset-4'>"+
-                              "<div class='btn-success form-control' style = 'text-align: center;' id='saveFunBtn'>保存</div>"+
-                           "</div>"+
-                        "</div>"+    
-                        "</form>";
     
-    var refEditHtml = "<form class='form-horizontal'>"+
-                        "<div class='form-group'>"+
-                        "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
-                        "<div class='col-sm-8' id = 'ref-edit-poten-name'>"+
-                        "</div>"+
-                        "</div>"+
-                        "<ul id='myul'>"+
-                        "<div class = 'slideUp'>" +
-                            slideUpHtml +
-                        "</div>"+
-                          "<div class='form-group' style = 'padding-top: 20px;'>"+
-                               "<div class='col-sm-4 col-sm-offset-2'>"+
-                                  "<div class='btn-success form-control' style = 'text-align: center;' id='addRefDivBtn'>继续添加</div>"+
-                               "</div>"+
-                               "<div class='col-sm-4'>"+
-                               "<div class='btn-success form-control' style = 'text-align: center;' id='saveRefBtn'>保存全部</div>"+
-                               "</div>"+
-                          "</div>"+
-                        "</form>";
-    var fileEditHtml = getRefFileDivHtml();
+    var potenEditHtml = getPotenEditHtml(funOptionHtml, elementOptionHtml);
+        
+    var refEditHtml = getRefEditHtml(slideUpHtml);
+        
+    var fileEditHtml = "";
 
     html += "<div class='layui-tab layui-tab-brief' lay-filter='docDemoTabBrief'>"+
                   "<ul class='layui-tab-title'>"+
                   "<li class='layui-this'>新增原子间势</li>"+
-                  "<li>添加势函数</li>"+
                   "<li>添加相关文献</li>"+
                   "<li>上传势数据文件</li>"+
                 "</ul>"+
@@ -251,10 +62,6 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                   
                   "<div class='layui-tab-item layui-show edit-poten-tab'>"+
                       potenEditHtml+
-                    "</div>"+
-                    
-                  "<div class='layui-tab-item edit-fun-tab'>"+
-                      funEditHtml+
                   "</div>"+
                   
                   "<div class='layui-tab-item edit-ref-tab'>"+
@@ -277,8 +84,6 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
         }
     };
 
-    var deleteRefBhArray = new Array();
-    
     $("#addPotenButton").on("click",function(){
         layer.open({
             type: 1,
@@ -291,7 +96,6 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
             content: html,
             cancel: function(){ 
               //右上角关闭回调
-                deleteRefBhArray.splice(0,deleteRefBhArray.length);
             },
             success:function(){
                 //注册下拉选事件
@@ -299,8 +103,8 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                     'selectedText': 'H'
                 });
                 
-                //添加点击下拉选后事件
-                $(".edit-poten-tab .dropdown-menu").find("li").on("click", function(){
+                //添加点击选择元素下拉选后事件
+                $(".edit-poten-tab .elementsArray .dropdown-menu").find("li").on("click", function(){
                     var nameStr = $("#potenName").val();
                     var names= new Array(); //定义一数组 
                     names = nameStr.split("-"); //字符分割 
@@ -323,18 +127,43 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                         newName=newName.substr(1);
                     }
                     $("#potenName").val(newName);
-                    $("#fun-edit-poten-name").text(newName);
                     $("#ref-edit-poten-name").text(newName);
                 });
                 
                 //点击保存势数据按钮事件
                 $("#savePotenBtn").on("click",function(){
+                    var _this = $(this);
+                    var combId = _this.parents("form").attr("id");
+                    var potenGroup = $(".potenSelectGroup option:selected").val();
+                    var potenName = $("#potenName").val();
+                    var potenDesc = $("#potenDesc").val();
+                    var potenNote = $("#potenNote").val();
+                    var elements = $(".elementsArray button span.filter-option").text();
+                    var functions = $(".functionArray button span.filter-option").text();
+                    
+                    $.post(contextPath + "/manage/addPotentials", {
+                        combId:combId,
+                        potenGroup:potenGroup,
+                        potenName:potenName,
+                        potenDesc:potenDesc,
+                        potenNote:potenNote,
+                        elements:elements,
+                        functions:functions
+                    }, 
+                    function(data) {
+                        if(data.success){
+                            _this.parents("form").attr("id",data.combId);
+                            layer.msg("保存成功！",{time:1000});
+                        }else{
+                            layer.msg(data.msg);
+                        }
+                    },"json");
                     
                 });
                 
-                    $(".slideUp").on("change","input[name='referenceDoi']",function(){
-                        $(this).parents('.hid').siblings("span").text($(this).val());
-                    });
+                $(".slideUp").on("change","input[name='referenceDoi']",function(){
+                    $(this).parents('.hid').siblings("span").text($(this).val());
+                });
                     
                     //添加文献页面折叠效果事件
                   $("#myul li span").addClass("hand"); 
@@ -359,9 +188,28 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                   $("#myul").on("click",".remove-ref-div",function(){
                       var refId = $(this).parent().attr("id");
                       if(refId && refId.trim() != ""){
-                          deleteRefBhArray.push(refId);
+                          layer.confirm('该文献已保存到了服务器，此操作将删除该文献的数据文件，确认删除？', {
+                              btn: ['删除','取消'] //按钮
+                            }, function(){
+                                $.post(contextPath + "/manage/deletePotenReference", {
+                                    refId:refId
+                                  }, 
+                                  function(data) {
+                                      if(data.success){
+                                          layer.msg("删除成功！",{time:500});
+                                          $(this).parent().remove();
+                                          $(".upload-file-tab").children("#"+refId).remove();
+                                      }else{
+                                          layer.msg(data.msg,{time:1000});
+                                      }
+                                  },
+                                  "json");
+                            }, function(){
+                                //默认关闭当前弹层
+                            });
+                      }else{
+                          $(this).parent().remove();
                       }
-                      $(this).parent().remove();
                   });
                   
                   //点击继续添加文献按钮
@@ -379,17 +227,95 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                   var uploadFileHtml = "";
                   //点击保存文献数据按钮事件
                   $("#saveRefBtn").on("click",function(){
+                      var combId = $(".edit-poten-tab form").attr("id");
+                      if(!(combId && combId.length > 0)){
+                          layer.msg("请先添加势数据！",{time:1000});
+                          return;
+                      }
+                      var json = {};
+                      json.combId = combId;
+                      var references = new Array();
                       $(".slideUp li").each(function(){
-                          //TODO 保存全部文献信息
-                          //回传删除文献id
-                         $(this).children("span");
+                          var ref = {};
+                          ref.refId = $(this).attr("id");
+                          ref.refSource = $(this).find("option:selected").val();
+                          ref.content = $(this).find("textarea[name='referenceText']").val();
+                          ref.doi = $(this).find("input[name='referenceDoi']").val();
+                          ref.note = $(this).find("textarea[name='referenceDesc']").val();
+                          references.push(ref);
                        });
-                      //TODO 为上传文件页面增加元素
-                      $(".upload-file-tab");
+                      
+                      json.references = references;
+                      //向后台发送请求
+                      $.post(contextPath + "/manage/addPotenReference", {
+                        potenRefJson:JSON.stringify(json)
+                      }, 
+                      function(data) {
+                          if(data.success){
+                              var refBeanList = data.refList;
+                              //循环
+                              $.each(refBeanList,function(index,item){
+                                  $(".slideUp li").each(function(){
+                                      var pageDoi = $(this).find("input[name='referenceDoi']").val();
+                                      if(pageDoi == item.cDoi){
+                                          $(this).attr("id", item.cId);
+                                      }
+                                  });
+                                  //判断是否存在该文献的文件编辑div
+                                  if(!$(".upload-file-tab").children("#"+item.cId)){
+                                      $(".upload-file-tab").append(getRefFileDivHtml(item.cId, item.cDoi));
+                                  }
+                              });
+                              layer.msg("保存成功！");
+                          }else{
+                              layer.msg(data.msg);
+                          }
+                      },"json");
                   });
                   
+                  //删除文件事件
+                  $(".refFileUpDiv").on("click",".deleteFileBtn",function(){
+                      var _this = $(this);
+                      layer.confirm('确认删除？', {
+                          btn: ['删除','取消'] //按钮
+                        }, function(){
+                            //TODO     在服务器删除文件
+                          layer.msg('删除成功！', {time: 500, icon: 1}, function(){
+                              _this.parents(".existsDiv").remove();
+                          });
+                        }, function(){
+                            //默认关闭当前弹层
+                        });
+                  });
+                  
+                  //点击上传文件按钮事件
                   $(".refFileUpDiv").on("click",".uploadFileBtn",function(){
-                	  alert("上传啦！");
+                      var refId = $(this).parents(".refFileUpDiv");
+                      var potentialsType = $(this).parents(".refFileUpDiv").find("option:selected").val();
+                      var potenFile = new FormData($(this).parents("form"));
+                      $.ajax({
+                           url: contextPath + "/manage/uploadPotentialsFile",
+                           method: 'POST',  
+                           data: {
+                               refId:refId,
+                               potentialsType:potentialsType,
+                               potenFile:potenFile
+                           }, 
+                           contentType: false,  
+                           processData: false,  
+                           success: function (resp) {
+                              if(resp.success){
+                                 //成功提示
+                                  
+                                  //TODO ajax 上传，回调函数中增加已存在文件区域
+                                  var existsFileHtml = getExistsFileHtml(fileId, fileName);
+                                  $(this).parents(".form-horizontal").find(".existsFileBox").append(existsFileHtml);
+                              }else{
+                                 //失败提示
+                              }
+                          }
+                       });
+                      
                   });
                   
             }

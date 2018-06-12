@@ -118,7 +118,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public void addCombFunction(CombFunctionInfo combFunInfo) {
         combFunctionDao.addCombFunctions(combFunInfo.getCombFunctions());
-        combParamDao.addCombParams(combFunInfo.getCombParams());
+//        combParamDao.addCombParams(combFunInfo.getCombParams());
     }
 
     /**
@@ -209,11 +209,16 @@ public class InterPotenServiceImpl implements IInterPotenService {
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IInterPotenService#addReference(com.ustb.ssjgl.main.dao.bean.TReference)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#saveOrUpdateReference(com.ustb.ssjgl.main.dao.bean.TReference)
      */
     @Override
-    public void addReference(TReference ref) {
-        referenceDao.insertSelective(ref);
+    public void saveOrUpdateReference(TReference ref) {
+        TReference existsRef = referenceDao.selectByPrimaryKey(TReference.class, ref.getcId());
+        if(existsRef == null){
+            referenceDao.insertSelective(ref);
+        }else{
+            referenceDao.updateSelective(ref);
+        }
     }
     
     /**
@@ -279,5 +284,47 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public List<TPotentialsFunction> getAllFunction() {
         return potentialsFunctionDao.selectAll();
+    }
+
+    @Override
+    public TElement getElementBySymbol(String name) {
+        return elementDao.getElementBySymbol(name);
+    }
+
+    @Override
+    public void deleteCombById(String combId) {
+        elementCombDao.deleteByPrimaryKey(TElementCombination.class, combId);
+        
+    }
+
+    @Override
+    public void deleteCombDetailByCombId(String combId) {
+        elementCombDetailDao.deleteDetailByCombId(combId);
+        
+    }
+
+    @Override
+    public void deleteCombTagByCombId(String combId) {
+        elementCombTagDao.deleteTagByCombId(combId);
+        
+    }
+
+    @Override
+    public void addCombFunction(String combId, InteratomicPotentials interPoten) {
+        combFunctionDao.addCombFunctions(interPoten.getCombFunctions());
+    }
+
+    @Override
+    public void deleteCombFunctionBycombId(String combId) {
+        combFunctionDao.deleteByCombId(combId);
+    }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#deleteReferenceById(java.lang.String)
+     */
+    @Override
+    public void deleteReferenceById(String refId) {
+        potentialsFileDao.deleteByReferenceId(refId);
+        referenceDao.deleteByPrimaryKey(TReference.class, refId);
     }
 }
