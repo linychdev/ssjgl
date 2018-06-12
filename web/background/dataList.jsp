@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/holder.js"></script>
 <script src="${pageContext.request.contextPath}/js/default.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/js/background/htmlTextUtil.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/background/dataList.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
@@ -41,49 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 </head>	
 <body>	
-
-<%--  	      <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-	        <ul class="layui-tab-title">
-	          <li class="layui-this">新增原子间势</li>
-	          <li>添加势函数</li>
-	          <li>添加相关文献</li>
-	          <li>上传势数据文件</li>
-	        </ul>
-	        <div class="layui-tab-content" style="height: 90%;">
-	          <div class="layui-tab-item layui-show">
-	          	<form class="form-horizontal">
-	          		<div class="form-group">
-						<label for="" class="col-sm-3 control-label">PotentialName:</label>
-						<div class="col-sm-8">
-						  <input type="text" class="form-control" id="" placeholder="Potentials name:">
-						</div>
-					 </div>
-					<!-- 测试 -->
-					 <div class="form-group">
-						<label for="tokens" class="col-sm-3 control-label">ElementName:</label>
-						<div class = "col-sm-8">
-							<select id="id_select" class="selectpicker " size="10"  multiple data-live-search="true">
-								<c:forEach items="${elementList}" var="element" varStatus="status">
-									<option>${element.cSymbol }</option>
-								</c:forEach>
-							</select>
-						</div>
-					</div>
-				 </form>
-	          </div>
-	          <div class="layui-tab-item">
-	          	内容3
-	          </div>
-	          <div class="layui-tab-item">
-	          	内容4
-	          </div>
-	          <div class="layui-tab-item">
-	          	内容5
-	          </div>
-	        </div>
-	      </div> --%>
-
-
 		<!-- 势数据管理页面开始 -->
 		<div class = "maincontent row">
 			<ul class="breadcrumb">  
