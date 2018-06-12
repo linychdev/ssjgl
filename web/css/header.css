@@ -1,24 +1,21 @@
 .header{
-	 height:90px;
+	 height:100px;
 	 width:100%;
 	 font-weight:bold;
 	 background-size: cover;
-	 background-image:url(../img/banner5.jpg);
-	 background-repeat: repeat-x;
+	 /* background-image:url(../img/banner5.jpg); */
+	 /* background-repeat: repeat-x; */
+	 background-color:#ffffff;
 }
 
-.main{
-	/* width:1230px; */
-	margin:0px auto;
-}
 
 .navbar-default .navbar-nav > li > a.active {
     /* color:#00FFCC; */
-	color:#ffff00;
+	color:#0000ff;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     /* color: #00FFCC; */
-	color:#ffff00;
+	color:#0000ff;
 }
 .navbar-default .navbar-nav > li > a {
     color: #000000;
@@ -55,4 +52,25 @@
 
 .logo{
 	margin-top:20px;
+	float:left;
+	width:150px;
+}
+
+.text1{
+	margin-top:20px;
+	float:left;
+	text-align:center;
+	font-size:15px;
+	line-height:30px;
+	color:#0000ff;
+	font-weight:700;
+}
+
+.text2{
+	float:right;
+	text-align:center;
+	font-size:14px;
+	line-height:20px;
+	color:#0000ff;
+	font-weight:700;
 }
