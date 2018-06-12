@@ -24,7 +24,7 @@ function getRefFileDivHtml(refId, doi, existsFileHtml){
                        "</select>"+
                     "</div>"+
                     "<div class='col-xs-3' style = 'margin-top:7px;'>"+
-                        "<input type='file' id='' name='potenFile' />"+
+                        "<input type='file' name='potenFile' />"+
                     "</div>"+
                     "<div class = 'col-xs-1' style = 'margin-top:10px;'>"+
                         "<span ><a href='javascript:void(0);' class = 'uploadFileBtn'><i class='fa fa-upload fa-fw'></i></a></span>"+

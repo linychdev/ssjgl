@@ -27,6 +27,7 @@ import com.ustb.ssjgl.common.utils.IPUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.login.dao.bean.TUser;
 import com.ustb.ssjgl.login.service.ISessionService;
+import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.dao.bean.ElementCombShowInfo;
 import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.visitlog.annotation.VisitLog;
@@ -120,10 +121,19 @@ public class VisitLogAop {
                 Integer validSearch = (Integer) mod.getModelMap().get("validSearch");
                 
                 List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
+                InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
                 TSearchRecord searchRecord = new TSearchRecord(user.getcId(), user.getcLoginName(), IPUtils.getBrowserIpAddress(request));
+                if(combList == null){
+                    if(combDetail == null){
+                        searchRecord.setnResultNum(0);
+                    }else{
+                        searchRecord.setnResultNum(1);
+                    }
+                }else{
+                    searchRecord.setnResultNum(combList.size());
+                }
                 searchRecord.setcSearchText(searchTag);
                 searchRecord.setnValidSearch(validSearch);
-                searchRecord.setnResultNum(combList.size());
                 visitLogService.addQueueElement(searchRecord);
                 
                 addSearchElementRecord(combList, searchRecord);

@@ -262,7 +262,7 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                                       }
                                   });
                                   //判断是否存在该文献的文件编辑div
-                                  if(!$(".upload-file-tab").children("#"+item.cId)){
+                                  if($(".upload-file-tab").children("#"+item.cId).length == 0){
                                       $(".upload-file-tab").append(getRefFileDivHtml(item.cId, item.cDoi));
                                   }
                               });
@@ -289,29 +289,32 @@ $.post(contextPath + "/background/elementList", {}, function(data) {
                   });
                   
                   //点击上传文件按钮事件
-                  $(".refFileUpDiv").on("click",".uploadFileBtn",function(){
-                      var refId = $(this).parents(".refFileUpDiv");
+                  $(".upload-file-tab").on("click",".refFileUpDiv .uploadFileBtn",function(){
+                	  var refId = $(this).parents(".refFileUpDiv").attr("id");
                       var potentialsType = $(this).parents(".refFileUpDiv").find("option:selected").val();
-                      var potenFile = new FormData($(this).parents("form"));
+                      var formData = new FormData($(this).parents("form")[0]);
+                      formData.append("refId",refId);
+                      formData.append("potentialsType",potentialsType);
                       $.ajax({
                            url: contextPath + "/manage/uploadPotentialsFile",
-                           method: 'POST',  
-                           data: {
-                               refId:refId,
-                               potentialsType:potentialsType,
-                               potenFile:potenFile
-                           }, 
-                           contentType: false,  
-                           processData: false,  
+                           method: "POST",  
+                           data: formData,
+                           contentType: false,
+                           processData: false,
+                           cache: false,
                            success: function (resp) {
                               if(resp.success){
                                  //成功提示
-                                  
-                                  //TODO ajax 上传，回调函数中增加已存在文件区域
-                                  var existsFileHtml = getExistsFileHtml(fileId, fileName);
-                                  $(this).parents(".form-horizontal").find(".existsFileBox").append(existsFileHtml);
+                            	  var existsFileHtml = getExistsFileHtml(resp.potentialsFile.cId, resp.potentialsFile.cFileName);
+                            	  layer.msg('上传成功！', {time: 500, icon: 1}, function(){
+                            		  var file = $(this).parent().prev().children("input");
+                            		  file.after(file.clone().val("")); 
+                            		  file.remove(); 
+                            		  $(this).parents(".form-horizontal").find(".existsFileBox").append(existsFileHtml);
+                                  });
                               }else{
                                  //失败提示
+                            	  layer.msg(resp.msg, {time: 500, icon: 1});
                               }
                           }
                        });
