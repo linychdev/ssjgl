@@ -29,60 +29,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/bootstrap-select.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	$(window).on('load', function () {         
-	     	$('.selectpicker').selectpicker({
-	                    'selectedText': 'H'
-	         });
-	    });
+    $(window).on('load', function () {         
+             $('.selectpicker').selectpicker({
+                        'selectedText': 'H'
+             });
+        });
 
-	var contextPath = "<%=request.getContextPath()%>";
-	var record = ${pageData.record};
-	var pageIndex = ${pageData.pageIndex};
-	var pageSize = ${pageData.pageSize};
+    var contextPath = "<%=request.getContextPath()%>";
+    var record = ${pageData.record};
+    var pageIndex = ${pageData.pageIndex};
+    var pageSize = ${pageData.pageSize};
 </script>
-</head>	
-<body>	
-		<!-- 势数据管理页面开始 -->
-		<div class = "maincontent row">
-			<ul class="breadcrumb">  
+</head>    
+<body>    
+        <!-- 势数据管理页面开始 -->
+        <div class = "maincontent row">
+            <ul class="breadcrumb">  
                 <li ><i class="fa fa-list-ul fa-fw"></i>&nbsp;势数据列表</a></li>
-				<li style="float:right"><a href = "javascript:void(0);" id = "addPotenButton"><i class="fa fa-plus fa-fw"></i></a>新增势数据</a></li>
+                <li style="float:right"><a href = "javascript:void(0);" id = "addPotenButton"><i class="fa fa-plus fa-fw"></i></a>新增势数据</a></li>
             </ul>
-			<div class ="col-md-12">
-				<table class = "table table-striped table-responsive">
-					<tr>
-						<th>序号</th>
-						<th>名称</th>
-						<th>类别</th>
-						<th>相关元素</th>
-						<th>其他属性</th>
-						<th>说明</th>
-						<th>操作</th>
-					</tr>
-					<c:forEach items="${pageData.dataList}" var="combInfo" varStatus="status">
-						<tr>
-							<td>${status.index + 1 }</td>
-							<td>${combInfo.elementComb.cCombName }</td>
-							<td>${combInfo.scope.cName }</td>
-							<td>
-								<c:forEach items="${combInfo.elementList}" var="element" varStatus="status">
-								${element.cSymbol }<c:if test="${status.last==false}">,</c:if>
-								</c:forEach>
-							</td>
-							<td>无</td>
-							<td>${combInfo.elementComb.cDescription }</td>
-							<td>
-							<a href = "javascript:void(0);"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
-							<a href = "javascript:void(0);"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
-	
-			<div class = "col-md-8 col-md-offset-4 " id = "paging-div" >
+            <div class ="col-md-12">
+                <table class = "table table-striped table-responsive">
+                    <tr>
+                        <th>序号</th>
+                        <th>名称</th>
+                        <th>类别</th>
+                        <th>相关元素</th>
+                        <th>其他属性</th>
+                        <th>说明</th>
+                        <th>操作</th>
+                    </tr>
+                    <c:forEach items="${pageData.dataList}" var="combInfo" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1 }</td>
+                            <td>${combInfo.elementComb.cCombName }</td>
+                            <td>${combInfo.scope.cName }</td>
+                            <td>
+                                <c:forEach items="${combInfo.elementList}" var="element" varStatus="status">
+                                ${element.cSymbol }<c:if test="${status.last==false}">,</c:if>
+                                </c:forEach>
+                            </td>
+                            <td>无</td>
+                            <td>${combInfo.elementComb.cDescription }</td>
+                            <td>
+                            <a href = "javascript:void(0);" combId = "${combInfo.elementComb.cId }" class = "editPotenBtn"><i class="fa fa-edit fa-fw"></i></a>&nbsp;编辑&nbsp; 
+                            <a href = "javascript:void(0);" combId = "${combInfo.elementComb.cId }" class = "delePotenBtn"><i class="fa fa-trash fa-fw"></i></a>&nbsp;删除
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+    
+            <div class = "col-md-8 col-md-offset-4 " id = "paging-div" >
 
-			</div>
-		</div>
-		<!-- 势数据管理页面结束 -->
+            </div>
+        </div>
+        <!-- 势数据管理页面结束 -->
 </body>
 </html>

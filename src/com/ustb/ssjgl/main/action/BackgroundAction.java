@@ -13,6 +13,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -258,10 +259,30 @@ public class BackgroundAction extends AbstractAction{
             }finally{
                 FileUtils.deleteQuietly(file);
             }
+        }else{
+            result.put("success", false);
+            result.put("msg", "不能上传空文件！");
         }
         this.writeAjaxObject(response, result);
     }
 
+    
+
+    /**
+     * 编辑原子间势时，先查询详情
+     * @param combId
+     * @return
+     */
+    @RequestMapping("/manage/selectComb")
+    @ResponseBody
+    public void editorElementComb(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = Maps.newHashMap();
+        String combId = request.getParameter("combId");
+        InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(combId);
+        result.put("combDetail", interPoten);
+        this.writeAjaxObject(response, result);
+    }
+    
     /**
      * 删除原子间势
      * @param request
@@ -290,10 +311,10 @@ public class BackgroundAction extends AbstractAction{
     @RequestMapping("/manage/deletePotenFile")
     @ResponseBody
     public void deletePotenFile(HttpServletRequest request, HttpServletResponse response) {
-        String pId = request.getParameter("potentialsId");
+        String fileId = request.getParameter("fileId");
         Map<String, Object> result = Maps.newHashMap();
         try {
-            interPotenService.deletePotenFileByPotenId(pId);
+            interPotenService.deletePotenFileById(fileId);
             result.put("success", true);
         } catch (Exception e) {
             LOG.error("删除势数据文件出错！", e);
