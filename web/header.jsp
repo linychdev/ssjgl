@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> 
 	  <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
+      <link href="${pageContext.request.contextPath}/css/main/index.css" rel="stylesheet" type="text/css" /> 
 	  <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css" />
   
       <script src="${pageContext.request.contextPath}/js/header.js"></script>
@@ -27,55 +28,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="row"> 
      <div class="col-md-4"> 
       <div class="logo"> 
-       <img src="${pageContext.request.contextPath}/img/logo20.png" alt="" style="width:150px; height:50px;" /> 
-      </div> 
-      <div class = "description">
-        Interatomic Potentials Database<br>
-        Part of the Materials Genetic Engineering Data
-      </div>
-      </div>
-     </div> 
-     <div class="col-md-6" > 
-      <nav class="navbar navbar-default"> 
-       <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
-        <ul class="nav navbar-nav navbar-nav-right"> 
-         <li><a href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
-         <li role="presentation" class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Resources<span class="caret"></span> </a> 
-          <ul class="dropdown-menu"> 
-           <li><a href="#">Semiconductors</a></li> 
-           <li><a href="#">Ionic Crystals</a></li> 
-           <li><a href="#">Interface</a></li> 
-           <li><a href="#">Metal Alloys</a></li> 
-           <li><a href="#">Others</a></li> 
-          </ul> 
-          </li> 
-         <li><a href="javascript:void(0);">Help</a></li> 
-         <li><a href="javascript:void(0);">About Us</a></li> 
-         <li><a href="javascript:void(0);">User</a></li> 
-         <li><a href="javascript:void(0);" class = "background">Background System</a></li> 
-        </ul> 
-       </div> 
-      </nav> 
-     </div> 
-     <div class = "col-md-2 right">
-        <div class = "row">
-            <div class = "col-xs-12 ustb">
-                USTB 
-            </div>
-            <div class = "col-xs-12">
-                Department of Physics, 
-            </div>
-            <div class = "col-xs-12">
-                University of Science and Technology Beijing, 
-            </div>
-            <div class = "col-xs-12">
-                China
-            </div>
-        </div>
-     </div>
+        	<a href ="#">
+               <img src="${pageContext.request.contextPath}/img/logo20.png" alt="" style="width:100px; height:40px;" /> 
+            </a>
+            </div> 
+					<div class = "text1">
+						Interatomic Potentials Database
+						<br>
+						<div style="font-size:12px; color:#1569b4;">Part of the Materials Genetic Engineering Data</div>
+					</div>
+            </div> 
+            <div class="col-md-6" > 
+              <nav class="navbar navbar-default"> 
+               <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
+                <ul class="nav navbar-nav navbar-nav-right"> 
+                 <li><a href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
+        						 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a href="#" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle" target="_self">Resources <span class="caret"></span></a>
+        							<ul role="menu" class=" dropdown-menu">
+        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1116"><a href="javascript:void(0);" target="_self">Semiconductors</a></li>
+        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1127"><a href="javascript:void(0);" target="_self">Ionic Crystals</a></li>
+        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1128"><a href="javascript:void(0);" target="_self">Interface</a></li>
+        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1129"><a href="javascript:void(0);" target="_self">Metal Alloys </a></li>
+        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5141"><a href="javascript:void(0);" target="_self">Others</a></li>
+                  </ul> 
+                  </li> 
+                 <li><a href="javascript:void(0);">Help</a></li> 
+                 <li><a href="javascript:void(0);">About Us</a></li> 
+                 <li><a href="javascript:void(0);">User</a></li> 
+        						 <li><a href="javascript:void(0);" class = "background">Login</a></li> 
+                </ul> 
+                    </div> 
+            </nav> 
+            </div> 
+				<div class = "col-md-2 ">
+					<div class = "text2">
+					   <div style = "font-size:16px;">USTB</div>
+					   University of Science and Technology Beijing,
+					   <br>
+					   China
+					</div>
+				</div>
+			</div>
     </div> 
    </div> 
-  </div> 
   <!-- //header --> 
  </body>
 </html>

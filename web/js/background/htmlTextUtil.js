@@ -61,13 +61,15 @@ function getEditorPotenPageHtml(potenCombId){
                 fileEditHtml += getRefFileDivHtml(refInfo.reference.cId, refInfo.reference.cDoi, existsFileHtml);
             }
             
+            potenEditHtml = getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml);
+            
         }, "json");
     }else{
         slideUpHtml = getSlideUpHtml();
         refEditHtml = getRefEditHtml("",slideUpHtml);
+        potenEditHtml = getPotenEditHtml(null, funOptionHtml, elementOptionHtml);
     }
     
-    potenEditHtml = getPotenEditHtml(funOptionHtml, elementOptionHtml);
     html += "<div class='layui-tab layui-tab-brief' lay-filter='docDemoTabBrief'>"+
                   "<ul class='layui-tab-title'>"+
                   "<li class='layui-this'>编辑原子间势</li>"+
@@ -200,13 +202,30 @@ function getRefSildUpHtml(reference){
      return slideUpHtml;
 }
 
-function getPotenEditHtml(funOptionHtml, elementOptionHtml){
+function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
     
-var funOptionHtml = funOptionHtml ? funOptionHtml : "";
-var elementOptionHtml = elementOptionHtml ? elementOptionHtml : "";
-    
-var potenEditHtml = 
-            "<form class='form-horizontal'>"+
+    var potenName = "";
+    var potenId = "";
+    var potenNote = "";
+    var potenDesc = "";
+    var scopeId = "";
+    var functions = new Array();
+    var elements = new Array();
+    if(combDetail){
+        var elementComb = combDetail.elementComb;
+        functions = combDetail.functions;
+        elements = combDetail.elements;
+        potenName = elementComb.cCombName ? elementComb.cCombName : "";
+        potenId = elementComb.cId ? elementComb.cId : "";
+        potenNote = elementComb.cNote ? elementComb.cNote : "";
+        potenDesc = elementComb.cDescription ? elementComb.cDescription : "";
+        scopeId = elementComb.cScopeId ? elementComb.cScopeId : "";
+    }
+    var funOptionHtml = funOptionHtml ? funOptionHtml : "";
+    var elementOptionHtml = elementOptionHtml ? elementOptionHtml : "";
+        
+    var potenEditHtml = 
+            "<form class='form-horizontal' id='"+potenId+"'>"+
                 "<div class='form-group'>"+
                 "<label for='' class='col-sm-3 control-label'>选择分组:</label>"+
                 "<div class='col-sm-8'>"+
@@ -232,7 +251,7 @@ var potenEditHtml =
                   "<div class='form-group'>"+
                   "<label for='' class='col-sm-3 control-label'>势名称:</label>"+
                   "<div class='col-sm-8'>"+
-                    "<input type='text' class='form-control' id='potenName' placeholder='Potentials name'>"+
+                    "<input type='text' class='form-control' id='potenName' placeholder='Potentials name' value='"+potenName+"'>"+
                   "</div>"+
                   "</div>"+
                   "<div class='form-group'>"+
@@ -246,13 +265,15 @@ var potenEditHtml =
                   "<div class='form-group'>"+
                       "<label for='' class='col-sm-3 control-label'>说明:</label>"+
                       "<div class='col-sm-8'>"+
-                          "<input type='text' class='form-control' id='potenDesc' placeholder='Potentials desc'>"+
+                          "<input type='text' class='form-control' id='potenDesc' placeholder='Potentials desc' value='"+potenDesc+"'>"+
                       "</div>"+
                   "</div>"+
                 "<div class='form-group'>"+
                   "<label for='' class='col-sm-3 control-label'>备注:</label>"+
                   "<div class='col-sm-8'>"+
-                      "<textarea type='text' rows='4' cols='20' class='form-control' id='potenNote' placeholder='Potentials note'></textarea>"+
+                      "<textarea type='text' rows='4' cols='20' class='form-control' id='potenNote' placeholder='Potentials note'>" +
+                          potenNote+
+                      "</textarea>"+
                   "</div>"+
                 "</div>"+
                 "<div class='form-group' style = 'padding-top: 50px;'>"+
@@ -261,7 +282,34 @@ var potenEditHtml =
                      "</div>"+
                 "</div>"+     
                "</form>";
-    return potenEditHtml;
+                
+               _html = $(potenEditHtml);
+               _html.find(".potenSelectGroup option").each(function(){
+                    if($(this).val() == scopeId){
+                        $(this)[0].selected = true;
+                        $(this).siblings()[0].selected = false;
+                    }
+                });
+                
+                _html.find(".functionArray .selectpicker option").each(function(){
+                    for(var i=0;i<functions.length;i++){
+                        var fun = functions[i];
+                        if($(this).text() == fun.cName){
+                            $(this).attr("selected",true);
+                        }
+                    }
+                });
+                
+                
+                _html.find(".elementsArray .selectpicker option").each(function(){
+                    for(var i=0;i<elements.length;i++){
+                        var elem = elements[i];
+                        if($(this).text() == elem.cSymbol){
+                            $(this).attr("selected",true);
+                        }
+                    }
+                });
+    return _html.html();
 }
 
 
