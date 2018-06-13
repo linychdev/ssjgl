@@ -122,10 +122,11 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 }
 /* 放大元素第一列 */
 .column-big-1{
-	width: 40px;
+	width: 45px;
 	 padding-top:25px; 
 	/* padding-bottom:10px; */
     text-align: left;
+	padding-left:5px;
 }
 
 .oxidation-column{
@@ -206,16 +207,17 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 
 /* 放大元素第三列 */
 .column-big-3{
-	width: 45px;
+	width: 50px;
 	/* padding-top:5px; */
 	/* padding-bottom:5px; */
     text-align: right;
+	padding-right:5px;
 }
 
 .atomic-big{
     font-size: 12px;
-    height: 12px;
     line-height: 12px;
+	padding-top:3px;
 }
 
 .melting-big, .boiling-big, .relative-big{
