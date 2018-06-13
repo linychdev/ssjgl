@@ -104,15 +104,10 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
     overflow:hidden;
     background-color: rgba(51,153,255,0.8);
 	color:#ffffff;
-    
     /*禁止光标移动到文字上显示I*/
    -moz-user-select: -moz-none;
    -khtml-user-select: none;
    -webkit-user-select: none;
-   /*
-     Introduced in IE 10.
-     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-   */
    -ms-user-select: none;
    user-select: none;
 }
@@ -122,30 +117,28 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 }
 /* 放大元素第一列 */
 .column-big-1{
-	width: 45px;
-	 padding-top:25px; 
-	/* padding-bottom:10px; */
+	width: 70px;
+	padding-top:10px; 
     text-align: left;
-	padding-left:5px;
+	padding-left:3px;
 }
 
 .oxidation-column{
 	padding-bottom:0px;
 	float: left;
-	width: 15px;
-	margin-left: 2px;
+	width: 20px;
 }
 
-.oxidation-column3{
-	width: 10px !important;
-}
+/* .oxidation-column3{ */
+	/* width: 10px !important; */
+/* } */
 
 .oxidation-big{
-	height: 65px;
+	height: 75px;
 	/* -webkit-box-orient: vertical;
 	-webkit-line-clamp: 3; */
 	overflow: hidden;
-	line-height:65px;
+	line-height:75px;
 }
 .oxidation-big ul{
 	padding-left: 0px;
@@ -153,10 +146,10 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 }
 .oxidation-big li{
 	list-style-type:none;
-	line-height: 6px;
+	line-height: 12px;
     padding-top: 0px;
     margin-top: 5px;
-    font-size: 6px;
+    font-size: 12px;
     text-align: right;
 }
 
@@ -165,11 +158,13 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 	/* margin-bottom: 5px; */
 /* } */
 .radius-big{
-	height: 50px;
+	height: 40px;
+	font-size: 12px;
+	margin-top:10px;
 }
 .electron-big{
 	height: 20px;
-	font-size: 10px;
+	font-size: 12px;
 	line-height:20px;
 }
 
@@ -177,6 +172,7 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 .column-big-2{
 	flex:1;
     text-align: center;
+	width:90px;
 	/* padding-top:10px; */
 	/* padding-bottom:10px; */
 }
