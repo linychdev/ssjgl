@@ -113,8 +113,7 @@ public class SearchAction extends AbstractAction{
         mode.addObject("validSearch", 1);
         mode.addObject("combDetail", interPoten);
         return mode;
-    }  
-    
+    }
     /**
      * 下载势文件
      * @param request

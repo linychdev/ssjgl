@@ -95,7 +95,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public void deletePotentialsById(String combId) {
         potentialsFileDao.deleteByReferenceId(combId);
-        combParamDao.deleteByCombId(combId);
+//        combParamDao.deleteByCombId(combId);
         combFunctionDao.deleteByCombId(combId);
         elementCombTagDao.deleteTagByCombId(combId);
         elementCombDetailDao.deleteDetailByCombId(combId);
@@ -326,5 +326,13 @@ public class InterPotenServiceImpl implements IInterPotenService {
     public void deleteReferenceById(String refId) {
         potentialsFileDao.deleteByReferenceId(refId);
         referenceDao.deleteByPrimaryKey(TReference.class, refId);
+    }
+
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#deletePotenFileById(java.lang.String)
+     */
+    @Override
+    public void deletePotenFileById(String fileId) {
+        potentialsFileDao.deletePotentialsFileById(fileId);
     }
 }

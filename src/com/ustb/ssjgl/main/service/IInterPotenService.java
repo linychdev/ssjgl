@@ -58,6 +58,12 @@ public interface IInterPotenService {
     public void deletePotenFileByPotenId(String pId);
 
     /**
+     * 删除势文件
+     * @param fileId
+     */
+    public void deletePotenFileById(String fileId);
+
+    /**
      * 根据组合id获取势数据文件
      * @param combId
      * @return
