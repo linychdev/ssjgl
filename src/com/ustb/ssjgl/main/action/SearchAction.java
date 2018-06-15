@@ -119,7 +119,7 @@ public class SearchAction extends AbstractAction{
      * @param request
      * @param response
      */
-    @RequestMapping(value="/manage/downloadPotentialsFile")
+    @RequestMapping(value="/search/downloadPotentialsFile")
     @ResponseBody
     public ResponseEntity<byte[]> downloadPotenFile(HttpServletRequest request, HttpServletResponse response) {
         String potentialsFileId = request.getParameter("potentialsFileId");
@@ -133,6 +133,7 @@ public class SearchAction extends AbstractAction{
             ftpService.setLocal(file);
             ftpService.setRemote(remote);
             ftpService.download();
+            System.out.println(FileUtils.readFileToString(file));
             response.setContentType("application/force-download");
             response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileMeta.getcFileName(), "UTF-8"));
             return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), HttpStatus.CREATED);  
@@ -150,5 +151,39 @@ public class SearchAction extends AbstractAction{
         ModelAndView mode = new ModelAndView();
         mode.setViewName("main/index");
         return mode;
-    }  
+    }
+    
+    @RequestMapping("/search/previewPotentialsFile")
+    @ResponseBody
+    public void previewPotentialsFile(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result =  Maps.newHashMap();
+        String potentialsFileId = request.getParameter("potentialsFileId");
+        TPotentialsFile fileMeta = interPotenService.getPotentialsFileMetaById(potentialsFileId);
+        String suffix = CommonUtils.getFileSuffix(fileMeta.getcFileName());
+        File file = null;
+        try {
+            file = File.createTempFile("potenFile", suffix);
+            String remote = fileMeta.getRemote();
+            remote = remote.replace(File.separator, "");
+            ftpService.setLocal(file);
+            ftpService.setRemote(remote);
+            ftpService.download();
+            List<String> fileTextList = FileUtils.readLines(file);
+            StringBuilder strBuilder = new StringBuilder();
+            for (String str : fileTextList) {
+                strBuilder.append(str);
+                strBuilder.append("<br />");
+            }
+            result.put("success", true);
+            result.put("fileText", strBuilder.toString());
+            result.put("fileName", fileMeta.getcFileName());
+        } catch (IOException e) {
+            LOG.error("获取势数据文件内容出错！ftpPath:{},fileName:{}",fileMeta.getcFtpUrlPath() ,fileMeta.getcFileName(), e);
+            result.put("success", false);
+        }finally{
+            FileUtils.deleteQuietly(file);
+        }
+        this.writeAjaxObject(response, result);
+    }
+    
 }
