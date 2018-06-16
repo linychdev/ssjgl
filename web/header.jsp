@@ -23,54 +23,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </head> 
  <body> 
   <!-- 头部开始 --> 
-  <div class="header"> 
-   <div class="main container-fluid"> 
-    <div class="row"> 
-     <div class="col-md-4"> 
-      <div class="logo"> 
-        	<a href ="#">
-               <img src="${pageContext.request.contextPath}/img/logo20.png" alt="" style="width:100px; height:40px;" /> 
-            </a>
-            </div> 
+   <div class="header">
+		<div class="container-fluid">
+			<div class = "row">
+				<div class = "col-md-4">
+					<div class = "logo">
+						<a href ="#">
+							<img src="${pageContext.request.contextPath}/img/logo20.png" alt="" style="width:100px; height:40px;">
+						</a>
+					</div>
 					<div class = "text1">
 						Interatomic Potentials Database
 						<br>
 						<div style="font-size:12px; color:#1569b4;">Part of the Materials Genetic Engineering Data</div>
 					</div>
-            </div> 
-            <div class="col-md-6" > 
-              <nav class="navbar navbar-default"> 
-               <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
-                <ul class="nav navbar-nav navbar-nav-right"> 
-                 <li><a href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
-        						 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a href="#" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle" target="_self">Resources <span class="caret"></span></a>
-        							<ul role="menu" class=" dropdown-menu">
-        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1116"><a href="javascript:void(0);" target="_self">Semiconductors</a></li>
-        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1127"><a href="javascript:void(0);" target="_self">Ionic Crystals</a></li>
-        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1128"><a href="javascript:void(0);" target="_self">Interface</a></li>
-        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1129"><a href="javascript:void(0);" target="_self">Metal Alloys </a></li>
-        								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5141"><a href="javascript:void(0);" target="_self">Others</a></li>
-                  </ul> 
-                  </li> 
-                 <li><a href="javascript:void(0);">Help</a></li> 
-                 <li><a href="javascript:void(0);">About Us</a></li> 
-                 <li><a href="javascript:void(0);">User</a></li> 
-        						 <li><a href="javascript:void(0);" class = "background">Login</a></li> 
-                </ul> 
-                    </div> 
-            </nav> 
-            </div> 
+				</div>
+				<div class = "col-md-6">
+					<nav class="navbar navbar-default"> 
+					   <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
+						<ul class="nav navbar-nav navbar-nav-right"> 
+						 <li><a href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
+						 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a href="#" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle" target="_self">Resources <span class="caret"></span></a>
+							<ul role="menu" class=" dropdown-menu">
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1116"><a href="javascript:void(0);" target="_self">Semiconductors</a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1127"><a href="javascript:void(0);" target="_self">Ionic Crystals</a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1128"><a href="javascript:void(0);" target="_self">Interface</a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1129"><a href="javascript:void(0);" target="_self">Metal Alloys </a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5141"><a href="javascript:void(0);" target="_self">Others</a></li>
+							</ul>
+						 </li>
+						 <li><a href="javascript:void(0);">Help</a></li> 
+						 <li><a href="javascript:void(0);">AboutUs</a></li> 
+						 <li><a href="javascript:void(0);">User</a></li> 
+						 <li><a href="javascript:void(0);" class = "background">Login</a></li> 
+						</ul> 
+					   </div> 
+					</nav> 
+				</div>
 				<div class = "col-md-2 ">
 					<div class = "text2">
-					   <div style = "font-size:16px;">USTB</div>
-					   University of Science and Technology Beijing,
-					   <br>
-					   China
+						<div style = "font-size:16px;">USTB</div>
+						University of 
+						<br>
+						Science & Technology 
+						<br>
+						Beijing,China
 					</div>
 				</div>
 			</div>
-    </div> 
-   </div> 
+		</div>
+	</div>
   <!-- //header --> 
  </body>
 </html>

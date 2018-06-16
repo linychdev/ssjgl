@@ -168,15 +168,12 @@ public class SearchAction extends AbstractAction{
             ftpService.setLocal(file);
             ftpService.setRemote(remote);
             ftpService.download();
-            List<String> fileTextList = FileUtils.readLines(file);
-            StringBuilder strBuilder = new StringBuilder();
-            for (String str : fileTextList) {
-                strBuilder.append(str);
-                strBuilder.append("<br />");
-            }
+            String fileText = FileUtils.readFileToString(file, "utf-8");
+            fileText = CommonUtils.StringToHTML(fileText); 
             result.put("success", true);
-            result.put("fileText", strBuilder.toString());
+            result.put("fileText", fileText);
             result.put("fileName", fileMeta.getcFileName());
+            LOG.info(fileText);
         } catch (IOException e) {
             LOG.error("获取势数据文件内容出错！ftpPath:{},fileName:{}",fileMeta.getcFtpUrlPath() ,fileMeta.getcFileName(), e);
             result.put("success", false);

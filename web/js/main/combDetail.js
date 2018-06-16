@@ -5,11 +5,9 @@ $(function(){
             potentialsFileId : fileId
           }, function(data) {
               if(data.success){
-                  var showTextHtml = "<div>"+
+                  var showTextHtml = "<div style = 'padding:15px;'>"+
                                           "<div class = 'col-xs-12'>"+
-                                              "<div class = 'downloadFile col-xs-12' id = '"+fileId+"'>"+
-                                                  "下载按钮"+
-                                              "</div>"+
+                                              "<div></div>"+
                                           "<div>"+
                                           "</div class = 'col-xs-12'>"+
                                               data.fileText+
@@ -17,10 +15,11 @@ $(function(){
                                       "</div>";
                   layer.open({
                       type: 1,
-                      title: 'text of ' + data.fileName,
+                      title: '<span id = "'+fileId+'" name="'+data.fileText+'" class="glyphicon glyphicon-download downloadFile" aria-hidden="true" style="color:#52b94c;margin-top:10px;font-size:25px;"></span><span style = "font-size:25px;">&nbsp;&nbsp;&nbsp;text of ' + data.fileName+'</span>',
                       anim: 2,
                       shadeClose: false, //开启遮罩
                       closeBtn: 1,
+                      move: false,
                       area: ['750px', '600px'], //宽高
                       content: showTextHtml,
                       cancel: function(){ 
@@ -38,11 +37,11 @@ $(function(){
     });
 
     $("body").on("click",".downloadFile", function(){
-        var fileId = $(this).attr("id");
-        $.post(contextPath + "/search/downloadPotentialsFile", {
-            potentialsFileId : fileId
-        }, function(data) {
-            
-        }, "json");
+    	 var fileId = $(this).attr("id");
+    	 var url = contextPath + "/search/downloadPotentialsFile?potentialsFileId="+fileId;
+         var fileName = $(this).attr("name");
+         var form = $("<form></form>").attr("action", url).attr("method", "post");
+         form.append($("<input></input>").attr("type", "hidden").attr("name", "fileName").attr("value", fileName));
+         form.appendTo('body').submit().remove();
     });
 });
