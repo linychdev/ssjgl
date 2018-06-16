@@ -58,22 +58,28 @@
 }
 
 .text1{
-	margin-top:15px;
+	margin-top:10px;
 	float:left;
 	text-align:center;
-	font-size:16px;
+	font-size:24px;
 	line-height:30px;
-	color:#777777;
-	font-weight:700;
-	padding-left:20px;
+	color:#000;
+	font-family: inherit;
+	font-weight: normal;
+	padding-left:5px;
+}
+.site-sologn{  
+    color: rgb(18, 101, 156);
+    font-size: 12px;
+	float:left;
+	padding-left:5px;
 }
 
 .text2{
 	float:right;
 	text-align:right;
 	font-size:10px;
-	line-height:20px;
-	color:#777777;
-	margin-top:5px;
+	color:#000;
+	font-family: inherit;
 }
 
