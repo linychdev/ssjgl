@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </head> 
  <body> 
   <!-- 头部开始 --> 
-   <div class="header">
+  	<div class="header">
 		<div class="container-fluid">
 			<div class = "row">
 				<div class = "col-md-4">
@@ -35,10 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class = "text1">
 						Interatomic Potentials Database
 						<br>
-						<div style="font-size:12px; color:#1569b4;">Part of the Materials Genetic Engineering Data</div>
+						<div class="site-sologn">Part of the Materials Genetic Engineering Data</div>
 					</div>
 				</div>
-				<div class = "col-md-6">
+				<div class = "col-md-7">
 					<nav class="navbar navbar-default"> 
 					   <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
 						<ul class="nav navbar-nav navbar-nav-right"> 
@@ -54,25 +54,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						 </li>
 						 <li><a href="javascript:void(0);">Help</a></li> 
 						 <li><a href="javascript:void(0);">AboutUs</a></li> 
+						 <li><a href="javascript:void(0);">Link</a></li> 
 						 <li><a href="javascript:void(0);">User</a></li> 
 						 <li><a href="javascript:void(0);" class = "background">Login</a></li> 
 						</ul> 
 					   </div> 
 					</nav> 
 				</div>
-				<div class = "col-md-2 ">
+				<div class = "col-md-1">
 					<div class = "text2">
-						<div style = "font-size:16px;">USTB</div>
+						<div style = "font-size:30px;">USTB</div>
+						<div  style="font-weight: normal;">
 						University of 
 						<br>
 						Science & Technology 
 						<br>
 						Beijing,China
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-  <!-- //header --> 
+    <!-- //header --> 
  </body>
 </html>

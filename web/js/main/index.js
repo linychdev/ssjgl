@@ -1,13 +1,15 @@
 $(function(){
    var operationType = 0;
    var TimeFn = null;
-   
+   var _this_element;
    $("body").on("mouseleave",".elements-big",function(){
     	operationType = 0;
         layer.closeAll();
 		removeCloneElement();
    });
    $("div").on("mouseenter",".elements",function(event){
+       clearTimeout(TimeFn);
+	   _this_element = $(this);
        var offset_top = $(this).offset().top - $(this).height();
        var offset_left = $(this).offset().left - $(this).width();
        var column1 = new Array();
@@ -70,10 +72,11 @@ $(function(){
             "</div>"+
         "</div>";
     
-       clearTimeout(TimeFn);
+
        //执行延时
        TimeFn = setTimeout(function () {
         layer.closeAll();
+        
     	layer.open({
     		type: 1,
     		area: ['220px', '200px'],
@@ -95,11 +98,37 @@ $(function(){
 			$(".oxidation-column").removeClass("oxidation-column3");
 		}
 		operationType = 1;
-		removeCloneElement();
-		 
-       }, 540);//延时时长设置   
-
+//		removeCloneElement();
+       }, 50);//延时时长设置  
    });
+   
+   $('body').mousemove(function(e){
+       var xx=e.originalEvent.x || e.originalEvent.layerX || 0;
+       var yy=e.originalEvent.y || e.originalEvent.layerY || 0;
+       if($(".elements-big") && $(".elements-big").length>0){
+    	   if(!isMouseInElement($(".elements-big"),xx,yy)){
+    		   layer.closeAll();
+    	   }
+       }
+   });    
+
+
+   
+   function isMouseInElement(element,x,y){
+	 //x的值相对于文档的左边缘。y的值相对于文档的上边缘  
+	 //x,y是全局变量;  
+	 //判断鼠标是否在某DIV中  
+	 var div = element;//获取你想要的DIV  
+	 var y1 = div.offset().top;  //div上面两个的点的y值  
+	 var y2 = y1 + div.height(); //div下面两个点的y值  
+	 var x1 = div.offset().left;  //div左边两个的点的x值  
+	 var x2 = x1 + div.width();  //div右边两个点的x的值  
+	 if( x < x1 || x > x2 || y < y1 || y > y2){  
+	     return false;
+	 }else{  
+	     return true;
+	 };  
+   }
    
    //单击元素
    $("div.elements").click(function(){
@@ -116,7 +145,7 @@ $(function(){
        operationType = 0;
    });
    
-   //拖动事件，克隆一个div用于拖动
+/*   //拖动事件，克隆一个div用于拖动
    var timer=null;  
    $("div.elements").mousedown(function(e){
 	   if(event.which == 1){
@@ -170,6 +199,7 @@ $(function(){
 		$(".clone").remove();
 		clearTimeout(timer);
 	}); 
+ */
 	
 	//移除克隆元素
 	function removeCloneElement(){
@@ -177,7 +207,6 @@ $(function(){
 			   $(".clone").remove();
 		   }
 	}
-	
 	//搜索按鈕事件
 	$(".input-group .input-group-addon").on("click",function(){
 		var selectVal = "";
