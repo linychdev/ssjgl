@@ -76,48 +76,17 @@ html, body{
 .logo{
 	margin-top:20px;
 }
-
-.xuanzhuan{
-	width:700px;
-	margin:auto;
+.label-define {
+    background-color: #66ccff;
 }
-
-.tagBall {
-	width:600px;
-	height:600px;
-	margin:0px auto;
-	position:absolute;
-}
-.tag {
-	display:block;
-	position:absolute;
-	color:#000;
-	text-decoration:none;
-	font-size:15px;
-	font-family:"微软雅黑";
-	font-weight:bold;
-}
-.tag:hover {
-	border:1px solid #666;
-}
-.form_vav td {
-	color:#a78b6f;
-}
-.element-label{
-	width:90%;
-}
-
-#wordcloud.panel{
-	position: relative; 
-	width: 1000px;
-	height: 600px;
-	margin: 0 auto;
-	background: #fff; 
-}
-
 .element-label .label{
 	cursor:pointer;
-	padding-top: 0px;
-    font-size: 18px;
+	padding-top: 5px;
+    font-size: 20px;
     line-height: 40px;
+	display: inline;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
 }
