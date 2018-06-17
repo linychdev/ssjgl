@@ -31,7 +31,8 @@ html, body{
 	height:60px;
 	margin-top:5px 5px 0px 0px;
 	color: #3399FF;
-
+	cursor: pointer;
+	
 -webkit-touch-callout: none; /* iOS Safari */
 
 -webkit-user-select: none; /* Chrome/Safari/Opera */
@@ -45,7 +46,6 @@ html, body{
 user-select: none; /* Non-prefixed version, currently not supported by any browser */
 
 }
-
 
 .elements .fontWhite{
 	color: #ffffff;
@@ -119,6 +119,8 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
    -webkit-user-select: none;
    -ms-user-select: none;
    user-select: none;
+   
+   	cursor: pointer;
 }
 
 .elements-big{

@@ -125,3 +125,6 @@ p {
 .jiange{
 	margin-top:15px;
 }
+a.previewFile{
+	cursor: pointer;
+}

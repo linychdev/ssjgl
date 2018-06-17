@@ -2,16 +2,27 @@ $(function(){
    var operationType = 0;
    var TimeFn = null;
    var _this_element;
-   $("body").on("mouseleave",".elements-big",function(){
-    	operationType = 0;
-        layer.closeAll();
-		removeCloneElement();
-   });
+//   $("body").on("mouseleave",".elements-big",function(){
+//    	operationType = 0;
+//        layer.closeAll();
+//		removeCloneElement();
+//   });
    $("div").on("mouseenter",".elements",function(event){
        clearTimeout(TimeFn);
 	   _this_element = $(this);
        var offset_top = $(this).offset().top - $(this).height();
        var offset_left = $(this).offset().left - $(this).width();
+       
+       if($(this).children(".atomic").text()>=1 && $(this).children(".atomic").text()<=2){
+    	   offset_top = $(this).offset().top;
+       }
+       if($(this).children(".atomic").text()>=89 && $(this).children(".atomic").text()<=103){
+    	   offset_top = $(this).offset().top + $(this).height() - 198 ;
+       }
+       if($(this).children(".atomic").text()>=57 && $(this).children(".atomic").text()<=71){
+    	   offset_top = $(this).offset().top + $(this).height()*2 - 198 ;
+       }
+       
        var column1 = new Array();
        var column2 = new Array();
        var column3 = new Array();
@@ -51,7 +62,7 @@ $(function(){
         		oxidhtml += "</ul></div>"
           oxidhtml += "<div class = 'float-clear'></div></div>";
 
-    htmlstr+="<div class ='elements-big'>"+
+    htmlstr+="<div class ='elements-big' elementId = '"+$(this).attr("id")+"'>"+
             "<div class = 'column-big-1'>"
                 +oxidhtml+
                 "<div class = 'radius-big' title = 'radius(pm)'>"+$(this).find("span.radius").text()+"</div>"+
@@ -87,9 +98,20 @@ $(function(){
     		         title: false,
     		         closeBtn: 0,
     		         shadeClose: true,
-//            skin: 'yourclass',
     		         shade: 0,
-    		         content: htmlstr
+    		         content: htmlstr,
+    		         success: function(){
+    		        	   //单击元素
+    		        	   $(".elements-big").on("click", function(){
+    		        		   operationType = 2;
+    		        	       var tmp=window.open("about:blank")  
+    		        	       tmp.moveTo(0,0)  
+    		        	       tmp.resizeTo(screen.width+20,screen.height)  
+    		        	       tmp.focus()  
+    		        	       tmp.location=contextPath+"/search/list/"+$(this).attr("elementId");  
+    		        	       operationType = 0;
+    		        	   });
+    		         }
     	});
         //大于3列，调整电负性列宽
 		if(column3.length > 0){
@@ -129,21 +151,6 @@ $(function(){
 	     return true;
 	 };  
    }
-   
-   //单击元素
-   $("div.elements").click(function(){
-	   operationType = 2;
-       clearTimeout(TimeFn);
-       setTimeout(function (){
-    	   removeCloneElement();
-       },300);
-       var tmp=window.open("about:blank")  
-       tmp.moveTo(0,0)  
-       tmp.resizeTo(screen.width+20,screen.height)  
-       tmp.focus()  
-       tmp.location=contextPath+"/search/list/"+$(this).attr("id");  
-       operationType = 0;
-   });
    
 /*   //拖动事件，克隆一个div用于拖动
    var timer=null;  

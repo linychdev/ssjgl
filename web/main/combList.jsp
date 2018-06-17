@@ -43,7 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  <strong>${item.key }:</strong>
 			  	<p>
 				<c:forEach items="${item.value}" var="it">   
-					<span class="label label-success" id = "${it.cId }">${it.cCombName }</span>
+					<span class="label label-info" id = "${it.cId }">${it.cCombName }</span>
 				</c:forEach>
 				</p>   
 			</c:forEach>  

@@ -43,7 +43,7 @@ $(function(){
     window.onresize = chart.resize;
     
     
-    $(".element-label .label-success").on("click",function(){
+    $(".element-label .label-info").on("click",function(){
     	var selectVal = $(this).attr("id"); 
     	var tmp=window.open("about:blank")  
     	tmp.moveTo(0,0)  

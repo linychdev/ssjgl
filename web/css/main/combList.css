@@ -118,4 +118,6 @@ html, body{
 .element-label .label{
 	cursor:pointer;
 	padding-top: 0px;
+    font-size: 18px;
+    line-height: 40px;
 }
