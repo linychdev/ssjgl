@@ -65,11 +65,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class = "text2">
 						<div style = "font-size:30px;">USTB</div>
 						<div  style="font-weight: normal;">
+						<div>
 						University of 
-						<br>
+						</div>
+						<div style = "margin-top: -2px;">
 						Science & Technology 
-						<br>
+						</div>
+						<div style = "margin-top: -2px;">
 						Beijing,China
+						</div>
 						</div>
 					</div>
 				</div>

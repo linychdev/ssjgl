@@ -129,11 +129,9 @@ public class SearchAction extends AbstractAction{
         try {
             file = File.createTempFile("potenFile", suffix);
             String remote = fileMeta.getRemote();
-            remote = remote.replace(File.separator, "");
             ftpService.setLocal(file);
             ftpService.setRemote(remote);
             ftpService.download();
-            System.out.println(FileUtils.readFileToString(file));
             response.setContentType("application/force-download");
             response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileMeta.getcFileName(), "UTF-8"));
             return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), HttpStatus.CREATED);  
@@ -149,6 +147,14 @@ public class SearchAction extends AbstractAction{
     @RequestMapping(value = "/index", method=RequestMethod.GET)
     public ModelAndView showSearchIndex() {
         ModelAndView mode = new ModelAndView();
+        List<String> elementNames = interPotenService.getElementNamesHasPoten();
+        JSONArray jsonArray = new JSONArray();
+        for (String name : elementNames) {
+            JSONObject json = new JSONObject();
+            json.put("name", name);
+            jsonArray.add(json);
+        }
+        mode.addObject("namesHasPoten", jsonArray.toString());
         mode.setViewName("main/index");
         return mode;
     }
@@ -164,7 +170,6 @@ public class SearchAction extends AbstractAction{
         try {
             file = File.createTempFile("potenFile", suffix);
             String remote = fileMeta.getRemote();
-            remote = remote.replace(File.separator, "");
             ftpService.setLocal(file);
             ftpService.setRemote(remote);
             ftpService.download();

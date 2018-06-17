@@ -251,4 +251,13 @@
     <include refid="Base_Column_List" />
     from t_element
   </select>
+
+  <select id="getElementNamesHasPoten" resultType="java.lang.String" >
+    select 
+    	c_symbol
+    from t_element
+    where c_id in (
+    	select distinct c_element_id from t_element_comb_detail
+    )
+  </select>
 </mapper>

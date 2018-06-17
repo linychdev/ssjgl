@@ -2,6 +2,13 @@ $(function(){
    var operationType = 0;
    var TimeFn = null;
    var _this_element;
+   
+   var hasPotenArray = new Array();
+   $.each(namesHasPoten, function(idx, obj) {
+	   hasPotenArray.push(obj.name);
+	});
+   
+   
 //   $("body").on("mouseleave",".elements-big",function(){
 //    	operationType = 0;
 //        layer.closeAll();
@@ -103,13 +110,15 @@ $(function(){
     		         success: function(){
     		        	   //单击元素
     		        	   $(".elements-big").on("click", function(){
-    		        		   operationType = 2;
-    		        	       var tmp=window.open("about:blank")  
-    		        	       tmp.moveTo(0,0)  
-    		        	       tmp.resizeTo(screen.width+20,screen.height)  
-    		        	       tmp.focus()  
-    		        	       tmp.location=contextPath+"/search/list/"+$(this).attr("elementId");  
-    		        	       operationType = 0;
+    		        		   if($.inArray($(this).attr("elementId"), hasPotenArray) != -1){
+    		        			   operationType = 2;
+    		        			   var tmp=window.open("about:blank")  
+    		        			   tmp.moveTo(0,0)  
+    		        			   tmp.resizeTo(screen.width+20,screen.height)  
+    		        			   tmp.focus()  
+    		        			   tmp.location=contextPath+"/search/list/"+$(this).attr("elementId");  
+    		        			   operationType = 0;
+    		        		   }
     		        	   });
     		         }
     	});

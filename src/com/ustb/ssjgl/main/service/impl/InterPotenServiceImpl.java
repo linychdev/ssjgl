@@ -335,4 +335,9 @@ public class InterPotenServiceImpl implements IInterPotenService {
     public void deletePotenFileById(String fileId) {
         potentialsFileDao.deletePotentialsFileById(fileId);
     }
+
+    @Override
+    public List<String> getElementNamesHasPoten() {
+        return elementDao.getElementNamesHasPoten();
+    }
 }

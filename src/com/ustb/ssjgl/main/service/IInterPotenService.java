@@ -161,4 +161,10 @@ public interface IInterPotenService {
      * @param refId
      */
     public void deleteReferenceById(String refId);
+
+    /**
+     * 获取存在势的元素名称集合
+     * @return
+     */
+    public List<String> getElementNamesHasPoten();
 }

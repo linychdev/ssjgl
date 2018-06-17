@@ -7,9 +7,6 @@ $(function(){
               if(data.success){
                   var showTextHtml = "<div style = 'padding:15px;'>"+
                                           "<div class = 'col-xs-12'>"+
-                                              "<div></div>"+
-                                          "<div>"+
-                                          "</div class = 'col-xs-12'>"+
                                               data.fileText+
                                           "</div>"+
                                       "</div>";

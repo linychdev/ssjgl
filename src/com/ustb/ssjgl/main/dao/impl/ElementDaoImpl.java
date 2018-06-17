@@ -44,4 +44,10 @@ public class ElementDaoImpl extends AbstractDao implements IElementDao {
         String statement = mapperNamespace + ".selectAll";
         return this.getSqlSession().selectList(statement);
     }
+
+    @Override
+    public List<String> getElementNamesHasPoten() {
+        String statement = mapperNamespace + ".getElementNamesHasPoten";
+        return this.getSqlSession().selectList(statement);
+    }
 }
