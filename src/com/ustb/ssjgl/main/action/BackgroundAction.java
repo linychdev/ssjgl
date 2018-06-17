@@ -13,6 +13,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,7 @@ import com.ustb.ssjgl.login.service.IUserService;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
 import com.ustb.ssjgl.main.bean.InteratomicPotentials;
 import com.ustb.ssjgl.main.bean.PotenFunction;
+import com.ustb.ssjgl.main.bean.TReferenceInfo;
 import com.ustb.ssjgl.main.dao.bean.TElement;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFile;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
@@ -184,6 +186,11 @@ public class BackgroundAction extends AbstractAction{
         Map<String, Object> result =  Maps.newHashMap();
         String refId = request.getParameter("refId");
         try{
+            List<TPotentialsFile> fileMetaList = interPotenService.getPotentialsFileMetaByRefId(refId);
+            for (TPotentialsFile potenFile : fileMetaList) {
+                ftpService.setRemote(potenFile.getRemote());
+                ftpService.delete();
+            }
             interPotenService.deleteReferenceById(refId);
             result.put("success", true);
         }catch(Exception e){
@@ -247,7 +254,7 @@ public class BackgroundAction extends AbstractAction{
                 potentialsFile.setnFileType(potentialsType);
                 potentialsFile.setnSize(FileUtils.sizeOf(file));
                 potentialsFile.setcSuffix(CommonUtils.getFileSuffix(potenFile));
-                potentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+File.separator+remoteFileName);
+                potentialsFile.setcFtpUrlPath(ftpService.getRemotePath()+"/"+remoteFileName);
                 interPotenService.addPotentialsFile(potentialsFile);
                 result.put("success", true);
                 result.put("potentialsFile", potentialsFile);
@@ -293,6 +300,18 @@ public class BackgroundAction extends AbstractAction{
         Map<String, Object> result = Maps.newHashMap();
         String pId = request.getParameter("potentialsId");
         try {
+            //删除ftp文件
+            InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(pId);
+            List<TReferenceInfo> refInfos = interPoten.getReferenceInfos();
+            for (TReferenceInfo refInfo : refInfos) {
+                List<TPotentialsFile> fileMates = refInfo.getPotentialsFiles();
+                for (TPotentialsFile potenFile : fileMates) {
+                    ftpService.setRemote(potenFile.getRemote());
+                    ftpService.delete();
+                    
+                }
+            }
+            //刪除元数据
             interPotenService.deletePotentialsById(pId);
             result.put("success", true);
         } catch (Exception e) {
@@ -313,6 +332,9 @@ public class BackgroundAction extends AbstractAction{
         String fileId = request.getParameter("fileId");
         Map<String, Object> result = Maps.newHashMap();
         try {
+            TPotentialsFile potenFile = interPotenService.getPotentialsFileMetaById(fileId);
+            ftpService.setRemote(potenFile.getRemote());
+            ftpService.delete();
             interPotenService.deletePotenFileById(fileId);
             result.put("success", true);
         } catch (Exception e) {

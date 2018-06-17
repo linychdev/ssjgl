@@ -240,6 +240,15 @@ public class FtpService {
         });
     }
 
+    private void ftpDeleteFile(){
+        execute(new FTPAction(){
+            @Override
+            public boolean action(FTPClient ftpClient) throws Exception{
+                return ftpClient.deleteFile(remote);
+            }           
+        });
+    }
+
     /**
      * 连接ftp服务器
      * @param host 主机ip或域名
@@ -303,7 +312,6 @@ public class FtpService {
             ftpRetrieveFile(output);
             output.flush();
         } catch (Exception e) {
-            e.printStackTrace();
             throw new CommonsException(e);
         }finally{
             ResourceUtils.close(output);
@@ -334,6 +342,24 @@ public class FtpService {
         }
     }
 
+    public void delete(){
+        try {
+            this.connect();
+            if(!StringUtils.isEmpty(remotePath)){
+                ftpChangeWorkingDirectory();
+            }       
+            if(StringUtils.isEmpty(remote)){
+                return;
+            }
+            ftpDeleteFile();
+        } catch (Exception e) {
+            throw new CommonsException(e);
+        }finally{
+            this.disconnect();
+        }
+    }
+    
+    
     /**
      * 服务端保存的路径
      * 如果不设置此值，将会默认为用户登录之后的路径
