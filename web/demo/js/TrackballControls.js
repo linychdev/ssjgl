@@ -429,25 +429,25 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 	function mousemove( event ) {
 
-		if ( _this.enabled === false ) return;
+		// if ( _this.enabled === false ) return;
 
-		event.preventDefault();
-		event.stopPropagation();
+		// event.preventDefault();
+		// event.stopPropagation();
 
-		if ( _state === STATE.ROTATE && ! _this.noRotate ) {
+		// if ( _state === STATE.ROTATE && ! _this.noRotate ) {
 
-			_movePrev.copy( _moveCurr );
-			_moveCurr.copy( getMouseOnCircle( event.pageX, event.pageY ) );
+			// _movePrev.copy( _moveCurr );
+			// _moveCurr.copy( getMouseOnCircle( event.pageX, event.pageY ) );
 
-		} else if ( _state === STATE.ZOOM && ! _this.noZoom ) {
+		// } else if ( _state === STATE.ZOOM && ! _this.noZoom ) {
 
-			_zoomEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) );
+			// _zoomEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) );
 
-		} else if ( _state === STATE.PAN && ! _this.noPan ) {
+		// } else if ( _state === STATE.PAN && ! _this.noPan ) {
 
-			_panEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) );
+			// _panEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) );
 
-		}
+		// }
 
 	}
 
@@ -477,17 +477,17 @@ THREE.TrackballControls = function ( object, domElement ) {
 
                         case 2:
                                 // Zoom in pages
-                                _zoomStart.y -= event.deltaY * 0.025;
+                                // _zoomStart.y -= event.deltaY * 0.025;
                                 break;
 
 			case 1:
                                 // Zoom in lines
-				_zoomStart.y -= event.deltaY * 0.01;
+				// _zoomStart.y -= event.deltaY * 0.01;
 				break;
 
 			default:
 				// undefined, 0, assume pixels
-				_zoomStart.y -= event.deltaY * 0.00025;
+				// _zoomStart.y -= event.deltaY * 0.00025;
 				break;
 
 		}

@@ -33,7 +33,7 @@ a {
 }
 
 .element {
-	width: 120px;
+	width: 160px;
 	height: 160px;
 	/* box-shadow: 0px 0px 12px rgba(204,51,255,0.5); */
 	border: 1px solid rgba(127,255,255,0.25);
@@ -51,7 +51,7 @@ a {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	font-size: 12px;
+	font-size: 28px;
 }
 
 .element .symbol {
@@ -61,7 +61,7 @@ a {
 	right: 0px;
 	font-size: 60px;
 	font-weight: bold;
-	text-shadow: 0 0 10px rgba(0,255,255,0.95);
+	text-shadow: 0 0 2px rgba(0,255,255,0.95);
 }
 
 .element .details {
@@ -69,14 +69,14 @@ a {
 	top: 5px;
 	left: 0px;
 	right: 0px;
-	font-size: 12px;
+	font-size: 28px;
 }
 .element .struture {
 	position: absolute;
 	bottom: 5px;
 	left: 0px;
 	right: 0px;
-	font-size: 12px;
+	font-size: 28px;
 }
 
 .logo{
@@ -84,20 +84,4 @@ a {
 	height:60px;
 	background-color: #ffffff;
 	
-}
-
-button {
-	color: rgba(127,255,255,0.75);
-	background: transparent;
-	outline: 1px solid rgba(127,255,255,0.75);
-	border: 0px;
-	padding: 5px 10px;
-	cursor: pointer;
-}
-button:hover {
-	background-color: rgba(0,255,255,0.5);
-}
-button:active {
-	color: #000000;
-	background-color: rgba(0,255,255,0.75);
 }

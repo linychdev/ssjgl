@@ -13,6 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> 
   <link href="${pageContext.request.contextPath}/css/main/index.css" rel="stylesheet" type="text/css" /> 
+  
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/animate.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/ssj.css">
+  
   <!-- //js --> 
   <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
@@ -20,6 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script src="${pageContext.request.contextPath}/js/holder.js"></script>
   <script src="${pageContext.request.contextPath}/js/default.js"></script>
   <script src="${pageContext.request.contextPath}/js/main/index.js"></script>
+  
   <script type="text/javascript">
   	var contextPath = "<%=request.getContextPath()%>";
   	var namesHasPoten = ${namesHasPoten};
@@ -140,6 +145,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <span class="input-group-addon btn btn-success">search</span> 
      </div> 
     </div> 
+    
+    <div id = "container">
+    <div class = "elements_sk display_none">
     <div class="col-md-4"> 
      <div class="row"> 
       <div class="col-md-2"> 
@@ -3050,7 +3058,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div> 
     <!-- 第十行元素 --> 
    </div> 
+   </div> 
   </div>  
-  </div>  
+  </div> 
+  </div> 
+  
+	<div id="menu">
+		<button id="threeDtable" hidden="true">表格</button>
+		<button id="sphere" hidden="true">球体</button>
+		<button id="helix" hidden="true">螺旋</button>
+		<button id="grid" hidden="true">方格</button>
+	</div>
+		
+		  
+  <script src="${pageContext.request.contextPath}/js/three/showFPS.js"></script>
+  <script src="${pageContext.request.contextPath}/js/three/three.js"></script>
+  <script src="${pageContext.request.contextPath}/js/three/tween.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/three/TrackballControls.js"></script>
+  <script src="${pageContext.request.contextPath}/js/three/CSS3DRenderer.js"></script>
+  <script src="${pageContext.request.contextPath}/js/three/ssj.js"></script>	
  </body>
 </html>

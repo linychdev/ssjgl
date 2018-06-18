@@ -255,3 +255,6 @@ user-select: none; /* Non-prefixed version, currently not supported by any brows
 	z-index: 999;
 } 
 
+.display_none{
+	display: none;
+}
