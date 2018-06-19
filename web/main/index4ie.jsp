@@ -14,8 +14,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> 
   <link href="${pageContext.request.contextPath}/css/main/index.css" rel="stylesheet" type="text/css" /> 
   
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/animate.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/ssj.css">
+<%--   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/animate.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/ssj.css"> --%>
   
   <!-- //js --> 
   <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
@@ -37,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  <div class ="wrap">
  <canvas id="canvas"></canvas>
 <script>
-    "use strict";
+     "use strict";
     var canvas = document.getElementById('canvas'),
             ctx = canvas.getContext('2d'),
             w = canvas.width = window.innerWidth,
@@ -94,7 +94,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         this.orbitX = w / 2;
         this.orbitY = h / 2;
         this.timePassed = random(0, maxStars);
-        this.speed = random(this.orbitRadius) / 2000000;
+        this.speed = random(this.orbitRadius) / 400000;
         this.alpha = random(2, 10) / 10;
 
         count++;
@@ -148,7 +148,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div> 
     
     <div id = "container">
-    <div class = "elements_sk" style="display: none">
+    <div class = "elements_sk">
     <div class="col-md-4"> 
      <div class="row"> 
       <div class="col-md-2"> 
@@ -3072,11 +3072,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 		
 		  
-  <script src="${pageContext.request.contextPath}/js/three/showFPS.js"></script>
+<%--   <script src="${pageContext.request.contextPath}/js/three/showFPS.js"></script>
   <script src="${pageContext.request.contextPath}/js/three/three.js"></script>
   <script src="${pageContext.request.contextPath}/js/three/tween.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/three/TrackballControls.js"></script>
   <script src="${pageContext.request.contextPath}/js/three/CSS3DRenderer.js"></script>
-  <script src="${pageContext.request.contextPath}/js/three/ssj.js"></script>	
+  <script src="${pageContext.request.contextPath}/js/three/ssj.js"></script>	 --%>
  </body>
 </html>

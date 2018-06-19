@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> 
 	  <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
-      <link href="${pageContext.request.contextPath}/css/main/index.css" rel="stylesheet" type="text/css" /> 
+      <%-- <link href="${pageContext.request.contextPath}/css/main/index.css" rel="stylesheet" type="text/css" />  --%>
 	  <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css" />
   
       <script src="${pageContext.request.contextPath}/js/header.js"></script>
@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 					</div>
 					<div class = "text1">
-						Interatomic Potentials Database
+						Interatomic Potentials Data
 						<br>
 						<div class="site-sologn">Part of the Materials Genetic Engineering Data</div>
 					</div>

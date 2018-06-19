@@ -18,7 +18,7 @@ public class IPUtils {
     /**
      * Logger
      */
-    private final static Logger LOG = LogUtils.getLogger();
+    private static final Logger LOG = LogUtils.getLogger();
 
     /**
      * 禁止实例化工具类
