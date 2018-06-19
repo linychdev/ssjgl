@@ -147,7 +147,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div> 
     
     <div id = "container">
-    <div class = "elements_sk display_none">
+    <div class = "elements_sk" style="display: none">
     <div class="col-md-4"> 
      <div class="row"> 
       <div class="col-md-2"> 
@@ -2331,7 +2331,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="atomic ">
          57
         </div> 
-        <div class="crystal  hid">
+        <div class="crystal">
           hcp 
         </div> 
         <div class="symbol ">
