@@ -135,17 +135,23 @@ var ifxz = true;
 var winHeigth = window.innerHeight;
 var winWidth = $(".main.container").width();
 
+var startRotate = function (){
+	if(firstAccess){
+		init();
+		animate();
+		setTimeout(clickDShere, 10);
+		setTimeout(clickGrid,  3000);
+		setTimeout(clickTable, 10600);
+		setTimeout(function(){
+			$(".elements_sk").fadeIn(1800);
+			$(".elements_sk").next().fadeOut(1500);
+		}, 12500);
+	}else{
+		$(".elements_sk").attr("style","");
+	}
+}
 
-init();
-animate();
-setTimeout(clickDShere, 10);
-setTimeout(clickGrid,  3000);
-setTimeout(clickTable, 10600);
-setTimeout(function(){
-//	$(".elements_sk").removeClass("display_none");
-	$(".elements_sk").fadeIn(1800);
-	$(".elements_sk").next().fadeOut(1500);
-}, 12500);
+startRotate();
 
 function init() {
 

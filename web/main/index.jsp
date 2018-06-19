@@ -28,6 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script type="text/javascript">
   	var contextPath = "<%=request.getContextPath()%>";
   	var namesHasPoten = ${namesHasPoten};
+  	var firstAccess = ${firstAccess};
   </script>
  </head> 
  <body> 
