@@ -128,24 +128,21 @@ var controls;
 var objects = [];
 var targets = { table: [], sphere: [], helix: [], grid: [] };
 
-var ifxz = true;
-
 //var winHeigth = window.innerHeight;
 //var winWidth = window.innerWidth;
-var winHeigth = window.innerHeight;
+//var winHeigth = window.innerHeight;
+var winHeigth = 582;
 var winWidth = $(".main.container").width();
 
 var startRotate = function (){
-	if(firstAccess){
+//	if(firstAccess){
+	if(true){
 		init();
 		animate();
-		setTimeout(clickDShere, 10);
-		setTimeout(clickGrid,  3000);
-		setTimeout(clickTable, 10600);
-		setTimeout(function(){
-			$(".elements_sk").fadeIn(1800);
-			$(".elements_sk").next().fadeOut(1500);
-		}, 12500);
+//		setTimeout(function(){
+//			$(".elements_sk").fadeIn(1800);
+//			$(".elements_sk").next().fadeOut(1500);
+//		}, 12500);
 	}else{
 		$(".elements_sk").attr("style","");
 	}
@@ -155,20 +152,24 @@ startRotate();
 
 function init() {
 
+    //设置透视投影的相机,默认情况下相机的上方向为Y轴，右方向为X轴，沿着Z轴朝里（视野角：fov 纵横比：aspect 相机离视体积最近的距离：near 相机离视体积最远的距离：far）
 	camera = new THREE.PerspectiveCamera( 40, winWidth / winHeigth, 1, 10000 );
-	//设置透视投影的相机,默认情况下相机的上方向为Y轴，右方向为X轴，沿着Z轴朝里（视野角：fov 纵横比：aspect 相机离视体积最近的距离：near 相机离视体积最远的距离：far）
+	//设置相机的位置坐标
 	camera.position.z = 3500;
-	////设置相机的位置坐标
-	scene = new THREE.Scene();
 	//设置场景
+	scene = new THREE.Scene();
 	// table
 //	var i = 0;
-	for ( var i = 0; i < table.length; i += 6 ) {
-//    $(".elements").each(function(index) {
-//    	var ele = $(this).clone();
-//    	ele.addClass("element");
-//		var element = ele[0];
-		var element = document.createElement( 'div' );
+//	for ( var i = 0; i < table.length; i += 6 ) {
+    $(".elements").each(function(index) {
+    	var ele = $(this).clone();
+//    	var ele2 = $(".elements_sk").clone();
+//    	ele2.attr("style","visibility:hidden");
+//    	$(".elements_sk").append(ele2);
+//    	
+    	ele.addClass("element");
+		var element = ele[0];
+		/*var element = document.createElement( 'div' );
 		//创建元素
 		element.className = 'element';
 		element.style.color = table[ i + 5 ] + 1 + ")"
@@ -193,27 +194,29 @@ function init() {
 		var struture = document.createElement('div');
 		struture.className = 'struture';
 		struture.innerHTML = table[ i + 2 ] ;
-		element.appendChild( struture );
+		element.appendChild( struture );*/
 		
-		var object = new THREE.CSS3DObject( element );
 		//头像平贴平面
+		var object = new THREE.CSS3DObject( element );
 		object.position.x = Math.random() * 4000 - 2000;//随机位置
 		object.position.y = Math.random() * 4000 - 2000;
 		object.position.z = Math.random() * 4000 - 2000;
-		scene.add( object );
 		//用于向场景中添加对象
+		scene.add( object );
 
 		objects.push( object );
 
 		var object = new THREE.Object3D();
-		object.position.x = ( table[ i + 3 ] * 176 ) - 1660;
+		object.position.x = ( (table[ i + 3 ] - 1) * 176 ) - 1660;
 		object.position.y = - ( table[ i + 4 ] * 176 ) + 1070;
-//		object.position.x = $("#"+table[ i ]).offset().left*2 -406*4;
-//		object.position.y = -$("#"+table[ i ]).offset().top*2 + 307*3;
+//		object.position.x = ele2.find("#"+$(this).attr("id")).offset().left;
+//		object.position.y = -ele2.find("#"+$(this).attr("id")).offset().top;
+		
+//		console.log("x:"+ele2.find("#"+$(this).attr("id")).offset().top+"  y:"+ ele2.find("#"+$(this).attr("id")).offset().left);
 		
 		targets.table.push( object );
 //		i+=6;
-}//);
+});
 
 		// sphere
 
@@ -285,31 +288,6 @@ for ( var i = 0, l = objects.length; i < l; i ++ ) {
 
 	// 鼠标控制
 	controls = new THREE.TrackballControls( camera, renderer.domElement );
-	//controls.rotateSpeed = 0.5;
-	//controls.minDistance = 500;
-	//controls.maxDistance = 6000;
-	controls.addEventListener( 'change', render );
-
-	var button = document.getElementById( 'threeDtable' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.table, 1000 );
-	}, false );
-
-	var button = document.getElementById( 'sphere' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.sphere, 2000 );
-	}, false );
-
-	var button = document.getElementById( 'helix' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.helix, 2000 );
-	}, false );
-
-	var button = document.getElementById( 'grid' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.grid, 2000 );
-	}, false );
-
 	window.addEventListener( 'resize', onWindowResize, false );
 }
 
@@ -338,8 +316,13 @@ function transform( targets, duration, fun) {
 		.to( {}, duration * 2 )
 		.onUpdate( render )
 		.start();
-		if(fun)
-		fun();
+	
+	
+	setTimeout(function(){
+	    if(fun){
+	        fun();
+	    }
+	}, duration*2);
 }
 function onWindowResize() {
 	camera.aspect = winWidth / winHeigth;
@@ -349,29 +332,59 @@ function onWindowResize() {
 
 	render();
 }
-function clickDShere(){document.getElementById( 'sphere' ).click();}  
-function clickHelix(){document.getElementById( 'helix' ).click();}  
-function clickGrid(){document.getElementById( 'grid' ).click();}  
-function clickTable(){
-	ifxz = false;
-	document.getElementById( 'threeDtable' ).click();
-}
 
+var number = 0;
+var sphereFlag = false;
+var gridFlag = false;
+var tableFlag = false;
 function animate() {
-	// 让场景通过x轴或者y轴旋转  & z
-	if(!ifxz){
-		scene.rotation.y = 0;
-	}else{
-		scene.rotation.y += 0.005;
-	}		
-	requestAnimationFrame( animate );
+    // 让场景通过x轴或者y轴旋转  & z
+    var angle = parseInt(scene.rotation.y*180/Math.PI);
+    if(angle > 1 && angle%20 == 0){
+        number = 1;
+    }
+    if(angle > 20 && angle%90 == 0){
+        number = 2;
+    }
+    
+    if(angle > 90 && angle%180 == 0){
+        number = 3;
+    }
+    
+    //随机位置转过20度后,变换为球体
+    if(number == 1 && !sphereFlag){
+        sphereFlag = true;
+        transform( targets.sphere, 2000 );
+    }
+    
+    //转过90度后，变换为阵列
+    if(number == 2 && !gridFlag){
+        gridFlag = true;
+        transform( targets.grid, 2000 );
+    }
+    //转过180度后变换为平面列表
+    if(number == 3 && !tableFlag){
+        tableFlag = true;
+        transform( targets.table, 1000, function(){
+            $(".elements_sk").fadeIn(1800);
+            $(".elements_sk").next().fadeOut(1500);
+        });
+    }
+    
+    //变成平面列表后不再旋转
+    if(number == 3){
+        scene.rotation.y = 0;
+    }
+    
+    scene.rotation.y += 0.005;
+    requestAnimationFrame( animate );
 
-	TWEEN.update();
+    TWEEN.update();
 
-	controls.update();
+    controls.update();
 
-	// 渲染循环
-	render();
+    // 渲染循环
+    render();
 }
 function render() {
 

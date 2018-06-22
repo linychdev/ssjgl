@@ -191,9 +191,10 @@ public class SearchAction extends AbstractAction{
             result.put("fileText", fileText);
             result.put("fileName", fileMeta.getcFileName());
             LOG.info(fileText);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.error("获取势数据文件内容出错！ftpPath:{},fileName:{}",fileMeta.getcFtpUrlPath() ,fileMeta.getcFileName(), e);
             result.put("success", false);
+            result.put("msg", "获取势数据文件内容出错！");
         }finally{
             FileUtils.deleteQuietly(file);
         }

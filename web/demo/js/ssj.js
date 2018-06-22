@@ -129,18 +129,17 @@ var targets = { table: [], sphere: [], helix: [], grid: [] };
 
 var ifxz = true;
 
-var winHeigth = window.innerHeight;
+//var winHeigth = window.innerHeight;
+//var winWidth = window.innerWidth;
+var winHeigth = $("#container").height();
+var winWidth = $("#container").width();
 
 init();
 animate();
-setTimeout(clickDShere, 10);
-setTimeout(clickGrid,  3000);
-setTimeout(clickTable, 10100);
-//setTimeout(clickTable, 12000);
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / winHeigth, 1, 10000 );
+	camera = new THREE.PerspectiveCamera( 40, winWidth / winHeigth, 1, 10000 );
 	//设置透视投影的相机,默认情况下相机的上方向为Y轴，右方向为X轴，沿着Z轴朝里（视野角：fov 纵横比：aspect 相机离视体积最近的距离：near 相机离视体积最远的距离：far）
 	camera.position.z = 3500;
 	////设置相机的位置坐标
@@ -187,8 +186,8 @@ function init() {
 		objects.push( object );
 
 		var object = new THREE.Object3D();
-		object.position.x = ( table[ i + 3 ] * 170 ) - 1600;
-		object.position.y = - ( table[ i + 4 ] * 180 ) + 890;
+		object.position.x = ( (table[ i + 3 ] - 1)  * 180 ) - winWidth;
+		object.position.y = - ( table[ i + 4 ] * 180 ) + winHeigth;
 		targets.table.push( object );
 }
 
@@ -256,7 +255,7 @@ for ( var i = 0, l = objects.length; i < l; i ++ ) {
 	}
 	//渲染
 	renderer = new THREE.CSS3DRenderer();
-	renderer.setSize( window.innerWidth, winHeigth );
+	renderer.setSize( winWidth, winHeigth );
 	renderer.domElement.style.position = 'absolute';
 	document.getElementById( 'container' ).appendChild( renderer.domElement );
 
@@ -265,27 +264,8 @@ for ( var i = 0, l = objects.length; i < l; i ++ ) {
 	//controls.rotateSpeed = 0.5;
 	//controls.minDistance = 500;
 	//controls.maxDistance = 6000;
-	controls.addEventListener( 'change', render );
+	//controls.addEventListener( 'change', render );
 
-	var button = document.getElementById( 'table' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.table, 1000 );
-	}, false );
-
-	var button = document.getElementById( 'sphere' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.sphere, 2000 );
-	}, false );
-
-	var button = document.getElementById( 'helix' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.helix, 2000 );
-	}, false );
-
-	var button = document.getElementById( 'grid' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.grid, 2000 );
-	}, false );
 
 	window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -319,28 +299,55 @@ function transform( targets, duration, fun) {
 		fun();
 }
 function onWindowResize() {
-	camera.aspect = window.innerWidth / winHeigth;
+	camera.aspect = winWidth / winHeigth;
 	camera.updateProjectionMatrix();
 
-	renderer.setSize( window.innerWidth, winHeigth );
+	renderer.setSize( winWidth, winHeigth );
 
 	render();
 }
-function clickDShere(){document.getElementById( 'sphere' ).click();}  
-function clickHelix(){document.getElementById( 'helix' ).click();}  
-function clickGrid(){document.getElementById( 'grid' ).click();}  
-function clickTable(){
-	ifxz = false;
-	document.getElementById( 'table' ).click();
-}
 
+var number = 0;
+var sphereFlag = false;
+var gridFlag = false;
+var tableFlag = false;
 function animate() {
 	// 让场景通过x轴或者y轴旋转  & z
-	if(!ifxz){
+	var angle = parseInt(scene.rotation.y*180/Math.PI);
+	if(angle > 1 && angle%20 == 0){
+		number = 1;
+	}
+	if(angle > 20 && angle%90 == 0){
+		number = 2;
+	}
+	
+	if(angle > 90 && angle%180 == 0){
+		number = 3;
+	}
+	
+	//随机位置转过20度后,变换为球体
+	if(number == 1 && !sphereFlag){
+		sphereFlag = true;
+		transform( targets.sphere, 2000 );
+	}
+	
+	//转过90度后，变换为阵列
+	if(number == 2 && !gridFlag){
+		gridFlag = true;
+		transform( targets.grid, 2000 );
+	}
+	//转过180度后变换为平面列表
+	if(number == 3 && !tableFlag){
+		tableFlag = true;
+		transform( targets.table, 1000 );
+	}
+	
+	//变成平面列表后不再旋转
+	if(number == 3){
 		scene.rotation.y = 0;
-	}else{
-		scene.rotation.y += 0.005;
-	}		
+	}
+	
+	scene.rotation.y += 0.005;
 	requestAnimationFrame( animate );
 
 	TWEEN.update();
@@ -351,7 +358,5 @@ function animate() {
 	render();
 }
 function render() {
-
 	renderer.render( scene, camera );
-
 }

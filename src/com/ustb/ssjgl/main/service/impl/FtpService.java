@@ -226,8 +226,8 @@ public class FtpService {
         execute(new FTPAction(){
             @Override
             public boolean action(FTPClient ftpClient) throws Exception{
-                return ftpClient.retrieveFile(remote, output);      
-            }           
+                return ftpClient.retrieveFile(remote, output);
+            }
         });
     }
     
@@ -235,7 +235,7 @@ public class FtpService {
         execute(new FTPAction(){
             @Override
             public boolean action(FTPClient ftpClient) throws Exception{
-                return ftpClient.storeFile(remote, fis);        
+                return ftpClient.storeFile(remote, fis); 
             }           
         });
     }
