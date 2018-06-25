@@ -148,7 +148,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div> 
     
     <div id = "container">
-    <div class = "elements_sk" style="display: none">
+  <div class = "elements_sk" id = "elements_sk" style="display: none;">
     <div class="col-md-4"> 
      <div class="row"> 
       <div class="col-md-2"> 

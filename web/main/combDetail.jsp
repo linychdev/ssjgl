@@ -111,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</p>
 										<p>
 											<strong>DOI:</strong>
-											<a href="http://dx.doi.org/${referenceInfo.reference.cDoi }">${referenceInfo.reference.cDoi }</a>
+											<a href="http://dx.doi.org/${referenceInfo.reference.cDoi }" target="view_window">${referenceInfo.reference.cDoi }</a>
 										</p>
 										<p>
 											<strong>Notes:</strong>
