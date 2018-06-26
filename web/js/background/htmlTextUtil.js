@@ -106,7 +106,7 @@ function getRefFileDivHtml(refId, doi, existsFileHtml){
                  "<form class='form-horizontal' enctype='multipart/form-data' method='post'>"+
                   "<div class='form-group'>"+
                     "<label class='col-xs-2 control-label'>文献DOI:</label>"+
-                    "<div class='col-xs-10' id=''>"+
+                    "<div class='col-xs-10' id='' style = 'padding-top: 9px;'>"+
                         doi +
                     "</div>"+
                   "</div>"+

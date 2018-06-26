@@ -129,11 +129,9 @@ public class SearchAction extends AbstractAction{
         try {
             file = File.createTempFile("potenFile", suffix);
             String remote = fileMeta.getRemote();
-            remote = remote.replace(File.separator, "");
             ftpService.setLocal(file);
             ftpService.setRemote(remote);
             ftpService.download();
-            System.out.println(FileUtils.readFileToString(file));
             response.setContentType("application/force-download");
             response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileMeta.getcFileName(), "UTF-8"));
             return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), HttpStatus.CREATED);  
@@ -147,9 +145,29 @@ public class SearchAction extends AbstractAction{
     
     @VisitLog(VisitLogType.BROWSE)
     @RequestMapping(value = "/index", method=RequestMethod.GET)
-    public ModelAndView showSearchIndex() {
+    public ModelAndView showSearchIndex(HttpServletRequest request) {
         ModelAndView mode = new ModelAndView();
-        mode.setViewName("main/index");
+        //判断是否第一次打开页面
+        if(null == request.getHeader("Cookie")){
+            mode.addObject("firstAccess", true);
+        }else{
+            mode.addObject("firstAccess", false);
+        }
+        List<String> elementNames = interPotenService.getElementNamesHasPoten();
+        JSONArray jsonArray = new JSONArray();
+        for (String name : elementNames) {
+            JSONObject json = new JSONObject();
+            json.put("name", name);
+            jsonArray.add(json);
+        }
+        mode.addObject("namesHasPoten", jsonArray.toString());
+        String agent=request.getHeader("User-Agent").toLowerCase();
+        //如果是ie内核,返回简版页面
+        if(agent != null && agent.contains("ie")){
+            mode.setViewName("main/index4ie");
+        }else{
+            mode.setViewName("main/index");
+        }
         return mode;
     }
     
@@ -164,7 +182,6 @@ public class SearchAction extends AbstractAction{
         try {
             file = File.createTempFile("potenFile", suffix);
             String remote = fileMeta.getRemote();
-            remote = remote.replace(File.separator, "");
             ftpService.setLocal(file);
             ftpService.setRemote(remote);
             ftpService.download();
@@ -174,13 +191,40 @@ public class SearchAction extends AbstractAction{
             result.put("fileText", fileText);
             result.put("fileName", fileMeta.getcFileName());
             LOG.info(fileText);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.error("获取势数据文件内容出错！ftpPath:{},fileName:{}",fileMeta.getcFtpUrlPath() ,fileMeta.getcFileName(), e);
             result.put("success", false);
+            result.put("msg", "获取势数据文件内容出错！");
         }finally{
             FileUtils.deleteQuietly(file);
         }
         this.writeAjaxObject(response, result);
     }
     
+    
+    private String getBrowserName(String agent) {
+        if(agent.indexOf("msie 7")>0){
+         return "ie7";
+        }else if(agent.indexOf("msie 8")>0){
+         return "ie8";
+        }else if(agent.indexOf("msie 9")>0){
+         return "ie9";
+        }else if(agent.indexOf("msie 10")>0){
+         return "ie10";
+        }else if(agent.indexOf("msie")>0){
+         return "ie";
+        }else if(agent.indexOf("opera")>0){
+         return "opera";
+        }else if(agent.indexOf("opera")>0){
+         return "opera";
+        }else if(agent.indexOf("firefox")>0){
+         return "firefox";
+        }else if(agent.indexOf("webkit")>0){
+         return "webkit";
+        }else if(agent.indexOf("gecko")>0 && agent.indexOf("rv:11")>0){
+         return "ie11";
+        }else{
+         return "Others";
+        }
+       }
 }

@@ -14,8 +14,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/main/combList.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
 <!-- js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
@@ -32,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 <body>
   <jsp:include page="/header.jsp" flush="true" />
-	<div class  = "wrap">
+	<div class  = "wrap container">
 		<blockquote>
 			<p> Potentials of ${searchText }</p>
 		</blockquote>
@@ -43,7 +45,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  <strong>${item.key }:</strong>
 			  	<p>
 				<c:forEach items="${item.value}" var="it">   
-					<span class="label label-info" id = "${it.cId }">${it.cCombName }</span>
+					<span class="label label-define" id = "${it.cId }">${it.cCombName }</span>
 				</c:forEach>
 				</p>   
 			</c:forEach>  

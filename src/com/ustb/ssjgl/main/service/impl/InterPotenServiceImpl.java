@@ -141,11 +141,11 @@ public class InterPotenServiceImpl implements IInterPotenService {
     }
 
     /** (non-Javadoc)
-     * @see com.ustb.ssjgl.main.service.IInterPotenService#getPotentialsFileMetaByCombId(java.lang.String)
+     * @see com.ustb.ssjgl.main.service.IInterPotenService#getPotentialsFileMetaByRefId(java.lang.String)
      */
     @Override
-    public List<TPotentialsFile> getPotentialsFileMetaByCombId(String combId) {
-        return potentialsFileDao.selectByReferenceId(combId);
+    public List<TPotentialsFile> getPotentialsFileMetaByRefId(String refId) {
+        return potentialsFileDao.selectByReferenceId(refId);
     }
 
     /**
@@ -334,5 +334,10 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public void deletePotenFileById(String fileId) {
         potentialsFileDao.deletePotentialsFileById(fileId);
+    }
+
+    @Override
+    public List<String> getElementNamesHasPoten() {
+        return elementDao.getElementNamesHasPoten();
     }
 }

@@ -64,11 +64,11 @@ public interface IInterPotenService {
     public void deletePotenFileById(String fileId);
 
     /**
-     * 根据组合id获取势数据文件
-     * @param combId
+     * 根据文献id获取势数据文件
+     * @param refId
      * @return
      */
-    public List<TPotentialsFile> getPotentialsFileMetaByCombId(String combId);
+    public List<TPotentialsFile> getPotentialsFileMetaByRefId(String refId);
 
     /**
      * 根据标签获取势数据信息
@@ -161,4 +161,10 @@ public interface IInterPotenService {
      * @param refId
      */
     public void deleteReferenceById(String refId);
+
+    /**
+     * 获取存在势的元素名称集合
+     * @return
+     */
+    public List<String> getElementNamesHasPoten();
 }

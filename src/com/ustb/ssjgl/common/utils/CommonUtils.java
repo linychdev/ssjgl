@@ -61,6 +61,8 @@ public class CommonUtils {
                 out.append("&nbsp;");
             else if (c == '\n')
                 out.append("<br/>");
+            else if (c == '\t')
+                out.append("&nbsp;&nbsp;&nbsp;&nbsp;");
             else
                 out.append(c);
         }

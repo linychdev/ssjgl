@@ -1,7 +1,7 @@
 //showFPS.setParentElementId("info");
 //showFPS.go();
 var table = [
-       "H", "hcp", "Hydrogen", 1, 1, "rgba(255,255,51,",
+    "H", "hcp", "Hydrogen", 1, 1, "rgba(255,255,51,",
     "He", "hcp", "Helium", 18, 1, "rgba(153,255,204,",
     "Li", "bcc", "Lithium", 1, 2, "rgba(255,255,51,",
     "Be", "hcp", "Beryllium", 2, 2, "rgba(255,255,51,",
@@ -57,21 +57,21 @@ var table = [
     "Xe", "fcc", "Xenon", 18, 5, "rgba(153,255,204,",
     "Cs", "bcc", "Caesium", 1, 6, "rgba(255,255,51,",
     "Ba", "bcc", "Barium", 2, 6, "rgba(255,255,51,",
-    "La", "hcp", "Lanthanum", 4, 9, "rgba(51,153,255,",
-    "Ce", "fcc", "Cerium", 5, 9, "rgba(51,153,255,",
-    "Pr", "hcp", "Praseodymium", 6, 9, "rgba(51,153,255,",
-    "Nd", "hcp", "Neodymium", 7, 9, "rgba(51,153,255,",
-    "Pm", "hcp", "Promethium", 8, 9, "rgba(51,153,255,",
-    "Sm", "trigonal", "Samarium", 9, 9, "rgba(51,153,255,",
-    "Eu", "bcc", "Europium", 10, 9, "rgba(51,153,255,",
-    "Gd", "hcp", "Gadolinium", 11, 9, "rgba(51,153,255,",
-    "Tb", "hcp", "Terbium", 12, 9, "rgba(51,153,255,",
-    "Dy", "hcp", "Dysprosium", 13, 9, "rgba(51,153,255,",
-    "Ho", "hcp", "Holmium", 14, 9, "rgba(51,153,255,",
-    "Er", "hcp", "Erbium", 15, 9, "rgba(51,153,255,",
-    "Tm", "hcp", "Thulium", 16, 9, "rgba(51,153,255,",
-    "Yb", "fcc", "Ytterbium", 17, 9, "rgba(51,153,255,",
-    "Lu", "hcp", "Lutetium", 18, 9, "rgba(51,153,255,",
+    "La", "hcp", "Lanthanum", 4, 8.5, "rgba(51,153,255,",
+    "Ce", "fcc", "Cerium", 5, 8.5, "rgba(51,153,255,",
+    "Pr", "hcp", "Praseodymium", 6, 8.5, "rgba(51,153,255,",
+    "Nd", "hcp", "Neodymium", 7, 8.5, "rgba(51,153,255,",
+    "Pm", "hcp", "Promethium", 8, 8.5, "rgba(51,153,255,",
+    "Sm", "trigonal", "Samarium", 9, 8.5, "rgba(51,153,255,",
+    "Eu", "bcc", "Europium", 10, 8.5, "rgba(51,153,255,",
+    "Gd", "hcp", "Gadolinium", 11, 8.5, "rgba(51,153,255,",
+    "Tb", "hcp", "Terbium", 12, 8.5, "rgba(51,153,255,",
+    "Dy", "hcp", "Dysprosium", 13, 8.5, "rgba(51,153,255,",
+    "Ho", "hcp", "Holmium", 14, 8.5, "rgba(51,153,255,",
+    "Er", "hcp", "Erbium", 15, 8.5, "rgba(51,153,255,",
+    "Tm", "hcp", "Thulium", 16, 8.5, "rgba(51,153,255,",
+    "Yb", "fcc", "Ytterbium", 17, 8.5, "rgba(51,153,255,",
+    "Lu", "hcp", "Lutetium", 18, 8.5, "rgba(51,153,255,",
     "Hf", "hcp", "Hafnium", 4, 6, "rgba(51,153,255,",
     "Ta", "bcc", "Tantalum", 5, 6, "rgba(51,153,255,",
     "W", "bcc", "Tungsten", 6, 6, "rgba(51,153,255,",
@@ -89,21 +89,21 @@ var table = [
     "Rn", "fcc", "Radon", 18, 6, "rgba(153,255,204,",
     "Fr", "bcc", "Francium", 1, 7, "rgba(255,255,51,",
     "Ra", "", "Radium", 2, 7, "rgba(255,255,51,",
-    "Ac", "", "Actinium", 4, 10, "rgba(51,153,255,",
-    "Th", "fcc", "Thorium", 5, 10, "rgba(51,153,255,",
-    "Pa", "", "Protactinium", 6, 10, "rgba(51,153,255,",
-    "U", "cubic", "Uranium", 7, 10, "rgba(51,153,255,",
-    "Np", "", "Neptunium", 8, 10, "rgba(51,153,255,",
-    "Pu", "", "Plutonium", 9, 10, "rgba(51,153,255,",
-    "Am", "", "Americium", 10, 10, "rgba(51,153,255,",
-    "Cm", "", "Curium", 11, 10, "rgba(51,153,255,",
-    "Bk", "", "Berkelium", 12, 10, "rgba(51,153,255,",
-    "Cf", "", "Californium", 13, 10, "rgba(51,153,255,",
-    "Es", "", "Einstenium", 14, 10, "rgba(51,153,255,",
-    "Fm", "", "Fermium", 15, 10, "rgba(51,153,255,",
-    "Md", "", "Mendelevium", 16, 10, "rgba(51,153,255,",
-    "No", "", "Nobelium", 17, 10, "rgba(51,153,255,",
-    "Lr", "", "Lawrencium", 18, 10, "rgba(51,153,255,",
+    "Ac", "", "Actinium", 4, 9.5, "rgba(51,153,255,",
+    "Th", "fcc", "Thorium", 5, 9.5, "rgba(51,153,255,",
+    "Pa", "", "Protactinium", 6, 9.5, "rgba(51,153,255,",
+    "U", "cubic", "Uranium", 7, 9.5, "rgba(51,153,255,",
+    "Np", "", "Neptunium", 8, 9.5, "rgba(51,153,255,",
+    "Pu", "", "Plutonium", 9, 9.5, "rgba(51,153,255,",
+    "Am", "", "Americium", 10, 9.5, "rgba(51,153,255,",
+    "Cm", "", "Curium", 11, 9.5, "rgba(51,153,255,",
+    "Bk", "", "Berkelium", 12, 9.5, "rgba(51,153,255,",
+    "Cf", "", "Californium", 13, 9.5, "rgba(51,153,255,",
+    "Es", "", "Einstenium", 14, 9.5, "rgba(51,153,255,",
+    "Fm", "", "Fermium", 15, 9.5, "rgba(51,153,255,",
+    "Md", "", "Mendelevium", 16, 9.5, "rgba(51,153,255,",
+    "No", "", "Nobelium", 17, 9.5, "rgba(51,153,255,",
+    "Lr", "", "Lawrencium", 18, 9.5, "rgba(51,153,255,",
     "Rf", "", "Rutherfordium", 4, 7, "rgba(51,153,255,",
     "Db", "", "Dubnium", 5, 7, "rgba(51,153,255,",
     "Sg", "", "Seaborgium", 6, 7, "rgba(51,153,255,",
@@ -129,20 +129,19 @@ var targets = { table: [], sphere: [], helix: [], grid: [] };
 
 var ifxz = true;
 
-var winHeigth = window.innerHeight - 60;
+//var winHeigth = window.innerHeight;
+//var winWidth = window.innerWidth;
+var winHeigth = $("#container").height();
+var winWidth = $("#container").width();
 
 init();
 animate();
-setTimeout(clickDShere, 10);
-setTimeout(clickGrid,  3000);
-setTimeout(clickTable, 10600);
-//setTimeout(clickTable, 12000);
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / winHeigth, 1, 10000 );
+	camera = new THREE.PerspectiveCamera( 40, winWidth / winHeigth, 1, 10000 );
 	//设置透视投影的相机,默认情况下相机的上方向为Y轴，右方向为X轴，沿着Z轴朝里（视野角：fov 纵横比：aspect 相机离视体积最近的距离：near 相机离视体积最远的距离：far）
-	camera.position.z = 3000;
+	camera.position.z = 3500;
 	////设置相机的位置坐标
 	scene = new THREE.Scene();
 	//设置场景
@@ -187,8 +186,8 @@ function init() {
 		objects.push( object );
 
 		var object = new THREE.Object3D();
-		object.position.x = ( table[ i + 3 ] * 140 ) - 1330;
-		object.position.y = - ( table[ i + 4 ] * 180 ) + 990;
+		object.position.x = ( (table[ i + 3 ] - 1)  * 180 ) - winWidth;
+		object.position.y = - ( table[ i + 4 ] * 180 ) + winHeigth;
 		targets.table.push( object );
 }
 
@@ -249,14 +248,14 @@ for ( var i = 0, l = objects.length; i < l; i ++ ) {
 
 		var object = new THREE.Object3D();
 
-		object.position.x = ( ( i % 5 ) * 400 ) - 500; // 400 图片的左右间距  800 x轴中心店
+		object.position.x = ( ( i % 5 ) * 400 ) - 800; // 400 图片的左右间距  800 x轴中心店
 		object.position.y = ( - ( Math.floor( i / 5 ) % 5 ) * 300 ) + 500;  // 500 y轴中心店
 		object.position.z = ( Math.floor( i / 25 ) ) * 400 - 800;// 300调整 片间距 800z轴中心店
 		targets.grid.push( object );
 	}
 	//渲染
 	renderer = new THREE.CSS3DRenderer();
-	renderer.setSize( window.innerWidth, winHeigth );
+	renderer.setSize( winWidth, winHeigth );
 	renderer.domElement.style.position = 'absolute';
 	document.getElementById( 'container' ).appendChild( renderer.domElement );
 
@@ -265,27 +264,8 @@ for ( var i = 0, l = objects.length; i < l; i ++ ) {
 	//controls.rotateSpeed = 0.5;
 	//controls.minDistance = 500;
 	//controls.maxDistance = 6000;
-	controls.addEventListener( 'change', render );
+	//controls.addEventListener( 'change', render );
 
-	var button = document.getElementById( 'table' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.table, 1000 );
-	}, false );
-
-	var button = document.getElementById( 'sphere' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.sphere, 2000 );
-	}, false );
-
-	var button = document.getElementById( 'helix' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.helix, 2000 );
-	}, false );
-
-	var button = document.getElementById( 'grid' );
-	button.addEventListener( 'click', function ( event ) {
-		transform( targets.grid, 2000 );
-	}, false );
 
 	window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -319,28 +299,55 @@ function transform( targets, duration, fun) {
 		fun();
 }
 function onWindowResize() {
-	camera.aspect = window.innerWidth / winHeigth;
+	camera.aspect = winWidth / winHeigth;
 	camera.updateProjectionMatrix();
 
-	renderer.setSize( window.innerWidth, winHeigth );
+	renderer.setSize( winWidth, winHeigth );
 
 	render();
 }
-function clickDShere(){document.getElementById( 'sphere' ).click();}  
-function clickHelix(){document.getElementById( 'helix' ).click();}  
-function clickGrid(){document.getElementById( 'grid' ).click();}  
-function clickTable(){
-	ifxz = false;
-	document.getElementById( 'table' ).click();
-}
 
+var number = 0;
+var sphereFlag = false;
+var gridFlag = false;
+var tableFlag = false;
 function animate() {
 	// 让场景通过x轴或者y轴旋转  & z
-	if(!ifxz){
+	var angle = parseInt(scene.rotation.y*180/Math.PI);
+	if(angle > 1 && angle%20 == 0){
+		number = 1;
+	}
+	if(angle > 20 && angle%90 == 0){
+		number = 2;
+	}
+	
+	if(angle > 90 && angle%180 == 0){
+		number = 3;
+	}
+	
+	//随机位置转过20度后,变换为球体
+	if(number == 1 && !sphereFlag){
+		sphereFlag = true;
+		transform( targets.sphere, 2000 );
+	}
+	
+	//转过90度后，变换为阵列
+	if(number == 2 && !gridFlag){
+		gridFlag = true;
+		transform( targets.grid, 2000 );
+	}
+	//转过180度后变换为平面列表
+	if(number == 3 && !tableFlag){
+		tableFlag = true;
+		transform( targets.table, 1000 );
+	}
+	
+	//变成平面列表后不再旋转
+	if(number == 3){
 		scene.rotation.y = 0;
-	}else{
-		scene.rotation.y += 0.005;
-	}		
+	}
+	
+	scene.rotation.y += 0.005;
 	requestAnimationFrame( animate );
 
 	TWEEN.update();
@@ -351,7 +358,5 @@ function animate() {
 	render();
 }
 function render() {
-
 	renderer.render( scene, camera );
-
 }

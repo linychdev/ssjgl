@@ -38,5 +38,11 @@ public interface IElementDao extends IAbstractDao {
      * @return
      */
     public List<TElement> getAllElements();
+
+    /**
+     * 获取存在势的元素名称集合
+     * @return
+     */
+    public List<String> getElementNamesHasPoten();
     
 }
