@@ -1,0 +1,16 @@
+
+.figure{
+	height:250px;
+	border:1px solid rgba(235, 235, 235, 1);
+	margin: 0 0 0 20px;
+	display:flex;
+}
+
+.figure-left{
+	width: 30%;
+
+}
+.figure-right{
+	width:70%;
+
+}
