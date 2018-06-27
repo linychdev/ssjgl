@@ -105,6 +105,7 @@ public class SearchAction extends AbstractAction{
         return mode;
     }
 
+    @VisitLog(VisitLogType.SEARCH)
     @RequestMapping(value = "/search/detail/{combId}", method=RequestMethod.GET)
     public ModelAndView getElementCombDetail(@PathVariable(value = "combId") String combId) {
         InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(combId);
@@ -119,6 +120,7 @@ public class SearchAction extends AbstractAction{
      * @param request
      * @param response
      */
+    @VisitLog(VisitLogType.DOWNLOAD)
     @RequestMapping(value="/search/downloadPotentialsFile")
     @ResponseBody
     public ResponseEntity<byte[]> downloadPotenFile(HttpServletRequest request, HttpServletResponse response) {

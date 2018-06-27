@@ -43,6 +43,12 @@ public class TUser {
     }
     
 
+    public TUser(String id, String userName) {
+        this.cId = id;
+        this.cLoginName = userName;
+    }
+
+
     public String getcId() {
         return cId;
     }

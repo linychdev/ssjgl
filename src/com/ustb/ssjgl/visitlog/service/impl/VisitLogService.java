@@ -57,11 +57,11 @@ public class VisitLogService implements IVisitLogService {
             List<TOperateRecord> operateRecordList = pollQueueElements(TOperateRecord.class);
             List<TDownloadRecord> downLoadRecordList = pollQueueElements(TDownloadRecord.class);
 
-            loginRecordDao.batchInsert(loginRecordList);
-            searchRecordDao.batchInsert(searchRecordList);
-            searchElementDao.batchInsert(searchElementList);
-            operateRecordDao.batchInsert(operateRecordList);
-            downloadRecordDao.batchInsert(downLoadRecordList);
+//            loginRecordDao.batchInsert(loginRecordList);
+//            searchRecordDao.batchInsert(searchRecordList);
+//            searchElementDao.batchInsert(searchElementList);
+//            operateRecordDao.batchInsert(operateRecordList);
+//            downloadRecordDao.batchInsert(downLoadRecordList);
         } catch (Exception e) {
             LOG.warn("将队列中的访问信息写入数据库时出错！", e);
         }

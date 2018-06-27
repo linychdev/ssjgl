@@ -69,12 +69,13 @@ public class VisitLogAop {
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method method = ms.getMethod();
         VisitLog log = method.getAnnotation(VisitLog.class);
-        if(user != null){
-            VisitLogType businessType = log.value();
-            TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
-            operateRecord.setnOperateType(businessType.getValue());
-            visitLogService.addQueueElement(operateRecord);
+        if(user == null){
+            user = new TUser("00000000000000000000000000000000", "visitor");
         }
+        VisitLogType businessType = log.value();
+        TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+        operateRecord.setnOperateType(businessType.getValue());
+        visitLogService.addQueueElement(operateRecord);
     }
     @AfterReturning(pointcut="log()", returning="returnValue")
     public void afterExec(JoinPoint joinPoint, Object returnValue) {
@@ -97,48 +98,46 @@ public class VisitLogAop {
     private void addDownloadRecord(JoinPoint joinPoint, VisitLogType businessType) {
         if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_DOWNLOAD)){
             TUser user = sessionService.getCurrentUser();
-            if(user != null){
-                TDownloadRecord downloadRecord = new TDownloadRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
-                Object[] orgs = joinPoint.getArgs();
-                String potentialsId = (String) orgs[0];
-                downloadRecord.setcDownloadFileId(potentialsId);
-                visitLogService.addQueueElement(downloadRecord);
+            if(user == null){
+                user = new TUser("00000000000000000000000000000000", "visitor");
             }
+            TDownloadRecord downloadRecord = new TDownloadRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+            Object[] orgs = joinPoint.getArgs();
+            String potentialsId = (String) orgs[0];
+            downloadRecord.setcDownloadFileId(potentialsId);
+            visitLogService.addQueueElement(downloadRecord);
         }
     }
 
     private void addSearchRecord(JoinPoint joinPoint, Object returnValue, VisitLogType businessType) {
         if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH)){
             TUser user = sessionService.getCurrentUser();
-            if(user != null){
-                TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
-                operateRecord.setnOperateType(SsjglContants.VISIT_TYPE_SEARCH);
-                visitLogService.addQueueElement(operateRecord);
-                
-                Object[] orgs = joinPoint.getArgs();
-                String searchTag = (String) orgs[0];
-                ModelAndView mod = (ModelAndView) returnValue;
-                Integer validSearch = (Integer) mod.getModelMap().get("validSearch");
-                
-                List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
-                InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
-                TSearchRecord searchRecord = new TSearchRecord(user.getcId(), user.getcLoginName(), IPUtils.getBrowserIpAddress(request));
-                if(combList == null){
-                    if(combDetail == null){
-                        searchRecord.setnResultNum(0);
-                    }else{
-                        searchRecord.setnResultNum(1);
-                    }
-                }else{
-                    searchRecord.setnResultNum(combList.size());
-                }
-                searchRecord.setcSearchText(searchTag);
-                searchRecord.setnValidSearch(validSearch);
-                visitLogService.addQueueElement(searchRecord);
-                
-                addSearchElementRecord(combList, searchRecord);
-                
+            if(user == null){
+                user = new TUser("00000000000000000000000000000000", "visitor");
             }
+            
+            Object[] orgs = joinPoint.getArgs();
+            String searchTag = (String) orgs[0];
+            ModelAndView mod = (ModelAndView) returnValue;
+            Integer validSearch = (Integer) mod.getModelMap().get("validSearch");
+            
+            List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
+            InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
+            TSearchRecord searchRecord = new TSearchRecord(user.getcId(), user.getcLoginName(), IPUtils.getBrowserIpAddress(request));
+            if(combList == null){
+                if(combDetail == null){
+                    searchRecord.setnResultNum(0);
+                }else{
+                    searchRecord.setnResultNum(1);
+                }
+            }else{
+                searchRecord.setnResultNum(combList.size());
+            }
+            searchRecord.setcSearchText(searchTag);
+            searchRecord.setnValidSearch(validSearch);
+            visitLogService.addQueueElement(searchRecord);
+            
+            addSearchElementRecord(combList, searchRecord);
         }
     }
 
@@ -158,21 +157,23 @@ public class VisitLogAop {
     private void addBrowseRecord(VisitLogType businessType) {
         if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_BROWSE)){
             TUser user = sessionService.getCurrentUser();
-            if(user != null){
-                TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
-                operateRecord.setnOperateType(SsjglContants.VISIT_TYPE_BROWSE);
-                visitLogService.addQueueElement(operateRecord);
-            }
+            if(user == null){
+                user = new TUser("00000000000000000000000000000000", "visitor");
+            }                
+            TOperateRecord operateRecord = new TOperateRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+            operateRecord.setnOperateType(SsjglContants.VISIT_TYPE_BROWSE);
+            visitLogService.addQueueElement(operateRecord);
         }
     }
 
     private void addLoginRecord(VisitLogType businessType) {
         if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_LOGIN)){
             TUser user = sessionService.getCurrentUser();
-            if(user != null){
-                TLoginRecord loginRecord = new TLoginRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
-                visitLogService.addQueueElement(loginRecord);
+            if(user == null){
+                user = new TUser("00000000000000000000000000000000", "visitor");
             }
+            TLoginRecord loginRecord = new TLoginRecord(user.getcId(),user.getcLoginName(),IPUtils.getBrowserIpAddress(request));
+            visitLogService.addQueueElement(loginRecord);
         }
     }
     //在执行目标方法的过程中，会执行这个方法，可以在这里实现日志的记录
