@@ -4,7 +4,7 @@ $(function(){
         tooltip: {},
         series: [ {
             type: 'wordCloud',
-            gridSize: 20,
+            gridSize: 40,
             sizeRange: [12, 40],
             rotationRange: [-90, 90],
             shape: 'pentagon',

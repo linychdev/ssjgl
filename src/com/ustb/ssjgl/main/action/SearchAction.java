@@ -73,8 +73,7 @@ public class SearchAction extends AbstractAction{
             return getElementCombDetail(combId);
         }
         
-        ArrayList<ElementCombShowInfo> wordCloudCombList = Lists.newArrayList();
-        Collections.copy(wordCloudCombList, combList);
+        ArrayList<ElementCombShowInfo> wordCloudCombList = Lists.newArrayList(combList);
         Collections.sort(wordCloudCombList);
         
         // 设置用于词云的字体大小和内容
