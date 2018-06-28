@@ -4,6 +4,7 @@ package com.ustb.ssjgl.visitlog.service.impl;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,11 +58,21 @@ public class VisitLogService implements IVisitLogService {
             List<TOperateRecord> operateRecordList = pollQueueElements(TOperateRecord.class);
             List<TDownloadRecord> downLoadRecordList = pollQueueElements(TDownloadRecord.class);
 
-//            loginRecordDao.batchInsert(loginRecordList);
-//            searchRecordDao.batchInsert(searchRecordList);
-//            searchElementDao.batchInsert(searchElementList);
-//            operateRecordDao.batchInsert(operateRecordList);
-//            downloadRecordDao.batchInsert(downLoadRecordList);
+            if(CollectionUtils.isNotEmpty(loginRecordList)){
+                loginRecordDao.batchInsert(loginRecordList);
+            }
+            if(CollectionUtils.isNotEmpty(searchRecordList)){
+                searchRecordDao.batchInsert(searchRecordList);
+            }
+            if(CollectionUtils.isNotEmpty(searchElementList)){
+                searchElementDao.batchInsert(searchElementList);
+            }
+            if(CollectionUtils.isNotEmpty(operateRecordList)){
+                operateRecordDao.batchInsert(operateRecordList);
+            }
+            if(CollectionUtils.isNotEmpty(downLoadRecordList)){
+                downloadRecordDao.batchInsert(downLoadRecordList);
+            }
         } catch (Exception e) {
             LOG.warn("将队列中的访问信息写入数据库时出错！", e);
         }

@@ -369,8 +369,8 @@ function animate() {
     if(number == 2 && !tableFlag){
         tableFlag = true;
         transform( targets.table, 1000, function(){
-            $(".elements_sk").fadeIn(1800);
-            $(".elements_sk").next().fadeOut(1800);
+            $(".elements_sk").fadeIn(2500);
+            $(".elements_sk").next().fadeOut(2500);
         });
 //        gridFlag = true;
 //        transform( targets.grid, 2000 , function(){

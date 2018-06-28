@@ -110,47 +110,47 @@ public class VisitLogAop {
     }
 
     private void addSearchRecord(JoinPoint joinPoint, Object returnValue, VisitLogType businessType) {
-        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH)){
+        if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB_LIST) || businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB)){
             TUser user = sessionService.getCurrentUser();
             if(user == null){
                 user = new TUser("00000000000000000000000000000000", "visitor");
             }
-            
             Object[] orgs = joinPoint.getArgs();
             String searchTag = (String) orgs[0];
             ModelAndView mod = (ModelAndView) returnValue;
             Integer validSearch = (Integer) mod.getModelMap().get("validSearch");
-            
-            List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
-            InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
             TSearchRecord searchRecord = new TSearchRecord(user.getcId(), user.getcLoginName(), IPUtils.getBrowserIpAddress(request));
-            if(combList == null){
-                if(combDetail == null){
-                    searchRecord.setnResultNum(0);
-                }else{
-                    searchRecord.setnResultNum(1);
-                }
-            }else{
-                searchRecord.setnResultNum(combList.size());
-            }
-            searchRecord.setcSearchText(searchTag);
-            searchRecord.setnValidSearch(validSearch);
-            visitLogService.addQueueElement(searchRecord);
             
-            addSearchElementRecord(combList, searchRecord);
+            if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB_LIST)){
+                List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
+                InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
+                if(combList == null){
+                    if(combDetail == null){
+                        searchRecord.setnResultNum(0);
+                    }else{
+                        searchRecord.setnResultNum(1);
+                    }
+                }else{
+                    searchRecord.setnResultNum(combList.size());
+                }
+                searchRecord.setcSearchText(searchTag);
+                searchRecord.setnValidSearch(validSearch);
+                visitLogService.addQueueElement(searchRecord);
+            }
+            
+            if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB)){
+                InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
+                addSearchElementRecord(combDetail, searchRecord);
+            }
         }
     }
 
-    private void addSearchElementRecord(List<ElementCombShowInfo> combList, TSearchRecord searchRecord) {
-        if(CollectionUtils.isNotEmpty(combList)){
-            for (ElementCombShowInfo comb : combList) {
-                List<TElement> elementList = comb.getElementList();
-                for (TElement element : elementList) {
-                    TSearchElement searchElement = new TSearchElement(searchRecord.getcId());
-                    searchElement.setcElementId(element.getcId());
-                    visitLogService.addQueueElement(searchElement);
-                }
-            }
+    private void addSearchElementRecord(InteratomicPotentials combDetail, TSearchRecord searchRecord) {
+        List<TElement> elementList = combDetail.getElements();
+        for (TElement element : elementList) {
+            TSearchElement searchElement = new TSearchElement(searchRecord.getcId());
+            searchElement.setcElementId(element.getcId());
+            visitLogService.addQueueElement(searchElement);
         }
     }
 

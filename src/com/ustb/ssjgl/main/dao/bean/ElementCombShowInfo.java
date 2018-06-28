@@ -8,7 +8,7 @@ import java.util.List;
  * @version 1.0
  *
  */
-public class ElementCombShowInfo {
+public class ElementCombShowInfo implements Comparable<ElementCombShowInfo>{
     private TElementCombination elementComb;
     private List<TElement> elementList;
     private Double searchTimes;
@@ -50,5 +50,9 @@ public class ElementCombShowInfo {
     }
     public void setScope(TPotentialsScope scope) {
         this.scope = scope;
+    }
+    @Override
+    public int compareTo(ElementCombShowInfo o) {
+        return o.searchTimes.compareTo(this.searchTimes);
     }
 }
