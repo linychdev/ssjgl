@@ -70,7 +70,8 @@
                 </li>
             </ul>
         </div>
-        <div class="maincontent row"> 
+        <div class="maincontent "> 
+			<div class="row">
 			<!-- 通过给class 加style="display:none;隐藏DIV -->
             <!--主面板 start-->
             <div class = "col-md-2">
@@ -84,43 +85,112 @@
 				</div>
 			</div>
             <div class="col-md-4 " >
-					<div class = "figure div2" id = "pageView">
-						
+					<div class = "figure" >
+						<div class ="row">
+							<div class = "col-xs-12 ">
+								<div class="figure-top">
+									页面浏览量
+								</div>
+							</div>
+							<div class = "col-xs-12 ">
+								<div class="figure-middle">
+									13,567
+								</div>
+							</div>
+							<div class = "col-xs-12 figure-bottom">
+								<img src="img/u1449.png" class="img"></img>
+							</div>
+						</div>
 					</div>
-				</div>
+			</div>
+			
 				<!-- 独立访客数 -->
 				<div class="col-md-4 " >
 					<div class = "figure">
-						<div class = " item figure-left">
-							haha
+						<div class = "figure-left">
+							<div class = "img1">
+							  <div class="img2">
+								<img src="img/u1391.png"/>
+							  </div>
+							  <img src="img/u1389.png"/>
+							</div>
 						</div>
-						<div class = "item figure-left">
-							haha
+						<div class = " figure-right">
+							<div class = "row">
+								<div class = "col-xs-12 ">
+									<div class="figure-top1">
+										独立访问者数量
+									</div>
+								</div>
+								<div class = "col-xs-12 ">
+									<div class="figure-middle1">
+										5
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<!-- IP -->
 				<div class="col-md-4 ">
 					<div class = "figure">
-						<div class = " item figure-left">
-							haha
+						<div class = "  figure-left">
+							<div class = "img1">
+							  <div class="img2">
+								<img src="img/u1415.png"/>
+							  </div>
+							  <img src="img/u1413.png"/>
+							</div>
 						</div>
-						<div class = "item figure-left">
-							haha
+						<div class = " figure-right">
+							<div class = "row">
+								<div class = "col-xs-12 ">
+									<div class="figure-top1">
+										重复访问者数量
+									</div>
+								</div>
+								<div class = "col-xs-12 ">
+									<div class="figure-middle1">
+										5
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<!-- 内容总浏览量 -->
+				 <div class = "col-md-12 up">
+					<blockquote class = "block" >
+						页面访问量趋势曲线
+					</blockquote>	
+				</div>
+			</div>	
+					<div class = "row">
+						<div class="trend">
+							<div class="trendDate">
+								<span>开始日期</span>
+								<span>&nbsp;&nbsp;~&nbsp;&nbsp;结束日期</span>
+							</div>
+							<div class="trendFigure" id="trendFigure">
+								
+							</div>
+						</div>
+					</div>
+				
         </div>
 	</div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('pageView'));
-
+        var myChart = echarts.init(document.getElementById('trendFigure'));
+ 
         // 指定图表的配置项和数据
         var option = {
     title : {
         text: '页面浏览量',
+		textStyle:{
+		  color:'#000000'
+		},
+		left:'0px',
     },
     tooltip : {
         trigger: 'axis'
@@ -145,7 +215,7 @@
             name:'访问量',
             type:'line',
             smooth:true,
-            <!-- itemStyle: {normal: {areaStyle: { color:'#00ccff', }}}, -->
+            itemStyle: {normal: {areaStyle: { color:'#00ccff', }}},
 			itemStyle: {  
                         normal: {  
                             color: '#0099ff'  
@@ -162,8 +232,8 @@
 };
                     
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    </script>
+       myChart.setOption(option); 
+  </script> 
 
 </body>
 </html>
