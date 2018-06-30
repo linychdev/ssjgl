@@ -63,9 +63,9 @@ public class SsjglContants {
     public static final Integer VISIT_TYPE_LOGOUT = 2;
 
     /**
-     * 访问类型_搜索
+     * 访问类型_搜索元素组合
      */
-    public static final Integer VISIT_TYPE_SEARCH = 3;
+    public static final Integer VISIT_TYPE_SEARCH_COMB = 3;
 
     /**
      * 访问类型_浏览
@@ -78,6 +78,11 @@ public class SsjglContants {
     public static final Integer VISIT_TYPE_DOWNLOAD = 5;
     
     /**
+     * 访问类型_搜索元素组合列表
+     */
+    public static final Integer VISIT_TYPE_SEARCH_COMB_LIST = 6;
+
+    /**
      * 参考文献来源_势库
      */
     public static final Integer REFERENCE_SOURCE_SSJGL = 1;
@@ -86,5 +91,6 @@ public class SsjglContants {
      * 参考文献来源_其他
      */
     public static final Integer REFERENCE_SOURCE_OTHER = 2;
+
 
 }

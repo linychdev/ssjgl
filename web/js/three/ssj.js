@@ -136,8 +136,8 @@ var winWidth = $("#container").width();
 //var winWidth = 1131;
 
 var startRotate = function (){
-	if(firstAccess){
-//	if(true){
+//	if(firstAccess){
+	if(true){
 		init();
 		animate();
 //		setTimeout(function(){
@@ -330,7 +330,7 @@ function transform( targets, duration, fun) {
 	    if(fun){
 	        fun();
 	    }
-	}, duration*2);
+	}, duration);
 }
 function onWindowResize() {
 	camera.aspect = winWidth / winHeigth;
@@ -366,25 +366,33 @@ function animate() {
     }
     
     //转过90度后，变换为阵列
-    if(number == 2 && !gridFlag){
-        gridFlag = true;
-        transform( targets.grid, 2000 );
-    }
-    //转过180度后变换为平面列表
-    if(number == 3 && !tableFlag){
+    if(number == 2 && !tableFlag){
         tableFlag = true;
         transform( targets.table, 1000, function(){
-            $(".elements_sk").fadeIn(1800);
-            $(".elements_sk").next().fadeOut(1500);
+            $(".elements_sk").fadeIn(2500);
+            $(".elements_sk").next().fadeOut(2500);
         });
+//        gridFlag = true;
+//        transform( targets.grid, 2000 , function(){
+//            $(".elements_sk").fadeIn(1800);
+//            $(".elements_sk").next().fadeOut(1500);
+//        });
     }
+    //转过180度后变换为平面列表
+//    if(number == 3 && !tableFlag){
+//        tableFlag = true;
+//        transform( targets.table, 1000, function(){
+//            $(".elements_sk").fadeIn(1800);
+//            $(".elements_sk").next().fadeOut(1500);
+//        });
+//    }
     
     //变成平面列表后不再旋转
     if(number == 3){
         scene.rotation.y = 0;
     }
     
-    scene.rotation.y += 0.01;
+    scene.rotation.y += 0.008;
     requestAnimationFrame( animate );
 
     TWEEN.update();

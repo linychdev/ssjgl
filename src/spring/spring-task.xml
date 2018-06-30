@@ -3,7 +3,7 @@
   xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
   
-<!--     <bean id="flushVisitLog"
+     <bean id="flushVisitLog"
         class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="visitLogService"></property>
         <property name="targetMethod" value="flushLogToDb"></property>
@@ -21,5 +21,5 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
                 <ref bean="flushVisitLogTrigger" />
             </list>
         </property>
-    </bean> -->
+    </bean>
 </beans>

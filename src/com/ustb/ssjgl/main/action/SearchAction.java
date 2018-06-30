@@ -3,6 +3,8 @@ package com.ustb.ssjgl.main.action;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -61,7 +64,7 @@ public class SearchAction extends AbstractAction{
     @Autowired
     private ISessionService sessionService;
     
-    @VisitLog(VisitLogType.SEARCH)
+    @VisitLog(VisitLogType.SEARCH_COMB_LIST)
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
         List<ElementCombShowInfo> combList = interPotenService.getElementCombShowInfoListByTag(tag);
@@ -70,21 +73,26 @@ public class SearchAction extends AbstractAction{
             return getElementCombDetail(combId);
         }
         
-        /**
-         * 设置用于词云的字体大小和内容
-         */
+        ArrayList<ElementCombShowInfo> wordCloudCombList = Lists.newArrayList(combList);
+        Collections.sort(wordCloudCombList);
+        
+        // 设置用于词云的字体大小和内容
+        int maxSize = 50;
+        int index = 1;
         JSONArray jsonArray = new JSONArray();
-        for (ElementCombShowInfo showInfo : combList) {
+        for (ElementCombShowInfo showInfo : wordCloudCombList) {
             JSONObject json = new JSONObject();
             json.put("value", (showInfo.getSearchTimes().intValue()+100*Math.random()));
             json.put("name", showInfo.getElementComb().getcCombName());
             json.put("combId", showInfo.getElementComb().getcId());
             jsonArray.add(json);
+            if(index > maxSize){
+                break;
+            }
+            index++;
         }
         
-        /**
-         * 设置分组信息
-         */
+        // 设置分组信息
         Map<String, List<TElementCombination>> groupMap = Maps.newLinkedHashMap();
         for (ElementCombShowInfo showInfo : combList) {
             TElementCombination comb = showInfo.getElementComb();
@@ -105,6 +113,7 @@ public class SearchAction extends AbstractAction{
         return mode;
     }
 
+    @VisitLog(VisitLogType.SEARCH_COMB)
     @RequestMapping(value = "/search/detail/{combId}", method=RequestMethod.GET)
     public ModelAndView getElementCombDetail(@PathVariable(value = "combId") String combId) {
         InteratomicPotentials interPoten = interPotenService.getInterPotenByCombId(combId);
@@ -119,10 +128,10 @@ public class SearchAction extends AbstractAction{
      * @param request
      * @param response
      */
+    @VisitLog(VisitLogType.DOWNLOAD)
     @RequestMapping(value="/search/downloadPotentialsFile")
     @ResponseBody
-    public ResponseEntity<byte[]> downloadPotenFile(HttpServletRequest request, HttpServletResponse response) {
-        String potentialsFileId = request.getParameter("potentialsFileId");
+    public ResponseEntity<byte[]> downloadPotenFile(@RequestParam("potentialsFileId") String potentialsFileId, HttpServletRequest request, HttpServletResponse response) {
         TPotentialsFile fileMeta = interPotenService.getPotentialsFileMetaById(potentialsFileId);
         String suffix = CommonUtils.getFileSuffix(fileMeta.getcFileName());
         File file = null;
@@ -190,7 +199,7 @@ public class SearchAction extends AbstractAction{
             result.put("success", true);
             result.put("fileText", fileText);
             result.put("fileName", fileMeta.getcFileName());
-            LOG.info(fileText);
+            LOG.debug(fileText);
         } catch (Exception e) {
             LOG.error("获取势数据文件内容出错！ftpPath:{},fileName:{}",fileMeta.getcFtpUrlPath() ,fileMeta.getcFileName(), e);
             result.put("success", false);

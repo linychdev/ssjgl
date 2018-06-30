@@ -2,6 +2,7 @@ package com.ustb.ssjgl.main.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
@@ -190,7 +191,7 @@ public class InterPotenServiceImpl implements IInterPotenService {
         for (TElementCombination elementComb : elementCombs) {
             ElementCombShowInfo elementCombShowInfo = new ElementCombShowInfo();
             //TODO 查询搜索记录表,设置有效搜索次数
-            double searchTimes = 0.0;
+            double searchTimes = Math.random()*600;
             elementCombShowInfo.setSearchTimes(searchTimes);
             List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
             TPotentialsScope scope = potentialsScopeDao.selectByPrimaryKey(TPotentialsScope.class, elementComb.getcScopeId());
