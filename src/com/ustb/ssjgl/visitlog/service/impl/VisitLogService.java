@@ -2,6 +2,7 @@ package com.ustb.ssjgl.visitlog.service.impl;
 
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -133,5 +134,26 @@ public class VisitLogService implements IVisitLogService {
             }
         }
         return list;
+    }
+
+    @Override
+    public int getTotalVisitTimes(String beginDate, String endDate) {
+        return operateRecordDao.getVisitTimes(beginDate, endDate);
+    }
+
+    @Override
+    public int getIndexPageVisitTimes(String beginDate, String endDate) {
+        return operateRecordDao.getIndexVisitTimes(beginDate, endDate);
+    }
+
+    @Override
+    public int getDisIpVisitTimes(String beginDate, String endDate) {
+        return operateRecordDao.getDisIpVisitTimes(beginDate, endDate);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getDaylyVisitTimes(String beginDate,
+            String endDate) {
+        return operateRecordDao.getDaylyVisitTimes(beginDate, endDate);
     }
 }

@@ -1,6 +1,7 @@
 package com.ustb.ssjgl.main.action;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +28,7 @@ import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.action.AbstractAction;
 import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.common.utils.CommonUtils;
+import com.ustb.ssjgl.common.utils.DateUtils;
 import com.ustb.ssjgl.common.utils.JsonUtils;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.UuidUtils;
@@ -45,6 +46,7 @@ import com.ustb.ssjgl.main.dao.bean.TReference;
 import com.ustb.ssjgl.main.service.IInterPotenService;
 import com.ustb.ssjgl.main.service.IPotenFunctionService;
 import com.ustb.ssjgl.main.service.impl.FtpService;
+import com.ustb.ssjgl.visitlog.service.IVisitLogService;
 
 /**
  * BackgroundAction
@@ -74,6 +76,9 @@ public class BackgroundAction extends AbstractAction{
 
     @Autowired
     private ISessionService sessionService;
+    
+    @Autowired
+    private IVisitLogService visitLogService;
     
     /**
      * 新增原子间势
@@ -566,6 +571,50 @@ public class BackgroundAction extends AbstractAction{
         mode.addObject("pageData", pageData);
         mode.addObject("isAdmin", isAdmin);
         mode.setViewName("background/userList");
+        return mode;
+    }
+
+    /**
+     * 获取活跃度页面
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/visiterPage")
+    @ResponseBody
+    public ModelAndView getVisiterPage(HttpServletRequest request, HttpServletResponse response) {
+        
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
+        if(beginDate == null){
+            beginDate = DateUtils.formatDate(DateUtils.addDays(new Date(), -30),"yyyy-MM-dd");
+        }
+        if(endDate == null){
+            endDate = DateUtils.formatDate(new Date(),"yyyy-MM-dd");
+        }
+        //TODO 后台查询数据,封装后返回
+        //页面浏览量
+        int ymlll = visitLogService.getTotalVisitTimes(beginDate, endDate);
+        int syfwl = visitLogService.getIndexPageVisitTimes(beginDate, endDate);
+        int dlipfwl = visitLogService.getDisIpVisitTimes(beginDate, endDate);
+        
+        JSONArray ymlllJsonArray = new JSONArray();
+        List<Map<String,Integer>> ymlllList = visitLogService.getDaylyVisitTimes(beginDate, endDate);
+        for (Map<String, Integer> map : ymlllList) {
+            JSONObject json = new JSONObject();
+            json.put("dateStr", map.get("dateStr"));
+            json.put("total", map.get("total"));
+            ymlllJsonArray.add(json);
+        }
+        
+        
+        ModelAndView mode = new ModelAndView();
+        mode.addObject("ymlll", ymlll);
+        mode.addObject("syfwl", syfwl);
+        mode.addObject("dlipfwl", dlipfwl);
+        mode.addObject("ymlllListJson", ymlllJsonArray);
+        mode.addObject("beginDate", "'"+beginDate+"'");
+        mode.addObject("endDate", "'"+endDate+"'");
+        mode.setViewName("background/visitLog");
         return mode;
     }
     

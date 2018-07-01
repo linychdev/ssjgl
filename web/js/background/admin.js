@@ -10,6 +10,18 @@ $(function () {
 	$("#dataManager").on("click",function(){
 		$("#mainSpace").attr("src", "dataList");  
 	});
+
+	$("#visiterManager").on("click",function(){
+		$("#mainSpace").attr("src", "visiterPage");  
+	});
+	
+	$("#searchManager").on("click",function(){
+		$("#mainSpace").attr("src", "searchPage");  
+	});
+	
+	$("#downloadManager").on("click",function(){
+		$("#mainSpace").attr("src", "downloadPage");  
+	});
 	
 var modifyPasswordHtml = "<div class = 'info'>                                                                        "+
 				  "	<form class='form-horizontal'>                                                             "+
