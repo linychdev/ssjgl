@@ -591,7 +591,6 @@ public class BackgroundAction extends AbstractAction{
         if(endDate == null){
             endDate = DateUtils.formatDate(new Date(),"yyyy-MM-dd");
         }
-        //TODO 后台查询数据,封装后返回
         //页面浏览量
         int ymlll = visitLogService.getTotalVisitTimes(beginDate, endDate);
         int syfwl = visitLogService.getIndexPageVisitTimes(beginDate, endDate);
@@ -615,6 +614,69 @@ public class BackgroundAction extends AbstractAction{
         mode.addObject("beginDate", "'"+beginDate+"'");
         mode.addObject("endDate", "'"+endDate+"'");
         mode.setViewName("background/visitLog");
+        return mode;
+    }
+
+    /**
+     * 获取活跃度页面
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/searchPage")
+    @ResponseBody
+    public ModelAndView getSearchPage(HttpServletRequest request, HttpServletResponse response) {
+        
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
+        if(beginDate == null){
+            beginDate = DateUtils.formatDate(DateUtils.addDays(new Date(), -30),"yyyy-MM-dd");
+        }
+        if(endDate == null){
+            endDate = DateUtils.formatDate(new Date(),"yyyy-MM-dd");
+        }
+        
+        JSONArray hotSearchJsonArray = new JSONArray();
+        List<Map<String,Integer>> hotSearchList = visitLogService.getHotSearchList(beginDate, endDate);
+        for (Map<String, Integer> map : hotSearchList) {
+            JSONObject json = new JSONObject();
+            json.put("searchText", map.get("searchText"));
+            json.put("total", map.get("total"));
+            hotSearchJsonArray.add(json);
+        }
+        JSONArray invalidSearchJsonArray = new JSONArray();
+        List<Map<String,Integer>> invalidSearchList = visitLogService.getInvalidSearchList(beginDate, endDate);
+        for (Map<String, Integer> map : invalidSearchList) {
+            JSONObject json = new JSONObject();
+            json.put("searchText", map.get("searchText"));
+            json.put("total", map.get("total"));
+            hotSearchJsonArray.add(json);
+        }
+        JSONArray hotPotenJsonArray = new JSONArray();
+        List<Map<String,Integer>> hotPotenList = visitLogService.getHotPotenList(beginDate, endDate);
+        for (Map<String, Integer> map : hotPotenList) {
+            JSONObject json = new JSONObject();
+            json.put("searchText", map.get("searchText"));
+            json.put("total", map.get("total"));
+            hotSearchJsonArray.add(json);
+        }
+        
+        
+        Map<String, Object> filter = Maps.newHashMap();
+        int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
+        //默认每页显示15行
+        int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
+        
+        Page<?> pageData = visitLogService.getSearchListByPaging(filter, pageSize, pageIndex);
+        
+        
+        ModelAndView mode = new ModelAndView();
+        mode.addObject("hotSearchListJson", hotSearchJsonArray);
+        mode.addObject("invalidSearchListJson", invalidSearchJsonArray);
+        mode.addObject("hotPotenListJson", hotPotenJsonArray);
+        mode.addObject("pageData", pageData);
+        mode.addObject("beginDate", "'"+beginDate+"'");
+        mode.addObject("endDate", "'"+endDate+"'");
+        mode.setViewName("background/searchLog");
         return mode;
     }
     

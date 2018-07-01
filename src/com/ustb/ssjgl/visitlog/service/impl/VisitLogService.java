@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.visitlog.dao.IDownloadRecordDao;
 import com.ustb.ssjgl.visitlog.dao.ILoginRecordDao;
@@ -155,5 +156,30 @@ public class VisitLogService implements IVisitLogService {
     public List<Map<String, Integer>> getDaylyVisitTimes(String beginDate,
             String endDate) {
         return operateRecordDao.getDaylyVisitTimes(beginDate, endDate);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getHotSearchList(String beginDate,
+            String endDate) {
+        return searchRecordDao.getHotSearchListByBeginEnd(beginDate, endDate);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getInvalidSearchList(String beginDate,
+            String endDate) {
+        return searchRecordDao.getInvalidSearchListByBeginEnd(beginDate, endDate);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getHotPotenList(String beginDate,
+            String endDate) {
+        return searchElementDao.getHotPotenListByBeginEnd(beginDate, endDate);
+    }
+
+    @Override
+    public Page<?> getSearchListByPaging(Map<String, Object> filter,
+            int pageSize, int pageIndex) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

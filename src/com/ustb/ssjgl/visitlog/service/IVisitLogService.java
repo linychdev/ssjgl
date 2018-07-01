@@ -3,6 +3,8 @@ package com.ustb.ssjgl.visitlog.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ustb.ssjgl.common.paging.Page;
+
 
 
 public interface IVisitLogService {
@@ -15,4 +17,16 @@ public interface IVisitLogService {
     public int getIndexPageVisitTimes(String beginDate, String endDate);
     public int getDisIpVisitTimes(String beginDate, String endDate);
     public List<Map<String,Integer>> getDaylyVisitTimes(String beginDate, String endDate);
+
+    public List<Map<String, Integer>> getHotSearchList(String beginDate,
+            String endDate);
+
+    public List<Map<String, Integer>> getInvalidSearchList(String beginDate,
+            String endDate);
+
+    public List<Map<String, Integer>> getHotPotenList(String beginDate,
+            String endDate);
+
+    public Page<?> getSearchListByPaging(Map<String, Object> filter,
+            int pageSize, int pageIndex);
 }

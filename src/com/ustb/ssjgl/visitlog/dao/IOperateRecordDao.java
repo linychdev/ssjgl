@@ -18,5 +18,4 @@ public interface IOperateRecordDao extends IAbstractDao {
 
     List<Map<String, Integer>> getDaylyVisitTimes(String beginDate,
             String endDate);
-
 }

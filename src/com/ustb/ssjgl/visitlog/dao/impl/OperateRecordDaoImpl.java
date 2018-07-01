@@ -51,5 +51,4 @@ public class OperateRecordDaoImpl extends AbstractDao implements IOperateRecordD
         String statement = mapperNamespace + ".selectDaylyVisitTimesByBeginEnd";
         return this.getSqlSession().selectList(statement, filter);
     }
-
 }
