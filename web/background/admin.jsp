@@ -71,14 +71,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li><a href="javascript:void(0);" id = "dataManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;势数据管理</a></li>
                     </ul>
                 </li>
-			<!-- 	<li class="has-sub">
+                <li class="has-sub">
                     <a href="javascript:void(0);"><span>日志管理</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
                     <ul class="sub-menu">
-                        <li><a href="element.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;活跃度</a></li>
-						<li><a href="function.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;检索统计</a></li>
-						<li><a href="add.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;下载统计</a></li>
+                        <li><a href="javascript:void(0);" id = "visiterManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;活跃度</a></li>
+						<li><a href="javascript:void(0);" id = "searchManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;检索统计</a></li>
+						<li><a href="javascript:void(0);" id = "downloadManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;下载统计</a></li>
                     </ul>
-                </li> -->
+                </li>
+                
             </ul>
         </div>
         <iframe id = "mainSpace" src="${pageContext.request.contextPath}/background/userList" width="100%" height="90%"></iframe>

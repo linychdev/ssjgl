@@ -125,4 +125,36 @@
       #{item.dOperateTime,jdbcType=TIMESTAMP})
      </foreach>
   </insert>
+  
+  <select id="selectVisitTimesByBeginEnd" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select 
+	count(*)
+    from t_operate_record
+    where d_operate_date between #{beginDate} and #{endDate}
+  </select>
+
+  <select id="selectIndexVisitTimesByBeginEnd" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select 
+	count(*)
+    from t_operate_record
+    where n_operate_type = 4 
+      and d_operate_date between #{beginDate} and #{endDate}
+  </select>
+
+  <select id="selectDisIpVisitTimesByBeginEnd" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select 
+       count(DISTINCT c_client_ip)
+    from t_operate_record
+    where n_operate_type = 4 
+      and d_operate_date between #{beginDate} and #{endDate}
+  </select>
+  
+  <select id="selectDaylyVisitTimesByBeginEnd" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      DATE_FORMAT(d_operate_date,'%m/%d') as dateStr,
+	  count(*) as total
+    from t_operate_record
+    where d_operate_date between #{beginDate} and #{endDate}
+group by d_operate_date
+  </select>
 </mapper>
