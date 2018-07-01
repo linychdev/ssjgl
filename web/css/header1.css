@@ -1,0 +1,132 @@
+body{
+	min-width:1366px;
+}
+ol,ul{list-style:none;margin:0;padding:0;}
+.header-wrapper{
+	width:100%;
+	height:90px;
+	margin-top:0px;
+	background-color:#f6f6f6;
+}
+
+.left{
+	width:500px;
+	height:100%;
+	float:left;
+	/* background:#ffe6b8; */
+}
+
+.right{
+	width:150px;
+	height:100%;
+	float:right;
+}
+
+.main{
+	height:100%;
+	margin:0 160px 0 510px;
+	
+}
+
+.logo{
+	margin-top:25px;
+	float:left;
+	width:100px;
+}
+.left_text{
+	width:400px;
+	height:90px;
+	margin-left:100px;
+}
+
+.left_textup{
+	width:100%;
+	margin-top:15px;
+	float:left;
+	text-align:left;
+	font-size:26px;
+	line-height:30px;
+	color:#000;
+	font-family: inherit;
+	font-weight: normal;
+	/* background:yellow; */
+}
+.left_textdown{
+	width:100%;
+	margin-top:5px;
+	float:left;
+	text-align:left;
+	color:#000;
+	font-family: inherit;
+	font-weight: normal;
+	color: rgb(18, 101, 156);
+    font-size: 12px;
+	float:left;
+	/* background:red; */
+}
+.navbar-default .navbar-nav > li{
+	height:90px;
+	margin-top:20px;
+}
+.navbar-default .navbar-nav > li > a.active {
+    /* color:#00FFCC; */
+	color:#1569b4;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    /* color: #00FFCC; */
+	color:#00ffcc;
+}
+.nav.navbar-nav.navbar-nav-right.ulheight > li > a {
+    color: #1569b4;
+	font-family: 'Raleway', sans-serif;
+	font-weight:bold;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
+}
+.navbar-default{
+	background:none !important;
+	border:none !important;
+}
+
+.nav > li > a {
+    padding: 25px;
+    font-size: 20px;
+    position: relative;
+	padding-right:25px;
+	padding-left:25px;
+}
+.navbar {
+    margin-bottom: 0;
+}
+.droptop{
+	top:50px !important;
+}
+
+.ulheight{
+	height:90px;
+}
+
+.right_text1{
+	width:100%;
+	margin-top:8px;
+	text-align:right;
+	font-size:30px;
+	line-height:30px;
+	height:30px;
+	color:#000000;
+	font-family: inherit;
+	font-weight: bold;
+}
+.right_text2{
+	width:100%;
+	margin-top:2px;
+	text-align:right;
+	color:#000;
+	font-family: inherit;
+	font-weight: normal;
+	color: rgb(18, 101, 156);
+    font-size: 10px;
+	/* background:red; */
+}
