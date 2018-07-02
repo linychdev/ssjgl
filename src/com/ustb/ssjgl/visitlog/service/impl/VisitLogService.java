@@ -18,8 +18,6 @@ import com.ustb.ssjgl.visitlog.dao.ILoginRecordDao;
 import com.ustb.ssjgl.visitlog.dao.IOperateRecordDao;
 import com.ustb.ssjgl.visitlog.dao.ISearchElementDao;
 import com.ustb.ssjgl.visitlog.dao.ISearchRecordDao;
-import com.ustb.ssjgl.visitlog.dao.bean.PotenFileDownloadInfo;
-import com.ustb.ssjgl.visitlog.dao.bean.SearchRecordInfo;
 import com.ustb.ssjgl.visitlog.dao.bean.TDownloadRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TOperateRecord;
@@ -181,32 +179,16 @@ public class VisitLogService implements IVisitLogService {
     @Override
     public Page<?> getSearchListByPaging(Map<String, Object> filter,
             int pageSize, int pageIndex) {
-        Page<SearchRecordInfo> page = new Page<SearchRecordInfo>();
-        page.setPageSize(pageSize);
-        page.setPageIndex(pageIndex);
-        int count = searchRecordDao.getCountByFilter(filter);
-        page.setRecord(count);
-        
-        filter.put("stratRow", page.getSartRow());
-        filter.put("endRow", page.getEndRow());
-        List<SearchRecordInfo> searchList = searchRecordDao.getSearchRecordInfoByFilter(filter);
-        page.setDataList(searchList);
-        return page;
+        // TODO Auto-generated method stub
+        return null;
     }
 
+    /** (non-Javadoc)
+     * @see com.ustb.ssjgl.visitlog.service.IVisitLogService#getDownloadListByPaging(java.util.Map, int, int)
+     */
     @Override
-    public Page<?> getDownloadListByPaging(Map<String, Object> filter,
-        int pageSize, int pageIndex) {
-        Page<PotenFileDownloadInfo> page = new Page<PotenFileDownloadInfo>();
-        page.setPageSize(pageSize);
-        page.setPageIndex(pageIndex);
-        int count = downloadRecordDao.getCountByFilter(filter);
-        page.setRecord(count);
-        
-        filter.put("stratRow", page.getSartRow());
-        filter.put("endRow", page.getEndRow());
-        List<PotenFileDownloadInfo> downloadList = downloadRecordDao.getPfdiByFilter(filter);
-        page.setDataList(downloadList);
-        return page;
+    public Page<?> getDownloadListByPaging(Map<String, Object> filter, int pageSize, int pageIndex) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
