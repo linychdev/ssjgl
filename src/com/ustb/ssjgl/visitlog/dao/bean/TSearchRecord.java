@@ -20,6 +20,9 @@ public class TSearchRecord {
 
     /** 搜索内容 */
     private String cSearchText;
+    
+    /** 搜索类型 */
+    private Integer nSearchType;
 
     /** 是否为有效搜索 */
     private Integer nValidSearch;
@@ -89,6 +92,20 @@ public class TSearchRecord {
 
     public void setcSearchText(String cSearchText) {
         this.cSearchText = cSearchText == null ? null : cSearchText.trim();
+    }
+
+    /**
+     * @return the nSearchType
+     */
+    public Integer getnSearchType() {
+        return nSearchType;
+    }
+
+    /**
+     * @param nSearchType the nSearchType to set
+     */
+    public void setnSearchType(Integer nSearchType) {
+        this.nSearchType = nSearchType;
     }
 
     public Integer getnValidSearch() {

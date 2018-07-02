@@ -108,6 +108,7 @@ public class VisitLogAop {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void addSearchRecord(JoinPoint joinPoint, Object returnValue, VisitLogType businessType) {
         if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB_LIST) || businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB)){
             TUser user = sessionService.getCurrentUser();
@@ -123,8 +124,8 @@ public class VisitLogAop {
             searchRecord.setnValidSearch(validSearch);
             
             if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB_LIST)){
+                searchRecord.setnSearchType(1);
                 List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
-                InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
                 if(combList == null){
                     searchRecord.setnResultNum(1);
                 }else{
@@ -134,6 +135,7 @@ public class VisitLogAop {
             }
             
             if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB)){
+                searchRecord.setnSearchType(1);
                 searchRecord.setnResultNum(1);
                 visitLogService.addQueueElement(searchRecord);
                 InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");

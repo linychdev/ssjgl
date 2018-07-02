@@ -7,13 +7,14 @@
     <result column="c_user_name" property="cUserName" jdbcType="VARCHAR" />
     <result column="c_client_ip" property="cClientIp" jdbcType="VARCHAR" />
     <result column="c_search_text" property="cSearchText" jdbcType="VARCHAR" />
+    <result column="n_search_type" property="nSearchType" jdbcType="INTEGER" />
     <result column="n_valid_search" property="nValidSearch" jdbcType="INTEGER" />
     <result column="n_result_num" property="nResultNum" jdbcType="INTEGER" />
     <result column="d_search_date" property="dSearchDate" jdbcType="DATE" />
     <result column="d_search_time" property="dSearchTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    c_id, c_user_id, c_user_name, c_client_ip, c_search_text, n_valid_search, n_result_num, 
+    c_id, c_user_id, c_user_name, c_client_ip, c_search_text, n_search_type, n_valid_search, n_result_num, 
     d_search_date, d_search_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -28,11 +29,11 @@
   </delete>
   <insert id="insert" parameterType="com.ustb.ssjgl.visitlog.dao.bean.TSearchRecord" >
     insert into t_search_record (c_id, c_user_id, c_user_name, 
-      c_client_ip, c_search_text, n_valid_search, 
+      c_client_ip, c_search_text, n_search_type, n_valid_search, 
       n_result_num, d_search_date, d_search_time
       )
     values (#{cId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, #{cUserName,jdbcType=VARCHAR}, 
-      #{cClientIp,jdbcType=VARCHAR}, #{cSearchText,jdbcType=VARCHAR}, #{nValidSearch,jdbcType=INTEGER}, 
+      #{cClientIp,jdbcType=VARCHAR}, #{cSearchText,jdbcType=VARCHAR},  #{nSearchType,jdbcType=INTEGER}, #{nValidSearch,jdbcType=INTEGER}, 
       #{nResultNum,jdbcType=INTEGER}, #{dSearchDate,jdbcType=DATE}, #{dSearchTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -53,6 +54,9 @@
       </if>
       <if test="cSearchText != null" >
         c_search_text,
+      </if>
+      <if test="nSearchType != null" >
+        n_search_type,
       </if>
       <if test="nValidSearch != null" >
         n_valid_search,
@@ -83,6 +87,9 @@
       <if test="cSearchText != null" >
         #{cSearchText,jdbcType=VARCHAR},
       </if>
+      <if test="nSearchType != null" >
+        #{nSearchType,jdbcType=INTEGER},
+      </if>
       <if test="nValidSearch != null" >
         #{nValidSearch,jdbcType=INTEGER},
       </if>
@@ -112,6 +119,9 @@
       <if test="cSearchText != null" >
         c_search_text = #{cSearchText,jdbcType=VARCHAR},
       </if>
+      <if test="nSearchType != null" >
+        n_search_type = #{nSearchType,jdbcType=INTEGER},
+      </if>
       <if test="nValidSearch != null" >
         n_valid_search = #{nValidSearch,jdbcType=INTEGER},
       </if>
@@ -133,6 +143,7 @@
       c_user_name = #{cUserName,jdbcType=VARCHAR},
       c_client_ip = #{cClientIp,jdbcType=VARCHAR},
       c_search_text = #{cSearchText,jdbcType=VARCHAR},
+      n_search_type = #{nSearchType,jdbcType=INTEGER},
       n_valid_search = #{nValidSearch,jdbcType=INTEGER},
       n_result_num = #{nResultNum,jdbcType=INTEGER},
       d_search_date = #{dSearchDate,jdbcType=DATE},
@@ -141,13 +152,13 @@
   </update>
   <insert id="batchInsert" parameterType="java.util.List" >
     insert into t_search_record (c_id, c_user_id, c_user_name, 
-      c_client_ip, c_search_text, n_valid_search, 
+      c_client_ip, c_search_text, n_search_type, n_valid_search, 
       n_result_num, d_search_date, d_search_time
       )
     values 
       <foreach collection ="list" item="item" separator =",">
      (#{item.cId,jdbcType=VARCHAR}, #{item.cUserId,jdbcType=VARCHAR}, #{item.cUserName,jdbcType=VARCHAR}, 
-      #{item.cClientIp,jdbcType=VARCHAR}, #{item.cSearchText,jdbcType=VARCHAR}, #{item.nValidSearch,jdbcType=INTEGER}, 
+      #{item.cClientIp,jdbcType=VARCHAR}, #{item.cSearchText,jdbcType=VARCHAR}, #{item.nSearchType,jdbcType=INTEGER},#{item.nValidSearch,jdbcType=INTEGER}, 
       #{item.nResultNum,jdbcType=INTEGER}, #{item.dSearchDate,jdbcType=DATE}, #{item.dSearchTime,jdbcType=TIMESTAMP}
       )
       </foreach>
