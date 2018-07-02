@@ -27,6 +27,13 @@ public interface IVisitLogService {
     public List<Map<String, Integer>> getHotPotenList(String beginDate,
             String endDate);
 
-    public Page<?> getSearchListByPaging(Map<String, Object> filter,
-            int pageSize, int pageIndex);
+    public Page<?> getSearchListByPaging(Map<String, Object> filter, int pageSize, int pageIndex);
+
+    /**
+     * @param filter
+     * @param pageSize
+     * @param pageIndex
+     * @return
+     */
+    Page<?> getDownloadListByPaging(Map<String, Object> filter, int pageSize, int pageIndex);
 }

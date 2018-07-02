@@ -1,7 +1,6 @@
 package com.ustb.ssjgl.visitlog.dao.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import com.ustb.ssjgl.common.dao.AbstractDao;
 import com.ustb.ssjgl.visitlog.dao.ISearchElementDao;
@@ -17,11 +16,4 @@ public class SearchElementDaoImpl extends AbstractDao implements ISearchElementD
         String statement = mapperNamespace + ".batchInsert";
         this.getSqlSession().insert(statement, searchElementList);
     }
-    @Override
-    public List<Map<String, Integer>> getHotPotenListByBeginEnd(
-            String beginDate, String endDate) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }

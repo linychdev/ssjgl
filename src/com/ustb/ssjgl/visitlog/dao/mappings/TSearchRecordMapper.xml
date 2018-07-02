@@ -186,4 +186,40 @@
  order by count(*) desc
  limit 5
   </select>
+  
+  <select id="selectHotPotenListByBeginEnd" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      c_search_text as searchText,
+      count(*) as total
+     from t_search_record
+    where d_operate_date between #{beginDate} and #{endDate}
+      and n_result_num = 1
+ group by c_search_text
+ order by count(*) desc
+ limit 5
+  </select>
+
+  <select id="" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+    record.c_search_text,
+    record.searchTime,
+    count(tag.c_id) as resultNumber
+    from (
+    select 
+    c_search_text,
+    count(*) as searchTime
+    from t_search_record
+    where d_operate_date between #{beginDate} and #{endDate}
+     <where>  
+       <if test="validSearch!=null">  
+            and n_valid_search = #{validSearch}
+       </if>  
+    </where>
+    GROUP BY c_search_text 
+    )record
+    left join t_element_comb_tag tag on (record.c_search_text = tag.c_tag)
+    GROUP BY record.c_search_text, record.searchTime
+    ORDER BY record.searchTime DESC
+    limit #{stratRow}, #{endRow} 
+  </select>
 </mapper>

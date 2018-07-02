@@ -11,6 +11,12 @@
     <result column="d_download_date" property="dDownloadDate" jdbcType="DATE" />
     <result column="d_download_time" property="dDownloadTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="fileDownloadInfoResultMap" type="com.ustb.ssjgl.visitlog.dao.bean.PotenFileDownloadInfo" >
+    <result column="c_download_file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="n_size" property="size" jdbcType="INTEGER" />
+    <result column="n_download_times" property="downLoadTimes" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     c_id, c_user_id, c_user_name, c_client_ip, c_download_file_id, c_download_file_name, 
     d_download_date, d_download_time
@@ -139,4 +145,34 @@
       #{item.dDownloadDate,jdbcType=DATE}, #{item.dDownloadTime,jdbcType=TIMESTAMP})
     </foreach>
     </insert>
+    
+    
+  <select id="selectCount" resultType="java.lang.Integer" >
+    select 
+    count(*)
+    from t_download_record
+  </select>
+
+  <select id="selectCountByFilter" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select 
+    count(*)
+    from t_download_record
+   where d_download_date between #{beginDate} and #{endDate}
+  </select>
+    
+    
+  <select id="selectByFilter" resultMap="fileDownloadInfoResultMap" parameterType="java.util.Map" >
+
+  select 
+    file.c_file_name as c_download_file_name,
+    file.n_size as n_size,
+    count(*) as n_download_times
+    from t_download_record record
+    LEFT JOIN t_potentials_file file on (record.c_download_file_id = file.c_id)
+    where d_download_time between #{beginDate} and #{endDate}
+    GROUP BY record.c_download_file_id 
+    ORDER BY  count(*) DESC
+    limit #{stratRow}, #{endRow} 
+  </select>
+  
 </mapper>

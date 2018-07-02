@@ -18,7 +18,7 @@ public class TDownloadRecord {
     /** 客户端ip */
     private String cClientIp;
 
-    /** 搜索内容 */
+    /** 下载文件id */
     private String cDownloadFileId;
 
     /** 下载文件名 */
