@@ -116,15 +116,16 @@ public class VisitLogAop {
                 user = new TUser("00000000000000000000000000000000", "visitor");
             }
             Object[] orgs = joinPoint.getArgs();
-            String searchTag = (String) orgs[0];
+            String searchTag = "";
             ModelAndView mod = (ModelAndView) returnValue;
             Integer validSearch = (Integer) mod.getModelMap().get("validSearch");
             TSearchRecord searchRecord = new TSearchRecord(user.getcId(), user.getcLoginName(), IPUtils.getBrowserIpAddress(request));
-            searchRecord.setcSearchText(searchTag);
             searchRecord.setnValidSearch(validSearch);
             
             if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB_LIST)){
+                searchTag = (String) orgs[0];
                 searchRecord.setnSearchType(1);
+                searchRecord.setcSearchText(searchTag);
                 List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
                 if(combList == null){
                     searchRecord.setnResultNum(1);
@@ -135,10 +136,12 @@ public class VisitLogAop {
             }
             
             if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB)){
+                InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
+                searchTag = combDetail.getElementComb().getcCombName();
                 searchRecord.setnSearchType(2);
                 searchRecord.setnResultNum(1);
+                searchRecord.setcSearchText(searchTag);
                 visitLogService.addQueueElement(searchRecord);
-                InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
                 addSearchElementRecord(combDetail, searchRecord);
             }
         }
