@@ -152,4 +152,27 @@
       )
       </foreach>
   </insert>
+  
+  <select id="selectHotSearchListByBeginEnd" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      c_search_text as searchText,
+      count(*) as total
+     from t_search_record
+    where d_operate_date between #{beginDate} and #{endDate}
+ group by c_search_text
+ order by count(*) desc
+ limit 5
+  </select>
+  
+  <select id="selectInvalidSearchListByBeginEnd" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      c_search_text as searchText,
+      count(*) as total
+     from t_search_record
+    where d_operate_date between #{beginDate} and #{endDate}
+      and n_valid_search = 0
+ group by c_search_text
+ order by count(*) desc
+ limit 5
+  </select>
 </mapper>

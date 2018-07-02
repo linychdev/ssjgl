@@ -53,7 +53,7 @@ public class SearchAction extends AbstractAction{
     /**
      * logger
      */
-    private final static Logger LOG = LogUtils.getLogger();
+    private static final Logger LOG = LogUtils.getLogger();
 
     @Autowired
     private IInterPotenService interPotenService;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -120,25 +119,23 @@ public class VisitLogAop {
             ModelAndView mod = (ModelAndView) returnValue;
             Integer validSearch = (Integer) mod.getModelMap().get("validSearch");
             TSearchRecord searchRecord = new TSearchRecord(user.getcId(), user.getcLoginName(), IPUtils.getBrowserIpAddress(request));
+            searchRecord.setcSearchText(searchTag);
+            searchRecord.setnValidSearch(validSearch);
             
             if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB_LIST)){
                 List<ElementCombShowInfo> combList = (List<ElementCombShowInfo>) mod.getModelMap().get("combList");
                 InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
                 if(combList == null){
-                    if(combDetail == null){
-                        searchRecord.setnResultNum(0);
-                    }else{
-                        searchRecord.setnResultNum(1);
-                    }
+                    searchRecord.setnResultNum(1);
                 }else{
                     searchRecord.setnResultNum(combList.size());
                 }
-                searchRecord.setcSearchText(searchTag);
-                searchRecord.setnValidSearch(validSearch);
                 visitLogService.addQueueElement(searchRecord);
             }
             
             if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB)){
+                searchRecord.setnResultNum(1);
+                visitLogService.addQueueElement(searchRecord);
                 InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
                 addSearchElementRecord(combDetail, searchRecord);
             }
