@@ -68,9 +68,14 @@ public class SearchAction extends AbstractAction{
     @RequestMapping(value = "/search/list/{tag}", method=RequestMethod.GET)
     public ModelAndView getElementCombList(@PathVariable(value = "tag") String tag) {
         List<ElementCombShowInfo> combList = interPotenService.getElementCombShowInfoListByTag(tag);
+        int validSearch = 0;
         if(combList.size() == 1){
             String combId = combList.get(0).getElementComb().getcId();
             return getElementCombDetail(combId);
+        }
+        
+        if(combList.size() > 1){
+            validSearch = 1;
         }
         
         ArrayList<ElementCombShowInfo> wordCloudCombList = Lists.newArrayList(combList);
@@ -105,7 +110,7 @@ public class SearchAction extends AbstractAction{
         
         ModelAndView mode = new ModelAndView();
         mode.setViewName("main/combList");
-        mode.addObject("validSearch", 1);
+        mode.addObject("validSearch", validSearch);
         mode.addObject("combList", combList);
         mode.addObject("combListJson", jsonArray.toString());
         mode.addObject("searchText", tag);

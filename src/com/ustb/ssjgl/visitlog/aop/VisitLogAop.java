@@ -135,7 +135,7 @@ public class VisitLogAop {
             }
             
             if(businessType.getValue().equals(SsjglContants.VISIT_TYPE_SEARCH_COMB)){
-                searchRecord.setnSearchType(1);
+                searchRecord.setnSearchType(2);
                 searchRecord.setnResultNum(1);
                 visitLogService.addQueueElement(searchRecord);
                 InteratomicPotentials combDetail = (InteratomicPotentials) mod.getModelMap().get("combDetail");
