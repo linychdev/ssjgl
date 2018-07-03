@@ -9,6 +9,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/main/combList.css" rel="stylesheet" type="text/css" media="all" />
  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/header.css" rel="stylesheet" type="text/css"  />
 <!-- js -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -17,41 +18,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 <body>
 <!-- header -->
-	<div class="header" style ="background:url(img/banner5.jpg) repeat-x; background-size: cover;" >
-		<div class="main">
-			<div class="header-nav">
-				<nav class="navbar navbar-default">
-					<div class="navbar-header">
-						<div class="logo">
-							<img src="img/logo20.png" alt="" style="width:150px; height:50px;">
+	<div class="header">
+		<div class="container-fluid">
+			<div class = "row">
+				<div class = "col-md-4">
+					<div class = "logo">
+						<a href ="#">
+							<img src="img/logo20.png" alt="" style="width:100px; height:40px;">
+						</a>
+					</div>
+					<div class = "text1">
+						Interatomic Potentials Database
+						<br>
+						<div class="site-sologn">Part of the Materials Genetic Engineering Data</div>
+					</div>
+				</div>
+				<div class = "col-md-7">
+					<nav class="navbar navbar-default"> 
+					   <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
+						<ul class="nav navbar-nav navbar-nav-right"> 
+						 <li><a href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
+						 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a href="#" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle" target="_self">Resources <span class="caret"></span></a>
+							<ul role="menu" class=" dropdown-menu">
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1116"><a href="javascript:void(0);" target="_self">Semiconductors</a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1127"><a href="javascript:void(0);" target="_self">Ionic Crystals</a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1128"><a href="javascript:void(0);" target="_self">Interface</a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1129"><a href="javascript:void(0);" target="_self">Metal Alloys </a></li>
+								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5141"><a href="javascript:void(0);" target="_self">Others</a></li>
+							</ul>
+						 </li>
+						 <li><a href="javascript:void(0);">Help</a></li> 
+						 <li><a href="javascript:void(0);">AboutUs</a></li> 
+						 <li><a href="javascript:void(0);">Link</a></li> 
+						 <li><a href="javascript:void(0);">User</a></li> 
+						 <li><a href="javascript:void(0);" class = "background">Login</a></li> 
+						</ul> 
+					   </div> 
+					</nav> 
+				</div>
+				<div class = "col-md-1">
+					<div class = "text2">
+						<div style = "font-size:30px;">USTB</div>
+						<div  style="font-weight: normal;">
+						University of 
+						<br>
+						Science & Technology 
+						<br>
+						Beijing,China
 						</div>
 					</div>
-
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-					 <ul class="nav navbar-nav cl-effect-14">
-						<li><a href="index.html" class="active">Home</a></li>
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-								Resources <span class="caret"></span>
-						    </a>
-							<ul class="dropdown-menu">
-								<li><a href = "#">Semiconductors</a></li>
-								<li><a href = "#">Ionic Crystals</a></li>
-								<li><a href = "#">Interface</a></li>
-								<li><a href = "#">Metal Alloys</a></li>
-								<li><a href = "#">Others</a></li>
-								
-						    </ul>
-						</li>
-
-						<li><a href="services.html">Help</a></li>
-						<li><a href="AboutUs.html">About Us</a></li>
-						<li><a href="User.html">User</a></li>
-						<li><a href="background system.html">Background System</a></li>
-					  </ul>
-					</div><!-- /.navbar-collapse -->
-				</nav>
+				</div>
 			</div>
 		</div>
 	</div>

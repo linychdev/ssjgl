@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <link href="css/background/admin.css" rel="stylesheet" type="text/css" media="all" />
+ <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" media="all" />
+ <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+ <link href="css/bootstrap.min.css" rel="stylesheet" />
+ <link href="css/font-awesome.min.css" rel="stylesheet" />
+ <link href="css/log.css" rel="stylesheet" />
+<!-- js -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/holder.js"></script>
+	<script src="js/default.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap-datetimepicker.js"></script>
+	<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="js/admin.js" type="text/javascript"></script>
+	<script src="js/echarts.js"></script>
+
+    <!--bootstrap库-->
+ <!--页面加载进度条-->
+    <script src="js/pace.min.js"></script>
+ <!--font-awesome字体库-->
+</head>	
+<body>	
+	<!-- header -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">势库网站后台管理系统</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="top1.html">您好，管理员！</a></li>
+                    <li><a href="top2.html">修改密码</a></li>
+                    <li><a href="top3.html">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+	<div class="container-fluid all">
+        <div class="sidebar" >
+            <ul class="nav">
+                <li><a href="index.html">主页面</a></li>
+                <li class="has-sub">
+                    <a href="javascript:void(0);"><span>用户管理</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="admin.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;注册用户管理</a></li>
+						<li><a href="admin.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;管理员管理</a></li>
+                    </ul>
+                </li>
+				 <li class="has-sub">
+                    <a href="javascript:void(0);"><span>数据管理</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
+                    <ul class="sub-menu">
+          
+						<li><a href="function.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;势函数管理</a></li>
+						<li><a href="mgi.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;势数据管理</a></li>
+                    </ul>
+                </li>
+				<li class="has-sub">
+                    <a href="javascript:void(0);"><span>日志管理</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="element.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;活跃度</a></li>
+						<li><a href="function.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;检索统计</a></li>
+						<li><a href="add.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;下载统计</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="maincontent "> 
+			<div class="row">
+			<!-- 通过给class 加style="display:none;隐藏DIV -->
+            <!--主面板 start-->
+            <div class = "col-md-12">
+				<blockquote class = "block" >
+						网站数据资源统计
+				</blockquote>	
+			</div>
+		    </div>
+			</div class="row">
+            <div class="col-md-4 " >
+					<div class = "figure" >
+						<div class ="row">
+							<div class = "col-xs-12 ">
+								<div class="figure-top">
+									函数
+								</div>
+							</div>
+							<div class = "col-xs-12 ">
+								<div class="figure-middle">
+									6
+								</div>
+							</div>
+							<div class = "col-xs-12 figure-bottom">
+								<img src="img/u1449.png" class="img"></img>
+							</div>
+						</div>
+					</div>
+			</div>
+			
+				<!-- 独立访客数 -->
+				<div class="col-md-4 " >
+					<div class = "figure">
+						<div class = "figure-left">
+							<div class = "img1">
+							  <div class="img2">
+								<img src="img/u1391.png"/>
+							  </div>
+							  <img src="img/u1389.png"/>
+							</div>
+						</div>
+						<div class = " figure-right">
+							<div class = "row">
+								<div class = "col-xs-12 ">
+									<div class="figure-top1">
+										势数据
+									</div>
+								</div>
+								<div class = "col-xs-12 ">
+									<div class="figure-middle1">
+										800
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- IP -->
+				<div class="col-md-4 ">
+					<div class = "figure">
+						<div class = "  figure-left">
+							<div class = "img1">
+							  <div class="img2">
+								<img src="img/u1415.png"/>
+							  </div>
+							  <img src="img/u1413.png"/>
+							</div>
+						</div>
+						<div class = " figure-right">
+							<div class = "row">
+								<div class = "col-xs-12 ">
+									<div class="figure-top1">
+										势文件
+									</div>
+								</div>
+								<div class = "col-xs-12 ">
+									<div class="figure-middle1">
+										500
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>	
+					
+				
+        </div>
+	</div>
+
+
+</body>
+</html>
