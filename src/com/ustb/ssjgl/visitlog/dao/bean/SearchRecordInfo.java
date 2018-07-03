@@ -1,9 +1,3 @@
-/*
- * @(#)SearchRecordInfo.java 2018年7月2日下午7:14:22
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.visitlog.dao.bean;
 
 /**
@@ -13,5 +7,25 @@ package com.ustb.ssjgl.visitlog.dao.bean;
  *
  */
 public class SearchRecordInfo {
-    
+    private String searchText;
+    private Integer searchTimes;
+    private Integer resultNumber;
+    public String getSearchText() {
+        return searchText;
+    }
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+    public Integer getSearchTimes() {
+        return searchTimes;
+    }
+    public void setSearchTimes(Integer searchTimes) {
+        this.searchTimes = searchTimes;
+    }
+    public Integer getResultNumber() {
+        return resultNumber;
+    }
+    public void setResultNumber(Integer resultNumber) {
+        this.resultNumber = resultNumber;
+    }
 }

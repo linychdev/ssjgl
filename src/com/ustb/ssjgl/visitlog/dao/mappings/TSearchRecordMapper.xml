@@ -13,6 +13,12 @@
     <result column="d_search_date" property="dSearchDate" jdbcType="DATE" />
     <result column="d_search_time" property="dSearchTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="SearchRecordInfoMap" type="com.ustb.ssjgl.visitlog.dao.bean.SearchRecordInfo" >
+    <result column="c_search_text" property="searchText" jdbcType="VARCHAR" />
+    <result column="searchTimes" property="searchTimes" jdbcType="INTEGER" />
+    <result column="resultNumber" property="resultNumber" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     c_id, c_user_id, c_user_name, c_client_ip, c_search_text, n_search_type, n_valid_search, n_result_num, 
     d_search_date, d_search_time
@@ -199,15 +205,15 @@
  limit 5
   </select>
 
-  <select id="" resultType="java.util.Map" parameterType="java.util.Map" >
+  <select id="" resultMap="SearchRecordInfoMap" parameterType="java.util.Map" >
     select 
     record.c_search_text,
-    record.searchTime,
+    record.searchTimes,
     count(tag.c_id) as resultNumber
     from (
     select 
     c_search_text,
-    count(*) as searchTime
+    count(*) as searchTimes
     from t_search_record
     where d_operate_date between #{beginDate} and #{endDate}
      <where>  

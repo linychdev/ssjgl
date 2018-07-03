@@ -18,6 +18,8 @@ import com.ustb.ssjgl.visitlog.dao.ILoginRecordDao;
 import com.ustb.ssjgl.visitlog.dao.IOperateRecordDao;
 import com.ustb.ssjgl.visitlog.dao.ISearchElementDao;
 import com.ustb.ssjgl.visitlog.dao.ISearchRecordDao;
+import com.ustb.ssjgl.visitlog.dao.bean.PotenFileDownloadInfo;
+import com.ustb.ssjgl.visitlog.dao.bean.SearchRecordInfo;
 import com.ustb.ssjgl.visitlog.dao.bean.TDownloadRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TLoginRecord;
 import com.ustb.ssjgl.visitlog.dao.bean.TOperateRecord;
@@ -179,8 +181,17 @@ public class VisitLogService implements IVisitLogService {
     @Override
     public Page<?> getSearchListByPaging(Map<String, Object> filter,
             int pageSize, int pageIndex) {
-        // TODO Auto-generated method stub
-        return null;
+        Page<SearchRecordInfo> page = new Page<SearchRecordInfo>();
+        page.setPageSize(pageSize);
+        page.setPageIndex(pageIndex);
+        int count = searchRecordDao.getCountByFilter(filter);
+        page.setRecord(count);
+        
+        filter.put("stratRow", page.getSartRow());
+        filter.put("endRow", page.getEndRow());
+        List<SearchRecordInfo> searchRecordList = searchRecordDao.getSearchRecordInfoByFilter(filter);
+        page.setDataList(searchRecordList);
+        return page;
     }
 
     /** (non-Javadoc)
@@ -188,7 +199,16 @@ public class VisitLogService implements IVisitLogService {
      */
     @Override
     public Page<?> getDownloadListByPaging(Map<String, Object> filter, int pageSize, int pageIndex) {
-        // TODO Auto-generated method stub
-        return null;
+        Page<PotenFileDownloadInfo> page = new Page<PotenFileDownloadInfo>();
+        page.setPageSize(pageSize);
+        page.setPageIndex(pageIndex);
+        int count = downloadRecordDao.getCountByFilter(filter);
+        page.setRecord(count);
+        
+        filter.put("stratRow", page.getSartRow());
+        filter.put("endRow", page.getEndRow());
+        List<PotenFileDownloadInfo> downloadRecordList = downloadRecordDao.getPfdiByFilter(filter);
+        page.setDataList(downloadRecordList);
+        return page;
     }
 }
