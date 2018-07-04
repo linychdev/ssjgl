@@ -56,8 +56,8 @@ public class SearchRecordDaoImpl extends AbstractDao implements ISearchRecordDao
      */
     @Override
     public int getCountByFilter(Map<String, Object> filter) {
-        // TODO Auto-generated method stub
-        return 0;
+        String statement = mapperNamespace + ".selectCountByFilter";
+        return this.getSqlSession().selectOne(statement, filter);
     }
 
     /** (non-Javadoc)
@@ -65,8 +65,8 @@ public class SearchRecordDaoImpl extends AbstractDao implements ISearchRecordDao
      */
     @Override
     public List<SearchRecordInfo> getSearchRecordInfoByFilter(Map<String, Object> filter) {
-        // TODO Auto-generated method stub
-        return null;
+        String statement = mapperNamespace + ".selectByFilter";
+        return this.getSqlSession().selectList(statement, filter);
     }
 
 }

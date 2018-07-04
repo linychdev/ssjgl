@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
             <div class="col-md-4 " >
-					<div class = "figure" >
+					<div class = "figure backimg" >
 						<div class ="row">
 							<div class = "col-xs-12 ">
 								<div class="figure-top">
@@ -73,9 +73,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<div class="figure-middle">
 									${ymlll }
 								</div>
-							</div>
-							<div class = "col-xs-12 figure-bottom">
-								<img src="${pageContext.request.contextPath}/img/u1449.png" class="img"></img>
 							</div>
 						</div>
 					</div>

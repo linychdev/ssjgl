@@ -16,6 +16,7 @@
 
   <resultMap id="SearchRecordInfoMap" type="com.ustb.ssjgl.visitlog.dao.bean.SearchRecordInfo" >
     <result column="c_search_text" property="searchText" jdbcType="VARCHAR" />
+    <result column="n_valid_search" property="nValidSearch" jdbcType="INTEGER" />
     <result column="searchTimes" property="searchTimes" jdbcType="INTEGER" />
     <result column="resultNumber" property="resultNumber" jdbcType="INTEGER" />
   </resultMap>
@@ -175,7 +176,7 @@
       c_search_text as searchText,
       count(*) as total
      from t_search_record
-    where d_operate_date between #{beginDate} and #{endDate}
+    where d_search_time between #{beginDate} and #{endDate}
  group by c_search_text
  order by count(*) desc
  limit 5
@@ -186,7 +187,7 @@
       c_search_text as searchText,
       count(*) as total
      from t_search_record
-    where d_operate_date between #{beginDate} and #{endDate}
+    where d_search_time between #{beginDate} and #{endDate}
       and n_valid_search = 0
  group by c_search_text
  order by count(*) desc
@@ -198,34 +199,49 @@
       c_search_text as searchText,
       count(*) as total
      from t_search_record
-    where d_operate_date between #{beginDate} and #{endDate}
+    where d_search_time between #{beginDate} and #{endDate}
       and n_result_num = 1
  group by c_search_text
  order by count(*) desc
  limit 5
   </select>
 
-  <select id="" resultMap="SearchRecordInfoMap" parameterType="java.util.Map" >
+  <select id="selectCountByFilter" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select 
+    count(*)
+    from t_search_record
+   where d_search_time between #{beginDate} and #{endDate}
+    <where>  
+       <if test="validSearch!=null">  
+            and n_valid_search = #{validSearch}
+       </if>  
+    </where>
+  </select>
+    
+
+  <select id="selectByFilter" resultMap="SearchRecordInfoMap" parameterType="java.util.Map" >
     select 
     record.c_search_text,
+    record.n_valid_search,
     record.searchTimes,
     count(tag.c_id) as resultNumber
     from (
     select 
     c_search_text,
+    n_valid_search,
     count(*) as searchTimes
     from t_search_record
-    where d_operate_date between #{beginDate} and #{endDate}
+    where d_search_time between #{beginDate} and #{endDate}
      <where>  
        <if test="validSearch!=null">  
             and n_valid_search = #{validSearch}
        </if>  
     </where>
-    GROUP BY c_search_text 
+    GROUP BY c_search_text,n_valid_search
     )record
     left join t_element_comb_tag tag on (record.c_search_text = tag.c_tag)
-    GROUP BY record.c_search_text, record.searchTime
-    ORDER BY record.searchTime DESC
+    GROUP BY record.c_search_text, record.searchTimes
+    ORDER BY record.searchTimes DESC
     limit #{stratRow}, #{endRow} 
   </select>
 </mapper>

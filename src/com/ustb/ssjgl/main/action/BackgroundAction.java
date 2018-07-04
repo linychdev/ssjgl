@@ -628,11 +628,12 @@ public class BackgroundAction extends AbstractAction{
         
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
+        String validSearch = request.getParameter("validSearch");
         if(beginDate == null){
-            beginDate = DateUtils.formatDate(DateUtils.addDays(new Date(), -30),"yyyy-MM-dd");
+            beginDate = DateUtils.formatDate(new Date(0),"yyyy-MM-dd");
         }
         if(endDate == null){
-            endDate = DateUtils.formatDate(new Date(),"yyyy-MM-dd");
+            endDate = DateUtils.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         }
         
         JSONArray hotSearchJsonArray = new JSONArray();
@@ -649,7 +650,7 @@ public class BackgroundAction extends AbstractAction{
             JSONObject json = new JSONObject();
             json.put("searchText", map.get("searchText"));
             json.put("total", map.get("total"));
-            hotSearchJsonArray.add(json);
+            invalidSearchJsonArray.add(json);
         }
         JSONArray hotPotenJsonArray = new JSONArray();
         List<Map<String,Integer>> hotPotenList = visitLogService.getHotPotenList(beginDate, endDate);
@@ -657,7 +658,7 @@ public class BackgroundAction extends AbstractAction{
             JSONObject json = new JSONObject();
             json.put("searchText", map.get("searchText"));
             json.put("total", map.get("total"));
-            hotSearchJsonArray.add(json);
+            hotPotenJsonArray.add(json);
         }
         
         
@@ -665,6 +666,9 @@ public class BackgroundAction extends AbstractAction{
         int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
         //默认每页显示15行
         int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
+        filter.put("endDate", endDate);
+        filter.put("beginDate", beginDate);
+        filter.put("validSearch", validSearch);
         
         Page<?> pageData = visitLogService.getSearchListByPaging(filter, pageSize, pageIndex);
         
@@ -674,8 +678,6 @@ public class BackgroundAction extends AbstractAction{
         mode.addObject("invalidSearchListJson", invalidSearchJsonArray);
         mode.addObject("hotPotenListJson", hotPotenJsonArray);
         mode.addObject("pageData", pageData);
-        mode.addObject("beginDate", "'"+beginDate+"'");
-        mode.addObject("endDate", "'"+endDate+"'");
         mode.setViewName("background/searchLog");
         return mode;
     }
