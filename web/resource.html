@@ -82,7 +82,7 @@
 		    </div>
 			</div class="row">
             <div class="col-md-4 " >
-					<div class = "figure" >
+					<div class = "figure backimg" >
 						<div class ="row">
 							<div class = "col-xs-12 ">
 								<div class="figure-top">
@@ -93,9 +93,6 @@
 								<div class="figure-middle">
 									6
 								</div>
-							</div>
-							<div class = "col-xs-12 figure-bottom">
-								<img src="img/u1449.png" class="img"></img>
 							</div>
 						</div>
 					</div>
@@ -156,12 +153,58 @@
 					</div>
 				</div>
 				
+				<div class="col-md-12 up" >
+					<div class="trend">
+							<div class="trendFigure" id="resourceFigure">	
+							</div>
+					</div>
+				</div>
 				
-			</div>	
-					
-				
+			</div>		
         </div>
 	</div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('resourceFigure'));
+ 
+        // 指定图表的配置项和数据
+        var option = {
+    title : {
+        text: '势的个数',
+        subtext: '数据来自于当前数据库'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:[]
+    },
+ 
+    calculable : true,
+    xAxis : [
+        {
+            type : 'value',
+            boundaryGap : [0, 0.01]
+        }
+    ],
+    yAxis : [
+        {
+            type : 'category',
+            data : ['Semiconductors','Ionic Crystals','Interface','Metal Alloys','Others']
+        }
+    ],
+    series : [
+        {
+            type:'bar',
+            data:[1020, 160, 120, 110, 20]
+        },
+  
+    ]
+};
+                    
+        // 使用刚指定的配置项和数据显示图表。
+       myChart.setOption(option); 
+  </script> 
 
 
 </body>
