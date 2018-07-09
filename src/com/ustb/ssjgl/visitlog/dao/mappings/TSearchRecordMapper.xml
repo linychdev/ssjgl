@@ -15,6 +15,7 @@
   </resultMap>
 
   <resultMap id="SearchRecordInfoMap" type="com.ustb.ssjgl.visitlog.dao.bean.SearchRecordInfo" >
+    <result column="rownum" property="rownum" jdbcType="INTEGER" />
     <result column="c_search_text" property="searchText" jdbcType="VARCHAR" />
     <result column="n_valid_search" property="nValidSearch" jdbcType="INTEGER" />
     <result column="searchTimes" property="searchTimes" jdbcType="INTEGER" />
@@ -207,19 +208,29 @@
   </select>
 
   <select id="selectCountByFilter" resultType="java.lang.Integer" parameterType="java.util.Map" >
-    select 
-    count(*)
-    from t_search_record
-   where d_search_time between #{beginDate} and #{endDate}
-    <where>  
-       <if test="validSearch!=null">  
-            and n_valid_search = #{validSearch}
-       </if>  
-    </where>
+    
+    select count(*) 
+      from (
+		select
+				1
+				from
+					t_search_record
+				 where d_search_time between #{beginDate} and #{endDate}
+			   <where>  
+			      <if test="validSearch!=null">  
+			           and n_valid_search = #{validSearch}
+			      </if>  
+			   </where>
+				group by
+					c_search_text,
+					n_valid_search
+		)a
   </select>
     
 
   <select id="selectByFilter" resultMap="SearchRecordInfoMap" parameterType="java.util.Map" >
+    
+    select @rownum := @rownum + 1 AS rownum,c_search_text,n_valid_search,searchTimes,resultNumber from (
     select 
     record.c_search_text,
     record.n_valid_search,
@@ -243,5 +254,7 @@
     GROUP BY record.c_search_text, record.searchTimes
     ORDER BY record.searchTimes DESC
     limit #{stratRow}, #{endRow} 
+    ) obj,
+	(SELECT @rownum := #{stratRow}) r
   </select>
 </mapper>

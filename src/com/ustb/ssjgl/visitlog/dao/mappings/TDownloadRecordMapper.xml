@@ -13,6 +13,7 @@
   </resultMap>
 
   <resultMap id="fileDownloadInfoResultMap" type="com.ustb.ssjgl.visitlog.dao.bean.PotenFileDownloadInfo" >
+    <result column="rownum" property="rownum" jdbcType="INTEGER" />
     <result column="c_download_file_name" property="fileName" jdbcType="VARCHAR" />
     <result column="n_size" property="size" jdbcType="INTEGER" />
     <result column="n_download_times" property="downLoadTimes" jdbcType="INTEGER" />
@@ -162,7 +163,7 @@
     
     
   <select id="selectByFilter" resultMap="fileDownloadInfoResultMap" parameterType="java.util.Map" >
-
+select  @rownum := @rownum + 1 AS rownum, c_download_file_name, n_size, n_download_times from (
   select 
     file.c_file_name as c_download_file_name,
     file.n_size as n_size,
@@ -173,6 +174,19 @@
     GROUP BY record.c_download_file_id 
     ORDER BY  count(*) DESC
     limit #{stratRow}, #{endRow} 
+    ) as obj,
+	(SELECT @rownum := #{stratRow}) r
   </select>
+  
+    <select id="selectDownLoadListByBeginEnd" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      DATE_FORMAT(d_download_date,'%m/%d') as dateStr,
+	  count(*) as total
+    from t_download_record
+    where d_download_date between #{beginDate} and #{endDate}
+group by d_download_date
+  </select>
+  
+  
   
 </mapper>

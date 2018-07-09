@@ -681,6 +681,55 @@ public class BackgroundAction extends AbstractAction{
         mode.setViewName("background/searchLog");
         return mode;
     }
+
+    /**
+     * 获取活跃度页面
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/downloadPage")
+    @ResponseBody
+    public ModelAndView getDownLoadPage(HttpServletRequest request, HttpServletResponse response) {
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
+        if(beginDate == null){
+            beginDate = DateUtils.formatDate(DateUtils.addDays(new Date(), -30),"yyyy-MM-dd");
+        }
+        if(endDate == null){
+            endDate = DateUtils.formatDate(new Date(),"yyyy-MM-dd");
+        }
+        
+        int totalDownLoadNum = visitLogService.getTotalDownloadTimes();
+        int tjqDownLoadNum = visitLogService.getTjqDownloadVisitTimes(beginDate, endDate);
+        
+        JSONArray tjqDownLoadListJsonArray = new JSONArray();
+        List<Map<String,Integer>> downLoadList = visitLogService.getDownloadList(beginDate, endDate);
+        for (Map<String, Integer> map : downLoadList) {
+            JSONObject json = new JSONObject();
+            json.put("dateStr", map.get("dateStr"));
+            json.put("total", map.get("total"));
+            tjqDownLoadListJsonArray.add(json);
+        }
+        
+        Map<String, Object> filter = Maps.newHashMap();
+        int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
+        //默认每页显示15行
+        int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 2);
+        filter.put("endDate", endDate);
+        filter.put("beginDate", beginDate);
+        
+        Page<?> pageData = visitLogService.getDownloadListByPaging(filter, pageSize, pageIndex);
+        
+        ModelAndView mode = new ModelAndView();
+        mode.addObject("totalDownLoadNum", totalDownLoadNum);
+        mode.addObject("tjqDownLoadNum", tjqDownLoadNum);
+        mode.addObject("tjqDownLoadListJson", tjqDownLoadListJsonArray);
+        mode.addObject("beginDate", "'"+beginDate+"'");
+        mode.addObject("endDate", "'"+endDate+"'");
+        mode.addObject("pageData", pageData);
+        mode.setViewName("background/downLoadLog");
+        return mode;
+    }
     
 
     @RequestMapping("/background/deleteUser")

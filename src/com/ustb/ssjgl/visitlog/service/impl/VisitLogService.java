@@ -6,11 +6,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.visitlog.dao.IDownloadRecordDao;
@@ -210,5 +212,24 @@ public class VisitLogService implements IVisitLogService {
         List<PotenFileDownloadInfo> downloadRecordList = downloadRecordDao.getPfdiByFilter(filter);
         page.setDataList(downloadRecordList);
         return page;
+    }
+
+    @Override
+    public int getTotalDownloadTimes() {
+        return downloadRecordDao.getCount();
+    }
+
+    @Override
+    public int getTjqDownloadVisitTimes(String beginDate, String endDate) {
+        Map<String, Object> filter = Maps.newHashMap();
+        filter.put("beginDate", beginDate);
+        filter.put("endDate", endDate);
+        return downloadRecordDao.getCountByFilter(filter);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getDownloadList(String beginDate,
+            String endDate) {
+        return downloadRecordDao.getDownLoadListByBeginEnd(beginDate, endDate);
     }
 }

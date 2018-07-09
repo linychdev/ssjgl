@@ -13,6 +13,7 @@ package com.ustb.ssjgl.visitlog.dao.bean;
  *
  */
 public class PotenFileDownloadInfo {
+    private Integer rownum;
     private String fileName;
     private Integer size;
     private Integer downLoadTimes;
@@ -52,5 +53,11 @@ public class PotenFileDownloadInfo {
      */
     public void setDownLoadTimes(Integer downLoadTimes) {
         this.downLoadTimes = downLoadTimes;
+    }
+    public Integer getRownum() {
+        return rownum;
+    }
+    public void setRownum(Integer rownum) {
+        this.rownum = rownum;
     }
 }
