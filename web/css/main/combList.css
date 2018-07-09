@@ -2,6 +2,7 @@ html, body{
     -webkit-text-size-adjust:none;
 	color: #444;
     font-family: "RobotoDraft", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	min-width:1200px;
 }
 
 .header{
@@ -89,12 +90,41 @@ html, body{
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: .25em;
-	color:#0000ff;
+	color:blue;
+	font-weight:normal;
 }
-#wordcloud.panel{
-       position: relative;
-       width: 1000px;
-       height: 600px;
-       margin: 0 auto;
-       background: #fff;
+
+.second_left{
+	width:140px;
+	float:left;
+	margin-top:10px;
+}
+
+.second_right{
+	width:1040px;
+	height:100%;
+	float:left;
+	margin-left:18px;
+}
+
+.second_left_up{
+	width:140px;
+	height:30px;
+	font-size:16px;
+	text-align:center;
+	line-height:30px;
+}
+.second_left__down{
+	width:140px;
+	font-size:12px;
+	border:1px solid  rgba(235, 235, 235, 1);
+	text-align:center;
+	overflow:auto;
+}
+
+.second_left_down ul li {
+	line-height:25px;
+	height:25px;
+	text-align:center;
+	list-style: none;
 }
