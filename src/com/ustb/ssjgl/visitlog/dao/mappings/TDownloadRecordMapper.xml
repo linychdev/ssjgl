@@ -170,7 +170,7 @@ select  @rownum := @rownum + 1 AS rownum, c_download_file_name, n_size, n_downlo
     count(*) as n_download_times
     from t_download_record record
     LEFT JOIN t_potentials_file file on (record.c_download_file_id = file.c_id)
-    where d_download_time between #{beginDate} and #{endDate}
+    where d_download_date between #{beginDate} and #{endDate}
     GROUP BY record.c_download_file_id 
     ORDER BY  count(*) DESC
     limit #{stratRow}, #{endRow} 

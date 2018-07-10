@@ -116,4 +116,9 @@ public class PotenFunctionServiceImpl implements IPotenFunctionService{
     public TPotentialsFunction selectByName(String funName) {
         return potentialsFunctionDao.selectByFunName(funName);
     }
+
+    @Override
+    public int getCountFunctionNum() {
+        return potentialsFunctionDao.selectCountNum();
+    }
 }

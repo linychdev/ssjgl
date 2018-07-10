@@ -56,4 +56,6 @@ public interface IPotenFunctionService {
      * @return
      */
     public TPotentialsFunction selectByName(String funName);
+
+    public int getCountFunctionNum();
 }

@@ -184,4 +184,10 @@
       and c_name = #{cName,jdbcType=VARCHAR}
  order by d_time desc
   </select>
+  
+    <select id="selectCountNum" resultType="java.lang.Integer" >
+	select 
+	count(*)
+	 from t_potentials_function
+  </select>
 </mapper>

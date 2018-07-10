@@ -203,6 +203,13 @@
 	</where>
   </select>
 
+  <select id="selectCountNum" resultType="java.lang.Integer" >
+	SELECT 
+	count(*)
+	 from t_element_combination comb
+	where comb.n_valid = 1
+  </select>
+
   <select id="selectByFilter" resultMap="BaseResultMap" parameterType="java.util.Map" >
 	SELECT 
 	<include refid="Base_Column_List" />
@@ -220,5 +227,14 @@
 	limit #{stratRow}, #{endRow} 
   </select>
   
+  <select id="selectPotenGroup" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      scope.c_name as groupName,
+      count(*) as total
+     from t_potentials_scope scope 
+left join t_element_combination comb on (scope.c_id = comb.c_scope_id)
+group by scope.c_name
+ order by count(*) desc
+  </select>
   
 </mapper>

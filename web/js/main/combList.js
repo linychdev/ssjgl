@@ -1,5 +1,5 @@
 $(function(){
-	var chart = echarts.init(document.getElementById('wordcloud'));
+	/*var chart = echarts.init(document.getElementById('wordcloud'));
     var option = {
         tooltip: {},
         series: [ {
@@ -40,7 +40,7 @@ $(function(){
        tmp.focus()  
        tmp.location=contextPath+"/search/detail/"+selectVal;  
     });
-    window.onresize = chart.resize;
+    window.onresize = chart.resize;*/
     
     
     $(".element-label .label-define").on("click",function(){

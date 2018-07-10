@@ -48,7 +48,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li ><i class="fa fa-list-ul fa-fw"></i>&nbsp;势数据列表</a></li>
                 <li style="float:right"><a href = "javascript:void(0);" id = "addPotenButton"><i class="fa fa-plus fa-fw"></i></a>新增势数据</a></li>
             </ul>
-            <div class ="col-md-12">
+            <div class ="col-md-3">
+            	<form class="form-inline">
+					  <div class="form-group">
+					    <p class="form-control-static">势数据名称：</p>
+					  </div>
+					  <div class="form-group">
+					    <input type="password" class="form-control" id="inputPassword2" placeholder="请输入势数据名称">
+					  </div>
+				</form>
+            </div>
+            <div class ="col-md-2">
+            	<form class="form-inline">
+					  <div class="form-group">
+					    <p class="form-control-static">势数据类型：</p>
+					  </div>
+					  <div class="form-group">
+					    <select class="form-control">
+						  <option>Metal Alloys</option>
+						  <option>Semiconductors</option>
+						  <option>Ionic Crystals</option>
+						  <option>Interface</option>
+						  <option>Others</option>
+						</select>
+					 </div>
+				</form>
+            </div>
+            <div class ="col-md-1 ">
+            	 <button type="submit" class="btn btn-primary">查询</button>
+            </div>
+            <div class ="col-md-12" style="margin-top:20px;">
                 <table class = "table table-striped table-responsive">
                     <tr>
                         <th>序号</th>

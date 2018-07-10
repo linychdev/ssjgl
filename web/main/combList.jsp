@@ -51,8 +51,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</c:forEach>  
 			</p>
 		</div>
-		<div id="wordcloud" class="panel">
-		</div>
+		<!-- <div id="wordcloud" class="panel">
+		</div> -->
    </div>
 </body>
 </html>
