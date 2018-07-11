@@ -235,8 +235,6 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                     "<option value='44192139591811e8a71b1c1b0da988f2'>Ionic Crystals</option>"+
                     "<option value='44192139591811e8a71b1c1b0da988f3'>Interface</option>"+
                     "<option value='44192139591811e8a71b1c1b0da988f4'>Others</option>"+
-                    "<option value='6'>aa</option>"+
-                    "<option value='7'>bb</option>"+
                     "</select>"+
                 "</div>"+
                 "</div>"+
@@ -309,7 +307,7 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                         }
                     }
                 });
-    return _html.html();
+    return potenEditHtml;
 }
 
 

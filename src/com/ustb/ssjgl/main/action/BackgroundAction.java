@@ -507,6 +507,14 @@ public class BackgroundAction extends AbstractAction{
     @ResponseBody
     public ModelAndView getPotenDataList(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> filter = Maps.newHashMap();
+        String scopeId = request.getParameter("scopeId");
+        String combName = request.getParameter("combName");
+        if(StringUtils.isNotBlank(scopeId)){
+            filter.put("scopeId", scopeId);
+        }
+        if(StringUtils.isNotBlank(combName)){
+            filter.put("combName", combName);
+        }
         int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
         //默认每页显示15行
         int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
@@ -514,6 +522,9 @@ public class BackgroundAction extends AbstractAction{
         Page<?> pageData = interPotenService.getShowInfoListByPaging(filter, pageSize, pageIndex);
         List<TElement> elementList = interPotenService.getAllElements();
         ModelAndView mode = new ModelAndView();
+        
+        mode.addObject("scopeId", scopeId != null ? scopeId : "");
+        mode.addObject("combName", combName != null ? combName : "");
         mode.addObject("pageData", pageData);
         mode.addObject("elementList", elementList);
         mode.setViewName("background/dataList");

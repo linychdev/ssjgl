@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <p class="form-control-static">势数据名称：</p>
 					  </div>
 					  <div class="form-group">
-					    <input type="password" class="form-control" id="inputPassword2" placeholder="请输入势数据名称">
+					    <input type="input" class="form-control filter-poten-name" placeholder="请输入势数据名称" value="${combName}">
 					  </div>
 				</form>
             </div>
@@ -64,18 +64,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <p class="form-control-static">势数据类型：</p>
 					  </div>
 					  <div class="form-group">
-					    <select class="form-control">
-						  <option>Metal Alloys</option>
-						  <option>Semiconductors</option>
-						  <option>Ionic Crystals</option>
-						  <option>Interface</option>
-						  <option>Others</option>
+					    <input type="input" class="hidden-scopeId display_none" value="${scopeId}">
+					    <select class="form-control filter-poten-group">
+						 	<option value="">scope</option>
+						 	<option value="44192139591811e8a71b1c1b0da988f8">Metal Alloys</option>
+							<option value="44192139591811e8a71b1c1b0da988f1">Semiconductors</option>
+							<option value="44192139591811e8a71b1c1b0da988f2">Ionic Crystals</option>
+							<option value="44192139591811e8a71b1c1b0da988f3">Interface</option>
+							<option value="44192139591811e8a71b1c1b0da988f4">Others</option>
 						</select>
 					 </div>
 				</form>
             </div>
             <div class ="col-md-1 ">
-            	 <button type="submit" class="btn btn-primary">查询</button>
+            	 <button type="submit" class="btn btn-primary filter-search">查询</button>
             </div>
             <div class ="col-md-12" style="margin-top:20px;">
                 <table class = "table table-striped table-responsive">

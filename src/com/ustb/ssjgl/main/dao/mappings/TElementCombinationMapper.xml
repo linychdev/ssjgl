@@ -193,14 +193,12 @@
 	count(*)
 	 from t_element_combination comb
 	where comb.n_valid = 1
- 	 <where>  
-	   <if test="scopeId!=null">  
-	        and comb.c_scope_id = #{scopeId}  
-	   </if>  
-	   <if test="combName!=null">  
-	        and comb.c_comb_name = #{combName}  
-	   </if>  
-	</where>
+   <if test="scopeId!=null">  
+        and comb.c_scope_id = #{scopeId}  
+   </if>  
+   <if test="combName!=null">  
+        and comb.c_comb_name like concat(concat('%',#{combName}),'%')
+   </if>  
   </select>
 
   <select id="selectCountNum" resultType="java.lang.Integer" >
@@ -215,14 +213,12 @@
 	<include refid="Base_Column_List" />
 	 from t_element_combination comb
 	where comb.n_valid = 1
-	 <where>  
-	   <if test="scopeId!=null">  
-	        and comb.c_scope_id = #{scopeId}  
-	   </if>  
-	   <if test="combName!=null">  
-	        and comb.c_comb_name = #{combName}  
-	   </if>  
-	</where>
+   <if test="scopeId!=null">  
+        and comb.c_scope_id = #{scopeId}  
+   </if>  
+   <if test="combName!=null">  
+        and comb.c_comb_name like concat(concat('%',#{combName}),'%')
+   </if>  
 	order by comb.n_order, comb.d_time desc
 	limit #{stratRow}, #{endRow} 
   </select>

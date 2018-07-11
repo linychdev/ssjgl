@@ -216,11 +216,9 @@
 				from
 					t_search_record
 				 where d_search_time between #{beginDate} and #{endDate}
-			   <where>  
 			      <if test="validSearch!=null">  
 			           and n_valid_search = #{validSearch}
 			      </if>  
-			   </where>
 				group by
 					c_search_text,
 					n_valid_search
@@ -243,11 +241,9 @@
     count(*) as searchTimes
     from t_search_record
     where d_search_time between #{beginDate} and #{endDate}
-     <where>  
-       <if test="validSearch!=null">  
-            and n_valid_search = #{validSearch}
-       </if>  
-    </where>
+    <if test="validSearch!=null">  
+         and n_valid_search = #{validSearch}
+    </if>  
     GROUP BY c_search_text,n_valid_search
     )record
     left join t_element_comb_tag tag on (record.c_search_text = tag.c_tag)

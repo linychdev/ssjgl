@@ -17,6 +17,20 @@ $(function () {
      });
     });
   
+  $(".filter-poten-group option").each(function(){
+	  if($(this).val() == $(".hidden-scopeId").val()){
+		  $(this)[0].selected = true;
+          $(this).siblings()[0].selected = false;
+	  }
+  });
+  
+  $(".filter-search").on("click",function(){
+	  var filterPotenGroup = $(".filter-poten-group option:selected").val() ? $(".filter-poten-group option:selected").val() : "";
+	  var filterPotenName = $(".filter-poten-name").val() ? $(".filter-poten-name").val() : "";
+	  $(location).attr("href", "dataList?scopeId="+filterPotenGroup + "&combName="+filterPotenName);
+  });
+  
+  
     layui.use('element', function(){
         var $ = layui.jquery;
         var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
