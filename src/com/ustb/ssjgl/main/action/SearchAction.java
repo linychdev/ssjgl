@@ -108,6 +108,8 @@ public class SearchAction extends AbstractAction{
             }
         }
         
+        List<Map<String, Object>> allPoten = interPotenService.getAllCombMap();
+        
         ModelAndView mode = new ModelAndView();
         mode.setViewName("main/combList");
         mode.addObject("validSearch", validSearch);
@@ -115,6 +117,7 @@ public class SearchAction extends AbstractAction{
         mode.addObject("combListJson", jsonArray.toString());
         mode.addObject("searchText", tag);
         mode.addObject("groupMap", groupMap);
+        mode.addObject("allPoten", allPoten);
         return mode;
     }
 

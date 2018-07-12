@@ -70,4 +70,10 @@ public class ElementCombDaoImpl extends AbstractDao implements IElementCombDao {
         return this.getSqlSession().selectList(statement);
     }
 
+    @Override
+    public List<Map<String, Object>> getAllCombMap() {
+        String statement = mapperNamespace + ".selectAllCombMap";
+        return this.getSqlSession().selectList(statement);
+    }
+
 }

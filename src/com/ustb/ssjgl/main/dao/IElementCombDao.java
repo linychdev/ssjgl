@@ -59,5 +59,7 @@ public interface IElementCombDao extends IAbstractDao{
     public int getCountNum();
 
     public List<Map<String, Integer>> getPotenGroup();
+
+    public List<Map<String, Object>> getAllCombMap();
     
 }

@@ -173,4 +173,6 @@ public interface IInterPotenService {
     public int getCountFileNum();
 
     public List<Map<String, Integer>> getPotenGroup();
+
+    public List<Map<String, Object>> getAllCombMap();
 }

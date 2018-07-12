@@ -355,4 +355,9 @@ public class InterPotenServiceImpl implements IInterPotenService {
     public List<Map<String, Integer>> getPotenGroup() {
         return elementCombDao.getPotenGroup();
     }
+
+    @Override
+    public List<Map<String, Object>> getAllCombMap() {
+        return elementCombDao.getAllCombMap();
+    }
 }

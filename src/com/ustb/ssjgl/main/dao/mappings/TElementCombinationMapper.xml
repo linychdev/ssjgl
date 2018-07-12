@@ -233,4 +233,12 @@ group by scope.c_name
  order by count(*) desc
   </select>
   
+  <select id="selectAllCombMap" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      c_id as id,
+      c_comb_name as combName
+     from t_element_combination
+ order by c_comb_name
+  </select>
+  
 </mapper>
