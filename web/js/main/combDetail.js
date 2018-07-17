@@ -41,4 +41,17 @@ $(function(){
          form.append($("<input></input>").attr("type", "hidden").attr("name", "fileName").attr("value", fileName));
          form.appendTo('body').submit().remove();
     });
+    
+    $(".second_left_down ul li").on("click",function(){
+    	var selectVal = $(this).attr("id"); 
+    	selectDetail(selectVal);
+    });
+    
+    function selectDetail(selectVal){
+    	var tmp=window.open("about:blank")  
+    	tmp.moveTo(0,0)  
+    	tmp.resizeTo(screen.width+20,screen.height)  
+    	tmp.focus()  
+    	tmp.location=contextPath+"/search/detail/"+selectVal;
+    }
 });

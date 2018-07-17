@@ -235,10 +235,13 @@ group by scope.c_name
   
   <select id="selectAllCombMap" resultType="java.util.Map" parameterType="java.util.Map" >
     select 
-      c_id as id,
-      c_comb_name as combName
-     from t_element_combination
- order by c_comb_name
+      comb.c_id as id,
+      comb.c_comb_name as combName,
+      scope.c_name as groupName
+     from t_potentials_scope scope
+     left join t_element_combination comb on (scope.c_id = comb.c_scope_id)
+     where comb.c_id is not null
+ order by comb.c_comb_name
   </select>
   
 </mapper>

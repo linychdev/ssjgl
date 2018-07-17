@@ -48,14 +48,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  aria-controls="sidebar-nav">
 						<i class="glyphicon glyphicon-menu-hamburger"></i> Navigation
 					</a> -->
-					<h3>resources</h3>
+					<h3>total potentials</h3>
+					<div class="second_left_down">
 					<ul class = "sidebar-nav ">
-						<li><a href = "#">Semiconductors</a></li>
-						<li><a href = "#">Ionic Crystals</a></li>
-						<li><a href = "#">Interface</a></li>
-						<li><a href = "#">Metal Alloys</a></li>
-						<li><a href = "#">Others </a></li>
+						<c:forEach var="item" items="${allPoten}">
+							<strong>${item.key }:</strong>
+							<c:forEach items="${item.value}" var="it">   
+								<li id = "${it.id }">${it.combName }</li>
+							</c:forEach>
+						</c:forEach>
 					</ul>
+					</div>
+					
 <!-- 第一版没有访问量统计，暂不显示热门搜索和热门下载 	
 				<h3>Popular Searches</h3>
 					<ul class = "sidebar-nav ">

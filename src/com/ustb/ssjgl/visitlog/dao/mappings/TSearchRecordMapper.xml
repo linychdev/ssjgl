@@ -247,7 +247,7 @@
     GROUP BY c_search_text,n_valid_search
     )record
     left join t_element_comb_tag tag on (record.c_search_text = tag.c_tag)
-    GROUP BY record.c_search_text, record.searchTimes
+    GROUP BY record.c_search_text, record.n_valid_search, record.searchTimes
     ORDER BY record.searchTimes DESC
     limit #{stratRow}, #{endRow} 
     ) obj,

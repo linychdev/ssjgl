@@ -128,3 +128,19 @@ p {
 a.previewFile{
 	cursor: pointer;
 }
+.second_left_down{
+	width:140px;
+	font-size:12px;
+	border:1px solid  rgba(235, 235, 235, 1);
+	text-align:center;
+	overflow-y:auto;
+	height: 80%;
+}
+
+.second_left_down ul li {
+	line-height:25px;
+	height:25px;
+	text-align:center;
+	list-style: none;
+	cursor: pointer;
+}

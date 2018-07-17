@@ -42,12 +42,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="second_left_down">
 				<ul>
-				<c:forEach var="item" items="${allPoten}">   
-					<li id = "${item.id }">${item.combName }</li>
+				<c:forEach var="item" items="${allPoten}">
+					<strong>${item.key }:</strong>
+					<c:forEach items="${item.value}" var="it">   
+						<li id = "${it.id }">${it.combName }</li>
+					</c:forEach>
 				</c:forEach>
 				</ul>
              </div>				
-	   </div>
+	</div>
 	<div class = "second_right">
 		<blockquote>
 			<p> Potentials of ${searchText }</p>

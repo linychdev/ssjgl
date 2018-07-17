@@ -344,7 +344,7 @@ function getExistsFileHtml(fileId, fileName,fileType){
     
     var existsFileHtml = "<div class='col-xs-12 existsDiv' id = '"+fileId+"'>" +
                             "<label for='' class='col-xs-2 control-label'>文件类型:</label>"+
-                            "<div class='col-xs-3'>";
+                            "<div class='col-xs-3 poten-file-type'>";
                             if(fileType == 1){
                                 existsFileHtml += "参数文件";
                             }else{
