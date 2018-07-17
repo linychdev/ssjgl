@@ -1,9 +1,3 @@
-/*
- * @(#)CombFunParamInfo.java 2018年5月2日下午3:23:33
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.main.bean;
 
 import java.util.List;

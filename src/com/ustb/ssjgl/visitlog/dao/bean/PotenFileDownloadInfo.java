@@ -1,9 +1,3 @@
-/*
- * @(#)PotenFileDownloadInfo.java 2018年7月2日下午6:25:12
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.visitlog.dao.bean;
 
 /**

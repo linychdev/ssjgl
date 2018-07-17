@@ -1,9 +1,3 @@
-/*
- * @(#)CommonsException.java 2018年4月12日下午5:39:22
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.common.exception;
 
 /**
