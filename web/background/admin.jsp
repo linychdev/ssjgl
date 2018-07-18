@@ -77,6 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <li><a href="javascript:void(0);" id = "visiterManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;活跃度</a></li>
 						<li><a href="javascript:void(0);" id = "searchManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;检索统计</a></li>
 						<li><a href="javascript:void(0);" id = "downloadManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;下载统计</a></li>
+						<li><a href="javascript:void(0);" id = "resourceManager"><i class="fa fa-circle-o fa-fw"></i>&nbsp;资源统计</a></li>
                     </ul>
                 </li>
                 

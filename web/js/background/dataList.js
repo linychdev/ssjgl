@@ -17,6 +17,20 @@ $(function () {
      });
     });
   
+  $(".filter-poten-group option").each(function(){
+	  if($(this).val() == $(".hidden-scopeId").val()){
+		  $(this)[0].selected = true;
+          $(this).siblings()[0].selected = false;
+	  }
+  });
+  
+  $(".filter-search").on("click",function(){
+	  var filterPotenGroup = $(".filter-poten-group option:selected").val() ? $(".filter-poten-group option:selected").val() : "";
+	  var filterPotenName = $(".filter-poten-name").val() ? $(".filter-poten-name").val() : "";
+	  $(location).attr("href", "dataList?scopeId="+filterPotenGroup + "&combName="+filterPotenName);
+  });
+  
+  
     layui.use('element', function(){
         var $ = layui.jquery;
         var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -72,14 +86,17 @@ $(function () {
         layer.confirm('相关文献,文件等数据将会同步删除，确认删除？', {
             btn: ['删除','取消'] //按钮
           }, function(){
+        	  var l = layer.load(1, {shade: [0.1,'#fff']});
               $.post(contextPath + "/manage/deletePotentials", {
                   potentialsId:combId
                 }, 
                 function(data) {
                     if(data.success){
+                    	layer.close(l);
                         layer.msg("删除成功！",{time:500});
                         self.location.reload();
                     }else{
+                    	layer.close(l);
                         layer.msg(data.msg,{time:1000});
                     }
                 },
@@ -132,7 +149,7 @@ $(function () {
             var potenNote = $("#potenNote").val();
             var elements = $(".elementsArray button span.filter-option").text();
             var functions = $(".functionArray button span.filter-option").text();
-            
+            var l = layer.load(1, {shade: [0.1,'#fff']});
             $.post(contextPath + "/manage/addPotentials", {
                 combId:combId,
                 potenGroup:potenGroup,
@@ -144,9 +161,11 @@ $(function () {
             }, 
             function(data) {
                 if(data.success){
+                	layer.close(l);
                     _this.parents("form").attr("id",data.combId);
                     layer.msg("保存成功！",{time:1000});
                 }else{
+                	layer.close(l);
                     layer.msg(data.msg);
                 }
             },"json");
@@ -179,19 +198,23 @@ $(function () {
           //添加文献页面，小表单删除图标事件
           $("#myul").on("click",".remove-ref-div",function(){
               var refId = $(this).parent().attr("id");
+              var _this = $(this);
               if(refId && refId.trim() != ""){
                   layer.confirm('该文献已保存到了服务器，此操作将删除该文献的数据文件，确认删除？', {
                       btn: ['删除','取消'] //按钮
                     }, function(){
+                    	var l = layer.load(1, {shade: [0.1,'#fff']});
                         $.post(contextPath + "/manage/deletePotenReference", {
                             refId:refId
                           }, 
                           function(data) {
                               if(data.success){
+                            	  layer.close(l);
                                   layer.msg("删除成功！",{time:500});
-                                  $(this).parent().remove();
+                                  _this.parent().remove();
                                   $(".upload-file-tab").children("#"+refId).remove();
                               }else{
+                            	  layer.close(l);
                                   layer.msg(data.msg,{time:1000});
                               }
                           },
@@ -237,13 +260,20 @@ $(function () {
                   references.push(ref);
                });
               
+              if(references.length < 1){
+            	  layer.msg("请至少录入一条文献信息！",{time:1000});
+            	  return;
+              }
+              
               json.references = references;
               //向后台发送请求
+              var l = layer.load(1, {shade: [0.1,'#fff']});
               $.post(contextPath + "/manage/addPotenReference", {
                 potenRefJson:JSON.stringify(json)
               }, 
               function(data) {
                   if(data.success){
+                	  layer.close(l);
                       var refBeanList = data.refList;
                       //循环
                       $.each(refBeanList,function(index,item){
@@ -260,6 +290,7 @@ $(function () {
                       });
                       layer.msg("保存成功！");
                   }else{
+                	  layer.close(l);
                       layer.msg(data.msg);
                   }
               },"json");
@@ -272,15 +303,18 @@ $(function () {
                   btn: ['删除','取消'] //按钮
                 }, function(){
                     var fileId = _this.parents(".existsDiv").attr("id");
+                    var l = layer.load(1, {shade: [0.1,'#fff']});
                     $.post(contextPath + "/manage/deletePotenFile", {
                         fileId:fileId
                       }, 
                       function(data) {
                           if(data.success){
+                        	  layer.close(l);
                               layer.msg('删除成功！', {time: 500, icon: 1}, function(){
                                   _this.parents(".existsDiv").remove();
                               });
                           }else{
+                        	  layer.close(l);
                               layer.msg(data.msg,{time:1000});
                           }
                       },
@@ -298,6 +332,8 @@ $(function () {
               var formData = new FormData($(this).parents("form")[0]);
               formData.append("refId",refId);
               formData.append("potentialsType",potentialsType);
+              var _this = $(this);
+              var l = layer.load(1, {shade: [0.1,'#fff']});
               $.ajax({
                    url: contextPath + "/manage/uploadPotentialsFile",
                    method: "POST",  
@@ -305,18 +341,21 @@ $(function () {
                    contentType: false,
                    processData: false,
                    cache: false,
-                   success: function (resp) {
-                      if(resp.success){
-                         //成功提示
+                   success: function (data) {
+                	  var resp = JSON.parse(data);
+                      if( resp.success){
+                    	  layer.close(l);
                           var existsFileHtml = getExistsFileHtml(resp.potentialsFile.cId, resp.potentialsFile.cFileName);
+                          //成功提示
                           layer.msg('上传成功！', {time: 500, icon: 1}, function(){
-                              var file = $(this).parent().prev().children("input");
+                              var file = _this.parent().prev().children("input");
                               file.after(file.clone().val("")); 
                               file.remove(); 
-                              $(this).parents(".form-horizontal").find(".existsFileBox").append(existsFileHtml);
+                              _this.parents(".form-horizontal").find(".existsFileBox").append(existsFileHtml);
                           });
                       }else{
-                         //失败提示
+                    	  layer.close(l);
+                    	  //失败提示
                           layer.msg(resp.msg, {time: 1000, icon: 1});
                       }
                   }

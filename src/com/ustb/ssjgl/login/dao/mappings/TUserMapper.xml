@@ -231,11 +231,9 @@
     from t_user user
     where user.n_valid = 1
       and user.c_login_name <![CDATA[ <> ]]> 'admin'
-    <where>  
-	   <if test="userName!=null">  
-	        and user.c_login_name = #{userName}  
-	   </if>  
-	</where>
+   <if test="userName!=null">  
+        and user.c_login_name = #{userName}  
+   </if>  
   </select>
   
   <select id="selectByFilter" resultMap="BaseResultMap" parameterType="java.util.Map" >
@@ -244,11 +242,9 @@
       from t_user user
      where user.n_valid = 1
        and user.c_login_name <![CDATA[ <> ]]> 'admin'
-    <where>  
 	   <if test="userName!=null">  
 	        and user.c_login_name = #{userName}  
 	   </if>  
-	</where>
 order by user.n_order, user.d_time desc
 	limit #{stratRow}, #{endRow} 
   </select>

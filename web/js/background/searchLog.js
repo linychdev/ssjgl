@@ -161,4 +161,20 @@ $(function () {
 };           
     // 使用刚指定的配置项和数据显示图表。
    myChartInvalidSearch.setOption(optionInvalidSearch); 
+   
+   layui.use(['laypage', 'layer'], function(){
+	   var laypage = layui.laypage, layer = layui.layer;
+	   laypage.render({
+	        elem: 'searchLog-paging-div'
+	        ,count: record //从服务器获取到的数据总量
+	        ,layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+	           ,curr : pageIndex
+	           ,limit : pageSize
+	        ,jump: function(obj){
+	         if(obj.curr != pageIndex){
+	            $(location).attr("href", "searchPage?pageIndex="+obj.curr + "&pageSize="+obj.limit);
+	         }
+	        }
+	      });
+	     });
 });

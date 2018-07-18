@@ -3,6 +3,7 @@ package com.ustb.ssjgl.visitlog.dao.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.dao.AbstractDao;
 import com.ustb.ssjgl.visitlog.dao.IDownloadRecordDao;
 import com.ustb.ssjgl.visitlog.dao.bean.PotenFileDownloadInfo;
@@ -45,6 +46,16 @@ public class DownloadRecordDaoImpl extends AbstractDao implements IDownloadRecor
     @Override
     public List<PotenFileDownloadInfo> getPfdiByFilter(Map<String, Object> filter) {
         String statement = mapperNamespace + ".selectByFilter";
+        return this.getSqlSession().selectList(statement, filter);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getDownLoadListByBeginEnd(
+            String beginDate, String endDate) {
+        Map<String, String> filter = Maps.newHashMap();
+        filter.put("beginDate", beginDate);
+        filter.put("endDate", endDate);
+        String statement = mapperNamespace + ".selectDownLoadListByBeginEnd";
         return this.getSqlSession().selectList(statement, filter);
     }
 }

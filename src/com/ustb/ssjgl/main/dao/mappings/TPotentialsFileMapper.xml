@@ -165,4 +165,9 @@
        and n_valid = 1
   </delete>
   
+  <select id="selectCountNum" resultType="java.lang.Integer" >
+	select 
+	count(*)
+	 from t_potentials_file
+  </select>
 </mapper>

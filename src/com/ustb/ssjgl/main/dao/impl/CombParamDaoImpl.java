@@ -1,9 +1,3 @@
-/*
- * @(#)CombParamDaoImpl.java 2018年4月19日下午5:55:31
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.main.dao.impl;
 
 import java.util.List;

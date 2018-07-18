@@ -2,7 +2,6 @@ package com.ustb.ssjgl.main.service.impl;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
@@ -340,5 +339,25 @@ public class InterPotenServiceImpl implements IInterPotenService {
     @Override
     public List<String> getElementNamesHasPoten() {
         return elementDao.getElementNamesHasPoten();
+    }
+
+    @Override
+    public int getCountPotenNum() {
+        return elementCombDao.getCountNum();
+    }
+
+    @Override
+    public int getCountFileNum() {
+        return potentialsFileDao.getCountNum();
+    }
+
+    @Override
+    public List<Map<String, Integer>> getPotenGroup() {
+        return elementCombDao.getPotenGroup();
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllCombMap() {
+        return elementCombDao.getAllCombMap();
     }
 }

@@ -44,4 +44,6 @@ public interface IPotentialsFunctionDao extends IAbstractDao {
      * @return
      */
     public TPotentialsFunction selectByFunName(String funName);
+
+    public int selectCountNum();
 }

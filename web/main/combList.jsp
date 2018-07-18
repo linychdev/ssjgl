@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<link href="${pageContext.request.contextPath}/css/reset.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/main/combList.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -34,7 +35,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 <body>
   <jsp:include page="/header.jsp" flush="true" />
-	<div class  = "wrap container">
+	<div class  = "wrap ">
+	<div  class="second_left">
+			<div class="second_left_up">
+				total potentials
+			</div>
+			<div class="second_left_down">
+				<ul>
+				<c:forEach var="item" items="${allPoten}">
+					<strong>${item.key }:</strong>
+					<c:forEach items="${item.value}" var="it">   
+						<li id = "${it.id }">${it.combName }</li>
+					</c:forEach>
+				</c:forEach>
+				</ul>
+             </div>				
+	</div>
+	<div class = "second_right">
 		<blockquote>
 			<p> Potentials of ${searchText }</p>
 		</blockquote>
@@ -51,8 +68,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</c:forEach>  
 			</p>
 		</div>
-		<div id="wordcloud" class="panel">
 		</div>
+		<!-- <div id="wordcloud" class="panel">
+		</div> -->
    </div>
 </body>
 </html>

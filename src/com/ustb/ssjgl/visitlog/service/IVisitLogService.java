@@ -36,4 +36,11 @@ public interface IVisitLogService {
      * @return
      */
     Page<?> getDownloadListByPaging(Map<String, Object> filter, int pageSize, int pageIndex);
+
+    public int getTotalDownloadTimes();
+
+    public int getTjqDownloadVisitTimes(String beginDate, String endDate);
+
+    public List<Map<String, Integer>> getDownloadList(String beginDate,
+            String endDate);
 }

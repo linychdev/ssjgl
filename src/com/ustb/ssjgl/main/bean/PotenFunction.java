@@ -1,9 +1,3 @@
-/*
- * @(#)PotenFunction.java 2018年4月18日上午11:04:23
- * ssjgl
- * Copyright 2018 Thuisoft, Inc. All rights reserved.
- * THUNISOFT PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.ustb.ssjgl.main.bean;
 
 import java.util.List;

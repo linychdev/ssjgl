@@ -28,4 +28,7 @@ public interface IDownloadRecordDao extends IAbstractDao {
      */
     int getCount();
 
+    List<Map<String, Integer>> getDownLoadListByBeginEnd(String beginDate,
+            String endDate);
+
 }

@@ -3,6 +3,7 @@ html, body{
 	color: #444;
     font-family: "RobotoDraft", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	min-width:1200px;
+	overflow-y:hidden; 
 }
 
 .header{
@@ -80,6 +81,10 @@ html, body{
 .label-define {
     /* background-color: #66ccff; */
 }
+.element-label{
+	overflow-y:auto;
+	height: 100%; 
+}
 .element-label .label{
 	cursor:pointer;
 	padding-top: 5px;
@@ -108,9 +113,9 @@ html, body{
 }
 
 .second_left_up{
-	width:140px;
+	width:160px;
 	height:30px;
-	font-size:16px;
+	font-size:24px;
 	text-align:center;
 	line-height:30px;
 }
@@ -119,7 +124,8 @@ html, body{
 	font-size:12px;
 	border:1px solid  rgba(235, 235, 235, 1);
 	text-align:center;
-	overflow:auto;
+	overflow-y:auto;
+	height: 80%;
 }
 
 .second_left_down ul li {
@@ -127,4 +133,5 @@ html, body{
 	height:25px;
 	text-align:center;
 	list-style: none;
+	cursor: pointer;
 }

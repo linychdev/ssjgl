@@ -26,95 +26,105 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
-<script src="${pageContext.request.contextPath}/js/background/searchLog.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/background/resource.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/echarts.js"></script>
 <script type="text/javascript">
 	var contextPath = "<%=request.getContextPath()%>";
-	var hotSearchListJson = ${hotSearchListJson};
-	var invalidSearchListJson = ${invalidSearchListJson};
-	var hotPotenListJson = ${hotPotenListJson};
-    var record = ${pageData.record};
-    var pageIndex = ${pageData.pageIndex};
-    var pageSize = ${pageData.pageSize};
+	var potenGroupListJson = ${potenGroupListJson};
 </script>
 </head>	
 <body>	
-        <div class="maincontent "> 
+                <div class="maincontent "> 
 			<div class="row">
 			<!-- 通过给class 加style="display:none;隐藏DIV -->
             <!--主面板 start-->
-            <div class = "col-md-2">
+            <div class = "col-md-12">
 				<blockquote class = "block" >
-						检索统计
+						网站数据资源统计
 				</blockquote>	
 			</div>
+		    </div>
+			</div class="row">
+            <div class="col-md-4 " >
+					<div class = "figure backimg" >
+						<div class ="row">
+							<div class = "col-xs-12 ">
+								<div class="figure-top">
+									函数
+								</div>
+							</div>
+							<div class = "col-xs-12 ">
+								<div class="figure-middle">
+									${totalFunctioNum }
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4" >
-					<div class="bar">
-						<div class="barup headingText">
-							热门搜索
-						</div>
-						<div class="bardown" id="hotSearch">
-							
-						</div>
-					</div>
-				</div>
+			
+				<!-- 独立访客数 -->
 				<div class="col-md-4 " >
-					<div class="bar">
-						<div class="barup headingText">
-							热门访问
+					<div class = "figure">
+						<div class = "figure-left">
+							<div class = "img1">
+							  <div class="img2">
+								<img src="${pageContext.request.contextPath}/img/u1391.png"/>
+							  </div>
+							  <img src="${pageContext.request.contextPath}/img/u1389.png"/>
+							</div>
 						</div>
-						<div class="bardown" id="hotVisit">
-						
+						<div class = " figure-right">
+							<div class = "row">
+								<div class = "col-xs-12 ">
+									<div class="figure-top1">
+										势数据
+									</div>
+								</div>
+								<div class = "col-xs-12 ">
+									<div class="figure-middle1">
+										${totalPotenNum }
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				<!-- IP -->
 				<div class="col-md-4 ">
-					<div class="bar">
-						<div class="barup headingText">
-							无效检索
+					<div class = "figure">
+						<div class = "  figure-left">
+							<div class = "img1">
+							  <div class="img2">
+								<img src="${pageContext.request.contextPath}/img/u1415.png"/>
+							  </div>
+							  <img src="${pageContext.request.contextPath}/img/u1413.png"/>
+							</div>
 						</div>
-						<div class="bardown" id="invalidSearch">
-						 
+						<div class = " figure-right">
+							<div class = "row">
+								<div class = "col-xs-12 ">
+									<div class="figure-top1">
+										势文件
+									</div>
+								</div>
+								<div class = "col-xs-12 ">
+									<div class="figure-middle1">
+										${totalFileNum }
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div> 
-				<!-- 统计图结束 -->
-				<div class="col-md-12 bartop">
-				<table class="table table-bordered">
-					<tr>
-						<td class="tdbg">
-							排名
-						</td>
-						<td class="tdbg">
-							检索词
-						</td>
-						<td class="tdbg">
-							检索热度
-						</td>
-						<td class="tdbg">
-							检索结果数
-						</td>
-						<td class="tdbg">
-							检索到有效结果<i class="fa fa-filter fa-fw "></i>
-						</td>
-					</tr>
-					<c:forEach items="${pageData.dataList}" var="searchLog" varStatus="status">
-					<tr>
-						<td>${searchLog.rownum }</td>
-						<td>${searchLog.searchText }</td>
-						<td>${searchLog.searchTimes }</td>
-						<td>${searchLog.resultNumber }</td>
-						<td>${searchLog.cValid }</td>
-					</tr>
-					</c:forEach>
-				</table>
 				</div>
-				<div class = "col-md-8 col-md-offset-4 " id = "searchLog-paging-div" >
-	
-	            </div>
-			</div>			
+				
+				<div class="col-md-12 up" >
+					<div class="trend">
+							<div class="trendFigure" id="resourceFigure">	
+							</div>
+					</div>
+				</div>
+				
+			</div>		
         </div>
 </body>
 </html>

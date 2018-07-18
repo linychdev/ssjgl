@@ -10,12 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <title>Home</title> 
 	  <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1" /> 
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	  <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> 
+	  <link href="${pageContext.request.contextPath}/css/reset.css" rel="stylesheet" type="text/css" /> 
 	  <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
-      <%-- <link href="${pageContext.request.contextPath}/css/main/index.css" rel="stylesheet" type="text/css" />  --%>
 	  <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css" />
-  
       <script src="${pageContext.request.contextPath}/js/header.js"></script>
 	  <script type="text/javascript">
 	  	var contextPath = "<%=request.getContextPath()%>";
@@ -24,21 +21,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <body> 
   <!-- 头部开始 --> 
   	<div class="header">
-		<div class="container-fluid">
-			<div class = "row">
-				<div class = "col-md-4">
+		<div class="header-wrapper">
+				<div class = "left">
 					<div class = "logo">
 						<a href ="#">
 							<img src="${pageContext.request.contextPath}/img/logo20.png" alt="" style="width:100px; height:40px;">
 						</a>
 					</div>
-					<div class = "text1">
-						Interatomic Potentials Data
-						<br>
-						<div class="site-sologn">Part of the Materials Genetic Engineering Data</div>
+					<div class="left_text">
+						<div class="left_textup">
+							Interatomic Potentials Database
+						</div>
+						<div class="left_textdown">
+							Part of the Materials Genetic Engineering Data
+						</div>
 					</div>
 				</div>
-				<div class = "col-md-7">
+				<div class="right">
+					<div class="right_text1">
+						USTB
+					</div>
+					<div class="right_text2">
+						University of 
+					</div>
+					<div class="right_text2">
+						Science & Technology
+					</div>
+					<div class="right_text2">
+						Beijing,China
+					</div>
+		</div>
+				<div class = "headermain">
 					<nav class="navbar navbar-default"> 
 					   <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
 						<ul class="nav navbar-nav navbar-nav-right"> 
@@ -61,24 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   </div> 
 					</nav> 
 				</div>
-				<div class = "col-md-1">
-					<div class = "text2">
-						<div style = "font-size:30px;">USTB</div>
-						<div  style="font-weight: normal;">
-						<div>
-						University of 
-						</div>
-						<div style = "margin-top: -2px;">
-						Science & Technology 
-						</div>
-						<div style = "margin-top: -2px;">
-						Beijing,China
-						</div>
-						</div>
-					</div>
-				</div>
 			</div>
-		</div>
 	</div>
     <!-- //header --> 
  </body>

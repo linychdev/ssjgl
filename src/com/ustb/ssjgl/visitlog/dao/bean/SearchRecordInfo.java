@@ -11,6 +11,7 @@ public class SearchRecordInfo {
     private Integer searchTimes;
     private Integer resultNumber;
     private Integer nValidSearch;
+    private Integer rownum;
     private String cValid;
     
     public String getSearchText() {
@@ -46,5 +47,11 @@ public class SearchRecordInfo {
     }
     public void setcValid(String cValid) {
         this.cValid = cValid;
+    }
+    public Integer getRownum() {
+        return rownum;
+    }
+    public void setRownum(Integer rownum) {
+        this.rownum = rownum;
     }
 }

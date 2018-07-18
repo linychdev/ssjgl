@@ -193,14 +193,19 @@
 	count(*)
 	 from t_element_combination comb
 	where comb.n_valid = 1
- 	 <where>  
-	   <if test="scopeId!=null">  
-	        and comb.c_scope_id = #{scopeId}  
-	   </if>  
-	   <if test="combName!=null">  
-	        and comb.c_comb_name = #{combName}  
-	   </if>  
-	</where>
+   <if test="scopeId!=null">  
+        and comb.c_scope_id = #{scopeId}  
+   </if>  
+   <if test="combName!=null">  
+        and comb.c_comb_name like concat(concat('%',#{combName}),'%')
+   </if>  
+  </select>
+
+  <select id="selectCountNum" resultType="java.lang.Integer" >
+	SELECT 
+	count(*)
+	 from t_element_combination comb
+	where comb.n_valid = 1
   </select>
 
   <select id="selectByFilter" resultMap="BaseResultMap" parameterType="java.util.Map" >
@@ -208,17 +213,35 @@
 	<include refid="Base_Column_List" />
 	 from t_element_combination comb
 	where comb.n_valid = 1
-	 <where>  
-	   <if test="scopeId!=null">  
-	        and comb.c_scope_id = #{scopeId}  
-	   </if>  
-	   <if test="combName!=null">  
-	        and comb.c_comb_name = #{combName}  
-	   </if>  
-	</where>
+   <if test="scopeId!=null">  
+        and comb.c_scope_id = #{scopeId}  
+   </if>  
+   <if test="combName!=null">  
+        and comb.c_comb_name like concat(concat('%',#{combName}),'%')
+   </if>  
 	order by comb.n_order, comb.d_time desc
 	limit #{stratRow}, #{endRow} 
   </select>
   
+  <select id="selectPotenGroup" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      scope.c_name as groupName,
+      count(*) as total
+     from t_potentials_scope scope 
+left join t_element_combination comb on (scope.c_id = comb.c_scope_id)
+group by scope.c_name
+ order by count(*) desc
+  </select>
+  
+  <select id="selectAllCombMap" resultType="java.util.Map" parameterType="java.util.Map" >
+    select 
+      comb.c_id as id,
+      comb.c_comb_name as combName,
+      scope.c_name as groupName
+     from t_potentials_scope scope
+     left join t_element_combination comb on (scope.c_id = comb.c_scope_id)
+     where comb.c_id is not null
+ order by comb.c_comb_name
+  </select>
   
 </mapper>

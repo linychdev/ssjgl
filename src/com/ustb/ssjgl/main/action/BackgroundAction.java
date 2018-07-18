@@ -507,6 +507,14 @@ public class BackgroundAction extends AbstractAction{
     @ResponseBody
     public ModelAndView getPotenDataList(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> filter = Maps.newHashMap();
+        String scopeId = request.getParameter("scopeId");
+        String combName = request.getParameter("combName");
+        if(StringUtils.isNotBlank(scopeId)){
+            filter.put("scopeId", scopeId);
+        }
+        if(StringUtils.isNotBlank(combName)){
+            filter.put("combName", combName);
+        }
         int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
         //默认每页显示15行
         int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
@@ -514,6 +522,9 @@ public class BackgroundAction extends AbstractAction{
         Page<?> pageData = interPotenService.getShowInfoListByPaging(filter, pageSize, pageIndex);
         List<TElement> elementList = interPotenService.getAllElements();
         ModelAndView mode = new ModelAndView();
+        
+        mode.addObject("scopeId", scopeId != null ? scopeId : "");
+        mode.addObject("combName", combName != null ? combName : "");
         mode.addObject("pageData", pageData);
         mode.addObject("elementList", elementList);
         mode.setViewName("background/dataList");
@@ -618,7 +629,7 @@ public class BackgroundAction extends AbstractAction{
     }
 
     /**
-     * 获取活跃度页面
+     * 获取搜索统计页面
      * @param request
      * @param response
      */
@@ -679,6 +690,85 @@ public class BackgroundAction extends AbstractAction{
         mode.addObject("hotPotenListJson", hotPotenJsonArray);
         mode.addObject("pageData", pageData);
         mode.setViewName("background/searchLog");
+        return mode;
+    }
+
+    /**
+     * 获取下载统计页面
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/downloadPage")
+    @ResponseBody
+    public ModelAndView getDownLoadPage(HttpServletRequest request, HttpServletResponse response) {
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
+        if(beginDate == null){
+            beginDate = DateUtils.formatDate(DateUtils.addDays(new Date(), -30),"yyyy-MM-dd");
+        }
+        if(endDate == null){
+            endDate = DateUtils.formatDate(new Date(),"yyyy-MM-dd");
+        }
+        
+        int totalDownLoadNum = visitLogService.getTotalDownloadTimes();
+        int tjqDownLoadNum = visitLogService.getTjqDownloadVisitTimes(beginDate, endDate);
+        
+        JSONArray tjqDownLoadListJsonArray = new JSONArray();
+        List<Map<String,Integer>> downLoadList = visitLogService.getDownloadList(beginDate, endDate);
+        for (Map<String, Integer> map : downLoadList) {
+            JSONObject json = new JSONObject();
+            json.put("dateStr", map.get("dateStr"));
+            json.put("total", map.get("total"));
+            tjqDownLoadListJsonArray.add(json);
+        }
+        
+        Map<String, Object> filter = Maps.newHashMap();
+        int pageIndex = NumberUtils.toInt(request.getParameter("pageIndex"), 1);
+        //默认每页显示15行
+        int pageSize = NumberUtils.toInt(request.getParameter("pageSize"), 15);
+        filter.put("endDate", endDate);
+        filter.put("beginDate", beginDate);
+        
+        Page<?> pageData = visitLogService.getDownloadListByPaging(filter, pageSize, pageIndex);
+        
+        ModelAndView mode = new ModelAndView();
+        mode.addObject("totalDownLoadNum", totalDownLoadNum);
+        mode.addObject("tjqDownLoadNum", tjqDownLoadNum);
+        mode.addObject("tjqDownLoadListJson", tjqDownLoadListJsonArray);
+        mode.addObject("beginDate", "'"+beginDate+"'");
+        mode.addObject("endDate", "'"+endDate+"'");
+        mode.addObject("pageData", pageData);
+        mode.setViewName("background/downLoadLog");
+        return mode;
+    }
+    
+    /**
+     * 获取资源统计页面
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/background/resourcePage")
+    @ResponseBody
+    public ModelAndView getResourcePagePage(HttpServletRequest request, HttpServletResponse response) {
+        int totalFunctioNum = potenFunctionService.getCountFunctionNum();
+        int totalPotenNum = interPotenService.getCountPotenNum();
+        int totalFileNum = interPotenService.getCountFileNum();
+        
+        JSONArray potenGroupListJsonArray = new JSONArray();
+        List<Map<String,Integer>> potenGroupList = interPotenService.getPotenGroup();
+        for (Map<String, Integer> map : potenGroupList) {
+            JSONObject json = new JSONObject();
+            json.put("groupName", map.get("groupName"));
+            json.put("total", map.get("total"));
+            potenGroupListJsonArray.add(json);
+        }
+        
+        ModelAndView mode = new ModelAndView();
+        mode.addObject("totalFunctioNum", totalFunctioNum);
+        mode.addObject("totalPotenNum", totalPotenNum);
+        mode.addObject("totalFileNum", totalFileNum);
+        mode.addObject("potenGroupListJson", potenGroupListJsonArray);
+        mode.setViewName("background/resource");
         return mode;
     }
     

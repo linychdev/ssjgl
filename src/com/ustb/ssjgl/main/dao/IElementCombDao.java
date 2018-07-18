@@ -55,5 +55,11 @@ public interface IElementCombDao extends IAbstractDao{
      * @return
      */
     public List<TElementCombination> getElementCombsByFilter(Map<String, Object> filter);
+
+    public int getCountNum();
+
+    public List<Map<String, Integer>> getPotenGroup();
+
+    public List<Map<String, Object>> getAllCombMap();
     
 }

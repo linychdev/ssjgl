@@ -249,7 +249,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <span class="show-span oxidation">+2</span> 
         <span class="show-span electron">[He]2s<sup>2</sup></span> 
         <span class="show-span eleativity">1.5</span> 
-        <span class="show-span ionic">4.3</span> 
+        <span class="show-span ionic">9.3</span> 
         <span class="show-span boiling">2471</span> 
         <span class="show-span melting">1287</span> 
         <span class="show-span relative">9.0</span> 
@@ -338,7 +338,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          8
         </div> 
         <div class="crystal fontPink">
-          hcp 
+          cub. 
         </div> 
         <div class="symbol fontPink">
           O 
@@ -490,7 +490,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          14
         </div> 
         <div class="crystal fontPink">
-          diamand 
+          dia. 
         </div> 
         <div class="symbol fontPink">
           Si 
@@ -514,7 +514,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          15
         </div> 
         <div class="crystal fontPink ">
-          cubic 
+          cub. 
         </div> 
         <div class="symbol fontPink">
           P 
@@ -538,7 +538,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          16
         </div> 
         <div class="crystal fontPink">
-          cubic 
+          cub. 
         </div> 
         <div class="symbol fontPink">
           S 
@@ -562,7 +562,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          17
         </div> 
         <div class="crystal fontPink">
-          tetragonal 
+          tet. 
         </div> 
         <div class="symbol fontPink">
           Cl 
@@ -763,7 +763,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          25
         </div> 
         <div class="crystal">
-          cubic 
+          cub. 
         </div> 
         <div class="symbol">
           Mn 
@@ -787,7 +787,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          26
         </div> 
         <div class="crystal ">
-          fcc 
+          bcc 
         </div> 
         <div class="symbol ">
           Fe 
@@ -911,7 +911,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          31
         </div> 
         <div class="crystal ">
-          cubic 
+          cub. 
         </div> 
         <div class="symbol ">
           Ga 
@@ -935,7 +935,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          32
         </div> 
         <div class="crystal ">
-          diamand 
+          dia. 
         </div> 
         <div class="symbol ">
           Ge 
@@ -959,7 +959,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          33
         </div> 
         <div class="crystal fontPink ">
-          trigonal 
+          tri. 
         </div> 
         <div class="symbol fontPink">
           As 
@@ -1007,7 +1007,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          35
         </div> 
         <div class="crystal fontPink">
-          cubic 
+          cub. 
         </div> 
         <div class="symbol fontPink">
           Br 
@@ -1242,7 +1242,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <span class="show-span oxidation">0,+1,&plusmn;2,+3,+4,+5,+6,+7,+8</span> 
         <span class="show-span electron">[Kr]4d<sup>7</sup>5s<sup>1</sup></span> 
         <span class="show-span eleativity">1.4</span> 
-        <span class="show-span ionic"></span> 
+        <span class="show-span ionic">7.4</span> 
         <span class="show-span boiling">4150</span> 
         <span class="show-span melting">2334</span> 
         <span class="show-span relative">101.1</span> 
@@ -1315,7 +1315,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <span class="show-span electron">[kr]4d<sup>10</sup>5s<sup>1</sup></span> 
         <span class="show-span eleativity">1.4</span> 
         <span class="show-span ionic">7.6</span> 
-        <span class="show-span boiling">2161</span> 
+        <span class="show-span boiling">2162</span> 
         <span class="show-span melting">962</span> 
         <span class="show-span relative">107.9</span> 
         <span class="show-span radius">144</span> 
@@ -1355,7 +1355,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          49
         </div> 
         <div class="crystal ">
-          tetragonal 
+          tet. 
         </div> 
         <div class="symbol ">
           In 
@@ -1379,7 +1379,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          50
         </div> 
         <div class="crystal ">
-          tetragonal 
+          tet. 
         </div> 
         <div class="symbol ">
           Sn 
@@ -1403,7 +1403,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          51
         </div> 
         <div class="crystal ">
-          trigonal 
+          tri. 
         </div> 
         <div class="symbol ">
           Sb 
@@ -1451,7 +1451,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          53
         </div> 
         <div class="crystal fontPink ">
-          cubic 
+          cub. 
         </div> 
         <div class="symbol fontPink">
           I 
@@ -1750,7 +1750,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          80
         </div> 
         <div class="crystal ">
-          trigonal 
+          tri. 
         </div> 
         <div class="symbol ">
           Hg 
@@ -1826,7 +1826,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          83
         </div> 
         <div class="crystal ">
-          trigonal 
+          tri. 
         </div> 
         <div class="symbol ">
           Bi 
@@ -1850,7 +1850,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          84
         </div> 
         <div class="crystal ">
-          monoclinic 
+          mon.
         </div> 
         <div class="symbol ">
           Po 
@@ -2457,7 +2457,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          62
         </div> 
         <div class="crystal ">
-          trigonal 
+          tri. 
         </div> 
         <div class="symbol  ">
           Sm 
@@ -2780,7 +2780,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          92
         </div> 
         <div class="crystal">
-          cubic 
+          cub. 
         </div> 
         <div class="symbol  ">
           U 

@@ -31,4 +31,6 @@ public interface IPotentialsFileDao extends IAbstractDao{
      * @return
      */
     public List<TPotentialsFile> selectByReferenceId(String referenceId);
+
+    public int getCountNum();
 }

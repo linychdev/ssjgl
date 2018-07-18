@@ -35,4 +35,10 @@ public class PotentialsFileDaoImpl extends AbstractDao implements IPotentialsFil
         return this.getSqlSession().selectList(statement, referenceId);
     }
 
+    @Override
+    public int getCountNum() {
+        String statement = mapperNamespace + ".selectCountNum";
+        return this.getSqlSession().selectOne(statement);
+    }
+
 }

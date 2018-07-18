@@ -58,4 +58,22 @@ public class ElementCombDaoImpl extends AbstractDao implements IElementCombDao {
         return this.getSqlSession().selectList(statement, filter);
     }
 
+    @Override
+    public int getCountNum() {
+        String statement = mapperNamespace + ".selectCountNum";
+        return this.getSqlSession().selectOne(statement);
+    }
+
+    @Override
+    public List<Map<String, Integer>> getPotenGroup() {
+        String statement = mapperNamespace + ".selectPotenGroup";
+        return this.getSqlSession().selectList(statement);
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllCombMap() {
+        String statement = mapperNamespace + ".selectAllCombMap";
+        return this.getSqlSession().selectList(statement);
+    }
+
 }

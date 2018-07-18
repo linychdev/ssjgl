@@ -1,5 +1,5 @@
 $(function(){
-	var chart = echarts.init(document.getElementById('wordcloud'));
+	/*var chart = echarts.init(document.getElementById('wordcloud'));
     var option = {
         tooltip: {},
         series: [ {
@@ -40,15 +40,24 @@ $(function(){
        tmp.focus()  
        tmp.location=contextPath+"/search/detail/"+selectVal;  
     });
-    window.onresize = chart.resize;
+    window.onresize = chart.resize;*/
     
     
     $(".element-label .label-define").on("click",function(){
+    	var selectVal = $(this).attr("id");
+    	selectDetail(selectVal);
+    });
+    
+    $(".second_left_down ul li").on("click",function(){
     	var selectVal = $(this).attr("id"); 
+    	selectDetail(selectVal);
+    });
+    
+    function selectDetail(selectVal){
     	var tmp=window.open("about:blank")  
     	tmp.moveTo(0,0)  
     	tmp.resizeTo(screen.width+20,screen.height)  
     	tmp.focus()  
-    	tmp.location=contextPath+"/search/detail/"+selectVal;  
-    });
+    	tmp.location=contextPath+"/search/detail/"+selectVal;
+    }
 });

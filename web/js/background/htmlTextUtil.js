@@ -235,8 +235,6 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                     "<option value='44192139591811e8a71b1c1b0da988f2'>Ionic Crystals</option>"+
                     "<option value='44192139591811e8a71b1c1b0da988f3'>Interface</option>"+
                     "<option value='44192139591811e8a71b1c1b0da988f4'>Others</option>"+
-                    "<option value='6'>aa</option>"+
-                    "<option value='7'>bb</option>"+
                     "</select>"+
                 "</div>"+
                 "</div>"+
@@ -309,7 +307,7 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                         }
                     }
                 });
-    return _html.html();
+    return potenEditHtml;
 }
 
 
@@ -346,7 +344,7 @@ function getExistsFileHtml(fileId, fileName,fileType){
     
     var existsFileHtml = "<div class='col-xs-12 existsDiv' id = '"+fileId+"'>" +
                             "<label for='' class='col-xs-2 control-label'>文件类型:</label>"+
-                            "<div class='col-xs-3'>";
+                            "<div class='col-xs-3 poten-file-type'>";
                             if(fileType == 1){
                                 existsFileHtml += "参数文件";
                             }else{

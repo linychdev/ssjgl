@@ -167,4 +167,12 @@ public interface IInterPotenService {
      * @return
      */
     public List<String> getElementNamesHasPoten();
+
+    public int getCountPotenNum();
+
+    public int getCountFileNum();
+
+    public List<Map<String, Integer>> getPotenGroup();
+
+    public List<Map<String, Object>> getAllCombMap();
 }
