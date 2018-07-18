@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
 						<ul class="nav navbar-nav navbar-nav-right"> 
 						 <li><a href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
-						 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a href="#" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle" target="_self">Resources <span class="caret"></span></a>
+						 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a id = "resources" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle">Resources <span class="caret"></span></a>
 							<ul role="menu" class=" dropdown-menu">
 								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1116"><a href="javascript:void(0);" target="_self">Semiconductors</a></li>
 								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1127"><a href="javascript:void(0);" target="_self">Ionic Crystals</a></li>

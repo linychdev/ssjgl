@@ -48,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  aria-controls="sidebar-nav">
 						<i class="glyphicon glyphicon-menu-hamburger"></i> Navigation
 					</a> -->
-					<h3>total potentials</h3>
+					<h3>Total Potentials</h3>
 					<div class="second_left_down">
 					<ul class = "sidebar-nav ">
 						<c:forEach var="item" items="${allPoten}">

@@ -13,7 +13,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<link href="${pageContext.request.contextPath}/css/reset.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/main/combList.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -38,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class  = "wrap ">
 	<div  class="second_left">
 			<div class="second_left_up">
-				total potentials
+				Total Potentials
 			</div>
 			<div class="second_left_down">
 				<ul>
@@ -59,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class = "element-label">
 			<p>
 			<c:forEach var="item" items="${groupMap}">   
-			  <strong>${item.key }:</strong>
+			  <strong style= "font-size: 18px;">${item.key }:</strong>
 			  	<p>
 				<c:forEach items="${item.value}" var="it">   
 					<span class="label label-define" id = "${it.cId }">${it.cCombName }</span>
@@ -68,9 +67,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</c:forEach>  
 			</p>
 		</div>
+		<div style = "clear:both;">
 		</div>
-		<!-- <div id="wordcloud" class="panel">
-		</div> -->
+		<div id="wordcloud" class="panel">
+		</div>
    </div>
 </body>
 </html>

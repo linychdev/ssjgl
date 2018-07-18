@@ -3,7 +3,7 @@ html, body{
 	color: #444;
     font-family: "RobotoDraft", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	min-width:1200px;
-	overflow-y:hidden; 
+	overflow-y:auto; 
 }
 
 .header{
@@ -83,7 +83,7 @@ html, body{
 }
 .element-label{
 	overflow-y:auto;
-	height: 100%; 
+	height: auto; 
 }
 .element-label .label{
 	cursor:pointer;
@@ -115,7 +115,7 @@ html, body{
 .second_left_up{
 	width:160px;
 	height:30px;
-	font-size:24px;
+	font-size:20px;
 	text-align:center;
 	line-height:30px;
 }
@@ -134,4 +134,7 @@ html, body{
 	text-align:center;
 	list-style: none;
 	cursor: pointer;
+}
+#wordcloud{
+	height:800px;
 }

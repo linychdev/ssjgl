@@ -36,4 +36,6 @@ public interface ISearchRecordDao extends IAbstractDao {
      */
     List<SearchRecordInfo> getSearchRecordInfoByFilter(Map<String, Object> filter);
 
+    List<Map<String, Object>> getValidHotPotenList();
+
 }

@@ -207,6 +207,16 @@
  limit 5
   </select>
 
+  <select id="selectValidHotPotenList" resultType="java.util.Map">
+    select 
+      c_search_text as searchText,
+      count(*) as total
+     from t_search_record
+    where n_result_num = 1
+ group by c_search_text
+ order by count(*) desc
+  </select>
+
   <select id="selectCountByFilter" resultType="java.lang.Integer" parameterType="java.util.Map" >
     
     select count(*) 

@@ -3,12 +3,14 @@ package com.ustb.ssjgl.main.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ustb.ssjgl.common.paging.Page;
 import com.ustb.ssjgl.login.dao.IUserDao;
 import com.ustb.ssjgl.main.bean.CombFunctionInfo;
@@ -34,6 +36,7 @@ import com.ustb.ssjgl.main.dao.bean.TPotentialsFunction;
 import com.ustb.ssjgl.main.dao.bean.TPotentialsScope;
 import com.ustb.ssjgl.main.dao.bean.TReference;
 import com.ustb.ssjgl.main.service.IInterPotenService;
+import com.ustb.ssjgl.visitlog.dao.ISearchRecordDao;
 
 public class InterPotenServiceImpl implements IInterPotenService {
 
@@ -69,6 +72,9 @@ public class InterPotenServiceImpl implements IInterPotenService {
     
     @Autowired
     private IUserDao userDao;
+    
+    @Autowired
+    private ISearchRecordDao searchRecordDao;
     
     /**
      * (non-Javadoc)
@@ -187,10 +193,18 @@ public class InterPotenServiceImpl implements IInterPotenService {
     public List<ElementCombShowInfo> getElementCombShowInfoListByTag(String tag) {
         List<ElementCombShowInfo> elementCombShowInfos = Lists.newArrayList();
         List<TElementCombination> elementCombs = elementCombDao.getElementCombsByTag(tag);
+        List<Map<String, Object>> searchTimesMapList = searchRecordDao.getValidHotPotenList();
+        Map<String, Long> searchTimesMap = Maps.newHashMap();
+        for (Map<String, Object> map : searchTimesMapList) {
+            String combName = (String) map.get("searchText");
+            Long total= (Long) map.get("total");
+            searchTimesMap.put(combName, total);
+        }
+        
         for (TElementCombination elementComb : elementCombs) {
             ElementCombShowInfo elementCombShowInfo = new ElementCombShowInfo();
-            //TODO 查询搜索记录表,设置有效搜索次数
-            double searchTimes = Math.random()*600;
+            Long st = searchTimesMap.get(elementComb.getcCombName());
+            double searchTimes = st == null ? 0 : st;
             elementCombShowInfo.setSearchTimes(searchTimes);
             List<TElement> elementList = elementDao.selectByCombId(elementComb.getcId());
             TPotentialsScope scope = potentialsScopeDao.selectByPrimaryKey(TPotentialsScope.class, elementComb.getcScopeId());

@@ -3,6 +3,8 @@ package com.ustb.ssjgl.main.action;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -76,24 +78,24 @@ public class SearchAction extends AbstractAction{
             validSearch = 1;
         }
         
-//        ArrayList<ElementCombShowInfo> wordCloudCombList = Lists.newArrayList(combList);
-//        Collections.sort(wordCloudCombList);
+        ArrayList<ElementCombShowInfo> wordCloudCombList = Lists.newArrayList(combList);
+        Collections.sort(wordCloudCombList);
         
         // 设置用于词云的字体大小和内容
-//        int maxSize = 50;
-//        int index = 1;
+        int maxSize = 50;
+        int index = 1;
         JSONArray jsonArray = new JSONArray();
-//        for (ElementCombShowInfo showInfo : wordCloudCombList) {
-//            JSONObject json = new JSONObject();
-//            json.put("value", (showInfo.getSearchTimes().intValue()+100*Math.random()));
-//            json.put("name", showInfo.getElementComb().getcCombName());
-//            json.put("combId", showInfo.getElementComb().getcId());
-//            jsonArray.add(json);
-//            if(index > maxSize){
-//                break;
-//            }
-//            index++;
-//        }
+        for (ElementCombShowInfo showInfo : wordCloudCombList) {
+            JSONObject json = new JSONObject();
+            json.put("value", (showInfo.getSearchTimes().intValue()+100));
+            json.put("name", showInfo.getElementComb().getcCombName());
+            json.put("combId", showInfo.getElementComb().getcId());
+            jsonArray.add(json);
+            if(index > maxSize){
+                break;
+            }
+            index++;
+        }
         
         // 设置分组信息
         Map<String, List<TElementCombination>> groupMap = Maps.newLinkedHashMap();
@@ -234,6 +236,15 @@ public class SearchAction extends AbstractAction{
         this.writeAjaxObject(response, result);
     }
     
+    
+    @RequestMapping(value = "/search/resources", method=RequestMethod.GET)
+    public ModelAndView getPotenResources(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, List<Map<String, Object>>> allCombGroupMap = getAllCombGroupmap();
+        ModelAndView mode = new ModelAndView();
+        mode.setViewName("main/resourcesList");
+        mode.addObject("allPoten", allCombGroupMap);
+        return mode;
+    }
     
     private String getBrowserName(String agent) {
         if(agent.indexOf("msie 7")>0){

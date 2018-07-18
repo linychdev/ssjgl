@@ -38,10 +38,24 @@ html, body{
 	border: 0px solid #ddd;
 }
 
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+.wrap .resources_list td {
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 0px solid #ddd;
     text-align: center;
+}
+
+.label-define{
+display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    color: #333333;
+    width: 130px;
+    height:30px;
+    float: left;
 }

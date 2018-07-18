@@ -51,6 +51,12 @@ public class SearchRecordDaoImpl extends AbstractDao implements ISearchRecordDao
         return this.getSqlSession().selectList(statement, filter);
     }
 
+    @Override
+    public List<Map<String, Object>> getValidHotPotenList() {
+        String statement = mapperNamespace + ".selectValidHotPotenList";
+        return this.getSqlSession().selectList(statement);
+    }
+
     /** (non-Javadoc)
      * @see com.ustb.ssjgl.visitlog.dao.ISearchRecordDao#getCountByFilter(java.util.Map)
      */
