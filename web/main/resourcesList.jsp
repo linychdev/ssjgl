@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>list</title>
+<title>resources</title>
 <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Optometry Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -21,9 +21,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/echarts.simple.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/echarts-wordcloud.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/combList.js"></script>
 
 <script type="text/javascript">
   var contextPath = "<%=request.getContextPath()%>";
