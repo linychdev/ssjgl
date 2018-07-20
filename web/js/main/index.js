@@ -1,4 +1,5 @@
 $(function(){
+	$("#li-home").parent("li").removeClass("active");
    var operationType = 0;
    var TimeFn = null;
    var _this_element;

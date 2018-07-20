@@ -40,21 +40,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="content">
 
 			<div id="large-header" class="large-header">
-				<div class="foot">版权信息</div>
+				<div class="foot"></div>
 				<canvas id="demo-canvas"></canvas>
 				<div class="logo_box">
-					<h3>欢迎使用势库</h3>
+					<h3>Welcome</h3>
 					<form id="loginform" name="indexForm" action="login" method="post" autocomplete="off">
 					<div class="input_outer">
 						<span class="u_user"></span> 
-						<input name="username" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+						<input name="username" class="text" style="color: #FFFFFF !important" type="text" placeholder="Please enter user name">
 					</div>
 					<div class="input_outer">
 						<span class="us_uer"></span>
-						<input name="password" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;" value="" type="password" placeholder="请输入密码">
+						<input name="password" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;" value="" type="password" placeholder="Please enter user password">
 					</div>
 					<div class="mb2">
-						<a class="act-but submit" href="javascript:void(0);" style="color: #FFFFFF" >登录</a>
+						<a class="act-but submit" href="javascript:void(0);" style="color: #FFFFFF" >Login</a>
 					</div>
 <!-- 					<div class="getpass">
 						<a href="javascript:void(0);" style="color: #FFFFFF">找回密码</a>

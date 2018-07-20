@@ -21,6 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/resourcesList.js"></script>
 
 <script type="text/javascript">
   var contextPath = "<%=request.getContextPath()%>";
@@ -51,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<c:forEach var="item" items="${allPoten}">
 								<c:if test="${item.key == 'Ionic Crystals' }">
 									<c:forEach items="${item.value}" var="it" varStatus="status">   
-										<span class="label-define"  id = "${it.id }">${it.combName }</span>
+										<span class="label-define"><a id = "${it.id }">${it.combName }</a></span>
 									</c:forEach>
 								</c:if>
 							</c:forEach>
@@ -72,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<c:forEach var="item" items="${allPoten}">
 						<c:if test="${item.key == 'Semiconductors' }">
 						   <c:forEach items="${item.value}" var="it" varStatus="status">   
-										<span class="label-define"  id = "${it.id }">${it.combName }</span>
+										<span class="label-define"><a id = "${it.id }">${it.combName }</a></span>
 									</c:forEach>
 						</c:if>
 					</c:forEach>
@@ -93,7 +94,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<c:forEach var="item" items="${allPoten}">
 						<c:if test="${item.key == 'Interface' }">
 						    <c:forEach items="${item.value}" var="it" varStatus="status">   
-										<span class="label-define"  id = "${it.id }">${it.combName }</span>
+										<span class="label-define"><a id = "${it.id }">${it.combName }</a></span>
 									</c:forEach>
 						</c:if>
 					</c:forEach>
@@ -114,7 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<c:forEach var="item" items="${allPoten}">
 						<c:if test="${item.key == 'Metal Alloys' }">
 						    <c:forEach items="${item.value}" var="it" varStatus="status">   
-										<span class="label-define"  id = "${it.id }">${it.combName }</span>
+										<span class="label-define"><a id = "${it.id }">${it.combName }</a></span>
 									</c:forEach>
 						</c:if>
 					</c:forEach>
@@ -135,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<c:forEach var="item" items="${allPoten}">
 						<c:if test="${item.key == 'Others' }">
 						    <c:forEach items="${item.value}" var="it" varStatus="status">   
-										<span class="label-define"  id = "${it.id }">${it.combName }</span>
+										<span class="label-define"><a id = "${it.id }">${it.combName }</a></span>
 									</c:forEach>
 						</c:if>
 					</c:forEach>

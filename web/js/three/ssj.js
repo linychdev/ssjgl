@@ -136,8 +136,8 @@ var winWidth = $("#container").width();
 //var winWidth = 1131;
 
 var startRotate = function (){
-//	if(firstAccess){
-	if(true){
+	if(firstAccess){
+//	if(true){
 		init();
 		animate();
 //		setTimeout(function(){

@@ -55,8 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<nav class="navbar navbar-default"> 
 					   <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1 " style="padding-right:0px;"> 
 						<ul class="nav navbar-nav navbar-nav-right"> 
-						 <li><a href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
-						 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a id = "resources" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle">Resources <span class="caret"></span></a>
+						 <li><a id = "li-home" href="${pageContext.request.contextPath}/index" class="active">Home</a></li> 
+	<!-- 					 <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18 dropdown"><a id = "resources" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" class="dropdown-toggle">Resources <span class="caret"></span></a>
 							<ul role="menu" class=" dropdown-menu">
 								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1116"><a href="javascript:void(0);" target="_self">Semiconductors</a></li>
 								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1127"><a href="javascript:void(0);" target="_self">Ionic Crystals</a></li>
@@ -64,12 +64,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1129"><a href="javascript:void(0);" target="_self">Metal Alloys </a></li>
 								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5141"><a href="javascript:void(0);" target="_self">Others</a></li>
 							</ul>
-						 </li>
-						 <li><a href="javascript:void(0);">Help</a></li> 
-						 <li><a href="javascript:void(0);">AboutUs</a></li> 
-						 <li><a href="javascript:void(0);">Link</a></li> 
-						 <li><a href="javascript:void(0);">User</a></li> 
-						 <li><a href="javascript:void(0);" class = "background">Login</a></li> 
+						 </li> -->
+						 <li><a id = "li-resources" href="javascript:void(0);">resources</a></li> 
+						 <li><a id = "li-help" href="javascript:void(0);">help</a></li> 
+						 <li><a id = "li-aboutus" href="javascript:void(0);">aboutus</a></li> 
+						 <li><a id = "li-link" href="javascript:void(0);">link</a></li> 
+						 <!-- <li><a id = "li-user" href="javascript:void(0);">user</a></li>  -->
+						 <li><a id = "li-login" href="javascript:void(0);">Login</a></li> 
 						</ul> 
 					   </div> 
 					</nav> 

@@ -67,7 +67,7 @@ public class LoginAction extends AbstractAction{
             } catch (Exception e) {
                 LOG.warn("验证不通过，无法登录！", e.getMessage());
                 result.put("success", false);
-                result.put("msg", "用户名或密码错误！");
+                result.put("msg", "Incorrect username or password!");
             }
         }else{
             result.put("success", true);
