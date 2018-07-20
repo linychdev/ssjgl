@@ -1,0 +1,41 @@
+html, body{
+    -webkit-text-size-adjust:none;
+	color: #444;
+    font-family: "RobotoDraft", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+	min-width:1200px;
+}
+
+.wrap{
+	width:1200px;
+	margin:0px auto;
+	padding: 10px;
+    margin-bottom: 10px;
+}
+
+.tit_b{
+	font-size:26px;
+}
+
+.block{
+	padding:10px 0px 10px;
+}
+
+.tit_m{
+	color:#3399ff;
+	font-size: 18px;
+    font-weight: normal;
+}
+
+.block p{
+	font-size: 14px;
+    font-weight: 300 !important;
+    text-align: left;
+    color: #333;
+	font-family: "Open Sans";
+	 line-height: 1.73;
+}
+.tit_m{
+	color:#3399ff;
+	font-size: 16px;
+    font-weight: normal;
+}
