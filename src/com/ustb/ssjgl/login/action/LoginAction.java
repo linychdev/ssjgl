@@ -12,8 +12,10 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ustb.ssjgl.common.action.AbstractAction;
@@ -43,14 +45,15 @@ public class LoginAction extends AbstractAction{
     @RequestMapping("/login/login")
     @ResponseBody
     public ModelAndView loginIndex(HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         ModelAndView mode = new ModelAndView();
         mode.setViewName("login/login");
         return mode;
     }
-    
     @RequestMapping("/login")
     public void login(HttpServletRequest request, HttpServletResponse response){
-       
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        LOG.info("response.setHeader('Access-Control-Allow-Origin', '*');");
         String loginName = request.getParameter("loginName");
         String password = request.getParameter("password");
         
@@ -77,6 +80,7 @@ public class LoginAction extends AbstractAction{
     
     @RequestMapping("/isLogin")
     public void isLogin(HttpServletRequest request, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, Object> result = new HashMap<String, Object>();
         if(sessionService.isLogin()){
             result.put("isLogin", true);
@@ -88,6 +92,7 @@ public class LoginAction extends AbstractAction{
     
     @RequestMapping("/logout")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Subject subject = SecurityUtils.getSubject();
         if(subject.isAuthenticated()==true){
             subject.logout();
