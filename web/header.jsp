@@ -65,10 +65,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5141"><a href="javascript:void(0);" target="_self">Others</a></li>
 							</ul>
 						 </li> -->
-						 <li><a id = "li-resources" href="javascript:void(0);">resources</a></li> 
-						 <li><a id = "li-help" href="javascript:void(0);">help</a></li> 
-						 <li><a id = "li-aboutus" href="javascript:void(0);">aboutus</a></li> 
-						 <li><a id = "li-link" href="javascript:void(0);">link</a></li> 
+						 <li><a id = "li-resources" href="javascript:void(0);">Resources</a></li> 
+						 <li><a id = "li-help" href="javascript:void(0);">Help</a></li> 
+						 <li><a id = "li-aboutus" href="javascript:void(0);">About Us</a></li> 
+						 <li><a id = "li-link" href="javascript:void(0);">Link</a></li> 
 						 <!-- <li><a id = "li-user" href="javascript:void(0);">user</a></li>  -->
 						 <li><a id = "li-login" href="javascript:void(0);">Login</a></li> 
 						</ul> 

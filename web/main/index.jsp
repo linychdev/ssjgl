@@ -142,8 +142,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    <div class="row"> 
     <div class="col-md-12 removePadding"> 
      <div class="input-group" style="width:100%; margin-top:5px;"> 
-      <input type="text" class="form-control input-lg" placeholder="please input elements" />
-      <span class="input-group-addon btn btn-success">search</span> 
+      <input type="text" class="form-control input-lg" placeholder="Please Input Elements" />
+      <span class="input-group-addon btn btn-success">Search</span> 
      </div> 
     </div> 
     
