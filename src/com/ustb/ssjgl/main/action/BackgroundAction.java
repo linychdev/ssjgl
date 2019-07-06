@@ -382,7 +382,7 @@ public class BackgroundAction extends AbstractAction{
             String json = request.getParameter("potenFunctionJson");
             String operationType = request.getParameter("operationType");
             String functionId = request.getParameter("functionId");
-            JSONObject potenFunctionJson = JSONObject.parseObject(json);
+            JSONObject potenFunctionJson = JSONObject.parseObject(string2Json(json));
             if(operationType.equals("update")){
                 updateFunction(functionId, potenFunctionJson);
             }else{
@@ -400,11 +400,9 @@ public class BackgroundAction extends AbstractAction{
         TPotentialsFunction function = potenFunctionService.selectById(functionId);
         String functionName = JsonUtils.getStrFromJson(potenFunctionJson, "functionName");
         String functionFormula = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormula");
-        String functionFormulaHtml = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormulaHtml");
         String functionDesc = JsonUtils.getStrFromJson(potenFunctionJson, "functionDesc");
         function.setcName(functionName);
         function.setcFormula(functionFormula);
-        function.setcFormulaHtml(functionFormulaHtml);
         function.setcDescription(functionDesc);
         potenFunctionService.updateFunction(function);
     }
@@ -788,4 +786,37 @@ public class BackgroundAction extends AbstractAction{
         }
         this.writeAjaxObject(response, result);
     }
+    
+    private String string2Json(String s) {     
+        StringBuffer sb = new StringBuffer();     
+        for (int i=0; i<s.length(); i++) {     
+            char c = s.charAt(i);     
+            switch (c) {     
+            case '\\':     
+                sb.append("\\\\");     
+                break;     
+            case '/':     
+                sb.append("\\/");     
+                break;     
+            case '\b':     
+                sb.append("\\b");     
+                break;     
+            case '\f':     
+                sb.append("\\f");     
+                break;     
+            case '\n':     
+                sb.append("\\n");     
+                break;     
+            case '\r':     
+                sb.append("\\r");     
+                break;     
+            case '\t':     
+                sb.append("\\t");     
+                break;     
+            default:     
+                sb.append(c);     
+            }
+       }
+        return sb.toString();     
+     }
 }

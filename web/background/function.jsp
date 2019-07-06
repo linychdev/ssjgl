@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
-<script src="${pageContext.request.contextPath}/jmeditor/JMEditor.js" type="text/javascript" ></script>
+<%-- <script src="${pageContext.request.contextPath}/jmeditor/JMEditor.js" type="text/javascript" ></script> --%>
 <script type="text/javascript">
 	var contextPath = "<%=request.getContextPath()%>";
 </script>
@@ -59,8 +59,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</td>
 						<td>${fun.cFormulaHtml} </td>
 						<td>
-						<a href = "javascript:void(0);" class = "editFun" id = "${fun.cId }"><i class="fa fa-edit fa-fw"></i>&nbsp;编辑&nbsp; </a>
-						<a href = "javascript:void(0);" class = "deleteFun" id = "${fun.cId }"><i class="fa fa-trash fa-fw"></i>&nbsp;删除&nbsp; </a>
+							<a href = "javascript:void(0);" class = "editFun" id = "${fun.cId }"><i class="fa fa-edit fa-fw"></i>&nbsp;编辑&nbsp; </a>
+							<a href = "javascript:void(0);" class = "deleteFun" id = "${fun.cId }"><i class="fa fa-trash fa-fw"></i>&nbsp;删除&nbsp; </a>
 						</td>
 					</tr>
 				</c:forEach>

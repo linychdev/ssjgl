@@ -59,13 +59,11 @@ public class PotenFunction {
     private TPotentialsFunction setFunction(JSONObject potenFunctionJson) {
         String functionName = JsonUtils.getStrFromJson(potenFunctionJson, "functionName");
         String functionFormula = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormula");
-        String functionFormulaHtml = JsonUtils.getStrFromJson(potenFunctionJson, "functionFormulaHtml");
         String functionDesc = JsonUtils.getStrFromJson(potenFunctionJson, "functionDesc");
         
         TPotentialsFunction function = new TPotentialsFunction();
         function.setcName(functionName);
         function.setcFormula(functionFormula);
-        function.setcFormulaHtml(functionFormulaHtml);
         function.setcDescription(functionDesc);
         this.potenFunction = function;
         return function;

@@ -1,12 +1,20 @@
 package com.ustb.ssjgl.main.dao.bean;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
+
+import org.slf4j.Logger;
 
 import com.ustb.ssjgl.common.SsjglContants;
 import com.ustb.ssjgl.common.utils.DateUtils;
+import com.ustb.ssjgl.common.utils.LogUtils;
 import com.ustb.ssjgl.common.utils.UuidUtils;
 
 public class TPotentialsFunction {
+    
+    private static final Logger LOG = LogUtils.getLogger();
+    
     /** 主键 */
     private String cId;
 
@@ -98,11 +106,18 @@ public class TPotentialsFunction {
     }
 
     public String getcFormulaHtml() {
-        return cFormulaHtml;
-    }
-
-    public void setcFormulaHtml(String cFormulaHtml) {
-        this.cFormulaHtml = cFormulaHtml == null ? null : cFormulaHtml.trim();
+        String formula = getcFormula();
+        String html = "\\dpi{100} \\tiny " + formula;
+        html = html.replaceAll(" ", "");
+        String src = "";
+        try {
+            src = URLEncoder.encode(html,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            LOG.error("url编码出错，原字符串：{}", html, e);
+        }
+        src = "http://latex.codecogs.com/png.latex?" + src;
+        html = "<img style='-webkit-user-select: none;' src='"+src+"'>";
+        return html;
     }
 
     public byte[] getbImage() {

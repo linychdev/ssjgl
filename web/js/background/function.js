@@ -28,10 +28,10 @@ $(function () {
 	
 	//保存函数
 	$("#saveFun").on("click",function(){
-		var funHtml = JMEditor.html('funEdit').replace(/\"/g, "'");
+		var funHtml = $("#funEdit").text();
 		var funName = $("#funName").val();
 		var funDesc = $("#funDesc").val();
-		var json = '{"functionName":"'+funName+'","functionFormula":"","functionFormulaHtml":"'+funHtml+'","functionDesc":"'+funDesc+'"}';
+		var json = '{"functionName":"'+funName+'","functionFormula":"'+funHtml+'","functionDesc":"'+funDesc+'"}';
 		 $.post(contextPath + "/manage/addFunction", {
 			 potenFunctionJson : json,
 			 operationType : operationType,
@@ -86,7 +86,7 @@ $(function () {
 		  }, function(data) {
 			  $("#funName").val(data.fun.cName);
 			  $("#funDesc").val(data.fun.cDescription);
-			  $("#funEdit").html(data.fun.cFormulaHtml);
+			  $("#funEdit").html(data.fun.cFormula);
 			  $("#addFunDiv").removeClass("display_none");
 		  }, "json");
 	});
