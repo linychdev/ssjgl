@@ -23,13 +23,13 @@
     </rollingPolicy>
   </appender>
 
-  <logger name="org.apache" level="info"/>
+  <logger name="org.apache" level="warn"/>
 <!--   <logger name="org.apache.ibatis" level="debug"/> -->
-  <logger name="org.mybatis" level="debug"/>
-  <logger name="org.springframework" level="info"/>
-  <logger name="org.springframework.web.servlet.DispatcherServlet" level="debug"/>
+  <logger name="org.mybatis" level="warn"/>
+  <logger name="org.springframework" level="warn"/>
+  <logger name="org.springframework.web.servlet.DispatcherServlet" level="warn"/>
   <logger name="org.quartz.simpl" level="error"/>
-  <logger name="com.ustb.ssjgl" level="debug"/>
+  <logger name="com.ustb.ssjgl" level="info"/>
   
   <logger name="jdbc.sqlonly" level="OFF"/>
   <logger name="jdbc.sqltiming" level="INFO"/>

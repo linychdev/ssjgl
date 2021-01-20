@@ -241,7 +241,7 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                 "<div class='form-group'>"+
                     "<label for='tokens' class='col-sm-3 control-label'>选择函数:</label>"+
                     "<div class = 'col-sm-8 functionArray'>"+
-                        "<select id='id_select_fun' class='selectpicker ' multiple data-live-search='true'>"+
+                        "<select id='id_select_fun' class='selectpicker' multiple data-live-search='true'>"+
                            funOptionHtml+
                         "</select>"+
                     "</div>"+
@@ -255,7 +255,7 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                   "<div class='form-group'>"+
                       "<label for='tokens' class='col-sm-3 control-label'>选择元素:</label>"+
                       "<div class = 'col-sm-8 elementsArray'>"+
-                          "<select id='id_select' class='selectpicker ' multiple data-live-search='true'>"+
+                          "<select id='id_select' class='selectpicker' multiple data-live-search='true'>"+
                              elementOptionHtml+
                           "</select>"+
                       "</div>"+
@@ -284,13 +284,16 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                _html = $(potenEditHtml);
                _html.find(".potenSelectGroup option").each(function(){
                     if($(this).val() == scopeId){
-                        $(this)[0].selected = true;
-                        $(this).siblings()[0].selected = false;
+                        //$(this)[0].selected = true;
+                        $(this).attr("selected",true);
+                        //$(this).siblings()[0].selected = false;
+                        $(this).siblings().attr("selected",false);
                     }
                 });
                 
                 _html.find(".functionArray .selectpicker option").each(function(){
                     for(var i=0;i<functions.length;i++){
+
                         var fun = functions[i];
                         if($(this).text() == fun.cName){
                             $(this).attr("selected",true);
@@ -307,7 +310,8 @@ function getPotenEditHtml(combDetail, funOptionHtml, elementOptionHtml){
                         }
                     }
                 });
-    return potenEditHtml;
+       return _html[0].outerHTML;
+    // return potenEditHtml;
 }
 
 
