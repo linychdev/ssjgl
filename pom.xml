@@ -38,7 +38,7 @@
     <slf4j.version>1.7.12</slf4j.version>
     <log4j.version>1.2.3</log4j.version>
     <httpclient.version>4.1.2</httpclient.version>
-    <jackson.version>2.3.3</jackson.version>
+    <jackson.version>2.9.10.8</jackson.version>
     <druid.version>1.0.26</druid.version>
     <aspectjweaver.version>1.8.8</aspectjweaver.version>
     <jstl.version>1.2</jstl.version>
